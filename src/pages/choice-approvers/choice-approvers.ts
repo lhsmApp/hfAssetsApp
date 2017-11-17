@@ -44,11 +44,11 @@ export class ChoiceApproversPage {
               public alertCtrl: AlertController,
               private viewCtrl: ViewController,
               private approvalService:ApprovalService) {
-  	this.billNumber = this.navParams.get(BillNumberCode);
+    this.billNumber = this.navParams.get(BillNumberCode);
     this.reviewType=this.navParams.get('reviewType');
     this.callback    = this.navParams.get('callback');
       console.log('reviewType：' + this.reviewType);
-  	//this.list = mainList;
+    //this.list = mainList;
   }
 
   ionViewDidLoad() {
@@ -85,9 +85,10 @@ export class ChoiceApproversPage {
 
   ok(){
     if(this.list!=null && this.list.length>0){
-      let data = new Array<ReviewProcessMain>();
+      /*let data = new Array<ReviewProcessMain>();
       let itemAdd = new ReviewProcessMain();
       itemAdd.userId = "";
+      itemAdd.reveiwPersonlist = [];
       for(let each of this.list){
         if(!(each.userId!=null && each.userId!="")){
           let alert = this.alertCtrl.create({
@@ -110,6 +111,13 @@ export class ChoiceApproversPage {
             itemAdd.userId += '@';
         }
         itemAdd.userId += each.userId;
+        if(each.reveiwPersonlist){
+            for(let det of each.reveiwPersonlist){
+              if(det.user_code == each.userId){
+                  itemAdd.reveiwPersonlist.push(det);
+              }
+            }
+        }
         //number:number;//审批岗位表流水号 int
         //sequence:number;//审批序号 int 
         //dutyId:string;//岗位编号"                  
@@ -129,7 +137,49 @@ export class ChoiceApproversPage {
         alert.present();
         return;
       }
-      data.push(itemAdd);
+      data.push(itemAdd);*/
+      let data = new Array<ReviewProcessMain>();
+      for(let each of this.list){
+        if(!(each.userId!=null && each.userId!="")){
+          let alert = this.alertCtrl.create({
+            title: '提示',
+            subTitle: "请勾选审批序号:" + each.sequence + "记录！",
+            buttons: ['确定']
+          });
+          alert.present();
+          return;
+        }
+        let itemAdd = new ReviewProcessMain();
+        itemAdd.userId = "";
+        itemAdd.reveiwPersonlist = [];
+        itemAdd.reviewType = each.reviewType;//审批类型"       
+        itemAdd.billNumber = each.billNumber;//单号"    
+        itemAdd.number = each.number;//审批岗位表流水号 int
+        itemAdd.sequence = each.sequence;//审批序号 int 
+        itemAdd.dutyId = each.dutyId;//岗位编号"                  
+        itemAdd.dutyName = each.dutyName;//岗位名称"  
+        itemAdd.dutySpecial = each.dutySpecial;//特殊处理”    
+        itemAdd.current = each.current;//是否当前审批岗位 int   
+        itemAdd.userName = each.userName;//审批人名称”               
+        itemAdd.result = each.result;//审批结果int                   
+        itemAdd.date = each.date;//审批日期”                     
+        itemAdd.option = each.option;//审批意见”                 
+        itemAdd.vetoType = each.vetoType;//打回类型int   
+        itemAdd.sendDate = each.sendDate;//送审时间"
+        itemAdd.designPosition = each.designPosition;//打印位置"     
+        itemAdd.departCode = each.departCode;//所属单位"  
+        itemAdd.reviewPersons = each.reviewPersons;//可审人"  
+
+        itemAdd.userId += each.userId + '@';//审批人编号”
+        if(each.reveiwPersonlist){
+            for(let det of each.reveiwPersonlist){
+              if(det.user_code == each.userId){
+                  itemAdd.reveiwPersonlist.push(det);
+              }
+            }
+        }
+        data.push(itemAdd);
+      }
       //billNumber:string,reviewType:string,data:object[]
       this.approvalService.sendReviewPay(this.billNumber,this.reviewType,JSON.stringify(data))
       .subscribe(object => {
