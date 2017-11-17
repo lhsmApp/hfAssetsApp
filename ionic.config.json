@@ -4,5 +4,8 @@
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "proxies": [ 
+  	{ "path": "/assets", "proxyUrl": "http://192.168.2.108:9080/assets" }
+  ]
 }

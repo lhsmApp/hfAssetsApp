@@ -165,6 +165,7 @@ export class AcceptApplyItemPage {
   save(){
     let transferInfo=new Array<AcceptApplyDetail>();
     let detail=this.applyFrom.value as AcceptApplyDetail;
+    detail.requireDate =  Utils.dateFormat(new Date(), 'yyyy-MM-dd HH:mm');
     transferInfo.push(detail);
 
     this.acceptService.saveAcceptApplyMain(JSON.stringify(transferInfo))
