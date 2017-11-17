@@ -1,0 +1,40 @@
+<!--
+  Generated template for the AdvancePaymentApprovalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color='dark'>
+    <ion-title>付款审批</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="!isEmpty">
+    <ion-searchbar (ionInput)="getItems($event)" placeholder="请输入付款单号"></ion-searchbar>
+    <ion-list class="list-avatar-page">
+      <ion-item *ngFor="let item of advancePaymentList;trackBy:item?.payCode" (click)="openPage(item)">
+        <!-- <ion-avatar item-start (click)="openUserPage(item.author.loginname, $event)">
+          <img src="{{item.author.avatar_url}}" />
+        </ion-avatar> -->
+        <h2>付款单号：{{item.payCode}}</h2>
+        <h3 item-end><span [yfktype]="item"></span></h3>
+        <p> 付款原因：{{item.payDigest}} </p>
+        <p>申请人： {{item.requireUser}} &nbsp;&nbsp;<ion-note>{{item.requireUser}}</ion-note></p>
+        
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="isEmpty" text-center padding-top margin-top>
+    <img [src]="emptyPath" width="50%" height="50%"  margin-top>
+    <h3>目前还没有审批记录哦~</h3>
+  </div>
+</ion-content>

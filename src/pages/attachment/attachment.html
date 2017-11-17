@@ -1,0 +1,58 @@
+<!--
+  Generated template for the AttachmentPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>
+      {{title}}
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="add()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="!isEmpty">
+    <ion-list>
+      <ion-item-sliding *ngFor="let item of attachmentList" >
+    	<ion-item (click)="openPage(item)"> 
+  	    <ion-thumbnail item-start>
+  	      <img src="{{thumbPath}}">
+  	    </ion-thumbnail>
+  	    <p>{{item.fileName}}</p>
+  	    <ion-note>{{item.fileInfo}}</ion-note>
+       </ion-item>
+       <ion-item-options side="right">
+          <button ion-button color="danger" (click)="delete(item);">
+            <ion-icon name="close"></ion-icon>
+            删除
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+  <div *ngIf="isEmpty" text-center padding-top margin-top>
+    <img [src]="emptyPath" width="50%" height="50%"  margin-top>
+    <h3>目前还没有任何记录哦~</h3>
+  </div>
+</ion-content>
+<!-- <ion-footer>
+  <ion-toolbar>
+    <ion-title>
+      <button ion-button block ion-left (click)="upload()">
+        <ion-icon name="search"></ion-icon>
+        上传
+      </button>
+    </ion-title>
+    
+  </ion-toolbar>
+</ion-footer> -->

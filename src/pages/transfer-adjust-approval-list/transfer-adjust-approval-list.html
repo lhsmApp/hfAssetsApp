@@ -1,0 +1,42 @@
+<!--
+  Generated template for the TransferAdjustApprovalListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="dark">
+    <ion-title>转资调整审批</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf="!isEmpty">
+    <ion-searchbar (ionInput)="getItems($event)" placeholder="输入编号模糊搜索"></ion-searchbar>
+    <ion-list>
+      <ion-item *ngFor="let item of list;trackBy:item?.translateCode" (click)="toDetail(item)">
+        <h2>单据编号：{{item.translateCode}}</h2><!---->
+        <p>项目单元名称：{{item.elementName}}</p><!---->
+        <p>转资金额：{{item.costTotal}}</p><!---->
+        <p>是否分摊费用：{{item.feeFlagName}}</p><!---->
+        <p>转资序号：{{item.sequence}}</p><!---->
+        <h3 item-end><span item-end [tab]="item"></span></h3><!--单据状态：reviewStatus-->
+      </ion-item>
+    </ion-list>
+  </div>
+  <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>-->
+  <div *ngIf="isEmpty" text-center padding-top margin-top>
+    <img [src]="emptyPath" width="50%" height="50%"  margin-top>
+    <h3>目前还没有审批记录哦~</h3>
+  </div>
+</ion-content>

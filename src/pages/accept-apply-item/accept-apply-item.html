@@ -1,0 +1,98 @@
+<!--
+  Generated template for the AcceptApplyItemPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="dark" hideBackButton="true">
+    
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+          <ion-icon ios="ios-arrow-back" md="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>验收申请</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-right (click)="send()">
+        送审
+        <ion-icon name="paper-plane"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+	<form [formGroup]="applyFrom" (ngSubmit)="(save())">
+        <ion-item-group>
+            <ion-item >
+                <ion-label fixed>合同流水号</ion-label>
+                <ion-input type="text" readonly formControlName="contractCode" 
+                           placeholder="选择" (focus)="choiceContract()"></ion-input>
+            </ion-item>
+            <span *ngIf="!applyFrom.controls.contractCode.valid && applyFrom.controls.contractCode.touched"
+                  class="validation-failed">
+                请选择合同流水号
+            </span>
+            <ion-item >
+                <ion-label fixed>合同名称</ion-label>
+                <ion-input type="text" readonly formControlName="contractName" placeholder="自动带出"></ion-input>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>项目单元编码</ion-label>
+                <ion-input type="text" readonly formControlName="elementCode" placeholder="自动带出"></ion-input>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>项目单元名称</ion-label>
+                <ion-input type="text" readonly formControlName="elementName" 
+                    placeholder="自动带出"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>申请单位</ion-label>
+                <ion-input type="text" readonly formControlName="departName"></ion-input>
+                <!--<ion-select type="text" [(ngModel)]="departCode" formControlName="departCode" placeholder="选择">
+                    <ion-option *ngFor="let dept of listDept" value="{{dept.departCode}}">{{dept.departName}}</ion-option>
+                    <ion-option value=""></ion-option>
+                </ion-select>-->
+            </ion-item>
+            <span *ngIf="!applyFrom.controls.departCode.valid && applyFrom.controls.departCode.touched"
+                  class="validation-failed">
+                请选择申请单位
+            </span>
+            <ion-item >
+                <ion-label fixed>申请时间</ion-label>
+                <ion-input type="text" readonly formControlName="requireDate"></ion-input>
+            </ion-item>
+            <span *ngIf="!applyFrom.controls.requireDate.valid && applyFrom.controls.requireDate.touched"
+                  class="validation-failed">
+                申请时间不能为空
+            </span>
+            <ion-item >
+                <ion-label fixed>申请人</ion-label>
+                <ion-input type="text" readonly formControlName="requireUser"></ion-input>
+            </ion-item>
+            <span *ngIf="!applyFrom.controls.requireUser.valid && applyFrom.controls.requireUser.touched"
+                  class="validation-failed">
+                申请人不能为空
+            </span>
+            <!-- 资产明细 -->
+            <ion-item-divider color="light"></ion-item-divider>
+            <ion-item (click)='toAssetDetail()'>资产明细<ion-icon name="more" item-end></ion-icon></ion-item>
+            <ion-item-divider color="light"></ion-item-divider>
+		</ion-item-group>
+        <div padding-horizontal>
+            <button ion-button color="danger" block type="submit" [disabled]="!applyFrom.valid">保 存</button>
+        </div>
+	</form>
+</ion-content>
+
+<!--<ion-footer>
+    <ion-toolbar>
+        <div padding-horizontal>
+            <button ion-button color="danger" block type="submit" [disabled]="!applyFrom.valid">保 存</button>
+        </div>
+    </ion-toolbar>
+</ion-footer>-->

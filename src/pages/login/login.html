@@ -1,0 +1,53 @@
+
+<ion-content class="card-background-page">
+    <img src="{{loginBg}}" style="position:absolute; height:100%; width:100%; top:0%; left:0%;"/>
+<!--     <h2 class="card-title">投资工程管理平台</h2> -->
+    <div class="card-form" padding>
+      <!-- <ion-card> -->
+        <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)" class="ion-card">
+         <ion-list  class='list'>
+          <ion-item class='list'>
+            <ion-label><ion-icon name="person"></ion-icon></ion-label>
+
+            <ion-input type="text" formControlName="usercode" placeholder="用户名" clearInput></ion-input>
+          </ion-item>
+          <div *ngIf="!loginForm.controls.usercode.valid && loginForm.controls.usercode.touched" class="validation-failed"> 请输入正确用户名</div>
+
+          <ion-item class='list'>
+            <ion-label><ion-icon name="key"></ion-icon></ion-label>
+            <ion-input type="password" formControlName="password" placeholder="密码" clearInput></ion-input>
+          </ion-item>
+          <div *ngIf="!loginForm.controls.password.valid&& loginForm.controls.password.touched" class="validation-failed">请输入密码</div>
+
+          <ion-item class='list'>
+            <ion-label><ion-icon name="people"></ion-icon></ion-label>
+            <ion-input type="text" formControlName="departCode" readonly tappable placeholder="单位" clearInput (ionFocus)="selectDepart()" ></ion-input>
+          </ion-item>
+          <div *ngIf="!loginForm.controls.departCode.valid && loginForm.controls.departCode.touched" class="validation-failed"> 请选择单位</div>
+
+          <ion-item class='list' no-lines>
+            <ion-checkbox formControlName="ischeck"></ion-checkbox>
+            <label item-left style="margin-left: -25px;" class="main_gray">记住信息</label>
+            
+          </ion-item>
+         </ion-list>
+         <div padding>
+           <button ion-button color="secondary" icon-left full type="submit" [disabled]="!loginForm.valid||submitted"><!-- <ion-icon name="category" color="purple"></ion-icon> -->登　录</button>
+         </div>
+        </form>
+      <!-- </ion-card> -->
+      
+    </div>
+    
+  <!-- <ion-grid>
+    <ion-row>
+      <ion-col text-center tappable (click)="findPassword()">
+        <button ion-button small clear color="primary">找回密码</button>
+      </ion-col>
+      <ion-col text-center tappable (click)="toRegister()">
+        <button ion-button small clear color="primary">注　册</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+  
+</ion-content>

@@ -1,0 +1,48 @@
+<!--
+  Generated template for the DepartSelectPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color='dark'>
+    <ion-title>单位选择</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="!isEmpty">
+    <ion-list radio-group [(ngModel)]="selectDepart">
+      <ion-item *ngFor="let item of departList;trackBy:item?.departCode">
+        <ion-label>
+  	      <h2>{{item.departName}}</h2>
+  	      <h3 item-end>{{item.departCode}}</h3>
+  	      <!-- <p> {{item.listNumber}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.listName}}</p> -->
+        </ion-label>
+    	  <ion-radio color="dark" checked="false" value={{item.departCode}}|{{item.departName}}></ion-radio>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="isEmpty" text-center padding-top margin-top>
+    <img [src]="emptyPath" width="50%" height="50%"  margin-top>
+    <h3>没有查询到任何记录哦~</h3>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+  	<ion-title>
+  		<button ion-button block ion-left (click)="confirm()">
+  			<!-- <ion-icon name="search"></ion-icon> -->
+  			确定
+  		</button>
+  	</ion-title>
+    
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,92 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+
+//.my-custom-alert{
+//  .alert-md .alert-button{
+//    color:#fff
+//  }
+//}
+
+.primary{color:#488aff;}    
+.secondary{color:#32db64;}
+.danger{color:     #f53d3d;}
+.light{color:      #f4f4f4;}
+.dark{color:      #222;}
+.base_color{color:#974500;}
+.black{color:#000000;}
+.gray{color:#808080;}
+.red{color:#FF0000;}
+.gold{color:#FFD700;}
+.yellow{color:#FFFF00;}
+.green{color:#008000;}
+.purple{color:#800080;}
+.pink{color:#FFC0CB;}
+.orange{color:#FFA500;}
+.lemonyellow{color:#FFFACD;}
+.graywhite{color:#F5F5F5;}
+.grayslate{color:#708090;}
+.lightblue{color:#0083FF;}
+.textindistinct{color:#BEBEBE;}
+.main_green{color:#40AA53;}
+.main_gray{color:#9A9A9A;}
+.main_black{color:#333;}
+.main_purple{color:#576B95;}
+
+.toolbar-title-md {
+    text-align: left;
+}
+
+.color-label{
+	color:#9A9A9A
+}
+
+.list-avatar-page {
+  ion-note {
+    font-size: 12px;
+    align-self: flex-start;
+    margin-top: 14px;
+  }
+}
+.alert-button-group-vertical{
+	flex-direction: row;
+}
+
+.alertButtionNo {
+    background-color: color($colors, danger) !important;
+    color: #fff !important;
+}
+.alertButtionYes {
+    background-color: color($colors, secondary) !important;
+    color: #fff !important;
+}
+.alertButtionCancel {
+    background-color: color($colors, primary) !important;
+    color: #fff !important;
+}
+
+.select-md {
+    padding: 13px 8px 13px 8px;
+}
+
+.datetime-md {
+    padding: 13px 8px 13px 8px;
+}
+
+
+
+

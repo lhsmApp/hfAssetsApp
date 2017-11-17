@@ -1,0 +1,201 @@
+<!--
+  Generated template for the ScheduleApplyItemPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="dark" hideBackButton="true">
+    
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+          <ion-icon ios="ios-arrow-back" md="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>进度管理</ion-title>
+    <!--<ion-buttons end>
+      <button ion-button icon-right (click)="send()">
+        送审
+        <ion-icon name="paper-plane"></ion-icon>
+      </button>
+    </ion-buttons>-->
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+	<form [formGroup]="applyFrom" (ngSubmit)="(save())">
+		<ion-item-group>
+            <ion-item >
+                <ion-label fixed>项目计划编码</ion-label>
+                <ion-input readonly type="text" formControlName="projectCode">
+                </ion-input>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>项目计划名称</ion-label>
+                <ion-input readonly type="text" formControlName="projectName">
+                </ion-input>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>项目单元编码</ion-label>
+                <ion-input readonly type="text" formControlName="elementCode">
+                </ion-input>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>项目单元名称</ion-label>
+                <ion-input readonly type="text" formControlName="elementName">
+                </ion-input>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>项目单元类别</ion-label>
+                <ion-input readonly type="text" formControlName="elementFlagName">
+                </ion-input>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>施工属性</ion-label>
+                <ion-input readonly type="text" formControlName="sgsxName">
+                </ion-input>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>进展概述</ion-label>
+                <ion-input type="text" formControlName="projectProgress" 
+                    placeholder="手工输入">
+                </ion-input>
+            </ion-item>
+
+            <ion-item >
+                <ion-label fixed>完工百分比</ion-label>
+                <ion-input type="number" formControlName="completionProgress" 
+                    placeholder="手工输入，只能输入数字">
+                </ion-input>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>设计完成时间</ion-label>
+                <!--<ion-input type="text" formControlName="designFinishTime" 
+                    placeholder="选择日期">
+                </ion-input>-->
+                <ion-datetime displayFormat="YYYY-MM-DD" placeholder="选择日期" max="{{maxYear}}" 
+                            cancelText="取消" doneText="确认"
+                            formControlName="designFinishTime" [(ngModel)]="designFinishTime">
+                </ion-datetime>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>施工图完成时间</ion-label>
+                <!--<ion-input type="text" formControlName="drawingFinishTime" 
+                    placeholder="选择日期">
+                </ion-input>-->
+                <ion-datetime displayFormat="YYYY-MM-DD" placeholder="选择日期" max="{{maxYear}}"
+                            cancelText="取消" doneText="确认"
+                            formControlName="drawingFinishTime" [(ngModel)]="drawingFinishTime">
+                </ion-datetime>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>计划开工时间</ion-label>
+                <!--<ion-input type="text" formControlName="planBeginTime" 
+                    placeholder="选择日期">
+                </ion-input>-->
+                <ion-datetime displayFormat="YYYY-MM-DD" placeholder="选择日期" max="{{maxYear}}"
+                            cancelText="取消" doneText="确认"
+                            formControlName="planBeginTime" [(ngModel)]="planBeginTime">
+                </ion-datetime>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>计划完工时间</ion-label>
+                <!--<ion-input type="text" formControlName="planEndTime" 
+                    placeholder="选择日期">
+                </ion-input>-->
+                <ion-datetime displayFormat="YYYY-MM-DD" placeholder="选择日期" max="{{maxYear}}"
+                            cancelText="取消" doneText="确认"
+                            formControlName="planEndTime" [(ngModel)]="planEndTime">
+                </ion-datetime>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>实际开工时间</ion-label>
+                <!--<ion-input type="text" formControlName="realBeginTime" 
+                    placeholder="选择日期">
+                </ion-input>-->
+                <ion-datetime displayFormat="YYYY-MM-DD" placeholder="选择日期" max="{{maxYear}}"
+                            cancelText="取消" doneText="确认"
+                            formControlName="realBeginTime" [(ngModel)]="realBeginTime">
+                </ion-datetime>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>实际完工时间</ion-label>
+                <!--<ion-input type="text" formControlName="realEndTime"
+                    placeholder="选择日期">
+                </ion-input>-->
+                <ion-datetime displayFormat="YYYY-MM-DD" placeholder="选择日期" max="{{maxYear}}"
+                            cancelText="取消" doneText="确认"
+                            formControlName="realEndTime" [(ngModel)]="realEndTime">
+                </ion-datetime>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>竣工验收时间</ion-label>
+                <!--<ion-input type="text" formControlName="realFinishTime" 
+                    placeholder="选择日期">
+                </ion-input>-->
+                <ion-datetime displayFormat="YYYY-MM-DD" placeholder="选择日期" max="{{maxYear}}"
+                            cancelText="取消" doneText="确认"
+                            formControlName="realFinishTime" [(ngModel)]="realFinishTime">
+                </ion-datetime>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>预达转资时间</ion-label>
+                <!--<ion-input type="text" formControlName="certainDate" 
+                    placeholder="选择日期">
+                </ion-input>-->
+                <ion-datetime displayFormat="YYYY-MM-DD" placeholder="选择日期" max="{{maxYear}}"
+                            cancelText="取消" doneText="确认"
+                            formControlName="certainDate" [(ngModel)]="certainDate">
+                </ion-datetime>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>审计报告日期</ion-label>
+                <!--<ion-input type="text" formControlName="auditReportTime" 
+                    placeholder="选择日期">
+                </ion-input>-->
+                <ion-datetime displayFormat="YYYY-MM-DD" placeholder="选择日期" max="{{maxYear}}"
+                            cancelText="取消" doneText="确认"
+                            formControlName="auditReportTime" [(ngModel)]="auditReportTime">
+                </ion-datetime>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>复核意见</ion-label>
+                <ion-input type="text" formControlName="checkOpinion" 
+                    placeholder="手工输入">
+                </ion-input>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>填报日期</ion-label>
+                <ion-input readonly type="text" formControlName="requireDate" 
+                    placeholder="自动填写">
+                </ion-input>
+                <span *ngIf="!applyFrom.controls.requireDate.valid && applyFrom.controls.requireDate.touched"
+                    class="validation-failed">
+                    填报日期不能为空
+                </span>
+            </ion-item>
+            <ion-item >
+                <ion-label fixed>填报人</ion-label>
+                <ion-input readonly type="text" formControlName="requireUser" 
+                    placeholder="自动填写">
+                </ion-input>
+                <span *ngIf="!applyFrom.controls.requireUser.valid && applyFrom.controls.requireUser.touched"
+                    class="validation-failed">
+                    填报人不能为空
+                </span>
+            </ion-item>
+		</ion-item-group>
+        <div padding-horizontal>
+            <button ion-button color="danger" block type="submit" [disabled]="!applyFrom.valid">保 存</button>
+        </div>
+	</form>
+
+</ion-content>
+
+<!--<ion-footer>
+    <ion-toolbar>
+    </ion-toolbar>
+</ion-footer>-->

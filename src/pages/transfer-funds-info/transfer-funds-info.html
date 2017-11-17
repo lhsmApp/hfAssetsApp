@@ -1,0 +1,96 @@
+<!--
+  Generated template for the TransferFundsInfoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="dark" hideBackButton="true">
+    
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+          <ion-icon ios="ios-arrow-back" md="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons end *ngIf="isShow">
+      <button ion-button icon-only (click)="check()">
+        <ion-icon name="document"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-item-group inset>
+        <ion-item>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>单据状态：</span></ion-col>
+                <ion-col col-8><span text-left>{{itemShow.reviewStatusName}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>单据编号：</span></ion-col>
+                <ion-col col-8><span text-left>{{itemShow.translateCode}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>转资类型：</span></ion-col>
+                <ion-col col-8><span text-left>{{itemShow.translateTypeName}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>项目单元编码：</span></ion-col>
+                <ion-col col-8><span text-left>{{itemShow.elementCode}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>项目单元名称：</span></ion-col>
+                <ion-col col-8><span text-left>{{itemShow.elementName}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>预达转资时间：</span></ion-col>
+                <ion-col col-8><span text-left>{{itemShow.beforehandDate}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>转资说明：</span></ion-col>
+                <ion-col col-8><span text-left>{{itemShow.translateContent}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>转资金额：</span></ion-col>
+                <ion-col col-8><span text-left>{{itemShow.costTotal}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>申请时间：</span></ion-col>
+                <ion-col col-8><span text-left>{{itemShow.requireDate}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>申请人：</span></ion-col>
+                <ion-col col-8><span text-left>{{itemShow.requireUser}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+            <!-- 资产明细 -->
+        <ion-item-divider color="light"></ion-item-divider>
+        <ion-item (click)='toAssetDetail()'>资产明细 <ion-icon name="more" item-end></ion-icon></ion-item>
+        <ion-item-divider *ngIf="hasApprovalProgress" color="light"></ion-item-divider>
+        <ion-item *ngIf="hasApprovalProgress" (click)='approvalProgress()'>审批进度 <ion-icon name="more" item-end></ion-icon></ion-item>
+        <ion-item-divider color="light"></ion-item-divider>
+    </ion-item-group>
+</ion-content>

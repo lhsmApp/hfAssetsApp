@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>
+      我的
+    </ion-title>
+    <!-- <ion-buttons end>
+      <button ion-button (click)="notice()">
+        <ion-icon name="ios-notifications-outline"></ion-icon>
+      </button>
+    </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="content-background">
+  <ion-list class="mine-header">
+    <button ion-item ><!-- (click)="edit()" -->
+      <ion-thumbnail item-left><!-- (click)="viewAvatar();$event.stopPropagation()" -->
+        <img src="{{avatarPath}}">
+      </ion-thumbnail>
+      <h2>{{userInfo?.userName}}</h2>
+      <p class="description">{{userInfo?.departName}}</p>
+    </button>
+  </ion-list>
+  <ion-list>
+    <button ion-item (click)="setting()">
+      <ion-icon name="settings" item-left color="primary"></ion-icon>
+      设置
+    </button>
+    <button ion-item (click)="dictReflesh()">
+      <ion-icon name="map" item-left color="bright"></ion-icon>
+      数据字典刷新
+    </button>
+  </ion-list>
+  
+  <ion-list>
+    <button ion-item (click)="about()">
+      <ion-icon name="information-circle" item-left color="secondary"></ion-icon>
+      关于
+    </button>
+    <button ion-item (click)="changeUnit()">
+      <ion-icon name="people" item-left color="orange"></ion-icon>
+      切换单位
+    </button>
+  </ion-list>
+  <ion-list>
+    <button ion-item (click)="loginOut()" detail-none>
+      <ion-icon name="log-in" item-left color="danger"></ion-icon>
+      重新登录
+    </button>
+    <button ion-item (click)="exitSoftware()" hideWhen="ios" detail-none>
+      <ion-icon name="log-out" item-left color="danger"></ion-icon>
+      退出软件
+    </button>
+  </ion-list>
+</ion-content>

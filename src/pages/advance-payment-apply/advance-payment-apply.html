@@ -1,0 +1,136 @@
+<!--
+  Generated template for the AdvancePaymentApplyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color='dark' hideBackButton="true">
+    
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+          <ion-icon ios="ios-arrow-back" md="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>付款申请</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-right (click)="send()">
+      	送审
+        <ion-icon name="paper-plane"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+	<form [formGroup]="paymentForm" (ngSubmit)="(save())">
+    <ion-item-group >
+      <ion-item>
+        <ion-label fixed>付款单号</ion-label>
+        <ion-input type="text" readonly formControlName="payCode" placeholder="保存后自动生成"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>款项类别<span class="danger">*</span></ion-label>
+        <ion-select [ngModel]="clauseType" formControlName="clauseType" style="left:0;" placeholder="选择" cancelText="取消" okText="确定" (ngModelChange)="clauseType=$event;clauseChange()">
+          <!-- <ion-option value="1">进度款</ion-option>
+          <ion-option value="2">预付款</ion-option>
+          <ion-option value="3">质保金</ion-option>
+          <ion-option value="4">验收款</ion-option> -->
+          <ion-option *ngFor="let category of paymentCategory" [value]="category.code">{{category.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <span *ngIf="!paymentForm.controls.clauseType.valid && paymentForm.controls.clauseType.touched"
+            class="validation-failed">
+          请选择款项类别
+      </span>
+      <ion-item>
+        <ion-label fixed>合同流水号<span class="danger">*</span></ion-label>
+        <ion-input type="text" readonly formControlName="contractCode" placeholder="选择" (focus)="choiceContract()"></ion-input>
+      </ion-item>
+      <span *ngIf="!paymentForm.controls.contractCode.valid && paymentForm.controls.contractCode.touched"
+            class="validation-failed">
+          请选择合同流水号
+      </span>
+      <ion-item>
+        <ion-label fixed>合同名称</ion-label>
+        <ion-input type="text" readonly formControlName="contractName" placeholder="自动带出"></ion-input>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-label fixed>项目性质</ion-label>
+        
+        <ion-input type="text" readonly formControlName="elementType" placeholder="自动带出"></ion-input>
+      </ion-item> -->
+      <ion-item>
+        <ion-label fixed>项目单元名称</ion-label>
+        
+        <ion-input type="text" readonly formControlName="elementName" placeholder="自动带出"></ion-input>
+      </ion-item>
+      <ion-item hidden>
+        <ion-label fixed>项目核算类别</ion-label>
+        <ion-input type="text" readonly formControlName="planType" placeholder="自动带出"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>项目核算类别</ion-label>
+        <ion-input type="text" readonly formControlName="planTypeName" placeholder="自动带出"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>合同标的额</ion-label>
+        <ion-input type="number" readonly formControlName="costMoney" placeholder="自动带出"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>已付款额度</ion-label>
+        <ion-input type="number" readonly formControlName="taxMoney" placeholder="自动带出"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>付款原因<span class="danger">*</span></ion-label>
+        <ion-input type="text" formControlName="payDigest" placeholder="手工输入"></ion-input>
+      </ion-item>
+      <span *ngIf="!paymentForm.controls.payDigest.valid && paymentForm.controls.payDigest.touched"
+            class="validation-failed">请输入付款原因
+      </span>
+      <ion-item>
+        <ion-label fixed>本次申请金额<span class="danger">*</span></ion-label>
+        <ion-input type="number" formControlName="payMoney" placeholder="手工输入"></ion-input>
+      </ion-item>
+      <span *ngIf="!paymentForm.controls.payMoney.valid && paymentForm.controls.payMoney.touched"
+            class="validation-failed">请输入本次申请金额
+      </span>
+      <ion-item>
+        <ion-label fixed>付款单位<span class="danger">*</span></ion-label>
+        <ion-select [(ngModel)]="paymentCode" formControlName="paymentCode" placeholder="选择" cancelText="取消" okText="确定">
+  	      <ion-option *ngFor="let payDept of listPayDept" [value]="payDept.departCode">{{payDept.departName}}</ion-option>
+	      </ion-select>
+      </ion-item>
+      <span *ngIf="!paymentForm.controls.paymentCode.valid && paymentForm.controls.paymentCode.touched"
+            class="validation-failed">请选择付款单位
+      </span>
+      <ion-item>
+        <ion-label fixed>往来单位<span class="danger">*</span></ion-label>
+        <ion-select [(ngModel)]="intercourseCode" formControlName="intercourseCode" style="left:0;" placeholder="选择" cancelText="取消" okText="确定">
+	         <ion-option *ngFor="let intercourse of listIntercourse" [value]="intercourse.departCode">{{intercourse.departName}}</ion-option>
+	      </ion-select>
+      </ion-item>
+      <span *ngIf="!paymentForm.controls.intercourseCode.valid && paymentForm.controls.intercourseCode.touched"
+            class="validation-failed">请选择往来单位
+      </span>
+      <ion-item>
+        <ion-label fixed>申请时间</ion-label>
+        <ion-input type="text" readonly formControlName="requireDate" placeholder="自动填写"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>申请人</ion-label>
+        <ion-input type="text" readonly formControlName="requireUser" placeholder="自动填写"></ion-input>
+      </ion-item>
+      <ion-item-divider color="light"></ion-item-divider>
+	    <ion-item (click)='invoice(item)'>发票 <ion-icon name="more" item-end></ion-icon></ion-item>
+	    <ion-item-divider color="light"></ion-item-divider>
+	    <ion-item (click)='billOfGcl(item)'>工程量清单 <ion-icon name="more" item-end></ion-icon></ion-item>
+	    <ion-item-divider color="light"></ion-item-divider>
+    </ion-item-group>
+    <div padding-horizontal>
+      <button ion-button color="danger" full type="submit" [disabled]="!paymentForm.valid">保 存</button>
+    </div>
+  </form>
+</ion-content>

@@ -1,0 +1,50 @@
+<!--
+  Generated template for the ApprovalProgressPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color='dark'>
+    <ion-title>审批进度</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <!-- <ion-list class="list-avatar-page">
+    <ion-item *ngFor="let item of contractList;trackBy:item?.contractCode" (click)="openPage(item)">
+      <h2>审批序号：{{item.sequence}}</h2>
+      <p>岗位名称： {{item.dutyName}} </p>
+      <p>审批人： {{item.userName}}</p>
+      <p>所属单位： {{item.departCode}}</p>
+      <p>审批结果： {{item.result}}</p>
+      <p>审批日期： {{item.date}}</p>
+      <p>审批意见 {{item.option}}</p>
+    </ion-item>
+  </ion-list> -->
+
+  <ion-item-group *ngFor="let item of list">
+    <ion-item-divider color="light">
+    	<!-- 审批序号 岗位编号 岗位名称 -->
+        <h2>审批序号：{{item.sequence}}</h2>
+        <!-- <p>{{mainItem.dutyId}} {{mainItem.dutyName}}</p> -->
+        <p item-end>{{item.dutyName}}</p>
+    </ion-item-divider>
+    <ion-item>
+      <p>审批结果：
+        <span *ngIf='item.result==0' class="primary" >未审批</span> 
+        <span *ngIf='item.result==1' class="secondary" >通过</span>
+        <span *ngIf='item.result==2' class="danger" >退回</span>
+      </p>
+        
+      <p>审批人： {{item.userName}}</p>
+      <!-- <p>所属单位： {{item.departCode}}</p> -->
+      <p>审批日期： {{item.date}}</p>
+      <p>审批意见： {{item.option}}</p>
+    </ion-item>
+  </ion-item-group>
+</ion-content>
