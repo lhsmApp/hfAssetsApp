@@ -128,20 +128,13 @@ export class NativeService {
       //fileTransfer.download(APK_DOWNLOAD, apk).then(() => {
       fileTransfer.download(APP_VERSION_SERVE_URL, apk).then((entry) => {
         //window['install'].install(apk.replace('file://', ''));
-        /*this.alert(entry);
-        this.alert(entry.toURL());
-        window['install'].install(entry);*/
-        
+        alert.dismiss();
         this.fileOpener.open(apk, 'application/vnd.android.package-archive').then(() =>{  
-            this.alert("File is opened");
             console.log('File is opened')  
         }).catch(e => {  
-            this.alert("Error openening file");
-            this.alert(JSON.stringify(e));
             console.log('Error openening file', e)  
         });  
       }, (error) => {
-        this.alert(JSON.stringify(error));
         alert.dismiss();
         //this.logger.log(err, 'android app 本地升级失败');
         this.alertCtrl.create({

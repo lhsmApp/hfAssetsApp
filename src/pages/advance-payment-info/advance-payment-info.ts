@@ -82,7 +82,7 @@ export class AdvancePaymentInfoPage {
     this.payCode=this.navParams.get('id');
     this.isapproval=this.navParams.get('approval');
 
-    this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
+    /*this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
       this.listPayDept=inDepart;
     });
     this.storage.get(OUT_DEPART).then((outDepart: DicOutDepart[]) => {
@@ -90,7 +90,7 @@ export class AdvancePaymentInfoPage {
     });
     this.storage.get(CONTRACT_TYPE).then((contractType: DicBase[]) => {
       this.listContractType=contractType;
-    });
+    });*/
     this.initData();
   }
 
@@ -102,10 +102,21 @@ export class AdvancePaymentInfoPage {
         if(resultBase.result=='true'){
           console.log(object[1][0]);
           this.paymentDetail = object[1][0] as AdvancePaymentDetail;
+
           this.paymentDetail.clauseTypeName=this.dictUtil.getClauseTypeName(this.paymentDetail.clauseType);
-          this.paymentDetail.payDepart=this.dictUtil.getInDepartName(this.listPayDept,this.paymentDetail.paymentCode);
-          this.paymentDetail.intercourseName=this.dictUtil.getOutDepartName(this.listIntercourse,this.paymentDetail.intercourseCode);
-          this.paymentDetail.planTypeName=this.dictUtil.getContractTypeName(this.listContractType,this.paymentDetail.planType);
+          this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
+            this.listPayDept=inDepart;
+            this.paymentDetail.payDepart=this.dictUtil.getInDepartName(this.listPayDept,this.paymentDetail.paymentCode);
+          });
+          this.storage.get(OUT_DEPART).then((outDepart: DicOutDepart[]) => {
+            this.listIntercourse=outDepart;
+            this.paymentDetail.intercourseName=this.dictUtil.getOutDepartName(this.listIntercourse,this.paymentDetail.intercourseCode);
+          });
+          this.storage.get(CONTRACT_TYPE).then((contractType: DicBase[]) => {
+            this.listContractType=contractType;
+            this.paymentDetail.planTypeName=this.dictUtil.getContractTypeName(this.listContractType,this.paymentDetail.planType);
+          });
+          
         }else{
           let alert = this.alertCtrl.create({
             title: '提示!',

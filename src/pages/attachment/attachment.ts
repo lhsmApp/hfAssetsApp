@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ModalController,AlertController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import {FileTransfer,FileTransferObject} from "@ionic-native/file-transfer";
-//import {FileOpener } from "@ionic-native/file-opener";
+import {FileOpener } from "@ionic-native/file-opener";
 import {File,FileEntry} from "@ionic-native/file";
 
 import { Attachment} from '../../model/attachment';
@@ -46,7 +46,7 @@ export class AttachmentPage {
     private modalCtrl: ModalController,
     private alertCtrl:AlertController,
     private inAppBrowser:InAppBrowser,
-    //private fileOpener: FileOpener,
+    private fileOpener: FileOpener,
     private fileTransfer: FileTransfer,
     private file:File,
     private attachmentService:AttachmentService,
@@ -108,13 +108,13 @@ export class AttachmentPage {
       ||fileType.toLowerCase()=="raw"||fileType.toLowerCase()=="ufo"
       ||fileType.toLowerCase()=="ai"){
       this.navCtrl.push("AttachmentViewPage",{attachment:item});
-    }/*else if(fileType.toLowerCase()=="txt"||fileType.toLowerCase()=="docx"
+    }else if(fileType.toLowerCase()=="txt"||fileType.toLowerCase()=="docx"
       ||fileType.toLowerCase()=="doc"||fileType.toLowerCase()=="pptx"
       ||fileType.toLowerCase()=="ppt"||fileType.toLowerCase()=="xlsx"
       ||fileType.toLowerCase()=="xls"||fileType.toLowerCase()=="zip"
       ||fileType.toLowerCase()=="rar"||fileType.toLowerCase()=="pdf"){
       const fileTransfer: FileTransferObject = this.fileTransfer.create();
-      const nativePath = this.file.externalRootDirectory + item.fileName; //文件保存的目录
+      const nativePath = this.file.dataDirectory + item.fileName; //文件保存的目录
 
       //下载并安装apk
       fileTransfer.download(APP_SERVE_FILE_URL +item.filePath, nativePath).then((entry) => {
@@ -123,14 +123,14 @@ export class AttachmentPage {
         .then(() => {
           console.log('打开成功');
         })
-        .catch(() => {
+        .catch((error) => {
           console.log('打开失败');
           window.open(APP_SERVE_FILE_URL +item.filePath,'_system');
         });
       }, err => {
         window.open(APP_SERVE_FILE_URL +item.filePath,'_system');
       });
-    }*/else{
+    }else{
       //this.inAppBrowser.create(APP_SERVE_FILE_URL +item.filePath);
       window.open(APP_SERVE_FILE_URL +item.filePath,'_system');
     }

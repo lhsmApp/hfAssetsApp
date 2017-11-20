@@ -87,13 +87,15 @@ export class SystemService {
   changeDepart(departCode:string): Observable<(Object)> {
     let param = {
      //必传
-     'action': 'loginSelectDepart',
+     //'action': 'loginSelectDepart',
+     'action': 'selectNewDepart',
      'sessionid':this.globalData.sessionId,
      'userCode':this.globalData.userCode,
      'password':this.globalData.userName,
      'departCode':departCode
      };
-     return this.httpService.get('departmentLogin.do', param).map((res: Response) => res.json());
+     //return this.httpService.get('departmentLogin.do', param).map((res: Response) => res.json());
+     return this.httpService.get('phoneMyInfo.do', param).map((res: Response) => res.json());
   }
 
   //待办事项

@@ -25,9 +25,9 @@
           <img src="{{item.author.avatar_url}}" />
         </ion-avatar> -->
         <h2>付款单号：{{item.payCode}}</h2>
-        <h3 item-end><span [tab]="item"></span></h3>
         <p> 付款原因： {{item.payDigest}} </p>
-        <p> 申请人：{{item.requireUser}} &nbsp;&nbsp;<ion-note>{{item.requireUser}}</ion-note></p>
+        <p> 申请人：{{item.requireUser}}</p>
+        <h3 item-end><span item-end [tab]="item"></span></h3>
       </ion-item>
     </ion-list>
   </div>

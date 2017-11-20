@@ -3,7 +3,7 @@ page-login {
 
 	.card-background-page {
 
-	  position: relative;
+	  position: position;
 	  text-align: center;
 	  height: 100%;width: 100%;margin:0;padding:0;
 	  overflow:hidden;
@@ -15,7 +15,7 @@ page-login {
 	  }
 
 	  ion-card {
-	    position: relative;
+	    position: position;
 	    text-align: center;
 	  }
 
@@ -36,6 +36,8 @@ page-login {
 	  .list{
 	  	 background:transparent;
 	  }
+
+	  
 
 	  .card-form{
 	    position: absolute;

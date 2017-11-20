@@ -73,6 +73,9 @@ export class LoginPage {
   ionViewDidLoad(){
     this.events.subscribe('system:timeout', () => {
       this.navCtrl.popToRoot();
+      this.loginForm.patchValue({
+        departCode:''
+      });
     });
   }
 
@@ -123,12 +126,15 @@ export class LoginPage {
 
   //选择单位
   selectDepart(){
-    console.log("select");
     let modal = this.modalCtrl.create('DepartSelectPage',{'userinfo':this.loginForm.value});
     modal.present();
     modal.onDidDismiss(departInfo => {
       if(departInfo){
         let departCodeAndName:string[]=departInfo.split('|');
+        console.log(this.loginForm.controls.departCode);
+        this.loginForm.patchValue({
+          departCode:departCodeAndName[1]
+        });
         this.loginForm.patchValue({
           departCode:departCodeAndName[1]
         });
