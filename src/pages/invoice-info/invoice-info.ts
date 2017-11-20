@@ -5,6 +5,7 @@ import {ResultBase} from "../../model/result-base";
 import { InvoiceMain} from '../../model/invoice-main';
 import { InvoiceDetail} from '../../model/invoice-detail';
 import { AdvancePaymentMain} from '../../model/advance-payment-main';
+import { DictUtil} from '../../providers/dict-util';
 
 /**
  * Generated class for the InvoiceInfoPage page.
@@ -25,7 +26,11 @@ export class InvoiceInfoPage {
   paymentMain:AdvancePaymentMain;
   contractCode:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl:AlertController,private paymentService:PaymentService) {
+  constructor(public navCtrl: NavController,
+   public navParams: NavParams,
+   public alertCtrl:AlertController,
+   private paymentService:PaymentService,
+   private dictUtil:DictUtil) {
     this.apply=this.navParams.get('apply');
     this.invoiceMain=this.navParams.get("invoiceItem");
     this.paymentMain=this.navParams.get("paymentItem");
@@ -44,6 +49,7 @@ export class InvoiceInfoPage {
         if(resultBase.result=='true'){
           console.log(object[1][0]);
           this.invoiceDetail = object[1][0] as InvoiceDetail;
+          this.invoiceDetail.chalanTypeName=this.dictUtil.getClauseTypeName(this.invoiceDetail.chalanType);
         }else{
           let alert = this.alertCtrl.create({
             title: '提示!',

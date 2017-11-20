@@ -114,7 +114,7 @@ export class AttachmentPage {
       ||fileType.toLowerCase()=="xls"||fileType.toLowerCase()=="zip"
       ||fileType.toLowerCase()=="rar"||fileType.toLowerCase()=="pdf"){
       const fileTransfer: FileTransferObject = this.fileTransfer.create();
-      const nativePath = this.file.externalRootDirectory + item.fileName; //文件保存的目录
+      const nativePath = this.file.dataDirectory + item.fileName; //文件保存的目录
 
       //下载并安装apk
       fileTransfer.download(APP_SERVE_FILE_URL +item.filePath, nativePath).then((entry) => {
@@ -123,7 +123,7 @@ export class AttachmentPage {
         .then(() => {
           console.log('打开成功');
         })
-        .catch(() => {
+        .catch((error) => {
           console.log('打开失败');
           window.open(APP_SERVE_FILE_URL +item.filePath,'_system');
         });

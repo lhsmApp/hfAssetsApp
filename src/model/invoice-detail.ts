@@ -8,6 +8,8 @@ export class InvoiceDetail{
 
     chalanType:string//发票类型
 
+    chalanTypeName:string//发票类型
+
 	chalanNumber :string;//发票编号
 	
 	chalanContent:string;//发票内容
