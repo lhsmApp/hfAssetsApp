@@ -117,23 +117,26 @@ export class AdvancePaymentApplyPage {
           if(resultBase.result=='true'){
             console.log(object[1][0]);
             this.paymentDetail = object[1][0] as AdvancePaymentDetail;
-            this.paymentForm.patchValue({
-              payCode:this.paymentDetail.payCode,
-              clauseType:this.paymentDetail.clauseType,
-              contractCode:this.paymentDetail.contractCode,
-              contractName:this.paymentDetail.contractName,
-              //elementType:this.paymentDetail.elementType,
-              elementName:this.paymentDetail.elementName,
-              planType:this.paymentDetail.planType,
-              planTypeName:this.dicUtil.getContractTypeName(this.listContractType,this.paymentDetail.planType),
-              payDigest:this.paymentDetail.payDigest,
-              costMoney:this.paymentDetail.costMoney,
-              taxMoney:this.paymentDetail.taxMoney,
-              payMoney:this.paymentDetail.payMoney,
-              paymentCode:this.paymentDetail.paymentCode,
-              intercourseCode:this.paymentDetail.intercourseCode,
-              requireDate:this.paymentDetail.requireDate,
-              requireUser:this.paymentDetail.requireUser
+            this.storage.get(CONTRACT_TYPE).then((contractType: DicBase[]) => {
+              this.listContractType=contractType;
+              this.paymentForm.patchValue({
+                payCode:this.paymentDetail.payCode,
+                clauseType:this.paymentDetail.clauseType,
+                contractCode:this.paymentDetail.contractCode,
+                contractName:this.paymentDetail.contractName,
+                //elementType:this.paymentDetail.elementType,
+                elementName:this.paymentDetail.elementName,
+                planType:this.paymentDetail.planType,
+                planTypeName:this.dicUtil.getContractTypeName(this.listContractType,this.paymentDetail.planType),
+                payDigest:this.paymentDetail.payDigest,
+                costMoney:this.paymentDetail.costMoney,
+                taxMoney:this.paymentDetail.taxMoney,
+                payMoney:this.paymentDetail.payMoney,
+                paymentCode:this.paymentDetail.paymentCode,
+                intercourseCode:this.paymentDetail.intercourseCode,
+                requireDate:this.paymentDetail.requireDate,
+                requireUser:this.paymentDetail.requireUser
+              });
             });
 
             //获取工程量信息
@@ -176,7 +179,7 @@ export class AdvancePaymentApplyPage {
       this.listIntercourse=outDepart;
     });
     this.storage.get(CONTRACT_TYPE).then((contractType: DicBase[]) => {
-      this.listContractType=contractType;
+              this.listContractType=contractType;
     });
     this.initData();
   }

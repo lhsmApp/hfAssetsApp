@@ -43,9 +43,9 @@ export class BillGclDetailPage {
   }
 
   ionViewDidLoad() {
-    this.storage.get(UNIT).then((unit: DicComplex[]) => {
+    /*this.storage.get(UNIT).then((unit: DicComplex[]) => {
       this.dicUnit=unit;
-    });
+    });*/
     this.initData();
   }
 
@@ -57,8 +57,12 @@ export class BillGclDetailPage {
         if(resultBase.result=='true'){
           console.log(object[1][0]);
           this.billOfWorkDetail = object[1][0] as BillOfWorkDetail;
-          //计量单位
-          this.billOfWorkDetail.unitCodeName = this.dictUtil.getUnitName(this.dicUnit,this.billOfWorkDetail.unitCode);
+          this.storage.get(UNIT).then((unit: DicComplex[]) => {
+            this.dicUnit=unit;
+            //计量单位
+            this.billOfWorkDetail.unitCodeName = this.dictUtil.getUnitName(this.dicUnit,this.billOfWorkDetail.unitCode);
+          });
+          
         }else{
           let alert = this.alertCtrl.create({
             title: '提示!',
