@@ -69,7 +69,7 @@ export class ContractInfoPage {
 
   ionViewDidLoad() {
     this.sendSuccess=false;
-    this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
+    /*this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
       this.dicInDept=inDepart;
     });
     this.storage.get(OUT_DEPART).then((outDepart: DicOutDepart[]) => {
@@ -80,7 +80,7 @@ export class ContractInfoPage {
     });
     this.storage.get(ADDITIONAL_PERSON).then((list: DicComplex[]) => {
       this.dicAdditionalPerson=list;
-    });
+    });*/
     this.initData();
   }
 
@@ -92,14 +92,28 @@ export class ContractInfoPage {
         if(resultBase.result=='true'){
           console.log(object[1][0]);
           this.contractDetailInfo = object[1][0] as ContractDetail;
-          //合同类别
-          this.contractDetailInfo.compactTypeName = this.dictUtil.getContractTypeName(this.dicContractType,this.contractDetailInfo.compactType);
-          //合同相对人
-          this.contractDetailInfo.relativePersonName = this.dictUtil.getOutDepartName(this.dicOutDept,this.contractDetailInfo.relativePerson);
-          //附加相对人
-          this.contractDetailInfo.additionalPersonName = this.dictUtil.getAdditionalPersonName(this.dicAdditionalPerson,this.contractDetailInfo.additionalPerson);
-          //甲方签约单位
-          this.contractDetailInfo.ownDepartName = this.dictUtil.getInDepartName(this.dicInDept,this.contractDetailInfo.ownDepart);
+          this.storage.get(CONTRACT_TYPE).then((list: DicBase[]) => {
+            this.dicContractType=list;
+            //合同类别
+            this.contractDetailInfo.compactTypeName = this.dictUtil.getContractTypeName(this.dicContractType,this.contractDetailInfo.compactType);
+          });
+          this.storage.get(OUT_DEPART).then((outDepart: DicOutDepart[]) => {
+            this.dicOutDept=outDepart;
+            //合同相对人
+            this.contractDetailInfo.relativePersonName = this.dictUtil.getOutDepartName(this.dicOutDept,this.contractDetailInfo.relativePerson);
+          });
+          
+          this.storage.get(ADDITIONAL_PERSON).then((list: DicComplex[]) => {
+            this.dicAdditionalPerson=list;
+            //附加相对人
+            this.contractDetailInfo.additionalPersonName = this.dictUtil.getAdditionalPersonName(this.dicAdditionalPerson,this.contractDetailInfo.additionalPerson);
+          });
+          this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
+            this.dicInDept=inDepart;
+            //甲方签约单位
+            this.contractDetailInfo.ownDepartName = this.dictUtil.getInDepartName(this.dicInDept,this.contractDetailInfo.ownDepart);
+          });
+          
           //成本属性
           this.contractDetailInfo.costPropertyName = this.dictUtil.getEnumsName(ContractCostProperty,this.contractDetailInfo.costProperty);
         }else{
