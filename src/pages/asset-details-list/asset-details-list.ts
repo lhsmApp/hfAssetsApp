@@ -72,10 +72,6 @@ export class AssetDetailsListPage {
     console.log('ionViewDidLoad AssetDetailsListPage');
     //this.listAll = [];
     //this.list = [];
-    this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
-      this.listDept=inDepart;
-    });
-
     this.getList();
   }
 
@@ -106,9 +102,12 @@ export class AssetDetailsListPage {
         if(resultBase.result=='true'){
           this.listAll = object[1] as AcceptAssetMain[];
           if(this.listAll){
-            for(let item of this.listAll){
-              item.departName  = this.dictUtil.getInDepartName(this.listDept,item.departCode);
-            }
+            this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
+              this.listDept=inDepart;
+              for(let item of this.listAll){
+                item.departName  = this.dictUtil.getInDepartName(this.listDept,item.departCode);
+              }
+            });
           }
           this.list = this.listAll;
           if(!(this.listAll!=null&&this.listAll.length>0)){

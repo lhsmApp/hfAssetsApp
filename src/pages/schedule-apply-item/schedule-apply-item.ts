@@ -157,9 +157,6 @@ export class ScheduleApplyItemPage {
     this.isBackRefrash=false;
     this.itemShow = new ProjectUnitDetail();
     this.dicSgsx = Sgsx;
-    this.storage.get(PROJECT_ELEMENT).then((dicList: DicBase[]) => {
-      this.dicelementFlag=dicList;
-    });
     this.getShowItem();
   }
 
@@ -173,9 +170,12 @@ export class ScheduleApplyItemPage {
             this.list = object[1] as ProjectUnitDetail[];
             if(this.list && this.list.length > 0){
               this.itemShow = this.list[0];
-              this.itemShow.elementFlagName = this.dictUtil.getProjectElementName(this.dicelementFlag,this.itemShow.elementFlag);//项目单元类别"
               this.itemShow.sgsxName = this.dictUtil.getEnumsName(this.dicSgsx,this.itemShow.sgsx);//施工属性"" 
-              this.FromPatchValue();
+              this.storage.get(PROJECT_ELEMENT).then((dicList: DicBase[]) => {
+                this.dicelementFlag=dicList;
+                this.itemShow.elementFlagName = this.dictUtil.getProjectElementName(this.dicelementFlag,this.itemShow.elementFlag);//项目单元类别"
+                this.FromPatchValue();
+              });
             }
           } else {
             let alert = this.alertCtrl.create({

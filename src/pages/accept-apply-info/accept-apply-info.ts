@@ -91,9 +91,6 @@ export class AcceptApplyInfoPage {
     console.log("ionViewDidLoad");
     this.isBackRefrash=false;
     this.itemShow = new AcceptApplyDetail();
-    this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
-      this.listDept=inDepart;
-    });
     this.getShowItem();
   }
 
@@ -106,7 +103,10 @@ export class AcceptApplyInfoPage {
           this.list = object[1] as AcceptApplyDetail[];
           if(this.list && this.list.length > 0){
               this.itemShow = this.list[0] as AcceptApplyDetail;
-              this.itemShow.departName = this.dictUtil.getInDepartName(this.listDept,this.itemShow.departCode);
+              this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
+                this.listDept=inDepart;
+                this.itemShow.departName = this.dictUtil.getInDepartName(this.listDept,this.itemShow.departCode);
+              });
           }
         } else {
             let alert = this.alertCtrl.create({

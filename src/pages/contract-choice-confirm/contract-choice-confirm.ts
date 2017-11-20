@@ -72,18 +72,6 @@ export class ContractChoiceConfirmPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ContractChoiceConfirmPage');
     this.itemShow = new ContractDetail();
-    this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
-      this.dicInDept=inDepart;
-    });
-    this.storage.get(OUT_DEPART).then((outDepart: DicOutDepart[]) => {
-      this.dicOutDept=outDepart;
-    });
-    this.storage.get(CONTRACT_TYPE).then((list: DicBase[]) => {
-      this.dicContractType=list;
-    });
-    this.storage.get(ADDITIONAL_PERSON).then((list: DicComplex[]) => {
-      this.dicAdditionalPerson=list;
-    });
     this.getShowItem();
   }
 
@@ -98,16 +86,28 @@ export class ContractChoiceConfirmPage {
           this.list = object[1] as ContractDetail[];
           if(this.list && this.list.length > 0){
               this.itemShow = this.list[0];
-              //合同类别
-              this.itemShow.compactTypeName = this.dictUtil.getContractTypeName(this.dicContractType,this.itemShow.compactType);
-              //合同相对人
-              this.itemShow.relativePersonName = this.dictUtil.getOutDepartName(this.dicOutDept,this.itemShow.relativePerson);
-              //附加相对人
-              this.itemShow.additionalPersonName = this.dictUtil.getAdditionalPersonName(this.dicAdditionalPerson,this.itemShow.additionalPerson);
-              //甲方签约单位
-              this.itemShow.ownDepartName = this.dictUtil.getInDepartName(this.dicInDept,this.itemShow.ownDepart);
               //成本属性
               this.itemShow.costPropertyName = this.dictUtil.getEnumsName(ContractCostProperty,this.itemShow.costProperty);
+              this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
+                this.dicInDept=inDepart;
+                //甲方签约单位
+                this.itemShow.ownDepartName = this.dictUtil.getInDepartName(this.dicInDept,this.itemShow.ownDepart);
+              });
+              this.storage.get(OUT_DEPART).then((outDepart: DicOutDepart[]) => {
+                this.dicOutDept=outDepart;
+                //合同相对人
+                this.itemShow.relativePersonName = this.dictUtil.getOutDepartName(this.dicOutDept,this.itemShow.relativePerson);
+              });
+              this.storage.get(CONTRACT_TYPE).then((list: DicBase[]) => {
+                this.dicContractType=list;
+                //合同类别
+                this.itemShow.compactTypeName = this.dictUtil.getContractTypeName(this.dicContractType,this.itemShow.compactType);
+              });
+              this.storage.get(ADDITIONAL_PERSON).then((list: DicComplex[]) => {
+                this.dicAdditionalPerson=list;
+                //附加相对人
+                this.itemShow.additionalPersonName = this.dictUtil.getAdditionalPersonName(this.dicAdditionalPerson,this.itemShow.additionalPerson);
+              });
           }
         } else {
             let alert = this.alertCtrl.create({

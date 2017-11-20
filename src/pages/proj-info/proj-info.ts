@@ -67,9 +67,6 @@ export class ProjInfoPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProjInfoPage');
     this.itemShow = new ProjectUnitDetail();
-    this.storage.get(PROJECT_ELEMENT).then((dicList: DicBase[]) => {
-      this.dicelementFlag=dicList;
-    });
     this.getShowItem();
   }
 
@@ -82,8 +79,11 @@ export class ProjInfoPage {
             this.list = object[1] as ProjectUnitDetail[];
             if(this.list && this.list.length > 0){
               this.itemShow = this.list[0];
-              this.itemShow.elementFlagName = this.dictUtil.getProjectElementName(this.dicelementFlag,this.itemShow.elementFlag);//项目单元类别"          
               this.itemShow.sgsxName = this.dictUtil.getEnumsName(Sgsx,this.itemShow.sgsx);//施工属性"" 
+              this.storage.get(PROJECT_ELEMENT).then((dicList: DicBase[]) => {
+                this.dicelementFlag=dicList;
+                this.itemShow.elementFlagName = this.dictUtil.getProjectElementName(this.dicelementFlag,this.itemShow.elementFlag);//项目单元类别"          
+              });
             }
           } else {
             let alert = this.alertCtrl.create({
