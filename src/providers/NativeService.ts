@@ -22,6 +22,9 @@ import {Observable} from "rxjs";
 import {Logger} from "./Logger";
 import {Utils} from "./Utils";
 import {Diagnostic} from "@ionic-native/diagnostic";
+import {PhotoLibrary } from "@ionic-native/photo-library";
+import {AndroidPermissions  } from "@ionic-native/android-permissions";
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 declare var LocationPlugin;
 declare var AMapNavigation;
@@ -50,6 +53,9 @@ export class NativeService {
               private loadingCtrl: LoadingController,
               private globalData: GlobalData,
               private diagnostic: Diagnostic,
+              private photoLibrary:PhotoLibrary,
+              private androidPermissions:AndroidPermissions,
+              private photoViewer:PhotoViewer,
               public logger: Logger) {
   }
 
@@ -583,4 +589,41 @@ export class NativeService {
     }).present();
   }
 
+  //预览图片
+  showPhotoViewer(url:string){
+    this.photoViewer.show(url);
+  }
+
+  //保存图片到本地
+  savePhoto(url:string){
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE).then(
+      success=>{
+        var tempSuccess=JSON.stringify(success);
+        if(!tempSuccess['hasPermission']){
+          this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE).then(suc=>{
+            this.photoLibrary.saveImage(url,'imgs').then(res=>{
+              this.showToast('保存成功');
+            }).catch(err=>{
+              this.showToast('没有权限,请在设置中开启权限');
+            });
+          })
+        }else{
+          this.photoLibrary.saveImage(url,'imgs').then(res=>{
+            this.showToast('保存成功');
+          }).catch(res=>{
+            this.showToast('保存失败');
+          })
+        }
+
+      }).catch(
+      err=>this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE).then(suc=>{
+        this.photoLibrary.saveImage(url,'imgs').then(res=>{
+          this.showToast('保存成功');
+        }).catch(error=>{
+          this.showToast('保存失败'+JSON.stringify(error));
+        })
+      }).catch(err=>{
+        this.showToast('没有权限,请在设置中开启权限');
+      }));
+  }
 }

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController,AlertController } from 'ionic-angular';
+import {Storage} from '@ionic/storage';
 import {Notice} from '../../model/notice';
-import {DEFAULT_YS,DEFAULT_YFK,DEFAULT_HT,DEFAULT_ZZ,DEFAULT_ZZTZ} from "../../providers/Constants";
+import {DEFAULT_YS,DEFAULT_YFK,DEFAULT_HT,DEFAULT_ZZ,DEFAULT_ZZTZ,IS_DEPT_CHANGE} from "../../providers/Constants";
 import {NoticeService} from '../../services/noticeService';
 
 import {Page_NoticeInfoPage} from '../../providers/TransferFeildName';
@@ -43,10 +44,10 @@ export class HomePage {
   scheduleList:Schedule[];
 
   notices: Notice[];
-  messageCount: string;
+  //messageCount: string;
   constructor(public navCtrl: NavController,private alertCtrl:AlertController,private systemService:SystemService,
-              public noticeService:NoticeService) {
-    this.messageCount="2";
+              private noticeService:NoticeService,private storage: Storage) {
+    //this.messageCount="2";
   }
 
   //初始化View
@@ -67,7 +68,17 @@ export class HomePage {
       }, () => {
     
       });
-    this.getList();
+      this.getList();
+  }
+
+  ionViewWillEnter(){
+    this.storage.get(IS_DEPT_CHANGE).then((deptChange: boolean) => {
+      if(deptChange){
+        console.log('deptChange');
+        this.getList();
+        this.storage.set(IS_DEPT_CHANGE,false);
+      }
+    });
   }
 
   //获取代办事项列表信息

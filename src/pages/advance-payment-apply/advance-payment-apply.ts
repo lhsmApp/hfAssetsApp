@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ViewController,ModalController,AlertController,ToastController } from 'ionic-angular';
+import { Component,ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams,ViewController,ModalController,AlertController,ToastController,Navbar } from 'ionic-angular';
 import {Storage} from "@ionic/storage";
 
 import {FormBuilder, Validators} from '@angular/forms';
@@ -52,6 +52,8 @@ import {DictUtil} from "../../providers/dict-util";
   templateUrl: 'advance-payment-apply.html',
 })
 export class AdvancePaymentApplyPage {
+  @ViewChild('myNavbar') navBar: Navbar;
+
   paymentForm: any;
   oper:string;
   paymentDetail:AdvancePaymentDetail;
@@ -170,6 +172,7 @@ export class AdvancePaymentApplyPage {
   }
 
   ionViewDidLoad() {
+    this.navBar.backButtonClick=this.goBack;
     this.sendSuccess=false;
     //console.log('ionViewDidLoad AdvancePaymentApplyPage');
     this.storage.get(IN_DEPART).then((inDepart: DicInDepart) => {
