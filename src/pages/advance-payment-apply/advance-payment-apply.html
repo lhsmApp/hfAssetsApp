@@ -6,14 +6,14 @@
 -->
 <ion-header>
 
-  <ion-navbar color='dark' hideBackButton="true">
+  <ion-navbar #myNavbar color='dark'>
     
-    <ion-buttons left>
+    <!-- <ion-buttons left>
       <button ion-button icon-only (click)="goBack()">
           <ion-icon ios="ios-arrow-back" md="ios-arrow-back"></ion-icon>
       </button>
-    </ion-buttons>
-    <ion-title>付款申请</ion-title>
+    </ion-buttons> -->
+    <ion-title>付款详情</ion-title>
     <ion-buttons end>
       <button ion-button icon-right (click)="send()">
       	送审

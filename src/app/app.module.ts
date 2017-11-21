@@ -32,6 +32,9 @@ import {ImagePicker} from "@ionic-native/image-picker";
 import {Network} from "@ionic-native/network";
 import {AppMinimize} from "@ionic-native/app-minimize";
 import {JPush} from "../../typings/modules/jpush/index";
+import {PhotoLibrary } from "@ionic-native/photo-library";
+import {AndroidPermissions  } from "@ionic-native/android-permissions";
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 //Service Part
 import {NativeService} from "../providers/NativeService";
@@ -129,6 +132,9 @@ class FundebugErrorHandler implements ErrorHandler {
     AppMinimize,
     Diagnostic,
     AppVersion,
+    PhotoLibrary,
+    AndroidPermissions,
+    PhotoViewer,
     {provide: ErrorHandler, useClass: IonicErrorHandler },
     //Native Part
     JPush,

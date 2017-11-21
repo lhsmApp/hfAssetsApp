@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController,ToastController } from 'ionic-angular';
+import { Component ,ViewChild} from '@angular/core';
+import { IonicPage, NavController, NavParams,AlertController,ToastController ,Navbar} from 'ionic-angular';
 import {FormBuilder, Validators} from '@angular/forms';
 import { InvoiceDetail} from '../../model/invoice-detail';
 import { PaymentService} from '../../services/paymentService';
@@ -21,6 +21,8 @@ import { INVOICE_TYPE} from '../../enums/enums';
   templateUrl: 'invoice-apply.html',
 })
 export class InvoiceApplyPage {
+  @ViewChild('myNavbar') navBar: Navbar;
+
   invoiceType=INVOICE_TYPE;
   invoiceForm: any;
   invoiceDetail:InvoiceDetail;
@@ -56,6 +58,7 @@ export class InvoiceApplyPage {
   }
 
   ionViewDidLoad() {
+    this.navBar.backButtonClick=this.goBack;
     this.saveSuccess=false;
     this.initData();
   }

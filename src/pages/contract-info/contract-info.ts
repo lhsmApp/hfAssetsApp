@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,AlertController,ToastController} from 'ionic-angular';
+import { Component,ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams ,AlertController,ToastController,Navbar} from 'ionic-angular';
 import {Storage} from "@ionic/storage";
 import {ContractDetail} from '../../model/contract-detail';
 import {ContractMain} from '../../model/contract-main';
@@ -35,6 +35,8 @@ import {TypeView,TypeView_Contract} from '../../providers/TransferFeildName';
   templateUrl: 'contract-info.html',
 })
 export class ContractInfoPage {
+  @ViewChild('myNavbar') navBar: Navbar;
+
   approvalState:string;
   hasApprovalProgress=false;
   isapproval:boolean;
@@ -68,6 +70,7 @@ export class ContractInfoPage {
   }
 
   ionViewDidLoad() {
+    this.navBar.backButtonClick=this.goBack;
     this.sendSuccess=false;
     /*this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
       this.dicInDept=inDepart;

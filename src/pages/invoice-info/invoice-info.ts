@@ -6,7 +6,7 @@ import { InvoiceMain} from '../../model/invoice-main';
 import { InvoiceDetail} from '../../model/invoice-detail';
 import { AdvancePaymentMain} from '../../model/advance-payment-main';
 import { DictUtil} from '../../providers/dict-util';
-
+import {INVOICE_TYPE} from '../../enums/enums';
 /**
  * Generated class for the InvoiceInfoPage page.
  *
@@ -49,7 +49,7 @@ export class InvoiceInfoPage {
         if(resultBase.result=='true'){
           console.log(object[1][0]);
           this.invoiceDetail = object[1][0] as InvoiceDetail;
-          this.invoiceDetail.chalanTypeName=this.dictUtil.getClauseTypeName(this.invoiceDetail.chalanType);
+          this.invoiceDetail.chalanTypeName=this.dictUtil.getEnumsName(INVOICE_TYPE,this.invoiceDetail.chalanType);
         }else{
           let alert = this.alertCtrl.create({
             title: '提示!',

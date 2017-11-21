@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController,ToastController  } from 'ionic-angular';
+import { Component,ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams,AlertController,ToastController ,Navbar } from 'ionic-angular';
 import {Storage} from "@ionic/storage";
 import { AdvancePaymentDetail} from '../../model/advance-payment-detail';
 import { AdvancePaymentMain} from '../../model/advance-payment-main';
@@ -44,6 +44,8 @@ import {ApprovalService} from '../../services/approvalService';
   templateUrl: 'advance-payment-info.html'
 })
 export class AdvancePaymentInfoPage {
+  @ViewChild('myNavbar') navBar: Navbar;
+
   payCode:string;
   isapproval:boolean;
   apply:boolean=false;
@@ -78,6 +80,7 @@ export class AdvancePaymentInfoPage {
   }
 
   ionViewDidLoad() {
+    this.navBar.backButtonClick=this.goBack;
     this.sendSuccess=false;
     this.payCode=this.navParams.get('id');
     this.isapproval=this.navParams.get('approval');

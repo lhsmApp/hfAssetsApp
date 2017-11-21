@@ -6,12 +6,12 @@
 -->
 <ion-header>
 
-  <ion-navbar color='dark' hideBackButton="true">
-  	<ion-buttons left>
+  <ion-navbar #myNavbar color='dark'>
+  	<!-- <ion-buttons left>
       <button ion-button icon-only (click)="goBack()">
           <ion-icon ios="ios-arrow-back" md="ios-arrow-back"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons> -->
     <ion-title>合同详情</ion-title>
     <ion-buttons end *ngIf="isapproval">
       <button ion-button icon-only (click)="approval()">
