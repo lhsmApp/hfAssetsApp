@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
-import { IonicPage, NavController, NavParams,AlertController,ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController,ToastController,Navbar } from 'ionic-angular';
 import {AcceptAssetDetail} from '../../model/accept-asset-detail';
 import {Depart} from '../../model/depart';
 import {ContractService} from '../../services/contractService';
@@ -77,6 +77,8 @@ import {TypeView} from '../../providers/TransferFeildName';
   templateUrl: 'asset-details-item.html',
 })
 export class AssetDetailsItemPage {
+  @ViewChild('myNavbar') navBar: Navbar;
+  
   oper:string;
   billNumber:string;
   contractCode:string;
@@ -193,6 +195,7 @@ export class AssetDetailsItemPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AssetDetailsItemPage');
+    this.navBar.backButtonClick=this.goBack;
     this.isBackRefrash=false;
     this.itemShow = new AcceptAssetDetail();
     this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {

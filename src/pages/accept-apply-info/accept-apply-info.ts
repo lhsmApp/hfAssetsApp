@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController,ToastController } from 'ionic-angular';
+import { Component,ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams,AlertController,ToastController,Navbar } from 'ionic-angular';
 import {Storage} from "@ionic/storage";
 import {AcceptApplyDetail} from '../../model/accept-apply-detail';
 import {AcceptService} from '../../services/acceptService';
@@ -42,6 +42,8 @@ import {BillApprovalState} from '../../providers/TransferFeildName';
   templateUrl: 'accept-apply-info.html',
 })
 export class AcceptApplyInfoPage {
+  @ViewChild('myNavbar') navBar: Navbar;
+  
   isShowCheck:boolean;
   isShowSend:boolean;
   title:string;
@@ -89,6 +91,7 @@ export class AcceptApplyInfoPage {
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad");
+    this.navBar.backButtonClick=this.goBack;
     this.isBackRefrash=false;
     this.itemShow = new AcceptApplyDetail();
     this.getShowItem();

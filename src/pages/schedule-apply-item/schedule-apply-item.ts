@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
-import { IonicPage, NavController, NavParams,AlertController,ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController,ToastController,Navbar } from 'ionic-angular';
 import {ProjectUnitDetail} from '../../model/project-unit-detail'
 import {GlobalData} from "../../providers/GlobalData";
 import {Utils} from "../../providers/Utils";
@@ -54,6 +54,8 @@ import {Page_ChoiceApproversPage} from '../../providers/TransferFeildName';
   templateUrl: 'schedule-apply-item.html',
 })
 export class ScheduleApplyItemPage {
+  @ViewChild('myNavbar') navBar: Navbar;
+  
     oper:string;
 	  billElementCode:string;
 
@@ -154,6 +156,7 @@ export class ScheduleApplyItemPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ScheduleApplyItemPage');
+    this.navBar.backButtonClick=this.goBack;
     this.isBackRefrash=false;
     this.itemShow = new ProjectUnitDetail();
     this.dicSgsx = Sgsx;

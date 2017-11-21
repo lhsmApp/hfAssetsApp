@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
+import {Component,ViewChild} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Storage} from '@ionic/storage';
 import {DictUtil} from '../../providers/dict-util';
-import {IonicPage, NavController, NavParams, ViewController,ModalController,AlertController,ToastController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ViewController,ModalController,AlertController,ToastController,Navbar} from 'ionic-angular';
 import {AcceptApplyDetail} from '../../model/accept-apply-detail';
 import {Depart} from '../../model/depart';
 import {GlobalData} from "../../providers/GlobalData";
@@ -45,6 +45,8 @@ import {BillAddTime} from '../../providers/TransferFeildName';
   templateUrl: 'accept-apply-item.html',
 })
 export class AcceptApplyItemPage {
+  @ViewChild('myNavbar') navBar: Navbar;
+  
   oper:string;
   billNumber:string;
 
@@ -108,6 +110,7 @@ export class AcceptApplyItemPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AcceptApplyItemPage');
+    this.navBar.backButtonClick=this.goBack;
     this.isBackRefrash=false;
     this.itemShow = new AcceptApplyDetail();
     this.getShowItem();

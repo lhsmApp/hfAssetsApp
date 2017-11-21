@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
-import { IonicPage, NavController, NavParams,AlertController,ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController,ToastController,Navbar } from 'ionic-angular';
 import {TransferFundsMain} from '../../model/transfer-funds-main';
 import {TransferFundsDetail} from '../../model/transfer-funds-detail';
 import {AcceptService} from '../../services/acceptService';
@@ -47,6 +47,8 @@ import {Page_TransferAdjustAssetListPage} from '../../providers/TransferFeildNam
   templateUrl: 'transfer-adjust-approval-info.html',
 })
 export class TransferAdjustApprovalInfoPage {
+  @ViewChild('myNavbar') navBar: Navbar;
+  
   isShow:boolean;
   title:string;
   oper:string;
@@ -87,6 +89,7 @@ export class TransferAdjustApprovalInfoPage {
   
   ionViewDidLoad() {
     console.log('ionViewDidLoad TransferAdjustApprovalInfoPage');
+    this.navBar.backButtonClick=this.goBack;
     this.isBackRefrash=false;
     this.itemShow = new TransferFundsDetail();
     this.getShowItem();
