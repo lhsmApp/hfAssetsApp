@@ -100,7 +100,6 @@ export class AssetDetailsItemPage {
   dicApplyCode: DicComplex[];//取得方式"
   dicUsedState: DicComplex[];//使用状况"
   dicStorePlace: DicComplex[];//存放地点""
-    dicUserPerson: string;//保管人"
   dicSpecialLine: DicComplex[];//技术鉴定部门"
 
   constructor(public navCtrl: NavController, 

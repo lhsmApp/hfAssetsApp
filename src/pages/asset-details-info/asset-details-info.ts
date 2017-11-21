@@ -87,7 +87,6 @@ export class AssetDetailsInfoPage {
   dicApplyCode: DicComplex[];//取得方式"
   dicUsedState: DicComplex[];//使用状况"
   dicStorePlace: DicComplex[];//存放地点""
-    dicUserPerson: string;//保管人"
   dicSpecialLine: DicComplex[];//技术鉴定部门"
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -181,7 +180,6 @@ export class AssetDetailsInfoPage {
                 this.dicStorePlace=dicList;
                 this.itemShow.storePlaceName = this.dictUtil.getDepositaryName(this.dicStorePlace,this.itemShow.storePlace);//存放地点""
               });
-              //this.itemShow.userPersonName = this.dictUtil.(this.,);//保管人"
               this.storage.get(SPECIAL_LINE).then((dicList: DicComplex[]) => {
                 this.dicSpecialLine=dicList;
                 this.itemShow.specialLineName = this.dictUtil.getSpecialLineName(this.dicSpecialLine,this.itemShow.specialLine);//技术鉴定部门"

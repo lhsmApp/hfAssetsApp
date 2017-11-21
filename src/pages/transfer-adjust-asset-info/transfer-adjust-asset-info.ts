@@ -138,7 +138,6 @@ export class TransferAdjustAssetInfoPage {
                 this.dicStorePlace=dicList;
                 this.itemShow.storePlaceName = this.dictUtil.getDepositaryName(this.dicStorePlace,this.itemShow.storePlace);//存放地点""
               });
-              //this.itemShow.userPersonName = this.dictUtil.(this.,);//保管人"
               this.storage.get(SPECIAL_LINE).then((dicList: DicComplex[]) => {
                 this.dicSpecialLine=dicList;
                 this.itemShow.specialLineName = this.dictUtil.getSpecialLineName(this.dicSpecialLine,this.itemShow.specialLine);//技术鉴定部门"

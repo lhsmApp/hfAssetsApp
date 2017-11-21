@@ -41,7 +41,5 @@ export class TransferAdjustDetail {
     applyCodeName: string;//取得方式"
     usedStateName: string;//使用状况"
     storePlaceName: string;//存放地点""
-    //没字典
-    userPersonName: string;//保管人"
     specialLineName: string;//技术鉴定部门"
 }
