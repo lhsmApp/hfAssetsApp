@@ -59,9 +59,6 @@ export class TransferAdjustAssetListPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TransferAdjustAssetListPage');
     //this.listAll = [];
-    this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
-      this.listDept=inDepart;
-    });
     this.getList();
   }
 
@@ -79,11 +76,14 @@ export class TransferAdjustAssetListPage {
         if(resultBase.result=='true'){
           this.listAll = object[1] as TransferAdjustMain[];
           if(this.listAll){
-            for(let item of this.listAll){
-              //"是否分摊费用"  
-              item.feeFlagName = this.dictUtil.getEnumsName(FeeFlag,item.feeFlag);
-              item.departName = this.dictUtil.getInDepartName(this.listDept,item.departCode);
-            }
+            this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
+              this.listDept=inDepart;
+                for(let item of this.listAll){
+                  //"是否分摊费用"  
+                  item.feeFlagName = this.dictUtil.getEnumsName(FeeFlag,item.feeFlag);
+                  item.departName = this.dictUtil.getInDepartName(this.listDept,item.departCode);
+                }
+            });
           }
           this.list = this.listAll;
           if(!(this.listAll!=null&&this.listAll.length>0)){

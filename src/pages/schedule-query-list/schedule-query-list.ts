@@ -59,9 +59,6 @@ export class ScheduleQueryListPage {
     //this.listAll = [];
     //this.list = [];
      this.queryCondition=this.navParams.get("queryCondition");
-    this.storage.get(PROJECT_ELEMENT).then((dicList: DicBase[]) => {
-      this.dicelementFlag=dicList;
-    });
     this.getList();
   }
 
@@ -103,10 +100,15 @@ export class ScheduleQueryListPage {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
           this.listAll = object[1] as ProjectUnitMain[];
-            for(let item of this.listAll){
-              item.elementFlagName = this.dictUtil.getProjectElementName(this.dicelementFlag,item.elementFlag);//项目单元类别"
-              item.sgsxName = this.dictUtil.getEnumsName(Sgsx,item.sgsx);//施工属性"" 
-            }
+          if(this.listAll){
+            this.storage.get(PROJECT_ELEMENT).then((dicList: DicBase[]) => {
+              this.dicelementFlag=dicList;
+              for(let item of this.listAll){
+                item.elementFlagName = this.dictUtil.getProjectElementName(this.dicelementFlag,item.elementFlag);//项目单元类别"
+                item.sgsxName = this.dictUtil.getEnumsName(Sgsx,item.sgsx);//施工属性"" 
+              }
+            });
+          }
           this.list = this.listAll;
           if(!(this.listAll!=null&&this.listAll.length>0)){
             this.isEmpty=true;

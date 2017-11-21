@@ -87,7 +87,6 @@ export class AssetDetailsInfoPage {
   dicApplyCode: DicComplex[];//取得方式"
   dicUsedState: DicComplex[];//使用状况"
   dicStorePlace: DicComplex[];//存放地点""
-    dicUserPerson: string;//保管人"
   dicSpecialLine: DicComplex[];//技术鉴定部门"
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -111,31 +110,6 @@ export class AssetDetailsInfoPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AssetDetailsInfoPage');
     this.itemShow = new AcceptAssetDetail();
-    this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
-      this.DicDepartCode=inDepart;
-    });
-    this.storage.get(BASIC_ENTITY).then((dicList: DicBasicEntity[]) => {
-      this.dicEntityCode=dicList;
-    });
-    this.storage.get(UNIT).then((dicList: DicComplex[]) => {
-      this.dicUnitCode=dicList;
-    });
-    this.storage.get(USED_ASPECT).then((dicList: DicComplex[]) => {
-      this.dicUsedAspect=dicList;
-    });
-    this.storage.get(APPLY_CODE).then((dicList: DicComplex[]) => {
-      this.dicApplyCode=dicList;
-    });
-    this.storage.get(USED_STATE).then((dicList: DicComplex[]) => {
-      this.dicUsedState=dicList;
-    });
-    this.storage.get(DEPOSITARY).then((dicList: DicComplex[]) => {
-      this.dicStorePlace=dicList;
-    });
-
-    this.storage.get(SPECIAL_LINE).then((dicList: DicComplex[]) => {
-      this.dicSpecialLine=dicList;
-    });
     this.getShowItem();
   }
 
@@ -178,15 +152,38 @@ export class AssetDetailsInfoPage {
               this.itemShow = this.list[0];
               this.itemShow.assetsTypeName = this.dictUtil.getAssetsTypeName(this.itemShow.assetsType);//资产类型"
               //this.itemShow.assetsCodeTypeName = this.dictUtil.(this.,);//资产类别"
-              this.itemShow.departCodeName = this.dictUtil.getInDepartName(this.DicDepartCode,this.itemShow.departCode);//所属单位"
-              this.itemShow.entityCodeName = this.dictUtil.getBasicEntityName(this.dicEntityCode,this.itemShow.entityCode);//所属资产组"
-              this.itemShow.unitCodeName = this.dictUtil.getUnitName(this.dicUnitCode,this.itemShow.unitCode);//计量单位"
-              this.itemShow.usedAspectName = this.dictUtil.getUsedAspectName(this.dicUsedAspect,this.itemShow.usedAspect);//使用方向"
-              this.itemShow.applyCodeName = this.dictUtil.getApplyCodeName(this.dicApplyCode,this.itemShow.applyCode);//取得方式"
-              this.itemShow.usedStateName = this.dictUtil.getUsedStateName(this.dicUsedState,this.itemShow.usedState);//使用状况"
-              this.itemShow.storePlaceName = this.dictUtil.getDepositaryName(this.dicStorePlace,this.itemShow.storePlace);//存放地点""
-              //this.itemShow.userPersonName = this.dictUtil.(this.,);//保管人"
-              this.itemShow.specialLineName = this.dictUtil.getSpecialLineName(this.dicSpecialLine,this.itemShow.specialLine);//技术鉴定部门"
+              this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
+                this.DicDepartCode=inDepart;
+                this.itemShow.departCodeName = this.dictUtil.getInDepartName(this.DicDepartCode,this.itemShow.departCode);//所属单位"
+              });
+              this.storage.get(BASIC_ENTITY).then((dicList: DicBasicEntity[]) => {
+                this.dicEntityCode=dicList;
+                this.itemShow.entityCodeName = this.dictUtil.getBasicEntityName(this.dicEntityCode,this.itemShow.entityCode);//所属资产组"
+              });
+              this.storage.get(UNIT).then((dicList: DicComplex[]) => {
+                this.dicUnitCode=dicList;
+                this.itemShow.unitCodeName = this.dictUtil.getUnitName(this.dicUnitCode,this.itemShow.unitCode);//计量单位"
+              });
+              this.storage.get(USED_ASPECT).then((dicList: DicComplex[]) => {
+                this.dicUsedAspect=dicList;
+                this.itemShow.usedAspectName = this.dictUtil.getUsedAspectName(this.dicUsedAspect,this.itemShow.usedAspect);//使用方向"
+              });
+              this.storage.get(APPLY_CODE).then((dicList: DicComplex[]) => {
+                this.dicApplyCode=dicList;
+                this.itemShow.applyCodeName = this.dictUtil.getApplyCodeName(this.dicApplyCode,this.itemShow.applyCode);//取得方式"
+              });
+              this.storage.get(USED_STATE).then((dicList: DicComplex[]) => {
+                this.dicUsedState=dicList;
+                this.itemShow.usedStateName = this.dictUtil.getUsedStateName(this.dicUsedState,this.itemShow.usedState);//使用状况"
+              });
+              this.storage.get(DEPOSITARY).then((dicList: DicComplex[]) => {
+                this.dicStorePlace=dicList;
+                this.itemShow.storePlaceName = this.dictUtil.getDepositaryName(this.dicStorePlace,this.itemShow.storePlace);//存放地点""
+              });
+              this.storage.get(SPECIAL_LINE).then((dicList: DicComplex[]) => {
+                this.dicSpecialLine=dicList;
+                this.itemShow.specialLineName = this.dictUtil.getSpecialLineName(this.dicSpecialLine,this.itemShow.specialLine);//技术鉴定部门"
+              });
           }
         } else {
             let alert = this.alertCtrl.create({

@@ -56,9 +56,6 @@ export class ProjQueryListPage {
     console.log('ionViewDidLoad ProjQueryListPage');
     //this.listAll = [];
     //this.list = [];
-    this.storage.get(PROJECT_ELEMENT).then((dicList: DicBase[]) => {
-      this.dicelementFlag=dicList;
-    });
     this.getList();
   }
 
@@ -84,10 +81,13 @@ export class ProjQueryListPage {
         if(resultBase.result=='true'){
           this.listAll = object[1] as ProjectUnitMain[];
           if(this.listAll){
-            for(let item of this.listAll){
-              item.elementFlagName = this.dictUtil.getProjectElementName(this.dicelementFlag,item.elementFlag);//项目单元类别"          
-              item.sgsxName = this.dictUtil.getEnumsName(Sgsx,item.sgsx);//施工属性"" 
-            }
+            this.storage.get(PROJECT_ELEMENT).then((dicList: DicBase[]) => {
+              this.dicelementFlag=dicList;
+              for(let item of this.listAll){
+                item.elementFlagName = this.dictUtil.getProjectElementName(this.dicelementFlag,item.elementFlag);//项目单元类别"          
+                item.sgsxName = this.dictUtil.getEnumsName(Sgsx,item.sgsx);//施工属性"" 
+              }
+            });
           }
           this.list = this.listAll;
           if(!(this.listAll!=null&&this.listAll.length>0)){
