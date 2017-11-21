@@ -21,13 +21,17 @@
           <span class='color-label'>发布人：{{itemShow.userName}}</span>
           <span class='color-label' item-end>发布时间：{{itemShow.publishDate}}</span>
         </ion-item>-->
-        <ion-row row-1>
+        <!--<ion-row row-1>
         	<ion-col col-5 text-left>
             <span class='color-label' text-left>发布人：{{itemShow.userName}}</span>
           </ion-col>
         	<ion-col col-7 text-right>
             <span  class='color-label' text-right>发布时间：{{itemShow.publishDate}}</span>
           </ion-col>
-        </ion-row>
+        </ion-row>-->
+        <ion-item-divider class='color-label'>
+            <span>发布人：{{itemShow.userName}}</span>
+            <span item-end>发布时间：{{itemShow.publishDate}}</span>
+        </ion-item-divider>
         <p>{{itemShow.messageContent}}</p>
 </ion-content>
