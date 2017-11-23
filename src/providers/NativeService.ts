@@ -290,6 +290,9 @@ export class NativeService {
         if (String(err).indexOf('cancel') != -1) {
           return;
         }
+        if (String(err).toLowerCase().indexOf('no image selected') != -1) {
+          return;
+        }
         //this.logger.log(err, '使用cordova-plugin-camera获取照片失败');
         this.alert('获取照片失败');
       });

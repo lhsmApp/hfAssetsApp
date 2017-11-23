@@ -52,20 +52,23 @@
           <div text-center>
             <img color="primary"  class='imgSize' src='{{ysPath}}'/>
             <p>验收审批</p>
+            <ion-badge *ngIf="ysBillCount>0" color="danger" class="brage">{{ysBillCount}}</ion-badge>
           </div>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col col-4 (click)="openPage('ZZFH')">
+        <ion-col col-4 (click)="openPage('ZZSP')">
           <div text-center>
             <img color="danger"  class='imgSize' src='{{zzPath}}'/>
             <p>转资审批</p>
+            <ion-badge *ngIf="zzBillCount>0" color="danger" class="brage">{{zzBillCount}}</ion-badge>
           </div>
         </ion-col>
         <ion-col col-4 (click)="openPage('ZZTZSP')" >
           <div text-center>
             <img color="secondary"  class='imgSize' src='{{zztzPath}}'/>
             <p>转资调整审批</p>
+            <ion-badge *ngIf="zztzBillCount>0" color="danger" class="brage">{{zztzBillCount}}</ion-badge>
           </div>
         </ion-col>
       </ion-row>

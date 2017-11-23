@@ -10,7 +10,7 @@ import {Observable, TimeoutError} from "rxjs";
 import {Utils} from "./Utils";
 import {GlobalData} from "./GlobalData";
 import {NativeService} from "./NativeService";
-import {APP_SERVE_URL, REQUEST_TIMEOUT} from "./Constants";
+import {APP_SERVE_URL,APP_SERVE_URL_CHART, REQUEST_TIMEOUT} from "./Constants";
 import {Logger} from "./Logger";
 
 @Injectable()
@@ -196,5 +196,35 @@ export class HttpService {
         'Authorization': token
       });
     }
+  }
+
+  public getChart(url: string, paramMap: any = null): Observable<Response> {
+    return this.requestChart(url, new RequestOptions({
+      method: RequestMethod.Get,
+      withCredentials:true,
+      search: HttpService.buildURLSearchParams(paramMap)
+    }));
+  }
+
+  public requestChart(url: string, options: RequestOptionsArgs): Observable<Response> {
+    url = Utils.formatUrl(url.startsWith('http') ? url : APP_SERVE_URL_CHART + url);
+    //this.optionsAddToken(options);
+    return Observable.create(observer => {
+      this.nativeService.showLoading();
+      console.log('%c 请求前 %c', 'color:blue', '', 'url', url, 'options', options);
+      this.http.request(url, options).timeout(REQUEST_TIMEOUT).subscribe(res => {
+        this.nativeService.hideLoading();
+        console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
+        if (res['_body'] == '') {
+          res['_body'] = null;
+        }else if(res['_body'].indexOf('您还没有登录或者很久')>0){
+          this.nativeService.alertReLogin("提示",'您还没有登录或者很久没有操作了,请重新登录！');
+        }
+        observer.next(res);
+      }, err => {
+        this.requestFailed(url, options, err);//处理请求失败
+        observer.error(err);
+      });
+    });
   }
 }

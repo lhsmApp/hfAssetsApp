@@ -94,7 +94,7 @@ export class HomePage {
               this.ysBillCount=item.billCount;
             }else if(item.businessType=='FKSP'){
               this.yfkBillCount=item.billCount;
-            }else if(item.businessType=='ZZFH'){
+            }else if(item.businessType=='ZZSP'){
               this.zzBillCount=item.billCount;
             }else if(item.businessType=='ZZTZSP'){
               this.zztzBillCount=item.billCount;
@@ -128,7 +128,7 @@ export class HomePage {
       this.navCtrl.push("AdvancePaymentApprovalPage");
     }else if(cate === 'ZCYS'){
       this.navCtrl.push("AcceptApprovalListPage");
-    }else if(cate === 'ZZFH'){
+    }else if(cate === 'ZZSP'){
       this.navCtrl.push("TransferFundsApprovalListPage");
     }else if(cate === 'ZZTZSP'){
       this.navCtrl.push("TransferAdjustApprovalListPage");

@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
-  selector: 'page-about',
+  selector: 'page-apply',
   templateUrl: 'apply.html'
 })
 export class ApplyPage {
