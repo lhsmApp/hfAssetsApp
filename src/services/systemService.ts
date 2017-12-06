@@ -119,4 +119,14 @@ export class SystemService {
      };
      return this.httpService.get('phoneMyInfo.do', param).map((res: Response) => res.json());
   }
+
+  //获取首页图表
+  createJFreeChartBar(){
+    let param = {
+     //必传
+     'action': 'indexImg',
+     'sessionid':this.globalData.sessionId,
+     };
+     return this.httpService.getChart('createJFreeChartBar.do', param).map((res: Response) => res.json());
+  }
 }

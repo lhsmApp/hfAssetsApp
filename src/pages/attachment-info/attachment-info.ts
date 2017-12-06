@@ -6,11 +6,9 @@ import {FileOpener } from "@ionic-native/file-opener";
 import {File,FileEntry} from "@ionic-native/file";
 
 import { Attachment} from '../../model/attachment';
-import {DEFAULT_INVOICE} from "../../providers/Constants";
+import {DEFAULT_INVOICE,DEFAULT_INVOICE_EMPTY,APP_SERVE_FILE_URL} from "../../providers/Constants";
 import { AttachmentService} from '../../services/attachmentService';
 import {ResultBase} from "../../model/result-base";
-import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
-import {APP_SERVE_FILE_URL} from "../../providers/Constants";
 
 /**
  * Generated class for the AttachmentInfoPage page.

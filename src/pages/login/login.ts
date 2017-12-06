@@ -101,6 +101,7 @@ export class LoginPage {
           this.userInfo.departCode=this.globalData.departCode;
           this.userInfo.departName=this.globalData.departName;
           this.navCtrl.push(TabsPage,{"userinfo":this.userInfo});
+          this.globalData.userType=this.userInfo.userType;
           //this.events.publish('user:login');
           //this.viewCtrl.dismiss(loginInfo.user);
         }else{

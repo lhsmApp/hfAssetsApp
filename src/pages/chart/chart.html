@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar color='dark'>
+    <ion-title>
+      首页
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div padding>
+		<div>
+	  		<img [src]="url1" width="100%" (click)='viewChart(1)'>
+	  	</div>
+	  	<!-- <div style="width: 50%;float: left;">
+	  		<img [src]="defaultUrl2" width="100%" (click)='viewChart(2)'>
+	  	</div> -->
+	</div>
+	<div padding>
+		<!-- <div style="width: 50%;float: left;">
+	  		<img [src]="defaultUrl1" width="100%" (click)='viewChart(1)'>
+	  	</div> -->
+	  	<div>
+	  		<img [src]="url2" width="100%" (click)='viewChart(2)'>
+	  	</div>
+	</div>
+</ion-content>

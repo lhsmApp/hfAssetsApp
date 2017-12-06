@@ -6,11 +6,9 @@ import {FileOpener } from "@ionic-native/file-opener";
 import {File,FileEntry} from "@ionic-native/file";
 
 import { Attachment} from '../../model/attachment';
-import {DEFAULT_INVOICE} from "../../providers/Constants";
+import {DEFAULT_INVOICE,DEFAULT_INVOICE_EMPTY,APP_SERVE_FILE_URL} from "../../providers/Constants";
 import { AttachmentService} from '../../services/attachmentService';
 import {ResultBase} from "../../model/result-base";
-import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
-import {APP_SERVE_FILE_URL} from "../../providers/Constants";
 import {NativeService} from '../../providers/NativeService';
 
 
@@ -108,6 +106,7 @@ export class AttachmentPage {
       ||fileType.toLowerCase()=="raw"||fileType.toLowerCase()=="ufo"
       ||fileType.toLowerCase()=="ai"){
       this.navCtrl.push("AttachmentViewPage",{attachment:item});
+      //this.nativeService.showPhotoViewer(APP_SERVE_FILE_URL+item.filePath);
     }else if(fileType.toLowerCase()=="txt"||fileType.toLowerCase()=="docx"
       ||fileType.toLowerCase()=="doc"||fileType.toLowerCase()=="pptx"
       ||fileType.toLowerCase()=="ppt"||fileType.toLowerCase()=="xlsx"

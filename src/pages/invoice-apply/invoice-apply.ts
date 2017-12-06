@@ -102,7 +102,7 @@ export class InvoiceApplyPage {
 
   //附件列表
   attachment(item){
-    let sequence=this.invoiceForm.get('sequence')._value;
+    let sequence=this.invoiceForm.get('sequence').value;
     if(!(sequence!=null&&sequence.trim()!="")){
       let alert = this.alertCtrl.create({
         title: '提示',

@@ -7,7 +7,7 @@ import {UserInfo} from "../../model/UserInfo";
 import {AboutPage} from "./about/about";
 import {LoginPage} from "../login/login";
 import {Helper} from "../../providers/Helper";
-import {DEFAULT_AVATAR,IS_DEPT_CHANGE} from "../../providers/Constants";
+import {DEFAULT_AVATAR,IS_DEPT_CHANGE,IS_DEPT_CHANGE1} from "../../providers/Constants";
 import {WorkMapPage} from "./work-map/work-map";
 import {SettingPage} from "./setting/setting";
 import {NativeService} from "../../providers/NativeService";
@@ -75,6 +75,7 @@ export class MinePage {
               this.userInfo.departCode=departCodeAndName[0];
               this.userInfo.departName=departCodeAndName[1];
               this.storage.set(IS_DEPT_CHANGE,true);
+              this.storage.set(IS_DEPT_CHANGE1,true);
             }
           }, () => {
             
