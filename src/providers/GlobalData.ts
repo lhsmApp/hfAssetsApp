@@ -16,6 +16,7 @@ export class GlobalData {
   private _sessionId:string;//sessionID
   private _departCode:string;//当前登录部门
   private _departName:string;//当前登录部门名称
+  private _userType:number;//单位类型：0：内部单位 1：外部单位
 
   //设置http请求是否显示loading,注意:设置为true,接下来的请求会不显示loading,请求执行完成会自动设置为false
   private _showLoading: boolean = true;
@@ -85,6 +86,14 @@ export class GlobalData {
 
   set departName(value: string) {
     this._departName = value;
+  }
+
+  get userType(): number {
+    return this._userType;
+  }
+
+  set userType(value: number) {
+    this._userType = value;
   }
 
   /*get fullName(): string {

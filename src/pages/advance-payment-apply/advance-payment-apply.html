@@ -107,7 +107,7 @@
             class="validation-failed">请选择付款单位
       </span>
       <ion-item>
-        <ion-label fixed>往来单位<span class="danger">*</span></ion-label>
+        <ion-label fixed>收款单位<span class="danger">*</span></ion-label>
         <ion-select [(ngModel)]="intercourseCode" formControlName="intercourseCode" style="left:0;" placeholder="选择" cancelText="取消" okText="确定">
 	         <ion-option *ngFor="let intercourse of listIntercourse" [value]="intercourse.departCode">{{intercourse.departName}}</ion-option>
 	      </ion-select>

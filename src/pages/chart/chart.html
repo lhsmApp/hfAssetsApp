@@ -7,14 +7,20 @@
 </ion-header>
 
 <ion-content>
-	<div padding-vertical>
-      <canvas>
-      	<img [src]="url" width="100%">
-      </canvas>
-    </div>
-    <div padding-vertical>
-      <canvas>
-      	<img [src]="url1" width="100%">
-      </canvas>
-    </div>
+	<div padding>
+		<div>
+	  		<img [src]="url1" width="100%" (click)='viewChart(1)'>
+	  	</div>
+	  	<!-- <div style="width: 50%;float: left;">
+	  		<img [src]="defaultUrl2" width="100%" (click)='viewChart(2)'>
+	  	</div> -->
+	</div>
+	<div padding>
+		<!-- <div style="width: 50%;float: left;">
+	  		<img [src]="defaultUrl1" width="100%" (click)='viewChart(1)'>
+	  	</div> -->
+	  	<div>
+	  		<img [src]="url2" width="100%" (click)='viewChart(2)'>
+	  	</div>
+	</div>
 </ion-content>

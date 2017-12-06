@@ -594,7 +594,7 @@ export class NativeService {
 
   //预览图片
   showPhotoViewer(url:string){
-    this.photoViewer.show(url);
+    this.photoViewer.show(url,'',{share: false});
   }
 
   //保存图片到本地

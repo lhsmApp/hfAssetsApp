@@ -231,7 +231,7 @@ export class AdvancePaymentApplyPage {
   //保存
   save(){
     //if(!this.paymentForm.valid) return;
-    if(this.paymentForm.get('clauseType')._value=='2'||this.paymentForm.get('clauseType')._value=='4'){
+    if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='4'){
       if(this.gclListInfo==null||this.gclListInfo.length==0){
         let alert = this.alertCtrl.create({
           title: '提示',
@@ -288,7 +288,7 @@ export class AdvancePaymentApplyPage {
           toast.present();
           this.paymentDetail = object[1][0] as AdvancePaymentDetail;
           this.sendSuccess=true;
-          this.paymentMain.payCode=this.paymentForm.get('payCode')._value;
+          this.paymentMain.payCode=this.paymentForm.get('payCode').value;
           this.paymentForm.patchValue({
             payCode:this.paymentDetail.payCode,
             clauseType:this.paymentDetail.clauseType,
@@ -336,7 +336,7 @@ export class AdvancePaymentApplyPage {
     return new Promise((resolve, reject) => {
       console.log(data);
       this.gclListInfo=data;
-      if(this.paymentForm.get('clauseType')._value=='2'||this.paymentForm.get('clauseType')._value=='4'){
+      if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='4'){
         let sumHj=0;
         if(this.gclListInfo){
           for(let gclItem of this.gclListInfo){
@@ -355,7 +355,8 @@ export class AdvancePaymentApplyPage {
 
   //发票
   invoice(paymentDetail:AdvancePaymentDetail){
-  	let payCode=this.paymentForm.get('payCode')._value;
+  	let payCode=this.paymentForm.get('payCode').value;
+    console.log(this.paymentForm.get('payCode'));
     if(!(payCode!=null&&payCode.trim()!="")){
       let alert = this.alertCtrl.create({
         title: '提示',
@@ -370,7 +371,7 @@ export class AdvancePaymentApplyPage {
 
   //工程量清单
   billOfGcl(paymentDetail:AdvancePaymentDetail){
-    if(this.paymentForm.get('contractCode')._value==null||this.paymentForm.get('contractCode')._value==""){
+    if(this.paymentForm.get('contractCode').value==null||this.paymentForm.get('contractCode').value==""){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: '请先选择合同流水号，再选择工程量信息！',
@@ -379,13 +380,13 @@ export class AdvancePaymentApplyPage {
       alert.present();
       return;
     }
-    this.paymentMain.payCode=this.paymentForm.get('payCode')._value;
-    this.navCtrl.push("BillGclSelectPage",{'paymentItem':this.paymentMain,callback:this.getData,'contractCode':this.paymentForm.get('contractCode')._value,'gclList':this.gclListInfo});
+    this.paymentMain.payCode=this.paymentForm.get('payCode').value;
+    this.navCtrl.push("BillGclSelectPage",{'paymentItem':this.paymentMain,callback:this.getData,'contractCode':this.paymentForm.get('contractCode').value,'gclList':this.gclListInfo});
   }
 
   //送审
   send(){
-    let payCode=this.paymentForm.get('payCode')._value;
+    let payCode=this.paymentForm.get('payCode').value;
     if(!(payCode!=null&&payCode.trim()!="")){
         let alert = this.alertCtrl.create({
           title: '提示',
@@ -423,7 +424,7 @@ export class AdvancePaymentApplyPage {
   //款项类别变化
   clauseChange(){
     console.log('change');
-    if(this.paymentForm.get('clauseType')._value=='2'||this.paymentForm.get('clauseType')._value=='4'){
+    if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='4'){
         let sumHj=0;
         if(this.gclListInfo){
           for(let gclItem of this.gclListInfo){
