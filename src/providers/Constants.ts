@@ -1,8 +1,8 @@
 /*----------------------------------------后台Api地址----------------------------------------*/
 //export const APP_SERVE_URL = 'http://88.128.18.144:8081/api/';
 
-/*export const APP_SERVE_FILE_URL = 'http://192.168.1.110:9080/assets/';
-export const APP_SERVE_URL = 'http://192.168.1.110:9080/assets/cellphone/';
+//export const APP_SERVE_FILE_URL = 'http://192.168.1.110:9080/assets/';
+/*export const APP_SERVE_URL = 'http://192.168.1.110:9080/assets/cellphone/';
 export const APP_SERVE_URL_CHART = 'http://192.168.1.110:9080/assets/analyze/';*/
 export const APP_VERSION_SERVE_URL = 'http://192.168.1.110:9080/assets/apkPackagesLib/hfApp.apk';//app版本升级服务;测试环境,查询app最新版本号,更新日志等信息.
 

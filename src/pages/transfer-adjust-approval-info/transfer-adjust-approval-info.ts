@@ -160,7 +160,7 @@ export class TransferAdjustApprovalInfoPage {
         handler: data => {
           console.log(data);
         //billNumber:string,reviewType:string,vetoReason:string
-        this.approvalService.vetoReview(this.itemShow.translateCode, ReviewType[ReviewType.REVIEW_TYPE_BASIC_TRANSLATE_ADJUST], data)
+        this.approvalService.vetoReview(this.itemShow.translateCode, ReviewType[ReviewType.REVIEW_TYPE_BASIC_TRANSLATE_ADJUST], data.title)
           .subscribe(object => {
             let resultBase:ResultBase=object[0] as ResultBase;
             if(resultBase.result=='true'){
@@ -188,7 +188,7 @@ export class TransferAdjustApprovalInfoPage {
       cssClass:'alertButtionYes',
       handler: data => {
         //billNumber:string,reviewType:string,vetoReason:string
-        this.approvalService.auditReview(this.itemShow.translateCode, ReviewType[ReviewType.REVIEW_TYPE_BASIC_TRANSLATE_ADJUST], data)
+        this.approvalService.auditReview(this.itemShow.translateCode, ReviewType[ReviewType.REVIEW_TYPE_BASIC_TRANSLATE_ADJUST], data.title)
           .subscribe(object => {
             let resultBase:ResultBase=object[0] as ResultBase;
             if(resultBase.result=='true'){
