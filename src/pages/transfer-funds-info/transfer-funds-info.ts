@@ -164,7 +164,7 @@ export class TransferFundsInfoPage {
         handler: data => {
           console.log(data);
         //billNumber:string,reviewType:string,vetoReason:string
-        this.approvalService.vetoReview(this.itemShow.translateCode, ReviewType[ReviewType.REVIEW_TYPE_BASIC_TRANSLATE_VOUCHER], data)
+        this.approvalService.vetoReview(this.itemShow.translateCode, ReviewType[ReviewType.REVIEW_TYPE_BASIC_TRANSLATE_VOUCHER], data.title)
           .subscribe(object => {
             let resultBase:ResultBase=object[0] as ResultBase;
             if(resultBase.result=='true'){
@@ -192,7 +192,7 @@ export class TransferFundsInfoPage {
       cssClass:'alertButtionYes',
       handler: data => {
         //billNumber:string,reviewType:string,vetoReason:string
-        this.approvalService.auditReview(this.itemShow.translateCode, ReviewType[ReviewType.REVIEW_TYPE_BASIC_TRANSLATE_VOUCHER], data)
+        this.approvalService.auditReview(this.itemShow.translateCode, ReviewType[ReviewType.REVIEW_TYPE_BASIC_TRANSLATE_VOUCHER], data.title)
           .subscribe(object => {
             let resultBase:ResultBase=object[0] as ResultBase;
             if(resultBase.result=='true'){

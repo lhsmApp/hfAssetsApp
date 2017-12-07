@@ -177,7 +177,7 @@ export class AcceptApplyInfoPage {
         cssClass:'alertButtionNo',
         handler: data => {
         //billNumber:string,reviewType:string,vetoReason:string
-        this.approvalService.vetoReview(this.itemShow.billNumber, ReviewType[ReviewType.BASICACCEPTANCE_APPLY], data)
+        this.approvalService.vetoReview(this.itemShow.billNumber, ReviewType[ReviewType.BASICACCEPTANCE_APPLY], data.title)
           .subscribe(object => {
             let resultBase:ResultBase=object[0] as ResultBase;
             if(resultBase.result=='true'){
@@ -207,7 +207,7 @@ export class AcceptApplyInfoPage {
       cssClass:'alertButtionYes',
       handler: data => {
         //billNumber:string,reviewType:string,vetoReason:string
-        this.approvalService.auditReview(this.itemShow.billNumber, ReviewType[ReviewType.BASICACCEPTANCE_APPLY], data)
+        this.approvalService.auditReview(this.itemShow.billNumber, ReviewType[ReviewType.BASICACCEPTANCE_APPLY], data.title)
           .subscribe(object => {
             let resultBase:ResultBase=object[0] as ResultBase;
             if(resultBase.result=='true'){
