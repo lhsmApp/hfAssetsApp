@@ -58,7 +58,14 @@ export class InvoiceApplyPage {
   }
 
   ionViewDidLoad() {
-    this.navBar.backButtonClick=this.goBack;
+    this.navBar.backButtonClick=()=>{
+      console.log('back');
+      if(this.saveSuccess){
+        this.callback(true).then(()=>{ this.navCtrl.pop() });
+      }else{
+        this.navCtrl.pop();
+      }
+    }
     this.saveSuccess=false;
     this.initData();
   }
@@ -161,14 +168,5 @@ export class InvoiceApplyPage {
       }, () => {
         
       });
-  }
-
-  goBack(){
-    console.log('back');
-    if(this.saveSuccess){
-      this.callback(true).then(()=>{ this.navCtrl.pop() });
-    }else{
-      this.navCtrl.pop();
-    }
   }
 }

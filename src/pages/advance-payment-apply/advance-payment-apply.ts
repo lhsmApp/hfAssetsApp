@@ -94,7 +94,7 @@ export class AdvancePaymentApplyPage {
       //elementType: [, [Validators.required]],//项目性质，自动带出
       elementName: [,[Validators.required]],//项目单元名称，自动带出
       planType: [,[Validators.required]],//项目核算类别，自动带出
-      planTypeName: [,[Validators.required]],//项目核算类别，自动带出
+      //planTypeName: [,[Validators.required]],//项目核算类别，自动带出
       payDigest: [,[Validators.required]],//付款原因，手工录入
       costMoney: [,[Validators.required]],//合同标的（审计）额，自动带出
       taxMoney: '',//已付款额度，自动带出
@@ -129,7 +129,7 @@ export class AdvancePaymentApplyPage {
                 //elementType:this.paymentDetail.elementType,
                 elementName:this.paymentDetail.elementName,
                 planType:this.paymentDetail.planType,
-                planTypeName:this.dicUtil.getAjustTypeName(this.listAjustType,this.paymentDetail.planType),
+                //planTypeName:this.dicUtil.getAjustTypeName(this.listAjustType,this.paymentDetail.planType),
                 payDigest:this.paymentDetail.payDigest,
                 costMoney:this.paymentDetail.costMoney,
                 taxMoney:this.paymentDetail.taxMoney,
@@ -172,7 +172,15 @@ export class AdvancePaymentApplyPage {
   }
 
   ionViewDidLoad() {
-    this.navBar.backButtonClick=this.goBack;
+    this.navBar.backButtonClick=()=>{
+      console.log('back');
+      if(this.sendSuccess){
+        this.callback(true).then(()=>{ this.navCtrl.pop() });
+      }else{
+        this.navCtrl.pop();
+      }
+    }
+    
     this.sendSuccess=false;
     //console.log('ionViewDidLoad AdvancePaymentApplyPage');
     this.storage.get(IN_DEPART).then((inDepart: DicInDepart) => {
@@ -288,7 +296,7 @@ export class AdvancePaymentApplyPage {
           toast.present();
           this.paymentDetail = object[1][0] as AdvancePaymentDetail;
           this.sendSuccess=true;
-          this.paymentMain.payCode=this.paymentForm.get('payCode').value;
+          this.paymentMain.payCode=this.paymentDetail.payCode;
           this.paymentForm.patchValue({
             payCode:this.paymentDetail.payCode,
             clauseType:this.paymentDetail.clauseType,
@@ -412,14 +420,6 @@ export class AdvancePaymentApplyPage {
     });
   };
 
-  goBack(){
-    console.log('back');
-    if(this.sendSuccess){
-      this.callback(true).then(()=>{ this.navCtrl.pop() });
-    }else{
-      this.navCtrl.pop();
-    }
-  }
 
   //款项类别变化
   clauseChange(){

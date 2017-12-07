@@ -255,10 +255,6 @@ export class AdvancePaymentInfoPage {
     });
   };
 
-  goBack(e:UIEvent){
-    
-  }
-
   //审批进度
   approvalProgress(){
     this.navCtrl.push('ApprovalProgressPage',{BillNumberCode:this.paymentDetail.payCode,'reviewType':ReviewType[ReviewType.REVIEW_TYPE_BASIC_PAYMENT],'approvalState':this.approvalState});

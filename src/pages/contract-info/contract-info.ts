@@ -240,8 +240,4 @@ export class ContractInfoPage {
   approvalProgress(){
     this.navCtrl.push('ApprovalProgressPage',{BillNumberCode:this.contractDetailInfo.contractCode,'reviewType':ReviewType[ReviewType.REVIEW_TYPE_CONTRACT_MAIN],'approvalState':this.approvalState});
   }
-
-  /*goBack(){
-
-  }*/
 }
