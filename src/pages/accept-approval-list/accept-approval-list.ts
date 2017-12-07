@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
+import { Component,ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams,AlertController,Navbar } from 'ionic-angular';
 import {AcceptApplyMain} from '../../model/accept-apply-main';
 import {AcceptService} from '../../services/acceptService';
 import {ResultBase} from "../../model/result-base";
@@ -31,20 +31,34 @@ import {BillNumberCode} from '../../providers/TransferFeildName';
   templateUrl: 'accept-approval-list.html',
 })
 export class AcceptApprovalListPage {
+  @ViewChild('myNavbar') navBar: Navbar;
     listAll:AcceptApplyMain[];
     list:AcceptApplyMain[];
   emptyPath=DEFAULT_INVOICE_EMPTY;
   isEmpty:boolean=false;
+  isBackRefrash=false;
+  
+  callback :any;
 
   constructor(public navCtrl: NavController,
               public alertCtrl: AlertController,
               public navParams: NavParams,
               public acceptService:AcceptService) {
+    this.callback = this.navParams.get('callback');
+    this.isBackRefrash=false;
     //this.listAll = [];
     //this.list = [];
   }
 
   ionViewDidLoad() {
+    this.isBackRefrash=false;
+    this.navBar.backButtonClick=()=>{
+      if(this.isBackRefrash){
+        this.callback(true).then(()=>{ this.navCtrl.pop() });
+      }else{
+        this.navCtrl.pop();
+      }
+    }
     //this.listAll = [];
     //this.list = [];
     this.getList();
@@ -133,8 +147,7 @@ export class AcceptApprovalListPage {
   checkRefresh = (data) =>
   {
     return new Promise((resolve, reject) => {
-      console.log('checkRefresh');
-      console.log(data);
+      this.isBackRefrash=data;
       if(data){
         this.getList();
       }

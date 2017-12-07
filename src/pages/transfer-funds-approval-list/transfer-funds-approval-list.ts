@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
+import { Component,ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams,AlertController,Navbar } from 'ionic-angular';
 import {TransferFundsMain} from '../../model/transfer-funds-main';
 import {AcceptService} from '../../services/acceptService';
 import {ResultBase} from "../../model/result-base";
@@ -32,21 +32,35 @@ import {BillNumberCode} from '../../providers/TransferFeildName';
   templateUrl: 'transfer-funds-approval-list.html',
 })
 export class TransferFundsApprovalListPage {
+  @ViewChild('myNavbar') navBar: Navbar;
   listAll:TransferFundsMain[];
     list:TransferFundsMain[];
   emptyPath=DEFAULT_INVOICE_EMPTY;
   isEmpty:boolean=false;
+  isBackRefrash=false;
+  
+  callback :any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController,
               private dictUtil:DictUtil,
               public translateVoucherService:AcceptService) {
+    this.callback = this.navParams.get('callback');
+    this.isBackRefrash=false;
     //this.listAll = [];
     //this.list = [];
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TransferFundsApprovalListPage');
+    this.isBackRefrash=false;
+    this.navBar.backButtonClick=()=>{
+      if(this.isBackRefrash){
+        this.callback(true).then(()=>{ this.navCtrl.pop() });
+      }else{
+        this.navCtrl.pop();
+      }
+    }
     //this.listAll = [];
     //this.list = [];
     this.getList();
@@ -138,7 +152,7 @@ export class TransferFundsApprovalListPage {
   checkRefresh = (data) =>
   {
     return new Promise((resolve, reject) => {
-      console.log(data);
+      this.isBackRefrash=data;
       if(data){
         this.getList();
       }

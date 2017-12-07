@@ -87,7 +87,13 @@ export class TransferFundsInfoPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TransferFundsInfoPage');
-    this.navBar.backButtonClick=this.goBack;
+    this.navBar.backButtonClick=()=>{
+      if(this.isBackRefrash){
+        this.callback(true).then(()=>{ this.navCtrl.pop() });
+      }else{
+        this.navCtrl.pop();
+      }
+    }
     this.isBackRefrash=false;
     this.itemShow = new TransferFundsDetail();
     this.getShowItem();
@@ -210,16 +216,6 @@ export class TransferFundsInfoPage {
       }
     });
     prompt.present();
-  }
-
-  goBack(){
-    console.log('back');
-    console.log(this.isBackRefrash);
-    if(this.isBackRefrash){
-      this.callback(this.isBackRefrash).then(()=>{ this.navCtrl.pop() });
-    }else{
-      this.navCtrl.pop();
-    }
   }
 
   //审批进度

@@ -110,7 +110,13 @@ export class AcceptApplyItemPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AcceptApplyItemPage');
-    this.navBar.backButtonClick=this.goBack;
+    this.navBar.backButtonClick=()=>{
+      if(this.isBackRefrash){
+        this.callback(true).then(()=>{ this.navCtrl.pop() });
+      }else{
+        this.navCtrl.pop();
+      }
+    }
     this.isBackRefrash=false;
     this.itemShow = new AcceptApplyDetail();
     this.getShowItem();
@@ -261,13 +267,18 @@ export class AcceptApplyItemPage {
     });
   }
 
-  goBack(){
-    console.log('back');
-    if(this.isBackRefrash){
-      this.callback(this.isBackRefrash).then(()=>{ this.navCtrl.pop() });
-    }else{
-      this.navCtrl.pop();
+  //附件列表
+  attachment(){
+    if(!(this.billNumber!=null&&this.billNumber.trim()!="")){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: '请先保存验收信息，再进行维护附件信息！',
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
     }
+    this.navCtrl.push("AttachmentPage",{'billNumber':this.billNumber,'contractCode':'','type':'1','attachmentType':'4'});
   }
 
 }

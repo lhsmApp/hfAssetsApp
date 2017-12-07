@@ -93,7 +93,13 @@ export class AcceptApplyInfoPage {
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad");
-    this.navBar.backButtonClick=this.goBack;
+    this.navBar.backButtonClick=()=>{
+      if(this.isBackRefrash){
+        this.callback(true).then(()=>{ this.navCtrl.pop() });
+      }else{
+        this.navCtrl.pop();
+      }
+    }
     this.isBackRefrash=false;
     console.log('ionViewDidLoad');
     console.log(this.isBackRefrash);
@@ -248,19 +254,14 @@ export class AcceptApplyInfoPage {
     });
   };
 
-  goBack(){
-    console.log('goBack');
-    console.log(this.isBackRefrash);
-    if(this.isBackRefrash){
-      this.callback(this.isBackRefrash).then(()=>{ this.navCtrl.pop() });
-    }else{
-      this.navCtrl.pop();
-    }
-  }
-
   //审批进度
   approvalProgress(){
     this.navCtrl.push('ApprovalProgressPage',{BillNumberCode:this.billNumber,'approvalState':this.approvalState,'reviewType':ReviewType[ReviewType.BASICACCEPTANCE_APPLY]});
+  }
+
+  //附件
+  attachment(){
+      this.navCtrl.push("AttachmentInfoPage",{'billNumber':this.billNumber,'contractCode':'','type':'1','attachmentType':'4'});
   }
 
 }

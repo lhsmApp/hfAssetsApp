@@ -127,11 +127,11 @@ export class HomePage {
     }else if (cate === 'FKSP') {
       this.navCtrl.push("AdvancePaymentApprovalPage",{callback:this.afterApproval});
     }else if(cate === 'ZCYS'){
-      this.navCtrl.push("AcceptApprovalListPage");
+      this.navCtrl.push("AcceptApprovalListPage",{callback:this.afterApproval});
     }else if(cate === 'ZZSP'){
-      this.navCtrl.push("TransferFundsApprovalListPage");
+      this.navCtrl.push("TransferFundsApprovalListPage",{callback:this.afterApproval});
     }else if(cate === 'ZZTZSP'){
-      this.navCtrl.push("TransferAdjustApprovalListPage");
+      this.navCtrl.push("TransferAdjustApprovalListPage",{callback:this.afterApproval});
     }
   }
 
