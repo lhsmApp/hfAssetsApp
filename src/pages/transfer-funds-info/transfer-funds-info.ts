@@ -164,7 +164,7 @@ export class TransferFundsInfoPage {
             if(resultBase.result=='true'){
               this.isBackRefrash=true;
               let toast = this.toastCtrl.create({
-                message: '审批成功',
+                message: resultBase.message,
                 duration: 3000
               });
               toast.present();
@@ -192,7 +192,7 @@ export class TransferFundsInfoPage {
             if(resultBase.result=='true'){
               this.isBackRefrash=true;
               let toast = this.toastCtrl.create({
-                message: '审批成功',
+                message: resultBase.message,
                 duration: 3000
               });
               toast.present();
@@ -214,6 +214,7 @@ export class TransferFundsInfoPage {
 
   goBack(){
     console.log('back');
+    console.log(this.isBackRefrash);
     if(this.isBackRefrash){
       this.callback(this.isBackRefrash).then(()=>{ this.navCtrl.pop() });
     }else{

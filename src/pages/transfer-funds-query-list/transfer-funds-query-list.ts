@@ -136,7 +136,19 @@ export class TransferFundsQueryListPage {
   }
 
     toDetail(translateCode: string) {
-        this.navCtrl.push(Page_TransferFundsInfoPage, {Oper:Oper_Look,Title:'转资查询',BillNumberCode: translateCode,'approvalState':this.queryCondition.state});
+        this.navCtrl.push(Page_TransferFundsInfoPage, {callback:this.checkRefresh,Oper:Oper_Look,Title:'转资查询',BillNumberCode: translateCode,'approvalState':this.queryCondition.state});
     }
+
+  //回调
+  checkRefresh = (data) =>
+  {
+    console.log(data);
+    return new Promise((resolve, reject) => {
+      if(data){
+        this.getList();
+      }
+      resolve();
+    });
+  };
 
 }

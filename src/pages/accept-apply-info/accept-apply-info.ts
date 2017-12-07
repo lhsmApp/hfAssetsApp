@@ -86,6 +86,8 @@ export class AcceptApplyInfoPage {
     }
     this.callback = this.navParams.get('callback');
     this.isBackRefrash=false;
+    console.log('constructor');
+    console.log(this.isBackRefrash);
     //this.listDept = listDeptGet;
   }
 
@@ -93,6 +95,8 @@ export class AcceptApplyInfoPage {
     console.log("ionViewDidLoad");
     this.navBar.backButtonClick=this.goBack;
     this.isBackRefrash=false;
+    console.log('ionViewDidLoad');
+    console.log(this.isBackRefrash);
     this.itemShow = new AcceptApplyDetail();
     this.getShowItem();
   }
@@ -141,6 +145,8 @@ export class AcceptApplyInfoPage {
   }
 
   check(){
+        console.log('check');
+        console.log(this.isBackRefrash);
     let prompt = this.alertCtrl.create({
       title: '审批',
       message: "请输入审批意见",
@@ -170,8 +176,10 @@ export class AcceptApplyInfoPage {
             let resultBase:ResultBase=object[0] as ResultBase;
             if(resultBase.result=='true'){
               this.isBackRefrash=true;
+              console.log('不通过');
+              console.log(this.isBackRefrash);
               let toast = this.toastCtrl.create({
-                message: '审批成功',
+                message: resultBase.message,
                 duration: 3000
               });
               toast.present();
@@ -198,8 +206,10 @@ export class AcceptApplyInfoPage {
             let resultBase:ResultBase=object[0] as ResultBase;
             if(resultBase.result=='true'){
               this.isBackRefrash=true;
+              console.log('通过');
+              console.log(this.isBackRefrash);
               let toast = this.toastCtrl.create({
-                message: '审批成功',
+                message: resultBase.message,
                 duration: 3000
               });
               toast.present();
@@ -231,13 +241,15 @@ export class AcceptApplyInfoPage {
       console.log(data);
       if(data){
         this.isBackRefrash=true;
+        console.log('checkRefresh');
+        console.log(this.isBackRefrash);
       }
       resolve();
     });
   };
 
   goBack(){
-    console.log('back');
+    console.log('goBack');
     console.log(this.isBackRefrash);
     if(this.isBackRefrash){
       this.callback(this.isBackRefrash).then(()=>{ this.navCtrl.pop() });

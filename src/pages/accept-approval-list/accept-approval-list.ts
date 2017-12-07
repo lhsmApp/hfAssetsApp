@@ -133,6 +133,7 @@ export class AcceptApprovalListPage {
   checkRefresh = (data) =>
   {
     return new Promise((resolve, reject) => {
+      console.log('checkRefresh');
       console.log(data);
       if(data){
         this.getList();
