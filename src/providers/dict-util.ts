@@ -317,4 +317,15 @@ export class DictUtil {
     }
     return code;
   }
+
+  //翻译核算类别
+  getAjustTypeName(dictInfo:DicComplex[],code:string):string{
+    if(dictInfo&&dictInfo.length>0){
+      for(let ajustType of dictInfo){
+        if(ajustType.complexCode==code)
+          return ajustType.complexName;
+      }
+    }
+    return code;
+  }
 }

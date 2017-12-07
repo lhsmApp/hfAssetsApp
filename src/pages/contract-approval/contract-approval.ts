@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
+import { Component ,ViewChild} from '@angular/core';
+import { IonicPage, NavController, NavParams,AlertController ,Navbar} from 'ionic-angular';
 import { ContractMain} from '../../model/contract-main';
 import {ContractService} from '../../services/contractService';
 import {ResultBase} from "../../model/result-base";
@@ -25,17 +25,29 @@ const  CONTRACT_LIST: ContractMain []= [
   templateUrl: 'contract-approval.html',
 })
 export class ContractApprovalPage {
+  @ViewChild('myNavbar') navBar: Navbar;
 
   emptyPath=DEFAULT_INVOICE_EMPTY;
   isEmpty:boolean=false;
   contractList:ContractMain[];
   listAll:ContractMain[];
+  callback :any;
+  sendSuccess=false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl:AlertController,private contractService:ContractService) {
   	//this.contractList=CONTRACT_LIST;
+    this.callback    = this.navParams.get('callback');
   }
 
   ionViewDidLoad() {
+    this.sendSuccess=false;
+    this.navBar.backButtonClick=()=>{
+      if(this.sendSuccess){
+        this.callback(true).then(()=>{ this.navCtrl.pop() });
+      }else{
+        this.navCtrl.pop();
+      }
+    }
     this.getList();
   }
 
@@ -106,6 +118,7 @@ export class ContractApprovalPage {
   saveSend = (data) =>
   {
     return new Promise((resolve, reject) => {
+      this.sendSuccess=data;
       console.log(data);
       if(data){
           this.getList();

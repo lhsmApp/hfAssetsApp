@@ -18,7 +18,7 @@ export class SystemService {
      'action': 'queryComplexByCodeProperty',
      'sessionid':this.globalData.sessionId,
      };
-     return this.httpService.get('phoneDictionaryQuery.do', param).map((res: Response) => res.json());
+     return this.httpService.get('phoneMyInfo.do', param).map((res: Response) => res.json());
   }
 
   //单位字典

@@ -17,6 +17,8 @@ export const DEPOSITARY="depositary";//存放地点
 
 export const ADDITIONAL_PERSON="additionalPerson";//附加相对人
 
+export const AJUST_TYPE="ajustType";//核算类别
+
 export const IN_DEPART="inDepart";//内部单位
 
 export const OUT_DEPART="outDepart";//外部单位

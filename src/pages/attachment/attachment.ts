@@ -38,6 +38,7 @@ export class AttachmentPage {
   billNumber:string;
   contractCode :string;
   type:string;//1.合同 2.发票 
+  attachmentType:string;//1.合同 2.付款 3.发票 4.验收
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -53,10 +54,15 @@ export class AttachmentPage {
     this.billNumber=this.navParams.get('billNumber');
     this.contractCode=this.navParams.get('contractCode');
     this.type=this.navParams.get('type');
-    if(this.type=='1'){
+    this.attachmentType=this.navParams.get('attachmentType');
+    if(this.attachmentType=='1'){
       this.title='合同附件';
-    }else if(this.type=='2'){
+    }else if(this.attachmentType=='2'){
+      this.title='付款附件';
+    }else if(this.attachmentType=='3'){
       this.title='发票附件';
+    }else if(this.attachmentType=='4'){
+      this.title='验收附件';
     }
   }
 
@@ -146,7 +152,10 @@ export class AttachmentPage {
     let modal = this.modalCtrl.create('AttachmentAddPage', {title:this.title,billNumber:this.billNumber,contractCode:this.contractCode,type:this.type});
     modal.present();
     modal.onDidDismiss(data => {
-      data.reflesh && this.getList();
+      console.log(data);
+      if(data){
+        data.reflesh && this.getList();
+      }
     });
   }
 

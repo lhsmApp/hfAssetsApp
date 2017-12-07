@@ -9,8 +9,8 @@ import { PAYMENT_CATEGORY} from '../../enums/enums';
 import {Page_ContractChoiceListPage} from '../../providers/TransferFeildName';
 import { PaymentService} from '../../services/paymentService';
 import {ResultBase} from "../../model/result-base";
-import {DicBase} from "../../model/dic-base";
-import {CONTRACT_TYPE} from "../../enums/storage-type";
+import {DicComplex} from "../../model/dic-complex";
+import {AJUST_TYPE} from "../../enums/storage-type";
 
 import {IN_DEPART} from "../../enums/storage-type";
 import {OUT_DEPART} from "../../enums/storage-type";
@@ -61,7 +61,7 @@ export class AdvancePaymentApplyPage {
   paymentCategory=PAYMENT_CATEGORY;
   listPayDept : DicInDepart;
   listIntercourse : DicOutDepart;
-  listContractType : DicBase[];
+  listAjustType : DicComplex[];
   gclListInfo:BillOfWorkMain[]=[];
   callback :any;
   sendSuccess=false;
@@ -119,8 +119,8 @@ export class AdvancePaymentApplyPage {
           if(resultBase.result=='true'){
             console.log(object[1][0]);
             this.paymentDetail = object[1][0] as AdvancePaymentDetail;
-            this.storage.get(CONTRACT_TYPE).then((contractType: DicBase[]) => {
-              this.listContractType=contractType;
+            this.storage.get(AJUST_TYPE).then((ajustType: DicComplex[]) => {
+              this.listAjustType=ajustType;
               this.paymentForm.patchValue({
                 payCode:this.paymentDetail.payCode,
                 clauseType:this.paymentDetail.clauseType,
@@ -129,7 +129,7 @@ export class AdvancePaymentApplyPage {
                 //elementType:this.paymentDetail.elementType,
                 elementName:this.paymentDetail.elementName,
                 planType:this.paymentDetail.planType,
-                planTypeName:this.dicUtil.getContractTypeName(this.listContractType,this.paymentDetail.planType),
+                planTypeName:this.dicUtil.getAjustTypeName(this.listAjustType,this.paymentDetail.planType),
                 payDigest:this.paymentDetail.payDigest,
                 costMoney:this.paymentDetail.costMoney,
                 taxMoney:this.paymentDetail.taxMoney,
@@ -181,8 +181,8 @@ export class AdvancePaymentApplyPage {
     this.storage.get(OUT_DEPART).then((outDepart: DicOutDepart) => {
       this.listIntercourse=outDepart;
     });
-    this.storage.get(CONTRACT_TYPE).then((contractType: DicBase[]) => {
-              this.listContractType=contractType;
+    this.storage.get(AJUST_TYPE).then((ajustType: DicComplex[]) => {
+      this.listAjustType=ajustType;
     });
     this.initData();
   }
@@ -219,8 +219,8 @@ export class AdvancePaymentApplyPage {
           contractName:contractInfo.contractName,
           //elementType:contractInfo.elementCode,
           elementName:contractInfo.elementName,
-          planType:contractInfo.compactType,
-          planTypeName:this.dicUtil.getContractTypeName(this.listContractType,contractInfo.compactType),
+          /*planType:contractInfo.compactType,
+          planTypeName:this.dicUtil.getAjustTypeName(this.listAjustType,contractInfo.compactType),*/
           costMoney:contractInfo.contractMoney
         });
       }
@@ -297,7 +297,7 @@ export class AdvancePaymentApplyPage {
             //elementType:this.paymentDetail.elementType,
             elementName:this.paymentDetail.elementName,
             planType:this.paymentDetail.planType,
-            planTypeName:this.dicUtil.getContractTypeName(this.listContractType,this.paymentDetail.planType),
+            //planTypeName:this.dicUtil.getContractTypeName(this.listContractType,this.paymentDetail.planType),
             payDigest:this.paymentDetail.payDigest,
             costMoney:this.paymentDetail.costMoney,
             taxMoney:this.paymentDetail.taxMoney,
@@ -437,5 +437,20 @@ export class AdvancePaymentApplyPage {
             payMoney:sumHj,
           });
       }
+  }
+
+  //附件列表
+  attachment(item){
+    let payCode=this.paymentForm.get('payCode').value;
+    if(!(payCode!=null&&payCode.trim()!="")){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: '请先保存付款信息，再进行维护附件信息！',
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
+    this.navCtrl.push("AttachmentPage",{'billNumber':this.paymentDetail.payCode,'contractCode':'','type':'1','attachmentType':'2'});
   }
 }
