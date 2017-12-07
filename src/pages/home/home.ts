@@ -123,9 +123,9 @@ export class HomePage {
 
   openPage(cate: string) {
     if (cate === 'HTSP') {
-      this.navCtrl.push("ContractApprovalPage");
+      this.navCtrl.push("ContractApprovalPage",{callback:this.afterApproval});
     }else if (cate === 'FKSP') {
-      this.navCtrl.push("AdvancePaymentApprovalPage");
+      this.navCtrl.push("AdvancePaymentApprovalPage",{callback:this.afterApproval});
     }else if(cate === 'ZCYS'){
       this.navCtrl.push("AcceptApprovalListPage");
     }else if(cate === 'ZZSP'){
@@ -134,4 +134,17 @@ export class HomePage {
       this.navCtrl.push("TransferAdjustApprovalListPage");
     }
   }
+
+  //回调
+  afterApproval = (data) =>
+  {
+    return new Promise((resolve, reject) => {
+      console.log(data);
+      if(data){
+          this.getList();
+          
+      }
+      resolve();
+    });
+  };
 }

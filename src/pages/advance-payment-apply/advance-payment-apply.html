@@ -69,7 +69,10 @@
       </ion-item>
       <ion-item hidden>
         <ion-label fixed>项目核算类别</ion-label>
-        <ion-input type="text" readonly formControlName="planType" placeholder="自动带出"></ion-input>
+        <!-- <ion-input type="text" readonly formControlName="planType" placeholder="自动带出"></ion-input> -->
+        <ion-select [(ngModel)]="planType" formControlName="planType" style="left:0;" placeholder="选择" cancelText="取消" okText="确定">
+          <ion-option *ngFor="let ajustType of listAjustType" [value]="ajustType.complexCode">{{ajustType.complexName}}</ion-option>
+        </ion-select>
       </ion-item>
       <ion-item>
         <ion-label fixed>项目核算类别</ion-label>
@@ -128,6 +131,8 @@
 	    <ion-item-divider color="light"></ion-item-divider>
 	    <ion-item (click)='billOfGcl(item)'>工程量清单 <ion-icon name="more" item-end></ion-icon></ion-item>
 	    <ion-item-divider color="light"></ion-item-divider>
+      <ion-item (click)='attachment(item)'>附件 <ion-icon name="more" item-end></ion-icon></ion-item>
+      <ion-item-divider color="light"></ion-item-divider>
     </ion-item-group>
     <div padding-horizontal>
       <button ion-button color="danger" full type="submit" [disabled]="!paymentForm.valid">保 存</button>

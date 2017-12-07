@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
+import { Component ,ViewChild} from '@angular/core';
+import { IonicPage, NavController, NavParams,AlertController,Navbar } from 'ionic-angular';
 import { AdvancePaymentMain} from '../../model/advance-payment-main';
 import { PaymentService} from '../../services/paymentService';
 import {ResultBase} from "../../model/result-base";
@@ -25,19 +25,34 @@ import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
   templateUrl: 'advance-payment-approval.html',
 })
 export class AdvancePaymentApprovalPage {
+  @ViewChild('myNavbar') navBar: Navbar;
+
   emptyPath=DEFAULT_INVOICE_EMPTY;
   isEmpty:boolean=false;
   advancePaymentList:AdvancePaymentMain[];
   listAll:AdvancePaymentMain[];
+  callback :any;
+  sendSuccess=false;
+
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public alertCtrl:AlertController,
     private paymentService:PaymentService) {
+    this.callback    = this.navParams.get('callback');
   	//this.advancePaymentList=ADVANTAGE_LIST;
   }
 
   //初始化View
   ionViewDidLoad() {
+    this.sendSuccess=false;
+    this.navBar.backButtonClick=()=>{
+      if(this.sendSuccess){
+        this.callback(true).then(()=>{ this.navCtrl.pop() });
+      }else{
+        this.navCtrl.pop();
+      }
+    }
     this.getList();
   }
 
@@ -98,6 +113,7 @@ export class AdvancePaymentApprovalPage {
   {
     return new Promise((resolve, reject) => {
       console.log(data);
+      this.sendSuccess=data;
       if(data){
           this.getList();
       }

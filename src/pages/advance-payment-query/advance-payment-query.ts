@@ -91,7 +91,7 @@ import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
   //打开详情页
   openPage(item: AdvancePaymentMain) {
   	//this.appCtrl.getRootNav().push(HomeDetailPage, { id: id });
-  	this.navCtrl.push("AdvancePaymentInfoPage",{"paymentItem":item,'approvalState':this.queryCondition.state,'apply':false});
+  	this.navCtrl.push("AdvancePaymentInfoPage",{"paymentItem":item,'approvalState':this.queryCondition.state,'apply':false,query:true});
   }
 
   //上拉刷新

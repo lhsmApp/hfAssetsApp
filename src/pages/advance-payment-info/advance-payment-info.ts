@@ -5,8 +5,8 @@ import { AdvancePaymentDetail} from '../../model/advance-payment-detail';
 import { AdvancePaymentMain} from '../../model/advance-payment-main';
 import { PaymentService} from '../../services/paymentService';
 import {ResultBase} from "../../model/result-base";
-import {DicBase} from "../../model/dic-base";
-import {CONTRACT_TYPE} from "../../enums/storage-type";
+import {DicComplex} from "../../model/dic-complex";
+import {AJUST_TYPE} from "../../enums/storage-type";
 import {IN_DEPART} from "../../enums/storage-type";
 import {OUT_DEPART} from "../../enums/storage-type";
 import {DicInDepart} from '../../model/dic-in-depart';
@@ -48,13 +48,14 @@ export class AdvancePaymentInfoPage {
 
   payCode:string;
   isapproval:boolean;
+  isquery:boolean;
   apply:boolean=false;
   paymentDetail:AdvancePaymentDetail;
   paymentMain:AdvancePaymentMain;
   paymentCategory=PAYMENT_CATEGORY;
   listPayDept : DicInDepart[];
   listIntercourse : DicOutDepart[];
-  listContractType : DicBase[];
+  listAjustType : DicComplex[];
   callback :any;
   sendSuccess=false;
   approvalState:string;
@@ -80,10 +81,19 @@ export class AdvancePaymentInfoPage {
   }
 
   ionViewDidLoad() {
-    this.navBar.backButtonClick=this.goBack;
+    this.navBar.backButtonClick=()=>{
+      console.log('back');
+      console.log(this.sendSuccess);
+      if(this.sendSuccess){
+        this.callback(true).then(()=>{ this.navCtrl.pop() });
+      }else{
+        this.navCtrl.pop();
+      }
+    }
     this.sendSuccess=false;
     this.payCode=this.navParams.get('id');
     this.isapproval=this.navParams.get('approval');
+    this.isquery=this.navParams.get('query');
 
     /*this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
       this.listPayDept=inDepart;
@@ -115,9 +125,9 @@ export class AdvancePaymentInfoPage {
             this.listIntercourse=outDepart;
             this.paymentDetail.intercourseName=this.dictUtil.getOutDepartName(this.listIntercourse,this.paymentDetail.intercourseCode);
           });
-          this.storage.get(CONTRACT_TYPE).then((contractType: DicBase[]) => {
-            this.listContractType=contractType;
-            this.paymentDetail.planTypeName=this.dictUtil.getContractTypeName(this.listContractType,this.paymentDetail.planType);
+          this.storage.get(AJUST_TYPE).then((adjustType: DicComplex[]) => {
+            this.listAjustType=adjustType;
+            this.paymentDetail.planTypeName=this.dictUtil.getAjustTypeName(this.listAjustType,this.paymentDetail.planType);
           });
           
         }else{
@@ -245,17 +255,22 @@ export class AdvancePaymentInfoPage {
     });
   };
 
-  goBack(){
-    console.log('back');
-    if(this.sendSuccess){
-      this.callback(true).then(()=>{ this.navCtrl.pop() });
-    }else{
-      this.navCtrl.pop();
-    }
+  goBack(e:UIEvent){
+    
   }
 
   //审批进度
   approvalProgress(){
     this.navCtrl.push('ApprovalProgressPage',{BillNumberCode:this.paymentDetail.payCode,'reviewType':ReviewType[ReviewType.REVIEW_TYPE_BASIC_PAYMENT],'approvalState':this.approvalState});
+  }
+
+  //附件
+  attachment(){
+    console.log(this.apply);
+    if(this.apply){
+      this.navCtrl.push("AttachmentPage",{'billNumber':this.paymentDetail.payCode,'contractCode':'','type':'1','attachmentType':'2'});
+    }else{
+      this.navCtrl.push("AttachmentInfoPage",{'billNumber':this.paymentDetail.payCode,'contractCode':'','type':'1','attachmentType':'2'});
+    }
   }
 }
