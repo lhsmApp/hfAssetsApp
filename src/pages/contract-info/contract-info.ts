@@ -233,7 +233,7 @@ export class ContractInfoPage {
 
   //附件
   attachment(){
-  	this.navCtrl.push("AttachmentInfoPage",{'billNumber':this.contractDetailInfo.contractCode,'contractCode':'','type':'1','attachmentType':'1'});
+  	this.navCtrl.push("AttachmentInfoPage",{'billNumber':this.contractDetailInfo.contractCode,'contractCode':'','type':'1','attachmentType':'1','typeList':'1'});
   }
 
   //审批进度

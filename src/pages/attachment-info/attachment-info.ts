@@ -36,6 +36,7 @@ export class AttachmentInfoPage {
   billNumber:string;
   contractCode :string;
   type:string;//1.合同 2.发票 
+  typeList:string;//1、合同 2、付款、发票、验收
   attachmentType:string;//1.合同 2.付款 3.发票 4.验收
 
   constructor(public navCtrl: NavController, 
@@ -49,6 +50,7 @@ export class AttachmentInfoPage {
     this.billNumber=this.navParams.get('billNumber');
     this.contractCode=this.navParams.get('contractCode');
     this.type=this.navParams.get('type');
+    this.typeList=this.navParams.get('typeList');
     this.attachmentType=this.navParams.get('attachmentType');
     if(this.attachmentType=='1'){
       this.title='合同附件';
@@ -67,7 +69,7 @@ export class AttachmentInfoPage {
 
   //获取附件列表信息
   getList(){
-    this.attachmentService.getAttachmentList(this.billNumber,this.contractCode,this.type)
+    this.attachmentService.getAttachmentList(this.billNumber,this.contractCode,this.typeList)
     .subscribe(object => {
       let resultBase:ResultBase=object[0] as ResultBase;
       if(resultBase.result=='true'){

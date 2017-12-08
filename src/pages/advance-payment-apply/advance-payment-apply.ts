@@ -451,6 +451,6 @@ export class AdvancePaymentApplyPage {
       alert.present();
       return;
     }
-    this.navCtrl.push("AttachmentPage",{'billNumber':this.paymentDetail.payCode,'contractCode':'','type':'1','attachmentType':'2'});
+    this.navCtrl.push("AttachmentPage",{'billNumber':this.paymentDetail.payCode,'contractCode':'','type':'3','attachmentType':'2','typeList':'3'});
   }
 }

@@ -119,7 +119,7 @@ export class InvoiceApplyPage {
       alert.present();
       return;
     }
-    this.navCtrl.push("AttachmentPage",{'billNumber':this.invoiceDetail.sequence,'contractCode':this.contractCode,'type':'2','attachmentType':'3'});
+    this.navCtrl.push("AttachmentPage",{'billNumber':this.invoiceDetail.sequence,'contractCode':this.contractCode,'type':'2','attachmentType':'3','typeList':'2'});
   }
 
   //发票保存
