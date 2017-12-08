@@ -92,6 +92,7 @@ export class AssetDetailsItemPage {
   assetFrom:any;
   callback :any;
   isBackRefrash=false;
+    maxYear:string;
 
   //assetsType: string;//资产类型"
     dicAssetsCodeType: string;//资产类别"
@@ -123,6 +124,7 @@ export class AssetDetailsItemPage {
     this.TypeView = this.navParams.get(TypeView);
     this.callback    = this.navParams.get('callback');
     this.isBackRefrash=false;
+    this.maxYear = ((new Date()).getFullYear() + 100).toString();
     
     this.assetFrom = this.formBuilder.group({
       assetsCode: [, [Validators.required]],

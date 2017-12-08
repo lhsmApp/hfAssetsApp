@@ -128,7 +128,9 @@
             </ion-item>
             <ion-item >
                 <ion-label fixed>保修截止日期</ion-label>
-                <ion-input formControlName="guaDate" placeholder="手工输入"></ion-input>
+                <!--<ion-input formControlName="guaDate" placeholder="手工输入"></ion-input>-->
+                <ion-datetime displayFormat="YYYY-MM-DD" placeholder="手工选择" cancelText="取消" doneText="确认"
+                            formControlName="guaDate" [(ngModel)]="guaDate" max="{{maxYear}}"></ion-datetime>
             </ion-item>
             <ion-item >
                 <ion-label fixed>使用状态</ion-label>

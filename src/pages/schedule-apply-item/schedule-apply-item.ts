@@ -79,7 +79,7 @@ export class ScheduleApplyItemPage {
               private dictUtil:DictUtil,
               public projectElementService: ProjectElementService) {
     this.itemShow = new ProjectUnitDetail();
-    this.maxYear = ((new Date()).getFullYear() + 10).toString();
+    this.maxYear = ((new Date()).getFullYear() + 100).toString();
   	this.oper = this.navParams.get(Oper);
   	this.billElementCode = this.navParams.get(BillElementCode);
     this.callback    = this.navParams.get('callback');
