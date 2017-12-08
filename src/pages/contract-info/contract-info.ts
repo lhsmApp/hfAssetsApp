@@ -233,15 +233,11 @@ export class ContractInfoPage {
 
   //附件
   attachment(){
-  	this.navCtrl.push("AttachmentInfoPage",{'billNumber':this.contractDetailInfo.contractCode,'contractCode':'','type':'1','attachmentType':'1'});
+  	this.navCtrl.push("AttachmentInfoPage",{'billNumber':this.contractDetailInfo.contractCode,'contractCode':'','type':'1','attachmentType':'1','typeList':'1'});
   }
 
   //审批进度
   approvalProgress(){
     this.navCtrl.push('ApprovalProgressPage',{BillNumberCode:this.contractDetailInfo.contractCode,'reviewType':ReviewType[ReviewType.REVIEW_TYPE_CONTRACT_MAIN],'approvalState':this.approvalState});
   }
-
-  /*goBack(){
-
-  }*/
 }

@@ -58,7 +58,14 @@ export class InvoiceApplyPage {
   }
 
   ionViewDidLoad() {
-    this.navBar.backButtonClick=this.goBack;
+    this.navBar.backButtonClick=()=>{
+      console.log('back');
+      if(this.saveSuccess){
+        this.callback(true).then(()=>{ this.navCtrl.pop() });
+      }else{
+        this.navCtrl.pop();
+      }
+    }
     this.saveSuccess=false;
     this.initData();
   }
@@ -112,7 +119,7 @@ export class InvoiceApplyPage {
       alert.present();
       return;
     }
-    this.navCtrl.push("AttachmentPage",{'billNumber':this.invoiceDetail.sequence,'contractCode':this.contractCode,'type':'2','attachmentType':'3'});
+    this.navCtrl.push("AttachmentPage",{'billNumber':this.invoiceDetail.sequence,'contractCode':this.contractCode,'type':'2','attachmentType':'3','typeList':'2'});
   }
 
   //发票保存
@@ -161,14 +168,5 @@ export class InvoiceApplyPage {
       }, () => {
         
       });
-  }
-
-  goBack(){
-    console.log('back');
-    if(this.saveSuccess){
-      this.callback(true).then(()=>{ this.navCtrl.pop() });
-    }else{
-      this.navCtrl.pop();
-    }
   }
 }

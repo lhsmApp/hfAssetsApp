@@ -255,10 +255,6 @@ export class AdvancePaymentInfoPage {
     });
   };
 
-  goBack(e:UIEvent){
-    
-  }
-
   //审批进度
   approvalProgress(){
     this.navCtrl.push('ApprovalProgressPage',{BillNumberCode:this.paymentDetail.payCode,'reviewType':ReviewType[ReviewType.REVIEW_TYPE_BASIC_PAYMENT],'approvalState':this.approvalState});
@@ -268,9 +264,9 @@ export class AdvancePaymentInfoPage {
   attachment(){
     console.log(this.apply);
     if(this.apply){
-      this.navCtrl.push("AttachmentPage",{'billNumber':this.paymentDetail.payCode,'contractCode':'','type':'1','attachmentType':'2'});
+      this.navCtrl.push("AttachmentPage",{'billNumber':this.paymentDetail.payCode,'contractCode':'','type':'3','attachmentType':'2','typeList':'3'});
     }else{
-      this.navCtrl.push("AttachmentInfoPage",{'billNumber':this.paymentDetail.payCode,'contractCode':'','type':'1','attachmentType':'2'});
+      this.navCtrl.push("AttachmentInfoPage",{'billNumber':this.paymentDetail.payCode,'contractCode':'','type':'3','attachmentType':'2','typeList':'3'});
     }
   }
 }

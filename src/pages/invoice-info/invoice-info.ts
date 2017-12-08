@@ -67,9 +67,9 @@ export class InvoiceInfoPage {
   attachment(){
     console.log(this.apply);
     if(this.apply){
-      this.navCtrl.push("AttachmentPage",{'billNumber':this.invoiceDetail.sequence,'contractCode':this.contractCode,'type':'2','attachmentType':'3'});
+      this.navCtrl.push("AttachmentPage",{'billNumber':this.invoiceDetail.sequence,'contractCode':this.contractCode,'type':'2','attachmentType':'3','typeList':'2'});
     }else{
-    	this.navCtrl.push("AttachmentInfoPage",{'billNumber':this.invoiceDetail.sequence,'contractCode':this.contractCode,'type':'2','attachmentType':'3'});
+    	this.navCtrl.push("AttachmentInfoPage",{'billNumber':this.invoiceDetail.sequence,'contractCode':this.contractCode,'type':'2','attachmentType':'3','typeList':'2'});
     }
   }
 

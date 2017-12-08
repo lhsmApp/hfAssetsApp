@@ -67,17 +67,17 @@
         
         <ion-input type="text" readonly formControlName="elementName" placeholder="自动带出"></ion-input>
       </ion-item>
-      <ion-item hidden>
+      <ion-item>
         <ion-label fixed>项目核算类别</ion-label>
         <!-- <ion-input type="text" readonly formControlName="planType" placeholder="自动带出"></ion-input> -->
         <ion-select [(ngModel)]="planType" formControlName="planType" style="left:0;" placeholder="选择" cancelText="取消" okText="确定">
           <ion-option *ngFor="let ajustType of listAjustType" [value]="ajustType.complexCode">{{ajustType.complexName}}</ion-option>
         </ion-select>
       </ion-item>
-      <ion-item>
+      <!-- <ion-item>
         <ion-label fixed>项目核算类别</ion-label>
         <ion-input type="text" readonly formControlName="planTypeName" placeholder="自动带出"></ion-input>
-      </ion-item>
+      </ion-item> -->
       <ion-item>
         <ion-label fixed>合同标的额</ion-label>
         <ion-input type="number" readonly formControlName="costMoney" placeholder="自动带出"></ion-input>
