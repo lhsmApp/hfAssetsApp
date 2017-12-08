@@ -10,6 +10,7 @@ import {ReviewType} from '../../enums/review-type';
 import {DictUtil} from '../../providers/dict-util';
 import {TransferFundsReviewStatus} from '../../enums/enums';
 import {TransferFundsType} from '../../enums/enums';
+import {Tzlx} from '../../enums/enums';
 
 import {Oper,Oper_Look,Oper_Approval} from '../../providers/TransferFeildName';
 import {Title} from '../../providers/TransferFeildName';
@@ -114,6 +115,8 @@ export class TransferAdjustApprovalInfoPage {
               this.itemShow.reviewStatusName = this.dictUtil.getEnumsName(TransferFundsReviewStatus,this.itemShow.reviewStatus);
               //转资类型"(1、固定资产 2、无形资产3、长期待摊费用4、长期股权投资)
               this.itemShow.translateTypeName = this.dictUtil.getEnumsName(TransferFundsType,this.itemShow.translateType);
+              //调增、调减
+              this.itemShow.oldTypeName = this.dictUtil.getEnumsName(Tzlx,this.itemShow.oldType);
           }
         } else {
             let alert = this.alertCtrl.create({

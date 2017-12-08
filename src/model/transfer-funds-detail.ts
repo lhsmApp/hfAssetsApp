@@ -10,7 +10,9 @@ export class TransferFundsDetail {
               requireUser: string;//申请人"                  
               requireDate: string;//申请日期"                
               checkOpinion: string;//审批意见"    
+              oldType: string;//调增、调减
 
               reviewStatusName: string;//单据状态"                     
-              translateTypeName: string;//转资类型"(1、固定资产 2、无形资产3、长期待摊费用4、长期股权投资)         
+              translateTypeName: string;//转资类型"(1、固定资产 2、无形资产3、长期待摊费用4、长期股权投资)   
+              oldTypeName: string;//调增、调减      
 }
