@@ -278,7 +278,7 @@ export class AcceptApplyItemPage {
       alert.present();
       return;
     }
-    this.navCtrl.push("AttachmentPage",{'billNumber':this.billNumber,'contractCode':'','type':'1','attachmentType':'4'});
+    this.navCtrl.push("AttachmentPage",{'billNumber':this.billNumber,'contractCode':'','type':'3','attachmentType':'2','typeList':'3'});
   }
 
 }

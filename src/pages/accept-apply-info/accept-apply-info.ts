@@ -261,7 +261,7 @@ export class AcceptApplyInfoPage {
 
   //附件
   attachment(){
-      this.navCtrl.push("AttachmentInfoPage",{'billNumber':this.billNumber,'contractCode':'','type':'1','attachmentType':'4'});
+      this.navCtrl.push("AttachmentInfoPage",{'billNumber':this.billNumber,'contractCode':'','type':'3','attachmentType':'2','typeList':'3'});
   }
 
 }
