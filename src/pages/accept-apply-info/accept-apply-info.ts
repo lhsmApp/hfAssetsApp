@@ -261,7 +261,11 @@ export class AcceptApplyInfoPage {
 
   //附件
   attachment(){
+    if(this.oper === Oper_Edit || this.oper === Oper_Add){
+      this.navCtrl.push("AttachmentPage",{'billNumber':this.billNumber,'contractCode':'','type':'3','attachmentType':'2','typeList':'3'});
+    } else {
       this.navCtrl.push("AttachmentInfoPage",{'billNumber':this.billNumber,'contractCode':'','type':'3','attachmentType':'2','typeList':'3'});
+    }
   }
 
 }
