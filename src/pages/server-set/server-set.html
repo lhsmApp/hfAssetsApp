@@ -1,0 +1,31 @@
+<!--
+  Generated template for the ServerSetPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>服务器设置</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="dismiss()">关闭</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>请输入服务器地址,例如:192.168.1.108</ion-label>
+        <ion-input type="text" formControlName="serverIP"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div padding-horizontal>
+      <button type="submit" ion-button block [disabled]="!form.valid">保 存</button>
+    </div>
+  </form>
+</ion-content>

@@ -145,6 +145,13 @@ export class LoginPage {
     });
   }
 
+  //更换IP
+  serverIP(){
+    console.log('ccccc');
+    let modal = this.modalCtrl.create('ServerSetPage');
+    modal.present();
+  }
+
 
   /*toRegister() {
     this.canLeave = true;

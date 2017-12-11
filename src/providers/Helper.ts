@@ -6,7 +6,7 @@ import {NativeService} from "./NativeService";
 import {HttpService} from "./HttpService";
 import {JPush} from "../../typings/modules/jpush/index";
 import {Observable} from "rxjs";
-import {DEFAULT_AVATAR, APP_VERSION_SERVE_URL} from "./Constants";
+import {DEFAULT_AVATAR} from "./Constants";
 import {FileService} from "./FileService";
 import {FileObj} from "../model/FileObj";
 import {Http, Response} from "@angular/http";
@@ -46,7 +46,7 @@ export class Helper {
       this.nativeService.getPackageName().subscribe(packageName => {//获得app包名
         let appName = packageName.substring(packageName.lastIndexOf('.') + 1);
         let appType = this.nativeService.isAndroid() ? 'android' : 'ios';
-        //let url = Utils.formatUrl(`${APP_VERSION_SERVE_URL}/app/${appName}/${appType}/latest/version`);
+        //let url = Utils.formatUrl(`${this.globalData.serverApkUrl}/app/${appName}/${appType}/latest/version`);
         let param = {
           //必传
           'action': 'judgeAppVersion',

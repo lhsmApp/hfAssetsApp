@@ -16,7 +16,7 @@ import {ImagePicker} from "@ionic-native/image-picker";
 import {Network} from "@ionic-native/network";
 import {AppMinimize} from "@ionic-native/app-minimize";
 import {Position} from "../model/type";
-import {APP_DOWNLOAD, APK_DOWNLOAD,APP_VERSION_SERVE_URL, IMAGE_SIZE, QUALITY_SIZE, REQUEST_TIMEOUT} from "./Constants";
+import {APP_DOWNLOAD, APK_DOWNLOAD, IMAGE_SIZE, QUALITY_SIZE, REQUEST_TIMEOUT} from "./Constants";
 import {GlobalData} from "./GlobalData";
 import {Observable} from "rxjs";
 import {Logger} from "./Logger";
@@ -111,7 +111,7 @@ export class NativeService {
   downloadApp(): void {
     if (this.isIos()) {//ios打开网页下载
       //this.openUrlByBrowser(APP_DOWNLOAD);
-      this.openUrlByBrowser(APP_VERSION_SERVE_URL);
+      this.openUrlByBrowser(this.globalData.serverApkUrl);
     }
     if (this.isAndroid()) {//android本地下载
       let backgroundProcess = false;//是否后台下载
@@ -132,7 +132,7 @@ export class NativeService {
 
       //下载并安装apk
       //fileTransfer.download(APK_DOWNLOAD, apk).then(() => {
-      fileTransfer.download(APP_VERSION_SERVE_URL, apk).then((entry) => {
+      fileTransfer.download(this.globalData.serverApkUrl, apk).then((entry) => {
         //window['install'].install(apk.replace('file://', ''));
         alert.dismiss();
         this.fileOpener.open(apk, 'application/vnd.android.package-archive').then(() =>{  
@@ -151,7 +151,7 @@ export class NativeService {
               text: '确定',
               handler: () => {
                 //this.openUrlByBrowser(APP_DOWNLOAD);//打开网页下载
-                this.openUrlByBrowser(APP_VERSION_SERVE_URL);//打开网页下载
+                this.openUrlByBrowser(this.globalData.serverApkUrl);//打开网页下载
               }
             }
           ]

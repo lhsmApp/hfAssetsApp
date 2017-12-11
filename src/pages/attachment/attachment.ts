@@ -6,10 +6,11 @@ import {FileOpener } from "@ionic-native/file-opener";
 import {File,FileEntry} from "@ionic-native/file";
 
 import { Attachment} from '../../model/attachment';
-import {DEFAULT_INVOICE,DEFAULT_INVOICE_EMPTY,APP_SERVE_FILE_URL} from "../../providers/Constants";
+import {DEFAULT_INVOICE,DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
 import { AttachmentService} from '../../services/attachmentService';
 import {ResultBase} from "../../model/result-base";
 import {NativeService} from '../../providers/NativeService';
+import {GlobalData} from "../../providers/GlobalData";
 
 
 /**
@@ -50,7 +51,8 @@ export class AttachmentPage {
     private fileTransfer: FileTransfer,
     private file:File,
     private attachmentService:AttachmentService,
-    private nativeService: NativeService) {
+    private nativeService: NativeService,
+    private globalData: GlobalData) {
   	//this.attachmentList=ATTACHMENT_LIST;
     this.billNumber=this.navParams.get('billNumber');
     this.contractCode=this.navParams.get('contractCode');
@@ -114,7 +116,7 @@ export class AttachmentPage {
       ||fileType.toLowerCase()=="raw"||fileType.toLowerCase()=="ufo"
       ||fileType.toLowerCase()=="ai"){
       this.navCtrl.push("AttachmentViewPage",{attachment:item});
-      //this.nativeService.showPhotoViewer(APP_SERVE_FILE_URL+item.filePath);
+      //this.nativeService.showPhotoViewer(this.globalData.serverFileUrl+item.filePath);
     }else if(fileType.toLowerCase()=="txt"||fileType.toLowerCase()=="docx"
       ||fileType.toLowerCase()=="doc"||fileType.toLowerCase()=="pptx"
       ||fileType.toLowerCase()=="ppt"||fileType.toLowerCase()=="xlsx"
@@ -124,7 +126,7 @@ export class AttachmentPage {
       const nativePath = this.file.dataDirectory + item.fileName; //文件保存的目录
 
       //下载并安装apk
-      fileTransfer.download(APP_SERVE_FILE_URL +item.filePath, nativePath).then((entry) => {
+      fileTransfer.download(this.globalData.serverFileUrl +item.filePath, nativePath).then((entry) => {
         // entry.nativeURL 是上面那个插件文件下载后的保存路径
         this.fileOpener.open(entry.nativeURL, this.getFileMimeType(fileType))
         .then(() => {
@@ -132,14 +134,14 @@ export class AttachmentPage {
         })
         .catch((error) => {
           console.log('打开失败');
-          window.open(APP_SERVE_FILE_URL +item.filePath,'_system');
+          window.open(this.globalData.serverFileUrl +item.filePath,'_system');
         });
       }, err => {
-        window.open(APP_SERVE_FILE_URL +item.filePath,'_system');
+        window.open(this.globalData.serverFileUrl +item.filePath,'_system');
       });
     }else{
-      //this.inAppBrowser.create(APP_SERVE_FILE_URL +item.filePath);
-      window.open(APP_SERVE_FILE_URL +item.filePath,'_system');
+      //this.inAppBrowser.create(this.globalData.serverFileUrl +item.filePath);
+      window.open(this.globalData.serverFileUrl +item.filePath,'_system');
     }
   }
 

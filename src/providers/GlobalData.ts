@@ -2,9 +2,18 @@
  * Created by jiachao on 2017-09-27.
  */
 import {Injectable} from '@angular/core';
+import {APP_SERVE_IP,APP_PORT_NATIVE,APP_PORT_BROWER,APP_SERVE_URL,APP_SERVE_FILE_URL,APP_SERVE_URL_CHART,APP_VERSION_SERVE_URL} from "../providers/Constants";
 
 @Injectable()
 export class GlobalData {
+
+  private _serverIP:string;//服务器地址
+  private _serverPort:string;//端口号
+
+  private _serverApiUrl:string;//接口服务器地址
+  private _serverFileUrl:string;//文件服务器地址
+  private _serverApkUrl:string;//本地升级服务器地址
+  private _serverChartUrl:string;//图表接口地址
 
   private _appNo:string;//当前版本号
   private _userId: string;//用户ID(登录帐号) 
@@ -23,6 +32,57 @@ export class GlobalData {
 
   //app更新进度.默认为0,在app升级过程中会改变
   private _updateProgress: number = -1;
+
+  get serverIP(): string {
+    if(this.serverPort==APP_PORT_NATIVE)
+      return this._serverIP;
+    else
+      return "localhost"
+  }
+
+  set serverIP(value: string) {
+    this._serverIP = value;
+  }
+
+  get serverPort(): string {
+    return this._serverPort;
+  }
+
+  set serverPort(value: string) {
+    this._serverPort = value;
+  }
+
+  get serverApiUrl(): string {
+    if(this.serverIP){
+      return "http://"+this.serverIP+":"+this.serverPort+APP_SERVE_URL;
+    }else{
+      return "http://"+APP_SERVE_IP+":"+this.serverPort+APP_SERVE_URL;
+    }
+  }
+
+  get serverFileUrl(): string {
+    if(this.serverIP){
+      return "http://"+this.serverIP+":"+this.serverPort+APP_SERVE_FILE_URL;
+    }else{
+      return "http://"+APP_SERVE_IP+":"+this.serverPort+APP_SERVE_FILE_URL;
+    }
+  }
+
+  get serverApkUrl(): string {
+    if(this.serverIP){
+      return "http://"+this.serverIP+":"+this.serverPort+APP_VERSION_SERVE_URL;
+    }else{
+      return "http://"+APP_SERVE_IP+":"+this.serverPort+APP_VERSION_SERVE_URL;
+    }
+  }
+
+  get serverChartUrl(): string {
+    if(this.serverIP){
+      return "http://"+this.serverIP+":"+this.serverPort+APP_SERVE_URL_CHART;
+    }else{
+      return "http://"+APP_SERVE_IP+":"+this.serverPort+APP_SERVE_URL_CHART;
+    }
+  }
 
   get appNo(): string {
     return this._appNo;

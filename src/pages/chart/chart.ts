@@ -3,7 +3,7 @@ import { NavController,AlertController } from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {SystemService} from '../../services/systemService';
 import {ResultBase} from "../../model/result-base";
-import {APP_SERVE_FILE_URL,CHART1,CHART2,IS_DEPT_CHANGE1} from "../../providers/Constants";
+import {CHART1,CHART2,IS_DEPT_CHANGE1} from "../../providers/Constants";
 
 import {NoticeService} from '../../services/noticeService';
 import {Notice} from '../../model/notice';
@@ -74,8 +74,8 @@ export class ChartPage {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
           let urls = object[1];
-          this.url1=APP_SERVE_FILE_URL+urls[0].url+"?r="+Math.random();
-          this.url2=APP_SERVE_FILE_URL+urls[0].url2+"?r="+Math.random();
+          this.url1=this.globalData.serverFileUrl+urls[0].url+"?r="+Math.random();
+          this.url2=this.globalData.serverFileUrl+urls[0].url2+"?r="+Math.random();
           console.log(this.url1);
           console.log(this.url2);
         } else {

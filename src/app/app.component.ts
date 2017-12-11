@@ -7,6 +7,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import {Helper} from "../providers/Helper";
 import {GlobalData} from "../providers/GlobalData";
+import {Storage} from '@ionic/storage';
+import {APP_PORT_BROWER,APP_PORT_NATIVE} from "../providers/Constants";
 
 @Component({
   templateUrl: 'app.html'
@@ -24,6 +26,7 @@ export class MyApp {
     private nativeService: NativeService,
     private helper: Helper,
     private toastCtrl: ToastController,
+    private storage: Storage,
     private globalData: GlobalData) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -38,6 +41,19 @@ export class MyApp {
       this.nativeService.getVersionNumber().subscribe(currentNo => {//获得当前app版本
         this.globalData.appNo=currentNo;
       });
+
+      if(this.nativeService.isMobile()){
+        this.globalData.serverPort=APP_PORT_NATIVE;
+      }else{
+        this.globalData.serverPort=APP_PORT_BROWER;
+      }
+
+      this.storage.get('SERVERIP').then((serverIP: string) => {
+        if(serverIP){
+          this.globalData.serverIP=serverIP;
+        }
+      });
+      
     });
   }
 
