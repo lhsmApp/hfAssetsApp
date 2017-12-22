@@ -65,6 +65,7 @@ export class AdvancePaymentApplyPage {
   gclListInfo:BillOfWorkMain[]=[];
   callback :any;
   sendSuccess=false;
+  sendSuccess1=false;//用于校验送审成功后，按钮变成灰色
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -182,6 +183,7 @@ export class AdvancePaymentApplyPage {
     }
     
     this.sendSuccess=false;
+    this.sendSuccess1=false;
     //console.log('ionViewDidLoad AdvancePaymentApplyPage');
     this.storage.get(IN_DEPART).then((inDepart: DicInDepart) => {
       this.listPayDept=inDepart;
@@ -415,6 +417,7 @@ export class AdvancePaymentApplyPage {
       if(data){
           //this.getShowItem();
           this.sendSuccess=true;
+          this.sendSuccess1=true;
       }
       resolve();
     });

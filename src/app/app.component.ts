@@ -43,8 +43,16 @@ export class MyApp {
       });
 
       if(this.nativeService.isMobile()){
-        this.globalData.serverPort=APP_PORT_NATIVE;
-      }else{
+          this.storage.get('SERVERPORT').then((serverPort: string) => {
+          if(serverPort){
+            this.globalData.serverPort=serverPort;
+          }else{
+            this.globalData.serverPort=APP_PORT_NATIVE;
+          }
+        });
+      }
+      else{
+        console.log('sdfsfsd');
         this.globalData.serverPort=APP_PORT_BROWER;
       }
 

@@ -5,6 +5,10 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-list>
     <ion-list-header text-center>
       <ion-item (click)="toNoticeList()">通知公告<ion-icon ios="ios-list" md="ios-list" item-end ></ion-icon></ion-item>
@@ -72,5 +76,22 @@
           </div>
         </ion-col>
       </ion-row>
+
   </ion-list>
+  <div padding *ngIf="url1!=''">
+    <div>
+        <img [src]="url1" width="100%" (click)='viewChart(1)'>
+      </div>
+      <!-- <div style="width: 50%;float: left;">
+        <img [src]="defaultUrl2" width="100%" (click)='viewChart(2)'>
+      </div> -->
+  </div>
+  <div padding *ngIf="url2!=''">
+    <!-- <div style="width: 50%;float: left;">
+        <img [src]="defaultUrl1" width="100%" (click)='viewChart(1)'>
+      </div> -->
+      <div>
+        <img [src]="url2" width="100%" (click)='viewChart(2)'>
+      </div>
+  </div>
 </ion-content>

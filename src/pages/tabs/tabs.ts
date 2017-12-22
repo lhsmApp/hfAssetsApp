@@ -12,7 +12,7 @@ import { ApplyPage } from '../apply/apply';
 import { QueryPage } from '../query/query';
 import { HomePage } from '../home/home';
 import { MinePage } from '../mine/mine';
-import { ChartPage } from '../chart/chart';
+/*import { ChartPage } from '../chart/chart';*/
 
 import {AlertController, ModalController,NavParams} from 'ionic-angular';
 
@@ -22,7 +22,7 @@ import {AlertController, ModalController,NavParams} from 'ionic-angular';
 })
 export class TabsPage implements OnInit {
   @ViewChild('mainTabs') tabs: Tabs;
-  tab0Root=ChartPage;
+  /*tab0Root=ChartPage;*/
   tab1Root = HomePage;
   tab2Root = ApplyPage;
   tab3Root = QueryPage;

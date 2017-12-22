@@ -19,13 +19,15 @@
   <div *ngIf="!isEmpty">
     <ion-list class="list-avatar-page">
       <ion-item *ngFor="let item of workList;trackBy:item?.sequence" (click)="openPage(item)">
-          <p>序号：{{item.sequence}}</p>
-          <p>付款单号：{{item.payCode}}</p>
+           <!-- <p>序号：{{item.sequence}}</p> 
+          <p>付款单号：{{item.payCode}}</p> -->
           <p>清单项目编号：{{item.listNumber}}</p>
           <p>清单项目名称：{{item.listName}}</p>
+          <p>工程量：{{item.projectLoad}}</p>
           <p>合价：{{item.moneyTotal}}</p>
           <!-- <ion-icon name="arrow-dropright" item-end></ion-icon> -->
-          <ion-icon ios="ios-arrow-forward" md="ios-arrow-forward" color="grayslate" item-end></ion-icon>
+          <ion-icon *ngIf="type=='ht'" ios="ios-arrow-forward" md="ios-arrow-forward" color="grayslate" item-end></ion-icon>
+          <h3 *ngIf="type!='ht'" item-end><span item-end [gcltype]="item"></span></h3>
       </ion-item>
     </ion-list>
   </div>

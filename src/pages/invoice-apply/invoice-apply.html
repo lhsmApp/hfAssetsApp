@@ -26,11 +26,11 @@
 <ion-content>
 	<form [formGroup]="invoiceForm" (ngSubmit)="(save())">
     <ion-item-group inset>
-      <ion-item>
+      <ion-item text-wrap>
         <ion-label fixed>序号</ion-label>
         <ion-input type="text" readonly formControlName="sequence"></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item text-wrap>
         <ion-label fixed>发票类型</ion-label>
         <ion-select [(ngModel)]="chalanType" formControlName="chalanType" cancelText="取消" okText="确定">
   	      <ion-option *ngFor="let invoice of invoiceType" [value]="invoice.code">{{invoice.name}}</ion-option>
@@ -40,7 +40,7 @@
             class="validation-failed">
           请选择发票类型
       </span>
-      <ion-item>
+      <ion-item text-wrap>
         <ion-label fixed>发票编号</ion-label>
         <ion-input type="text" formControlName="chalanNumber"></ion-input>
       </ion-item>
@@ -48,49 +48,49 @@
             class="validation-failed">
           请输入发票编号
       </span>
-      <ion-item>
+      <ion-item text-wrap>
         <ion-label fixed>发票单价</ion-label>
         <ion-input type="number" formControlName="price"></ion-input>
       </ion-item>
       <span *ngIf="!invoiceForm.controls.price.valid && invoiceForm.controls.price.touched"
             class="validation-failed">请输入发票单价
       </span>
-      <ion-item>
+      <ion-item text-wrap>
         <ion-label fixed>发票数量</ion-label>
         <ion-input type="number" formControlName="singleAmount"></ion-input>
       </ion-item>
       <span *ngIf="!invoiceForm.controls.singleAmount.valid && invoiceForm.controls.singleAmount.touched"
             class="validation-failed">请输入发票数量
       </span>
-      <ion-item>
+      <ion-item text-wrap>
         <ion-label fixed>税率</ion-label>
         <ion-input type="text" formControlName="sl"></ion-input>
       </ion-item>
       <span *ngIf="!invoiceForm.controls.sl.valid && invoiceForm.controls.sl.touched"
             class="validation-failed">请输入税率
       </span>
-      <ion-item>
+      <ion-item text-wrap>
         <ion-label fixed>发票金额</ion-label>
         <ion-input type="number" formControlName="chalanMoney"></ion-input>
       </ion-item>
       <span *ngIf="!invoiceForm.controls.chalanMoney.valid && invoiceForm.controls.chalanMoney.touched"
             class="validation-failed">请输入发票金额
       </span>
-      <ion-item>
+      <ion-item text-wrap>
         <ion-label fixed>不含税金额</ion-label>
         <ion-input type="number" formControlName="noTaxMoney"></ion-input>
       </ion-item>
       <span *ngIf="!invoiceForm.controls.noTaxMoney.valid && invoiceForm.controls.noTaxMoney.touched"
             class="validation-failed">请输入不含税金额
       </span>
-      <ion-item>
+      <ion-item text-wrap>
         <ion-label fixed>可抵扣进项税</ion-label>
         <ion-input type="text" formControlName="deductibleInputString"></ion-input>
       </ion-item>
       <span *ngIf="!invoiceForm.controls.deductibleInputString.valid && invoiceForm.controls.deductibleInputString.touched"
             class="validation-failed">请输入可抵扣进项税
       </span>
-      <ion-item>
+      <ion-item text-wrap>
         <ion-label fixed>发票日期</ion-label>
         <!-- <ion-input type="text" formControlName="chalanDate"></ion-input> -->
         <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY MM DD" formControlName="chalanDate" cancelText="取消" doneText="确定"></ion-datetime>
@@ -98,14 +98,14 @@
       <span *ngIf="!invoiceForm.controls.chalanDate.valid && invoiceForm.controls.chalanDate.touched"
             class="validation-failed">请输入发票日期
       </span>
-      <ion-item>
+      <ion-item text-wrap>
         <ion-label fixed>发票内容</ion-label>
         <ion-input type="text" formControlName="chalanContent"></ion-input>
       </ion-item>
       <span *ngIf="!invoiceForm.controls.chalanContent.valid && invoiceForm.controls.chalanContent.touched"
             class="validation-failed">请输入发票内容
       </span>
-	  <ion-item>
+	  <ion-item text-wrap>
         <ion-label fixed>完税凭证号</ion-label>
         <ion-input type="text" formControlName="taxNumber"></ion-input>
       </ion-item>

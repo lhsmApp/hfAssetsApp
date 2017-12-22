@@ -12,7 +12,13 @@ export class BillOfWorkMain{
 
 	listName :string;//清单项目名称
 
+	projectLoad:string;//工程量
+
 	moneyTotal :number;//合价
 
 	checked:boolean;//是否选中
+
+	gclType:string;//工程量类型 1、本次 2、历史 3、未完成
+
+	disabled:boolean;
 }

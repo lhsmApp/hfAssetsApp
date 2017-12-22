@@ -3,7 +3,7 @@
 
 export const APP_PORT_NATIVE = '9080';
 export const APP_PORT_BROWER = '8100';
-export const APP_SERVE_IP = '192.168.1.108';
+export const APP_SERVE_IP = '192.168.1.105';
 export const APP_SERVE_FILE_URL = '/assets/';
 export const APP_SERVE_URL = '/assets/cellphone/';
 export const APP_SERVE_URL_CHART = '/assets/analyze/';

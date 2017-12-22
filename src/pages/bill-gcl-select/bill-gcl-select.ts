@@ -61,12 +61,25 @@ export class BillGclSelectPage {
             this.isEmpty=false;
             this.workList = object[1] as BillOfWorkMain[];
             for(let workItem of this.workList){
-              for(let gclItem of this.gclList){
+              /*for(let gclItem of this.gclList){
                 if(workItem.payCode==gclItem.payCode){
                   workItem.checked=true;
                 }else{
                   workItem.checked=false;
                 }
+              }*/
+              if(workItem.payCode==null||workItem.payCode.trim()==""){
+                workItem.checked=false;
+                workItem.gclType='3';
+                workItem.disabled=false;
+              }else if(workItem.payCode==this.paymentMain.payCode){
+                workItem.checked=true;
+                workItem.gclType="1";
+                workItem.disabled=false;
+              }else{
+                workItem.checked=false;
+                workItem.gclType='2';
+                workItem.disabled=true;
               }
             }
           }else{
@@ -80,7 +93,7 @@ export class BillGclSelectPage {
           });
           alert.present();
         }
-      }, () => {
+      }, () => { 
         
       });
   }

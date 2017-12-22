@@ -11,6 +11,8 @@ import {ItemTranfer} from '../../providers/TransferFeildName';
 import {SystemService} from '../../services/systemService';
 import {ResultBase} from "../../model/result-base";
 import {Schedule} from "../../model/schedule";
+import {GlobalData} from "../../providers/GlobalData";
+import {NativeService} from '../../providers/NativeService';
 
 
 /*const NOTICES: Notice[] = [
@@ -23,6 +25,9 @@ import {Schedule} from "../../model/schedule";
   templateUrl: 'home.html'
 })
 export class HomePage {
+  url1: string;
+  url2:string;
+
   htPath: String = DEFAULT_HT;
   ysPath: String = DEFAULT_YS;
   yfkPath: String = DEFAULT_YFK;
@@ -46,7 +51,8 @@ export class HomePage {
   notices: Notice[];
   //messageCount: string;
   constructor(public navCtrl: NavController,private alertCtrl:AlertController,private systemService:SystemService,
-              private noticeService:NoticeService,private storage: Storage) {
+              private noticeService:NoticeService,private storage: Storage,private globalData: GlobalData
+              ,private nativeService: NativeService) {
     //this.messageCount="2";
   }
 
@@ -69,6 +75,7 @@ export class HomePage {
     
       });
       this.getList();
+      this.getListChart();
   }
 
   ionViewWillEnter(){
@@ -76,9 +83,18 @@ export class HomePage {
       if(deptChange){
         console.log('deptChange');
         this.getList();
+        this.getListChart();
         this.storage.set(IS_DEPT_CHANGE,false);
       }
     });
+
+    /*this.storage.get(IS_DEPT_CHANGE1).then((deptChange: boolean) => {
+      if(deptChange){
+        console.log('deptChange1');
+        this.getList();
+        this.storage.set(IS_DEPT_CHANGE1,false);
+      }
+    });*/
   }
 
   //获取代办事项列表信息
@@ -110,6 +126,35 @@ export class HomePage {
         }
       }, () => {
         
+      });
+  }
+
+  getListChart(){
+    if(this.globalData.userType==1){
+      this.url1='';
+      this.url2='';
+      return;
+    }
+
+    this.systemService.createJFreeChartBar().subscribe(
+      object => {
+        let resultBase:ResultBase=object[0] as ResultBase;
+        if(resultBase.result=='true'){
+          let urls = object[1];
+          this.url1=this.globalData.serverFileUrl+urls[0].url+"?r="+Math.random();
+          this.url2=this.globalData.serverFileUrl+urls[0].url2+"?r="+Math.random();
+          console.log(this.url1);
+          console.log(this.url2);
+        } else {
+            let alert = this.alertCtrl.create({
+              title: '提示!',
+              subTitle: resultBase.message,
+              buttons: ['确定']
+            });
+            alert.present();
+        }
+      }, () => {
+    
       });
   }
 
@@ -147,4 +192,21 @@ export class HomePage {
       resolve();
     });
   };
+
+  viewChart(type:number){
+    console.log(this.globalData.userType);
+
+    if(this.globalData.userType==1) return;
+    if(type==1){
+      this.nativeService.showPhotoViewer(this.url1);
+    }else{
+      this.nativeService.showPhotoViewer(this.url2);
+    }  
+  }
+
+  //上拉刷新
+  doRefresh(refresher) {
+    this.getList();
+    refresher.complete();
+  }
 }

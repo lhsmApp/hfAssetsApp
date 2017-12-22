@@ -15,7 +15,7 @@ import { MyApp } from './app.component';
 import { ApplyPage } from '../pages/apply/apply';
 import { QueryPage } from '../pages/query/query';
 import { HomePage } from '../pages/home/home';
-import { ChartPage } from '../pages/chart/chart';
+/*import { ChartPage } from '../pages/chart/chart';*/
 //import { MinePage } from '../pages/mine/mine';
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -87,7 +87,7 @@ class FundebugErrorHandler implements ErrorHandler {
     ApplyPage,
     QueryPage,
     HomePage,
-    ChartPage,
+    /*ChartPage,*/
     //MinePage,
     TabsPage
 
@@ -118,7 +118,7 @@ class FundebugErrorHandler implements ErrorHandler {
     QueryPage,
    ///MinePage,
     HomePage,
-    ChartPage,
+    /*ChartPage,*/
     TabsPage
   ],
   providers: [

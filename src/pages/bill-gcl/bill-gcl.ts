@@ -63,7 +63,20 @@ export class BillGclPage {
         if(resultBase.result=='true'){
           if(object[1]!=null&&object[1].length>0){
             this.isEmpty=false;
-            this.workList = object[1] as BillOfWorkMain[];
+            if(this.type=="ht"){
+              this.workList = object[1] as BillOfWorkMain[];
+            }else{
+              this.workList = object[1] as BillOfWorkMain[];
+              for(let item of this.workList){
+                if(item.payCode==null||item.payCode.trim()==""){
+                  item.gclType='3';
+                }else if(item.payCode==payCode){
+                  item.gclType="1";
+                }else{
+                  item.gclType='2';
+                }
+              }
+            }
           }else{
             this.isEmpty=true;
           }

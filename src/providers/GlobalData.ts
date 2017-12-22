@@ -34,10 +34,13 @@ export class GlobalData {
   private _updateProgress: number = -1;
 
   get serverIP(): string {
-    if(this.serverPort==APP_PORT_NATIVE)
-      return this._serverIP;
-    else
+    console.log(this.serverPort);
+    if(this.serverPort==APP_PORT_BROWER)
       return "localhost"
+    else
+      return this._serverIP;
+
+    
   }
 
   set serverIP(value: string) {
