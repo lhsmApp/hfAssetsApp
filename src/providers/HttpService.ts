@@ -10,7 +10,7 @@ import {Observable, TimeoutError} from "rxjs";
 import {Utils} from "./Utils";
 import {GlobalData} from "./GlobalData";
 import {NativeService} from "./NativeService";
-import {APP_SERVE_URL,APP_SERVE_URL_CHART, REQUEST_TIMEOUT} from "./Constants";
+import {REQUEST_TIMEOUT} from "./Constants";
 import {Logger} from "./Logger";
 
 @Injectable()
@@ -23,7 +23,7 @@ export class HttpService {
   }
 
   public request(url: string, options: RequestOptionsArgs): Observable<Response> {
-    url = Utils.formatUrl(url.startsWith('http') ? url : APP_SERVE_URL + url);
+    url = Utils.formatUrl(url.startsWith('http') ? url : this.globalData.serverApiUrl + url);
     //this.optionsAddToken(options);
     return Observable.create(observer => {
       this.nativeService.showLoading();
@@ -207,7 +207,7 @@ export class HttpService {
   }
 
   public requestChart(url: string, options: RequestOptionsArgs): Observable<Response> {
-    url = Utils.formatUrl(url.startsWith('http') ? url : APP_SERVE_URL_CHART + url);
+    url = Utils.formatUrl(url.startsWith('http') ? url : this.globalData.serverChartUrl + url);
     //this.optionsAddToken(options);
     return Observable.create(observer => {
       this.nativeService.showLoading();

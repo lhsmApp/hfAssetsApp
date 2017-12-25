@@ -14,7 +14,7 @@
     </ion-buttons> -->
     <ion-title>合同详情</ion-title>
     <ion-buttons end *ngIf="isapproval">
-      <button ion-button icon-only (click)="approval()">
+      <button ion-button icon-only (click)="approval()" [disabled]="sendSuccess">
         <ion-icon name="document"></ion-icon>
       </button>
     </ion-buttons>
@@ -25,7 +25,7 @@
 
 <ion-content>
 	<ion-item-group inset>
-	    <ion-item hidden>
+	    <ion-item  text-wrap hidden>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>序号：</span>
@@ -35,7 +35,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>项目单元编码：</span>
@@ -46,7 +46,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>项目单元名称：</span>
@@ -57,7 +57,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>合同流水号：</span>
@@ -68,7 +68,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>合同名称：</span>
@@ -79,7 +79,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>合同类别：</span>
@@ -90,7 +90,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>合同相对人：</span>
@@ -101,7 +101,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>附加相对人：</span>
@@ -112,7 +112,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>甲方签约单位：</span>
@@ -123,7 +123,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>合同标的额：</span>
@@ -134,7 +134,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>成本属性：</span>
@@ -145,7 +145,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>签约日期：</span>
@@ -156,7 +156,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>申请人：</span>
@@ -167,7 +167,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>申请时间：</span>

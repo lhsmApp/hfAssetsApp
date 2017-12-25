@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams ,ViewController,ActionSheetController} from 'ionic-angular';
 import {DEFAULT_INVOICE} from "../../providers/Constants";
 import { Attachment} from '../../model/attachment';
-import {APP_SERVE_FILE_URL} from "../../providers/Constants";
 import { NativeService} from "../../providers/NativeService";
+import {GlobalData} from "../../providers/GlobalData";
 
 /**
  * Generated class for the AttachmentViewPage page.
@@ -25,9 +25,10 @@ export class AttachmentViewPage {
     public navParams: NavParams,
     private viewCtrl: ViewController,
     private nativeService: NativeService,
-    private actionSheetCtrl: ActionSheetController) {
+    private actionSheetCtrl: ActionSheetController,
+    private globalData: GlobalData) {
     this.attachment=this.navParams.get('attachment');
-    this.attachmentPath=APP_SERVE_FILE_URL + this.attachment.filePath;
+    this.attachmentPath=this.globalData.serverFileUrl + this.attachment.filePath;
     //this.nativeService.alert('path',this.attachmentPath);
   }
 

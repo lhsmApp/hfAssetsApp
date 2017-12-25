@@ -1,21 +1,23 @@
 /*----------------------------------------后台Api地址----------------------------------------*/
 //export const APP_SERVE_URL = 'http://88.128.18.144:8081/api/';
 
-//export const APP_SERVE_FILE_URL = 'http://192.168.1.110:9080/assets/';
-/*export const APP_SERVE_URL = 'http://192.168.1.110:9080/assets/cellphone/';
-export const APP_SERVE_URL_CHART = 'http://192.168.1.110:9080/assets/analyze/';*/
-export const APP_VERSION_SERVE_URL = 'http://192.168.1.110:9080/assets/apkPackagesLib/hfApp.apk';//app版本升级服务;测试环境,查询app最新版本号,更新日志等信息.
-
-export const APP_SERVE_FILE_URL = 'http://localhost:8100/assets/';
-export const APP_SERVE_URL = 'http://localhost:8100/assets/cellphone/';
-export const APP_SERVE_URL_CHART = 'http://localhost:8100/assets/analyze/';
+export const APP_PORT_NATIVE = '9080';
+export const APP_PORT_BROWER = '8100';
+export const APP_SERVE_IP = '192.168.1.105';
+export const APP_SERVE_FILE_URL = '/assets/';
+export const APP_SERVE_URL = '/assets/cellphone/';
+export const APP_SERVE_URL_CHART = '/assets/analyze/';
+export const APP_VERSION_SERVE_URL = '/assets/apkPackagesLib/hfApp.apk';//app版本升级服务;测试环境,查询app最新版本号,更新日志等信息.
+/*export const APP_SERVE_FILE_URL = 'http://192.168.1.110:9080/assets/';
+export const APP_SERVE_URL = 'http://192.168.1.110:9080/assets/cellphone/';
+export const APP_SERVE_URL_CHART = 'http://192.168.1.110:9080/assets/analyze/';
+export const APP_VERSION_SERVE_URL = 'http://192.168.1.110:9080/assets/apkPackagesLib/hfApp.apk';//app版本升级服务;测试环境,查询app最新版本号,更新日志等信息.*/
 
 
 /*----------------------------------------文件服务器地址----------------------------------------*/
 export const FILE_SERVE_URL = 'http://172.16.19.86/kit_file_server/';//文件服务:测试环境
 
 /*----------------------------------------app版本升级服务地址----------------------------------------*/
-//export const APP_VERSION_SERVE_URL = 'http://172.16.19.86:8111/api/';//app版本升级服务;测试环境,查询app最新版本号,更新日志等信息.
 
 
 export const IS_DEBUG = true;//是否开发(调试)模式

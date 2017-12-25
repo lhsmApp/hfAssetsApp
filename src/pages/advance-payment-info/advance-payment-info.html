@@ -14,13 +14,13 @@
     </ion-buttons> -->
     <ion-title>付款详情</ion-title>
     <ion-buttons end *ngIf="isapproval">
-      <button ion-button icon-only (click)="approval()">
+      <button ion-button icon-only (click)="approval()" [disabled]="sendSuccess">
         <ion-icon name="document"></ion-icon>
       </button>
 
     </ion-buttons>
     <ion-buttons end *ngIf="!isapproval&&!isquery">
-    	<button ion-button icon-only (click)="send()">
+    	<button ion-button icon-only (click)="send()" [disabled]="sendSuccess">
         <ion-icon name="paper-plane"></ion-icon>
       </button>
     </ion-buttons>
@@ -42,7 +42,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item> -->
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>付款单号：</span>
@@ -53,7 +53,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>款项类别：</span>
@@ -64,7 +64,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>合同流水号：</span>
@@ -75,7 +75,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>合同名称：</span>
@@ -97,7 +97,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item> -->
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>项目单元名称：</span>
@@ -108,7 +108,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>项目核算类别：</span>
@@ -119,7 +119,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>付款原因：</span>
@@ -130,7 +130,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>合同标的额：</span>
@@ -141,7 +141,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>已付款额度：</span>
@@ -152,7 +152,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>本次申请金额：</span>
@@ -163,7 +163,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>付款单位：</span>
@@ -174,7 +174,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>收款单位：</span>
@@ -185,7 +185,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>申请人：</span>
@@ -196,7 +196,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item>
+	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>申请时间：</span>
