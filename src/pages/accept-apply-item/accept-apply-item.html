@@ -15,7 +15,7 @@
     </ion-buttons>-->
     <ion-title>验收申请</ion-title>
     <ion-buttons end>
-      <button ion-button icon-right (click)="send()">
+      <button ion-button icon-right (click)="send()" [disabled]="sendSuccess">
         送审
         <ion-icon name="paper-plane"></ion-icon>
       </button>
@@ -28,7 +28,7 @@
 <ion-content >
 	<form [formGroup]="applyFrom" (ngSubmit)="(save())">
         <ion-item-group>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>合同流水号</ion-label>
                 <ion-input type="text" readonly formControlName="contractCode" 
                            placeholder="选择" (focus)="choiceContract()"></ion-input>
@@ -37,20 +37,20 @@
                   class="validation-failed">
                 请选择合同流水号
             </span>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>合同名称</ion-label>
                 <ion-input type="text" readonly formControlName="contractName" placeholder="自动带出"></ion-input>
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>项目单元编码</ion-label>
                 <ion-input type="text" readonly formControlName="elementCode" placeholder="自动带出"></ion-input>
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>项目单元名称</ion-label>
                 <ion-input type="text" readonly formControlName="elementName" 
                     placeholder="自动带出"></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item text-wrap>
                 <ion-label fixed>申请单位</ion-label>
                 <ion-input type="text" readonly formControlName="departName"></ion-input>
                 <!--<ion-select type="text" [(ngModel)]="departCode" formControlName="departCode" placeholder="选择">
@@ -62,7 +62,7 @@
                   class="validation-failed">
                 请选择申请单位
             </span>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>申请时间</ion-label>
                 <ion-input type="text" readonly formControlName="requireDate"></ion-input>
             </ion-item>
@@ -70,7 +70,7 @@
                   class="validation-failed">
                 申请时间不能为空
             </span>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>申请人</ion-label>
                 <ion-input type="text" readonly formControlName="requireUser"></ion-input>
             </ion-item>

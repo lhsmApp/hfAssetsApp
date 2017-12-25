@@ -12,33 +12,32 @@ import {PROJECT_ELEMENT} from "../../enums/storage-type";
 import {DicBase} from '../../model/dic-base';
 import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
 
-import {Page_ProjUnitListPage} from '../../providers/TransferFeildName';
 import {Oper,Oper_Look} from '../../providers/TransferFeildName';
 import {BillProjectCode} from '../../providers/TransferFeildName';
 
+import {Page_ProjInfoPage} from '../../providers/TransferFeildName';
+//import {Oper,Oper_Look} from '../../providers/TransferFeildName';
+import {BillElementCode} from '../../providers/TransferFeildName';
+
 /**
- * Generated class for the ProjQueryListPage page.
+ * Generated class for the ProjUnitListPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
-  /*const listGet:ProjectUnitMain[] = [
-        { elementCode: 'HT201800001', elementName: 'XXXXXXXX', elementFlag: '项目单元类别', sgsx: '施工属性'},
-        { elementCode: 'HT201800002', elementName: 'XXXXXXXX', elementFlag: '项目单元类别', sgsx: '施工属性'},
-        { elementCode: 'HT201800003', elementName: 'XXXXXXXX', elementFlag: '项目单元类别', sgsx: '施工属性'},
-        { elementCode: 'HT201800004', elementName: 'XXXXXXXX', elementFlag: '项目单元类别', sgsx: '施工属性'},
-    ];*/
-
 @IonicPage()
 @Component({
-  selector: 'page-proj-query-list',
-  templateUrl: 'proj-query-list.html',
+  selector: 'page-proj-unit-list',
+  templateUrl: 'proj-unit-list.html',
 })
-export class ProjQueryListPage {
+export class ProjUnitListPage {
+
+  oper:string;
+  projectCode:string;
   
   listAll:ProjectUnitMain[];
-    list:ProjectUnitMain[];
+  list:ProjectUnitMain[];
   emptyPath=DEFAULT_INVOICE_EMPTY;
   isEmpty:boolean=false;
   dicelementFlag: DicBase[];//项目单元类别"       
@@ -50,10 +49,12 @@ export class ProjQueryListPage {
               public projectElementService: ProjectElementService) {
     //this.listAll = [];
     //this.list = [];
+    this.oper = this.navParams.get(Oper);
+    this.projectCode = this.navParams.get(BillProjectCode);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProjQueryListPage');
+    console.log('ionViewDidLoad ProjUnitListPage');
     //this.listAll = [];
     //this.list = [];
     this.getList();
@@ -64,9 +65,8 @@ export class ProjQueryListPage {
     this.isEmpty=false;
     //this.listAll = [];
     //this.list = [];
-    //type 1.申请 2.查询 3.审批
-    //type:string
-    this.projectElementService.getProjectInfoList('2').subscribe(
+    //projectCode:string
+    this.projectElementService.getProjectElementList(this.projectCode).subscribe(
       object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
@@ -142,8 +142,8 @@ export class ProjQueryListPage {
     }, 500);*/
   }
 
-    toDetail(projectCode: string) {
-        this.navCtrl.push(Page_ProjUnitListPage, {BillprojectCode: projectCode, Oper:Oper_Look});
+    toDetail(elementCode: string) {
+        this.navCtrl.push(Page_ProjInfoPage, {BillElementCode: elementCode, Oper:Oper_Look});
     }
 
 }

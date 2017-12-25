@@ -58,7 +58,7 @@ export class TransferAdjustApprovalInfoPage {
   list: TransferFundsDetail[];
   itemShow:TransferFundsDetail;
   callback :any;
-  isBackRefrash=false;
+  sendSuccess=false;
   hasApprovalProgress=false;
   approvalState:string;
 
@@ -79,7 +79,7 @@ export class TransferAdjustApprovalInfoPage {
     }
   	this.itemTranfer = this.navParams.get(ItemTranfer);
     this.callback    = this.navParams.get('callback');
-    this.isBackRefrash=false;
+    this.sendSuccess=false;
     this.approvalState=this.navParams.get('approvalState');
     if(this.approvalState=='2'||this.approvalState=='3'||this.approvalState=='4'){
       this.hasApprovalProgress=true;
@@ -91,13 +91,13 @@ export class TransferAdjustApprovalInfoPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TransferAdjustApprovalInfoPage');
     this.navBar.backButtonClick=()=>{
-      if(this.isBackRefrash){
+      if(this.sendSuccess){
         this.callback(true).then(()=>{ this.navCtrl.pop() });
       }else{
         this.navCtrl.pop();
       }
     }
-    this.isBackRefrash=false;
+    this.sendSuccess=false;
     this.itemShow = new TransferFundsDetail();
     this.getShowItem();
   }
@@ -167,7 +167,7 @@ export class TransferAdjustApprovalInfoPage {
           .subscribe(object => {
             let resultBase:ResultBase=object[0] as ResultBase;
             if(resultBase.result=='true'){
-              this.isBackRefrash=true;
+              this.sendSuccess=true;
               let toast = this.toastCtrl.create({
                 message: resultBase.message,
                 duration: 3000
@@ -195,7 +195,7 @@ export class TransferAdjustApprovalInfoPage {
           .subscribe(object => {
             let resultBase:ResultBase=object[0] as ResultBase;
             if(resultBase.result=='true'){
-              this.isBackRefrash=true;
+              this.sendSuccess=true;
               let toast = this.toastCtrl.create({
                 message: resultBase.message,
                 duration: 3000
