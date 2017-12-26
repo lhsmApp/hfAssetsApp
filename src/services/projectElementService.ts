@@ -23,8 +23,8 @@ export class ProjectElementService {
      return this.httpService.get('phoneBasicProjectPlan.do', param).map((res: Response) => res.json());
   }
 
-  //项目单元列表-----项目信息查询
-  getProjectElementList(projectCode:string): Observable<(Object)> {
+  //项目信息详情-----项目信息查询
+  getProjectInfo(projectCode:string): Observable<(Object)> {
     console.log('项目单元列表'+this.globalData.sessionId);
     let param = {
      'action': 'queryPhoneBasicProjectPlan',

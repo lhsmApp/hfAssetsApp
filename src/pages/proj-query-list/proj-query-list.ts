@@ -1,18 +1,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
-import {ProjectUnitMain} from '../../model/project-unit-main';
+import {ProjectQueryMain} from '../../model/project-query-main';
 import {ProjectElementService} from '../../services/projectElementService';
 import {ResultBase} from "../../model/result-base";
 import { QueryCondition } from '../../model/query-condition';
 import {Storage} from "@ionic/storage";
 import {DictUtil} from '../../providers/dict-util';
-//import {} from "../../enums/storage-type";
-import {Sgsx} from '../../enums/enums';
-import {PROJECT_ELEMENT} from "../../enums/storage-type";
-import {DicBase} from '../../model/dic-base';
 import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
 
-import {Page_ProjUnitListPage} from '../../providers/TransferFeildName';
+import {Page_ProjInfoPage} from '../../providers/TransferFeildName';
 import {Oper,Oper_Look} from '../../providers/TransferFeildName';
 import {BillProjectCode} from '../../providers/TransferFeildName';
 
@@ -23,7 +19,7 @@ import {BillProjectCode} from '../../providers/TransferFeildName';
  * Ionic pages and navigation.
  */
 
-  /*const listGet:ProjectUnitMain[] = [
+  /*const listGet:ProjectInfo[] = [
         { elementCode: 'HT201800001', elementName: 'XXXXXXXX', elementFlag: '项目单元类别', sgsx: '施工属性'},
         { elementCode: 'HT201800002', elementName: 'XXXXXXXX', elementFlag: '项目单元类别', sgsx: '施工属性'},
         { elementCode: 'HT201800003', elementName: 'XXXXXXXX', elementFlag: '项目单元类别', sgsx: '施工属性'},
@@ -37,11 +33,10 @@ import {BillProjectCode} from '../../providers/TransferFeildName';
 })
 export class ProjQueryListPage {
   
-  listAll:ProjectUnitMain[];
-    list:ProjectUnitMain[];
+  listAll:ProjectQueryMain[];
+    list:ProjectQueryMain[];
   emptyPath=DEFAULT_INVOICE_EMPTY;
-  isEmpty:boolean=false;
-  dicelementFlag: DicBase[];//项目单元类别"       
+  isEmpty:boolean=false;    
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController,
@@ -70,16 +65,7 @@ export class ProjQueryListPage {
       object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
-          this.listAll = object[1] as ProjectUnitMain[];
-          if(this.listAll){
-            this.storage.get(PROJECT_ELEMENT).then((dicList: DicBase[]) => {
-              this.dicelementFlag=dicList;
-              for(let item of this.listAll){
-                item.elementFlagName = this.dictUtil.getProjectElementName(this.dicelementFlag,item.elementFlag);//项目单元类别"          
-                item.sgsxName = this.dictUtil.getEnumsName(Sgsx,item.sgsx);//施工属性"" 
-              }
-            });
-          }
+          this.listAll = object[1] as ProjectQueryMain[];
           this.list = this.listAll;
           if(!(this.listAll!=null&&this.listAll.length>0)){
             this.isEmpty=true;
@@ -110,8 +96,8 @@ export class ProjQueryListPage {
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
       this.list = this.listAll.filter((item) => {
-        return (item.elementCode.toLowerCase().indexOf(val.toLowerCase()) > -1 
-          || item.elementName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        return (item.projectCode.toLowerCase().indexOf(val.toLowerCase()) > -1 
+          || item.projectName.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     } else {
       this.list = this.listAll;
@@ -143,7 +129,7 @@ export class ProjQueryListPage {
   }
 
     toDetail(projectCode: string) {
-        this.navCtrl.push(Page_ProjUnitListPage, {BillprojectCode: projectCode, Oper:Oper_Look});
+        this.navCtrl.push(Page_ProjInfoPage, {BillProjectCode: projectCode, Oper:Oper_Look});
     }
 
 }

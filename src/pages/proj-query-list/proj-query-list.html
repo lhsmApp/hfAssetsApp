@@ -22,12 +22,14 @@
   <div *ngIf="!isEmpty">
     <ion-searchbar (ionInput)="getItems($event)" placeholder="输入名称或编号模糊搜索"></ion-searchbar>
     <ion-list class="list-avatar-page">
-      <ion-item *ngFor="let item of list;trackBy:item?.elementCode" (click)="toDetail(item.elementCode)">
-        <h2>项目单元编号：{{item.elementCode}}</h2><!---->
-        <h3>项目单元名称：{{item.elementName}}</h3><!---->
-        <p>项目单元类别：{{item.elementFlagName}}</p><!---->
-        <p>施工属性：{{item.sgsxName}}</p><!---->
-        <ion-icon ios="ios-arrow-forward" md="ios-arrow-forward" color="grayslate" item-end></ion-icon>
+      <ion-item *ngFor="let item of list;trackBy:item?.projectCode" (click)="toDetail(item.projectCode)">
+        <h2>项目编号：{{item.projectCode}}</h2><!---->
+        <h3>项目名称：{{item.projectName}}</h3><!---->
+        <!--<p>总投资：{{item.totalInvest}}</p>-->
+        <!--<p>我方投资：{{item.selfInvest}}</p>-->
+        <p>录入日期：{{item.requireDate}}</p><!---->
+        <p>录入人：{{item.requireUser}}</p><!---->
+        <h3 item-end><span item-end [tab]="item"></span></h3><!--单据状态：reviewStatus-->
       </ion-item>
     </ion-list>
   </div>

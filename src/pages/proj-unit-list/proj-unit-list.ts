@@ -15,7 +15,7 @@ import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
 import {Oper,Oper_Look} from '../../providers/TransferFeildName';
 import {BillProjectCode} from '../../providers/TransferFeildName';
 
-import {Page_ProjInfoPage} from '../../providers/TransferFeildName';
+import {Page_ProjUnitInfoPage} from '../../providers/TransferFeildName';
 //import {Oper,Oper_Look} from '../../providers/TransferFeildName';
 import {BillElementCode} from '../../providers/TransferFeildName';
 
@@ -65,8 +65,8 @@ export class ProjUnitListPage {
     this.isEmpty=false;
     //this.listAll = [];
     //this.list = [];
-    //projectCode:string
-    this.projectElementService.getProjectElementList(this.projectCode).subscribe(
+    //type:string, sgsx:string, elementCode:string, startDate:string, endDate:string, checkResult:string
+    this.projectElementService.getProjectElementMainList('2', '', this.projectCode, '', '', '').subscribe(
       object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
@@ -143,7 +143,7 @@ export class ProjUnitListPage {
   }
 
     toDetail(elementCode: string) {
-        this.navCtrl.push(Page_ProjInfoPage, {BillElementCode: elementCode, Oper:Oper_Look});
+        this.navCtrl.push(Page_ProjUnitInfoPage, {BillElementCode: elementCode, Oper:Oper_Look});
     }
 
 }

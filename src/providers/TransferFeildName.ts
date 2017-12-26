@@ -63,10 +63,12 @@ export const Page_AssetDetailsInfoPage = 'AssetDetailsInfoPage';
 //资产详情编辑： BillNumberCode BillContractCode BillKeyCode Oper:Oper_Add、Oper_Edit TypeView ItemTranfer//从添加界面传入
 export const Page_AssetDetailsItemPage = 'AssetDetailsItemPage';
 
+//项目详情查看： BillProjectCode Oper:Oper_Look
+export const Page_ProjInfoPage = 'ProjInfoPage';
 //项目单元列表查看： BillProjectCode Oper:Oper_Look
 export const Page_ProjUnitListPage = 'ProjUnitListPage';
 //项目单元详情查看： BillElementCode Oper:Oper_Look
-export const Page_ProjInfoPage = 'ProjInfoPage';
+export const Page_ProjUnitInfoPage = 'ProjUnitInfoPage';
 
 //转资审批：Oper,Oper_Look、Oper_Approval Title BillNumberCode TypeView:TypeView_TransferFunds BillApprovalState
 export const Page_TransferFundsInfoPage = 'TransferFundsInfoPage';

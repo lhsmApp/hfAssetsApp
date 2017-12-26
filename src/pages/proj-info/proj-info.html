@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="dark">
-    <ion-title>项目单元</ion-title>
+    <ion-title>项目信息查询</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,52 +15,147 @@
 
 <ion-content>
     <ion-item-group inset>
+        <!-- 复核标志 -->
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>项目计划编码：</span></ion-col>
+                <ion-col col-4><span class='color-label'>项目编号：</span></ion-col>
                 <ion-col col-8><span text-left class="lable-info">{{itemShow.projectCode}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>项目计划名称：</span></ion-col>
+                <ion-col col-4><span class='color-label'>项目名称：</span></ion-col>
                 <ion-col col-8><span text-left class="lable-info">{{itemShow.projectName}}</span></ion-col>
             </ion-row>
         </ion-item>
+        <!--<ion-item text-wrap>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>项目性质：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.projectPropertyName}}</span></ion-col>
+            </ion-row>
+        </ion-item>-->
+        <!-- 所属单位编码 -->
+        <!-- 所属单位名称 -->
+        <!-- 核算项目编码 -->
+        <!-- 核算项目名称 -->
+        <!--<ion-item text-wrap>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>资金渠道：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.assetsStandardName}}</span></ion-col>
+            </ion-row>
+        </ion-item>-->
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>项目单元编码：</span></ion-col>
-                <ion-col col-8><span text-left class="lable-info">{{itemShow.elementCode}}</span></ion-col>
+                <ion-col col-4><span class='color-label'>批文文号：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.fileId}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>项目单元名称：</span></ion-col>
-                <ion-col col-8><span text-left class="lable-info">{{itemShow.elementName}}</span></ion-col>
+                <ion-col col-4><span class='color-label'>我方投资：</span></ion-col>
+                <ion-col col-8><span text-right class="lable-info">{{itemShow.selfInvest}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>项目单元类别：</span></ion-col>
-                <ion-col col-8><span text-left class="lable-info">{{itemShow.elementFlagName}}</span></ion-col>
+                <ion-col col-4><span class='color-label'>当前我方投资：</span></ion-col>
+                <ion-col col-8><span text-right class="lable-info">{{itemShow.selfInvestCurrent}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>施工属性：</span></ion-col>
-                <ion-col col-8><span text-left class="lable-info">{{itemShow.sgsxName}}</span></ion-col>
+                <ion-col col-4><span class='color-label'>录入日期：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.requireDate}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>初始计划金额：</span></ion-col>
-                <ion-col col-8><span text-right class="lable-info">{{itemShow.planMoney}}</span></ion-col>
+                <ion-col col-4><span class='color-label'>录入人：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.requireUser}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <!--<ion-item text-wrap>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>序号：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.sequence}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>当前计划金额：</span></ion-col>
-                <ion-col col-8><span text-right class="lable-info">{{itemShow.planMoneyCurrent}}</span></ion-col>
+                <ion-col col-4><span class='color-label'>所属资产组：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.entityCodeName}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>计划类别：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.planType}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>计划类别名称：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.planTypeName}}</span></ion-col>
+            </ion-row>
+        </ion-item>-->
+        <!--<ion-item text-wrap>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>评审通过日期：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.reviewDate}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>总投资：</span></ion-col>
+                <ion-col col-8><span text-right class="lable-info">{{itemShow.totalInvest}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>当前总投资：</span></ion-col>
+                <ion-col col-8><span text-right class="lable-info">{{itemShow.totalInvestCurrent}}</span></ion-col>
+            </ion-row>
+        </ion-item>-->
+        <!--<ion-item text-wrap>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>操作类型：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.operateTypeName}}</span></ion-col>
+            </ion-row>
+        </ion-item>-->
+        <!--<ion-item text-wrap>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>复核日期：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.checkDate}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>复核人姓名：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.checkUser}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>复核结果：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.checkResultName}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>审批意见：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.checkOpinion}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>单据状态：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.reviewStatusName}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>已下达计划金额：</span></ion-col>
+                <ion-col col-8><span text-right class="lable-info">{{itemShow.planTotal}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
@@ -71,57 +166,60 @@
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>计划完工时间：</span></ion-col>
-                <ion-col col-8><span text-left class="lable-info">{{itemShow.planEndTime}}</span></ion-col>
+                <ion-col col-4><span class='color-label'>已确认成本金额：</span></ion-col>
+                <ion-col col-8><span text-right class="lable-info">{{itemShow.costMoney}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>实际开工时间：</span></ion-col>
-                <ion-col col-8><span text-left class="lable-info">{{itemShow.realBeginTime}}</span></ion-col>
+                <ion-col col-4><span class='color-label'>可研汽油销量：</span></ion-col>
+                <ion-col col-8><span text-right class="lable-info">{{itemShow.feasibilityStudyGasoline}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>计划开工时间：</span></ion-col>
-                <ion-col col-8><span text-left class="lable-info">{{itemShow.planBeginTime}}</span></ion-col>
+                <ion-col col-4><span class='color-label'>可研柴油销量：</span></ion-col>
+                <ion-col col-8><span text-right class="lable-info">{{itemShow.feasibilityStudyDiesel}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>实际完工时间：</span></ion-col>
-                <ion-col col-8><span text-left class="lable-info">{{itemShow.realEndTime}}</span></ion-col>
+                <ion-col col-4><span class='color-label'>内部收益率：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.internalYield}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>竣工验收时间：</span></ion-col>
-                <ion-col col-8><span text-left class="lable-info">{{itemShow.realFinishTime}}</span></ion-col>
+                <ion-col col-4><span class='color-label'>投资回收期：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.paybackPeriod}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>预达转资时间：</span></ion-col>
-                <ion-col col-8><span text-left class="lable-info">{{itemShow.certainDate}}</span></ion-col>
+                <ion-col col-4><span class='color-label'>分年租金折现：</span></ion-col>
+                <ion-col col-8><span text-right class="lable-info">{{itemShow.discountedRentInstallment}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>操作人：</span></ion-col>
-                <ion-col col-8><span text-left class="lable-info">{{itemShow.requireUser}}</span></ion-col>
+                <ion-col col-4><span class='color-label'>资金来源：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.sourceOfFundName}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>操作日期：</span></ion-col>
-                <ion-col col-8><span text-left class="lable-info">{{itemShow.requireDate}}</span></ion-col>
+                <ion-col col-4><span class='color-label'>责任中心：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.dutyCenter}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
-            <ion-row row-3>
-                <ion-col col-4><span class='color-label'>复核意见：</span></ion-col>
-                <ion-col col-8><span text-left class="lable-info">{{itemShow.checkOpinion}}</span></ion-col>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>中心名称：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.dutyCenterName}}</span></ion-col>
             </ion-row>
-        </ion-item>
+        </ion-item>-->
+        <ion-item-divider color="light"></ion-item-divider>
+        <ion-item (click)='toProjUnit()'>项目单元<ion-icon name="more" item-end></ion-icon></ion-item>
+        <ion-item-divider color="light"></ion-item-divider>
 	</ion-item-group>
 </ion-content>
