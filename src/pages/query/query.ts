@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import {GlobalData} from "../../providers/GlobalData";
+import { Permission} from '../../model/permission';
 
 @Component({
   selector: 'page-query',
@@ -7,9 +9,20 @@ import { NavController } from 'ionic-angular';
 })
 export class QueryPage {
 
-  constructor(public navCtrl: NavController) {
+  projectQueryPermission:boolean=true;
+  zzQueryPermission:boolean=true;
 
-	  
+
+  constructor(public navCtrl: NavController,private globalData: GlobalData) {
+    if(this.globalData.permission){
+      for(let item of this.globalData.permission){
+        if(item.func_code=='391209'){
+          this.projectQueryPermission=item.enabled==1?true:false;
+        }else if(item.func_code=='391306'){
+          this.zzQueryPermission=item.enabled==1?true:false;
+        }
+      }
+    }
   }
 
   //项目单元查询

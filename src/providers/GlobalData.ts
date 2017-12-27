@@ -3,6 +3,7 @@
  */
 import {Injectable} from '@angular/core';
 import {APP_SERVE_IP,APP_PORT_NATIVE,APP_PORT_BROWER,APP_SERVE_URL,APP_SERVE_FILE_URL,APP_SERVE_URL_CHART,APP_VERSION_SERVE_URL} from "../providers/Constants";
+import { Permission} from '../model/permission';
 
 @Injectable()
 export class GlobalData {
@@ -32,6 +33,17 @@ export class GlobalData {
 
   //app更新进度.默认为0,在app升级过程中会改变
   private _updateProgress: number = -1;
+
+  //查询权限
+  private _permission:Permission[];
+
+  get permission(): Permission[] {
+    return this._permission;
+  }
+
+  set permission(value: Permission[]) {
+    this._permission = value;
+  }
 
   get serverIP(): string {
     console.log(this.serverPort);

@@ -14,6 +14,7 @@ import {ResultBase} from "../../model/result-base";
 import {GlobalData} from "../../providers/GlobalData";
 import {Utils} from "../../providers/Utils";
 import {DEFAULT_LOGIN_BG} from "../../providers/Constants";
+import { Permission} from '../../model/permission';
 
 @Component({
   selector: 'page-login',
@@ -102,6 +103,10 @@ export class LoginPage {
           this.userInfo.departName=this.globalData.departName;
           this.navCtrl.push(TabsPage,{"userinfo":this.userInfo});
           this.globalData.userType=this.userInfo.userType;
+
+
+          this.globalData.permission=loginInfo[1].userFuntionList as Permission[];
+          
           //this.events.publish('user:login');
           //this.viewCtrl.dismiss(loginInfo.user);
         }else{
