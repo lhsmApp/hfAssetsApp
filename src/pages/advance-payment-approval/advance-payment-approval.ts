@@ -12,12 +12,12 @@ import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
  * Ionic pages and navigation.
  */
 
- const  ADVANTAGE_LIST: AdvancePaymentMain []= [  
+ /*const  ADVANTAGE_LIST: AdvancePaymentMain []= [  
  { payCode: 'FKD2017080001', payDigest: '付款缺失合同明细', reviewStatus: '1',requireUser: 'jiachao'},
  { payCode: 'FKD2017080002', payDigest: '进度款需要申请' ,reviewStatus: '2',requireUser: 'zhangsan'},
  { payCode: 'FKD2017080003', payDigest: '进度款需要申请' ,reviewStatus: '3',requireUser: 'zhangsan'},
  { payCode: 'FKD2017080004', payDigest: '进度款需要申请' ,reviewStatus: '4',requireUser: 'zhangsan'}
- ];
+ ];*/
 
 @IonicPage()
 @Component({
