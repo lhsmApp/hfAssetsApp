@@ -10,4 +10,6 @@ export class AdvancePaymentMain{
 	requireUser:string;//申请人
 
 	reviewStatus:string;//单据状态
+
+	clauseType:string;//付款类型
 }

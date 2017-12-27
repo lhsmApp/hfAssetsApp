@@ -17,11 +17,11 @@ export class YfkTypeDirective {
       value: '进度款',
     },
     {
-      key: '3',
+      key: '4',
       value: '竣工款',
     },
     {
-      key: '4',
+      key: '3',
       value: '质保金',
     }
   ]
@@ -38,21 +38,21 @@ export class YfkTypeDirective {
       this.el.style.paddingRight='7px';
       this.el.style.paddingTop='4px';
       this.el.style.paddingBottom='4px';
-      if (topic.reviewStatus=='1') {
+      if (topic.clauseType=='1') {
         this.el.textContent = '预付款';
         this.el.style.background = '#32DB64';
         this.el.style.color = '#fff';
       }
-      else if (topic.reviewStatus=='2') {
+      else if (topic.clauseType=='2') {
         this.el.textContent = '进度款';
         this.el.style.background = '#BDAE52';
         this.el.style.color = '#fff';
-      }else if (topic.reviewStatus=='3') {
+      }else if (topic.clauseType=='4') {
         this.el.textContent = '竣工款';
         this.el.style.background = '#3374de';
         this.el.style.color = '#fff';
       }
-      else {
+      else if (topic.clauseType=='3') {
         this.el.textContent = this.getValue('4');
         this.el.style.background = '#f53d3d';
         this.el.style.color = '#fff';
