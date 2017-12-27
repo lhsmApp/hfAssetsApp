@@ -32,7 +32,7 @@ export const ContractCostProperty= [{code:'1',name:'直接成本'}, {code:'2',na
 export const ASSETS_TYPE= [{code: '1', name: '实物资产'}, {code: '2', name: '无形资产'}, {code: '3', name: '长期待摊费用'}, {code: '4', name: '长期股权投资'},{code: '5', name: '固定资产'}]
 
 //项目查询单据状态
-export const ProjQueryReviewStatus= [{code: 0, name: '新增'}, {code: 2, name: '打回至初始状态'}, {code: 3, name: '打回至上级'}]
+export const ProjQueryReviewStatus= [{code: 0, name: '新增'}, {code: 2, name: '退回'}, {code: 3, name: '退回'}]
 
 //项目查询操作类型;  (1：正常;2：调整) 1
 export const OperaType= [{code: 1, name: '新增'}, {code: 2, name: '打回至初始状态'}]
