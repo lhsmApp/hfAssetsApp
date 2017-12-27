@@ -22,13 +22,16 @@ export class TabProjQueryDirective {
       this.el.style.paddingRight='7px';
       this.el.style.paddingTop='4px';
       this.el.style.paddingBottom='4px';
-      this.el.textContent = this.getValue(topic.reviewStatus);
+      this.el.textContent = this.getValue(topic.checkResult);
       
-      if (topic.reviewStatus==0) {
+      if (topic.checkResult==0) {
         this.el.style.background = '#32DB64';
         this.el.style.color = '#fff';
-      } else if (topic.reviewStatus==2) {
+      } else if (topic.checkResult==1) {
         this.el.style.background = '#3374de';
+        this.el.style.color = '#fff';
+      }else if (topic.checkResult==4 || topic.checkResult== 10) {
+        this.el.style.background = '#BDAE52';
         this.el.style.color = '#fff';
       } else {
         this.el.style.background = '#f53d3d';
