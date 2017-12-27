@@ -286,6 +286,15 @@ export class DictUtil {
     }
     return code;
   }
+  getNumEnumsName(list:Array<{code: number, name: string}>,code:number):string{
+    if(list){
+    for(let enu of list){
+      if(enu.code==code)
+        return enu.name;
+    }
+    }
+    return code.toString();
+  }
 
   //翻译资产类型
   getAssetsTypeName(code:string):string{

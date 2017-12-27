@@ -55,7 +55,7 @@ export class AcceptApplyItemPage {
   itemShow:AcceptApplyDetail;
   listDept: DicInDepart[];
   callback :any;
-  isBackRefrash=false;
+  sendSuccess=false;
 
   constructor(public navCtrl: NavController,
               public params: NavParams,
@@ -72,7 +72,7 @@ export class AcceptApplyItemPage {
   	this.oper = this.params.get(Oper);
   	this.billNumber = this.params.get(BillNumberCode);
     this.callback    = this.params.get('callback');
-    this.isBackRefrash=false;
+    this.sendSuccess=false;
     //this.listDept = listDeptGet;
 
     this.applyFrom = this.formBuilder.group({
@@ -111,13 +111,13 @@ export class AcceptApplyItemPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AcceptApplyItemPage');
     this.navBar.backButtonClick=()=>{
-      if(this.isBackRefrash){
+      if(this.sendSuccess){
         this.callback(true).then(()=>{ this.navCtrl.pop() });
       }else{
         this.navCtrl.pop();
       }
     }
-    this.isBackRefrash=false;
+    this.sendSuccess=false;
     this.itemShow = new AcceptApplyDetail();
     this.getShowItem();
   }
@@ -181,7 +181,7 @@ export class AcceptApplyItemPage {
       .subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
-          this.isBackRefrash=true;
+          this.sendSuccess=true;
           this.oper = Oper_Edit;
           console.log(object[1][0]);
           this.itemShow = object[1][0] as AcceptApplyDetail;
@@ -226,7 +226,7 @@ export class AcceptApplyItemPage {
     return new Promise((resolve, reject) => {
       console.log(data);
       if(data){
-         this.isBackRefrash=true;
+         this.sendSuccess=true;
       }
       resolve();
     });

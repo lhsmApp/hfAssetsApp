@@ -12,7 +12,29 @@ export class ProjectElementService {
   constructor(public httpService: HttpService, private globalData: GlobalData) {
   }
 
-  //项目单元列表-----basic_project_element  项目单元表
+  //项目信息列表-----项目信息查询
+  getProjectInfoList(type:string): Observable<(Object)> {
+    console.log('项目信息列表'+this.globalData.sessionId);
+    let param = {
+     'action': 'queryListPhoneBasicProjectPlan',
+     'sessionid': this.globalData.sessionId,
+     'type': type,//1.申请 2.查询 3.审批
+     };
+     return this.httpService.get('phoneBasicProjectPlan.do', param).map((res: Response) => res.json());
+  }
+
+  //项目信息详情-----项目信息查询
+  getProjectInfo(projectCode:string): Observable<(Object)> {
+    console.log('项目单元列表'+this.globalData.sessionId);
+    let param = {
+     'action': 'queryPhoneBasicProjectPlan',
+     'sessionid': this.globalData.sessionId,
+     'projectCode': projectCode,//"项目编号"
+     };
+     return this.httpService.get('phoneBasicProjectPlan.do', param).map((res: Response) => res.json());
+  }
+
+  //项目单元列表-----进度管理
   getProjectElementMainList(type:string, sgsx:string, elementCode:string, startDate:string, endDate:string, checkResult:string): Observable<(Object)> {
   	console.log('项目单元列表'+this.globalData.sessionId);
     let param = {
@@ -35,7 +57,7 @@ export class ProjectElementService {
      return this.httpService.get('phoneProjectElement.do', param).map((res: Response) => res.json());
   }
 
-  //项目单元详细-----basic_project_element  项目单元表
+  //项目单元详细-----项目信息查询、进度管理
   getProjectElementDetailItem(elementCode:string):Observable<(object)>{
     console.log('项目单元详细'+this.globalData.sessionId);
     let param = {

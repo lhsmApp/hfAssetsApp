@@ -26,7 +26,7 @@
                 <ion-label fixed>序号</ion-label>
                 <ion-input readonly formControlName="xh" placeholder="自动填写"></ion-input>
             </ion-item>-->
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>合同编号</ion-label>
                 <ion-input readonly formControlName="contractCode" placeholder="自动填写"></ion-input>
             </ion-item>
@@ -34,7 +34,7 @@
                   class="validation-failed">
                 合同编号不能为空
             </span>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>资产编码</ion-label>
                 <ion-input readonly formControlName="assetsCode" placeholder="自动填写，禁止调整"></ion-input>
             </ion-item>
@@ -42,15 +42,15 @@
                   class="validation-failed">
                 资产编码不能为空
             </span>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>资产名称</ion-label>
                 <ion-input readonly formControlName="assetsName" placeholder="自动填写"></ion-input>
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>资产类型</ion-label>
                 <ion-input readonly formControlName="assetsTypeName" placeholder="自动填写，禁止调整"></ion-input>
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>资产类别</ion-label>
                 <ion-input formControlName="assetsCodeType" placeholder="手工输入"></ion-input>
                 <!--<ion-select type="text" [(ngModel)]="assetsCodeType" formControlName="assetsCodeType" placeholder="手工选择" cancelText="取消" okText="确定" >
@@ -58,106 +58,106 @@
                     <ion-option value=""></ion-option>
                 </ion-select>-->
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>所属单位</ion-label>
                 <ion-select type="text" [(ngModel)]="departCode" formControlName="departCode" placeholder="手工选择"
                             cancelText="取消" okText="确定" >
                     <ion-option *ngFor="let dept of DicDepartCode" value="{{dept.departCode}}">{{dept.departName}}</ion-option>
-                    <ion-option value=""></ion-option>
+                    <!--<ion-option value=""></ion-option>-->
                 </ion-select>
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>所属资产组</ion-label>
                 <ion-select type="text" [(ngModel)]="entityCode" formControlName="entityCode" placeholder="手工选择"
                             cancelText="取消" okText="确定" >
                     <ion-option *ngFor="let item of dicEntityCode" value="{{item.entityCode}}">{{item.entityName}}</ion-option>
-                    <ion-option value=""></ion-option>
+                    <!--<ion-option value=""></ion-option>-->
                 </ion-select>
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>规格型号</ion-label>
                 <ion-input formControlName="assetsStandard" placeholder="手工输入"></ion-input>
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>车牌井号</ion-label>
                 <ion-input formControlName="licenceNumber" placeholder="手工输入"></ion-input>
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>计量单位</ion-label>
                 <ion-select type="text" [(ngModel)]="unitCode" formControlName="unitCode" placeholder="手工选择"
                             cancelText="取消" okText="确定" >
                     <ion-option *ngFor="let item of dicUnitCode" value="{{item.complexCode}}">{{item.complexName}}</ion-option>
-                    <ion-option value=""></ion-option>
+                    <!--<ion-option value=""></ion-option>-->
                 </ion-select>
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>制作厂家</ion-label>
                 <ion-input formControlName="makeFactory" placeholder="手工输入"></ion-input>
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>出厂编号</ion-label>
                 <ion-input formControlName="factoryNumber" placeholder="手工输入"></ion-input>
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>出厂日期</ion-label>
                 <!--<ion-input formControlName="productDate" placeholder="手工选择"></ion-input>-->
                 <ion-datetime displayFormat="YYYY-MM-DD" placeholder="手工选择" cancelText="取消" doneText="确认"
                             formControlName="productDate" [(ngModel)]="productDate"></ion-datetime>
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>投产日期</ion-label>
                 <!--<ion-input formControlName="operateDate" placeholder="手工选择"></ion-input>-->
                 <ion-datetime displayFormat="YYYY-MM-DD" placeholder="手工选择" cancelText="取消" doneText="确认"
                             formControlName="operateDate" [(ngModel)]="operateDate"></ion-datetime>
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>使用方向</ion-label>
                 <ion-select type="text" [(ngModel)]="usedAspect" formControlName="usedAspect" placeholder="手工选择"
                             cancelText="取消" okText="确定" >
                     <ion-option *ngFor="let item of dicUsedAspect" value="{{item.complexCode}}">{{item.complexName}}</ion-option>
-                    <ion-option value=""></ion-option>
+                    <!--<ion-option value=""></ion-option>-->
                 </ion-select>
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>取得方式</ion-label>
                 <ion-select type="text" [(ngModel)]="applyCode" formControlName="applyCode" placeholder="手工选择"
                             cancelText="取消" okText="确定" >
                     <ion-option *ngFor="let item of dicApplyCode" value="{{item.complexCode}}">{{item.complexName}}</ion-option>
-                    <ion-option value=""></ion-option>
+                    <!--<ion-option value=""></ion-option>-->
                 </ion-select>
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>保修截止日期</ion-label>
                 <!--<ion-input formControlName="guaDate" placeholder="手工输入"></ion-input>-->
                 <ion-datetime displayFormat="YYYY-MM-DD" placeholder="手工选择" cancelText="取消" doneText="确认"
                             formControlName="guaDate" [(ngModel)]="guaDate" max="{{maxYear}}"></ion-datetime>
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>使用状态</ion-label>
                 <ion-select type="text" [(ngModel)]="usedState" formControlName="usedState" placeholder="手工选择"
                             cancelText="取消" okText="确定" >
                     <ion-option *ngFor="let item of dicUsedState" value="{{item.complexCode}}">{{item.complexName}}</ion-option>
-                    <ion-option value=""></ion-option>
+                    <!--<ion-option value=""></ion-option>-->
                 </ion-select>
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>存放地点</ion-label>
                 <ion-select type="text" [(ngModel)]="storePlace" formControlName="storePlace" placeholder="手工选择"
                             cancelText="取消" okText="确定" >
                     <ion-option *ngFor="let item of dicStorePlace" value="{{item.complexCode}}">{{item.complexName}}</ion-option>
-                    <ion-option value=""></ion-option>
+                    <!--<ion-option value=""></ion-option>-->
                 </ion-select>
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>保管人</ion-label>
                 <ion-input formControlName="userPerson" placeholder="手工输入"></ion-input>
             </ion-item>
-            <ion-item >
+            <ion-item text-wrap>
                 <ion-label fixed>技术部门</ion-label>
                 <ion-select type="text" [(ngModel)]="specialLine" formControlName="specialLine" placeholder="手工选择"
                             cancelText="取消" okText="确定" >
                     <ion-option *ngFor="let item of dicSpecialLine" value="{{item.complexCode}}">{{item.complexName}}</ion-option>
-                    <ion-option value=""></ion-option>
+                    <!--<ion-option value=""></ion-option>-->
                 </ion-select>
             </ion-item>
             <!--<ion-item >

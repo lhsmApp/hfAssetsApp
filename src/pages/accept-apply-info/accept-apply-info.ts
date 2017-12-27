@@ -54,7 +54,7 @@ export class AcceptApplyInfoPage {
   itemShow:AcceptApplyDetail;
   listDept: DicInDepart[];
   callback :any;
-  isBackRefrash=false;
+  sendSuccess=false;
   hasApprovalProgress=false;
   approvalState:string;
 
@@ -85,24 +85,24 @@ export class AcceptApplyInfoPage {
       this.hasApprovalProgress=false;
     }
     this.callback = this.navParams.get('callback');
-    this.isBackRefrash=false;
+    this.sendSuccess=false;
     console.log('constructor');
-    console.log(this.isBackRefrash);
+    console.log(this.sendSuccess);
     //this.listDept = listDeptGet;
   }
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad");
     this.navBar.backButtonClick=()=>{
-      if(this.isBackRefrash){
+      if(this.sendSuccess){
         this.callback(true).then(()=>{ this.navCtrl.pop() });
       }else{
         this.navCtrl.pop();
       }
     }
-    this.isBackRefrash=false;
+    this.sendSuccess=false;
     console.log('ionViewDidLoad');
-    console.log(this.isBackRefrash);
+    console.log(this.sendSuccess);
     this.itemShow = new AcceptApplyDetail();
     this.getShowItem();
   }
@@ -152,7 +152,7 @@ export class AcceptApplyInfoPage {
 
   check(){
         console.log('check');
-        console.log(this.isBackRefrash);
+        console.log(this.sendSuccess);
     let prompt = this.alertCtrl.create({
       title: '审批',
       message: "请输入审批意见",
@@ -181,9 +181,9 @@ export class AcceptApplyInfoPage {
           .subscribe(object => {
             let resultBase:ResultBase=object[0] as ResultBase;
             if(resultBase.result=='true'){
-              this.isBackRefrash=true;
+              this.sendSuccess=true;
               console.log('不通过');
-              console.log(this.isBackRefrash);
+              console.log(this.sendSuccess);
               let toast = this.toastCtrl.create({
                 message: resultBase.message,
                 duration: 3000
@@ -211,9 +211,9 @@ export class AcceptApplyInfoPage {
           .subscribe(object => {
             let resultBase:ResultBase=object[0] as ResultBase;
             if(resultBase.result=='true'){
-              this.isBackRefrash=true;
+              this.sendSuccess=true;
               console.log('通过');
-              console.log(this.isBackRefrash);
+              console.log(this.sendSuccess);
               let toast = this.toastCtrl.create({
                 message: resultBase.message,
                 duration: 3000
@@ -246,9 +246,9 @@ export class AcceptApplyInfoPage {
     return new Promise((resolve, reject) => {
       console.log(data);
       if(data){
-        this.isBackRefrash=true;
+        this.sendSuccess=true;
         console.log('checkRefresh');
-        console.log(this.isBackRefrash);
+        console.log(this.sendSuccess);
       }
       resolve();
     });
