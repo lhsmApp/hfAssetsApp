@@ -254,7 +254,7 @@ export class AdvancePaymentApplyPage {
         });
 
         //获取工程量信息,当付款类型为进度款或者竣工款时付款金额需要根据验收单号下的工程量进行计算
-        this.paymentService.getGclMainList(this.paymentDetail.contractCode,'fk',this.paymentDetail.payCode,'0')
+        this.paymentService.getGclMainList(this.paymentDetail.contractCode,'fk',this.paymentDetail.payCode,'0','')
         .subscribe(object => {
           let resultBase:ResultBase=object[0] as ResultBase;
           if(resultBase.result=='true'){
