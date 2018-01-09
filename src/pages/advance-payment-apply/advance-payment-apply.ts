@@ -97,6 +97,7 @@ export class AdvancePaymentApplyPage {
       planType: [,[Validators.required]],//项目核算类别，自动带出
       //planTypeName: [,[Validators.required]],//项目核算类别，自动带出
       payDigest: [,[Validators.required]],//付款原因，手工录入
+      acceptanceCode:[,[Validators.required]],//验收单号，选择
       costMoney: [,[Validators.required]],//合同标的（审计）额，自动带出
       taxMoney: '',//已付款额度，自动带出
       payMoney: [,[Validators.required]],//本次申请金额，手工录入
@@ -132,6 +133,7 @@ export class AdvancePaymentApplyPage {
                 planType:this.paymentDetail.planType,
                 //planTypeName:this.dicUtil.getAjustTypeName(this.listAjustType,this.paymentDetail.planType),
                 payDigest:this.paymentDetail.payDigest,
+                acceptanceCode:this.paymentDetail.acceptanceCode,
                 costMoney:this.paymentDetail.costMoney,
                 taxMoney:this.paymentDetail.taxMoney,
                 payMoney:this.paymentDetail.payMoney,
@@ -143,7 +145,7 @@ export class AdvancePaymentApplyPage {
             });
 
             //获取工程量信息
-            this.paymentService.getGclMainList(this.paymentDetail.contractCode,'fk',this.paymentDetail.payCode,'0')
+            /*this.paymentService.getGclMainList(this.paymentDetail.contractCode,'fk',this.paymentDetail.payCode,'0')
             .subscribe(object => {
               let resultBase:ResultBase=object[0] as ResultBase;
               if(resultBase.result=='true'){
@@ -151,7 +153,7 @@ export class AdvancePaymentApplyPage {
               }
             }, () => {
               
-            });
+            });*/
           }else{
             let alert = this.alertCtrl.create({
               title: '提示',
@@ -238,10 +240,52 @@ export class AdvancePaymentApplyPage {
     });
   }
 
+  //选择验收单号
+  choiceAccept(){
+    this.navCtrl.push('AcceptSelectPage',  {callback: this.choiceAcceptOk});
+  }
+
+  choiceAcceptOk = (acceptCode) =>
+  {
+    return new Promise((resolve, reject) => {
+      if(acceptCode){
+          this.paymentForm.patchValue({
+            acceptanceCode:acceptCode
+        });
+
+        //获取工程量信息,当付款类型为进度款或者竣工款时付款金额需要根据验收单号下的工程量进行计算
+        this.paymentService.getGclMainList(this.paymentDetail.contractCode,'fk',this.paymentDetail.payCode,'0')
+        .subscribe(object => {
+          let resultBase:ResultBase=object[0] as ResultBase;
+          if(resultBase.result=='true'){
+            this.gclListInfo = object[1] as BillOfWorkMain[];
+            if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='4'){
+            let sumHj=0;
+            if(this.gclListInfo){
+              for(let gclItem of this.gclListInfo){
+                if(gclItem.checked){
+                  sumHj+=gclItem.moneyTotal;
+                }
+              }
+            }
+            this.paymentForm.patchValue({
+                payMoney:sumHj,
+              });
+            }
+          }
+        }, () => {
+          
+        });
+      }
+      resolve();
+    });
+  }
+
   //保存
   save(){
     //if(!this.paymentForm.valid) return;
-    if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='4'){
+
+    /*if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='4'){
       if(this.gclListInfo==null||this.gclListInfo.length==0){
         let alert = this.alertCtrl.create({
           title: '提示',
@@ -251,7 +295,7 @@ export class AdvancePaymentApplyPage {
         alert.present();
         return;
       }
-    }
+    }*/
 
     let paymentInfo=new Array<AdvancePaymentDetail>();
     let detail=this.paymentForm.value as AdvancePaymentDetail;
@@ -261,7 +305,7 @@ export class AdvancePaymentApplyPage {
     detail.payMoney=parseFloat(detail.payMoney.toString());
     //detail.requireUser='';
     paymentInfo.push(detail);
-    console.log(this.gclListInfo);
+    /*console.log(this.gclListInfo);
     let datalist=new Array();
     if(this.gclListInfo){
       let seqceList =[];
@@ -285,9 +329,10 @@ export class AdvancePaymentApplyPage {
     }else{
       let gclInfo={cCode:detail.contractCode,payCode:detail.payCode,seqceList:'',xzList:''};
       datalist.push(gclInfo);
-    }
+    }*/
 
-    this.paymentService.savePaymentMain(JSON.stringify(paymentInfo),JSON.stringify(datalist))
+    //this.paymentService.savePaymentMain(JSON.stringify(paymentInfo),JSON.stringify(datalist))
+    this.paymentService.savePaymentMain(JSON.stringify(paymentInfo))
       .subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
@@ -309,6 +354,7 @@ export class AdvancePaymentApplyPage {
             planType:this.paymentDetail.planType,
             //planTypeName:this.dicUtil.getContractTypeName(this.listContractType,this.paymentDetail.planType),
             payDigest:this.paymentDetail.payDigest,
+            acceptanceCode:this.paymentDetail.acceptanceCode,
             costMoney:this.paymentDetail.costMoney,
             taxMoney:this.paymentDetail.taxMoney,
             payMoney:this.paymentDetail.payMoney,
@@ -341,7 +387,7 @@ export class AdvancePaymentApplyPage {
   };*/
 
   //回调获取选择的工程量清单
-  getData = (data) =>
+  /*getData = (data) =>
   {
     return new Promise((resolve, reject) => {
       console.log(data);
@@ -361,7 +407,7 @@ export class AdvancePaymentApplyPage {
       }
       resolve();
     });
-  };
+  };*/
 
   //发票
   invoice(paymentDetail:AdvancePaymentDetail){
@@ -390,8 +436,36 @@ export class AdvancePaymentApplyPage {
       alert.present();
       return;
     }
+    if(this.paymentForm.get('acceptanceCode').value==null||this.paymentForm.get('acceptanceCode').value==""){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: '请先选择验收单号，再查看工程量信息！',
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
+    if(this.paymentForm.get('clauseType').value=='1'){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: '当前款项类别为预付款，无工程量信息！',
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
+    if(this.paymentForm.get('clauseType').value=='3'){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: '当前款项类别为质保金，无工程量信息！',
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
     this.paymentMain.payCode=this.paymentForm.get('payCode').value;
-    this.navCtrl.push("BillGclSelectPage",{'paymentItem':this.paymentMain,callback:this.getData,'contractCode':this.paymentForm.get('contractCode').value,'gclList':this.gclListInfo});
+    //this.navCtrl.push("BillGclSelectPage",{'paymentItem':this.paymentMain,callback:this.getData,'contractCode':this.paymentForm.get('contractCode').value,'gclList':this.gclListInfo});
+    this.navCtrl.push("BillGclPage",{'paymentItem':this.paymentMain,'contractCode':this.paymentDetail.contractCode,'type':'fk'});
   }
 
   //送审

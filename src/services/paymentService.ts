@@ -49,7 +49,8 @@ export class PaymentService {
   }
 
   //付款申请新增（修改）---basic_pay_main       付款主表
-  savePaymentMain(paymentInfo:string,gclInfo:string):Observable<(Object)> {
+  //savePaymentMain(paymentInfo:string,gclInfo:string):Observable<(Object)> {
+  savePaymentMain(paymentInfo:string):Observable<(Object)> {
     /*let param = {
      //必传
      'action': 'savePhonePayMain',
@@ -63,10 +64,10 @@ export class PaymentService {
     formData.append('action', 'savePhonePayMain');
     formData.append('sessionid', this.globalData.sessionId);
     formData.append('data', paymentInfo);
-    formData.append('datalist', gclInfo);
+    //formData.append('datalist', gclInfo);
 
     console.log('data:'+paymentInfo);
-    console.log('datalist:'+gclInfo);
+    //console.log('datalist:'+gclInfo);
     //formData.append('data', '[{"payCode":"好","clauseType":"1","contractCode":"0000000101000009","contractName":"合同工作量清单test","elementType":"项目性质","elementName":"项目单元名称","planType":"0","payDigest":"付款原因","costMoney":100,"taxMoney":0,"payMoney":0,"paymentCode":"0000002","intercourseCode":"往来单位名称(收款单位)","requireDate":"20170202x","requireUser":"比如往来单位名称(收款单往来单位名称(收款单往来单位名称(收款单往来单位名称(收款单往来单位名称(收款单 "}]');
     return this.httpService.postMultiFormData('phonePaymentRequest.do', formData).map((res: Response) => res.json());
   }

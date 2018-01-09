@@ -90,4 +90,14 @@ export class ContractService {
     return this.httpService.get('phoneContactMain.do', param).map((res:Response) => res.json());
   }
 
+  //根据明细编码查询指定的清单选中状态
+  getGclListByAssetsCode(keyCode:string):Observable<(object)>{
+    let param = {
+        'action': "queryContractDetailworkListSelected",
+        'sessionid': this.globalData.sessionId,
+        'keyCode': keyCode//明细编码
+    };
+    return this.httpService.get('phoneContactMain.do', param).map((res:Response) => res.json());
+  }
+
 }
