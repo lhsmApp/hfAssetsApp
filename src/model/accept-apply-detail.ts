@@ -9,6 +9,10 @@ export class AcceptApplyDetail {
     elementCode :string;//项目单元编码
     elementName :string;//项目单元名称
     departCode:string;//申请单位
+    costProperty:string;//”成本属性”（1.直接成本2.间接费用）
+    clauseType:string;//”验收类型（3.质保验收，4，竣工验收）”
 
     departName:string;//申请单位
+    costPropertyName:string;//”成本属性”（1.直接成本2.间接费用）
+    clauseTypeName:string;//”验收类型（3.质保验收，4，竣工验收）”
 }

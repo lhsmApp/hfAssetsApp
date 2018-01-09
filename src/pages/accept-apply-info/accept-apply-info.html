@@ -64,6 +64,18 @@
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
+                <ion-col col-4><span class='color-label'>成本属性：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.costPropertyName}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-row>
+                <ion-col col-4><span class='color-label'>验收类型：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.clauseTypeName}}</span></ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-row>
                 <ion-col col-4><span class='color-label'>申请单位：</span></ion-col>
                 <ion-col col-8><span text-left class="lable-info">{{itemShow.departName}}</span>
                 </ion-col>
@@ -81,7 +93,8 @@
                 <ion-col col-8><span text-left class="lable-info">{{itemShow.requireUser}}</span></ion-col>
             </ion-row>
         </ion-item>
-            <!-- 资产明细 -->
+        <ion-item-divider color="light"></ion-item-divider>
+        <ion-item (click)='billOfGcl()'>工程量清单 <ion-icon name="more" item-end></ion-icon></ion-item>
         <ion-item-divider color="light"></ion-item-divider>
         <ion-item (click)='toAssetDetail()'>资产明细<ion-icon name="more" item-end></ion-icon></ion-item>
         <ion-item-divider color="light"></ion-item-divider>

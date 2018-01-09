@@ -10,6 +10,8 @@ import {Utils} from "../../providers/Utils";
 import {AcceptService} from '../../services/acceptService';
 import {ResultBase} from "../../model/result-base";
 import {ReviewType} from '../../enums/review-type';
+import {ContractCostProperty} from '../../enums/enums';
+import {AcceptType} from '../../enums/enums';
 
 import {IN_DEPART} from "../../enums/storage-type";
 import {DicInDepart} from '../../model/dic-in-depart';
@@ -57,6 +59,9 @@ export class AcceptApplyItemPage {
   callback :any;
   sendSuccess=false;
 
+  dicCostProperty: Array<{code: string, name: string}>;//”成本属性”（1.直接成本2.间接费用）
+  dicClauseType: Array<{code: string, name: string}>;//”验收类型（3.质保验收，4，竣工验收）”
+
   constructor(public navCtrl: NavController,
               public params: NavParams,
               private formBuilder: FormBuilder,
@@ -83,11 +88,15 @@ export class AcceptApplyItemPage {
       departCode: [, [Validators.required]],
       requireDate: [, [Validators.required]],
       requireUser: [, [Validators.required]],
+      costProperty: [, [Validators.required]],
+      clauseType: [, [Validators.required]],
 
       billNumber: [, []],
       reviewStatus: [, []],
       
       departName: [, []],
+      costPropertyName: [, [Validators.required]],
+      clauseTypeName: [, [Validators.required]],
     });
   }
 
@@ -100,16 +109,24 @@ export class AcceptApplyItemPage {
       departCode: this.itemShow.departCode,
       requireDate: this.itemShow.requireDate,
       requireUser: this.itemShow.requireUser,
+      costProperty: this.itemShow.costProperty,
+      clauseType: this.itemShow.clauseType,
 
       billNumber: this.itemShow.billNumber,
       reviewStatus: this.itemShow.reviewStatus,
       
       departName: this.itemShow.departName,
+      costPropertyName: this.itemShow.costPropertyName,
+      clauseTypeName: this.itemShow.clauseTypeName,
     });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AcceptApplyItemPage');
+
+    this.dicCostProperty = ContractCostProperty;//”成本属性”（1.直接成本2.间接费用）
+    this.dicClauseType = AcceptType;//”验收类型（3.质保验收，4，竣工验收）”
+
     this.navBar.backButtonClick=()=>{
       if(this.sendSuccess){
         this.callback(true).then(()=>{ this.navCtrl.pop() });
@@ -164,6 +181,10 @@ export class AcceptApplyItemPage {
       this.itemShow.requireDate =  Utils.dateFormat(new Date());
       this.itemShow.requireUser = this.globalData.userName;
       this.itemShow.reviewStatus = "0";
+      this.itemShow.costProperty = "";
+      this.itemShow.clauseType = "";
+      this.itemShow.costPropertyName = "";
+      this.itemShow.clauseTypeName = "";
       this.FromPatchValue();
     } else {
       this.FromPatchValue();
@@ -231,6 +252,20 @@ export class AcceptApplyItemPage {
       resolve();
     });
   };
+
+  //工程量清单
+  billOfGcl(){
+    if(this.applyFrom.get('contractCode').value==null||this.applyFrom.get('contractCode').value==""){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: '请先选择合同流水号，再选择工程量信息！',
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
+    //this.navCtrl.push("BillGclSelectPage",{'paymentItem':this.paymentMain,callback:this.getData,'contractCode':this.paymentForm.get('contractCode').value,'gclList':this.gclListInfo});
+  }
   
   //资产明细
   toAssetDetail(){

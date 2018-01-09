@@ -51,6 +51,28 @@
                     placeholder="自动带出"></ion-input>
             </ion-item>
             <ion-item text-wrap>
+                <ion-label fixed>成本属性</ion-label>
+                <ion-select type="text" [(ngModel)]="costProperty" formControlName="costProperty" placeholder="手工选择"
+                            cancelText="取消" okText="确定" >
+                    <ion-option *ngFor="let item of dicCostProperty" value="{{item.code}}">{{item.name}}</ion-option>
+                    <!--<ion-option value=""></ion-option>-->
+                </ion-select>
+            </ion-item>
+            <ion-item text-wrap>
+                <ion-label fixed>验收类型</ion-label>
+                <ion-select type="text" [(ngModel)]="clauseType" formControlName="clauseType" placeholder="手工选择"
+                            cancelText="取消" okText="确定" >
+                    <ion-option *ngFor="let item of dicClauseType" value="{{item.code}}">{{item.name}}</ion-option>
+                    <!--<ion-option value=""></ion-option>-->
+                </ion-select>
+            </ion-item>
+
+
+
+
+
+
+            <ion-item text-wrap>
                 <ion-label fixed>申请单位</ion-label>
                 <ion-input type="text" readonly formControlName="departName"></ion-input>
                 <!--<ion-select type="text" [(ngModel)]="departCode" formControlName="departCode" placeholder="选择">
@@ -78,7 +100,8 @@
                   class="validation-failed">
                 申请人不能为空
             </span>
-            <!-- 资产明细 -->
+            <ion-item-divider color="light"></ion-item-divider>
+            <ion-item (click)='billOfGcl()'>工程量清单 <ion-icon name="more" item-end></ion-icon></ion-item>
             <ion-item-divider color="light"></ion-item-divider>
             <ion-item (click)='toAssetDetail()'>资产明细<ion-icon name="more" item-end></ion-icon></ion-item>
             <ion-item-divider color="light"></ion-item-divider>
