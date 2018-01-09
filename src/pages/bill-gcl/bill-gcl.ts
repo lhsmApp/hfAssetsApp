@@ -5,6 +5,8 @@ import { PaymentService} from '../../services/paymentService';
 import {ResultBase} from "../../model/result-base";
 import { AdvancePaymentMain} from '../../model/advance-payment-main';
 import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
+import {ContractService} from '../../services/contractService';
+
 /**
  * Generated class for the BillGclPage page.
  *
@@ -34,19 +36,30 @@ export class BillGclPage {
   workList:BillOfWorkMain[];
   paymentMain:AdvancePaymentMain;
   contractCode:string;
-  type:string;//ht，fk
+  type:string;//ht，fk,htAssets
   sequence:string;//合同序号sequence
+  assetsCode:string;//合同下的资产明细编码
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl:AlertController,private paymentService:PaymentService) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    public alertCtrl:AlertController,
+    private paymentService:PaymentService,
+    private contractService:ContractService) {
 	  //this.workList=WORK_LIST;
     this.paymentMain=this.navParams.get("paymentItem");
     this.contractCode=this.navParams.get('contractCode');
     this.type=this.navParams.get('type');
     this.sequence=this.navParams.get('sequence');
+    this.assetsCode=this.navParams.get('assetsCode');
   }
 
   ionViewDidLoad() {
-    this.getList();
+    console.log(this.type);
+    if(this.type=='htAssets'){
+      this.getListByAssetsCode();
+    }else{
+      this.getList();
+    }
   }
 
   //获取工程量列表信息
@@ -57,7 +70,7 @@ export class BillGclPage {
       nullItem1=this.sequence;
     else
       payCode=this.paymentMain.payCode;
-    this.paymentService.getGclMainList(this.contractCode,this.type,payCode,nullItem1)
+    this.paymentService.getGclMainList(this.contractCode,this.type,payCode,nullItem1,'')
       .subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
@@ -93,9 +106,39 @@ export class BillGclPage {
       });
   }
 
+  //获取工程量列表信息
+  getListByAssetsCode() {
+    this.contractService.getGclListByAssetsCode(this.assetsCode)
+      .subscribe(object => {
+        let resultBase:ResultBase=object[0] as ResultBase;
+        if(resultBase.result=='true'){
+          if(object[1]!=null&&object[1].length>0){
+            this.isEmpty=false;
+            this.workList = object[1] as BillOfWorkMain[];
+          }else{
+            this.isEmpty=true;
+          }
+        }else{
+          let alert = this.alertCtrl.create({
+            title: '提示!',
+            subTitle: resultBase.message,
+            buttons: ['确定']
+          });
+          alert.present();
+        }
+      }, () => {
+        
+      });
+  }
+
   //上拉刷新
   doRefresh(refresher) {
-  	this.getList();
+  	//this.getList();
+    if(this.type=='htAssets'){
+      this.getListByAssetsCode();
+    }else{
+      this.getList();
+    }
   	refresher.complete();
   }
 

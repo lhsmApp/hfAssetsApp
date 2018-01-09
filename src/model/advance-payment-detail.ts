@@ -24,4 +24,5 @@ export class AdvancePaymentDetail{
 	requireUser:string;//申请人
 
 	reviewStatus:string;//单据状态
+	acceptanceCode:string;//验收单号
 }

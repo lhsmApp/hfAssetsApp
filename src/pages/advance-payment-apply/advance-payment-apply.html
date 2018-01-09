@@ -87,6 +87,14 @@
         <ion-input type="number" readonly formControlName="taxMoney" placeholder="自动带出"></ion-input>
       </ion-item>
       <ion-item text-wrap>
+        <ion-label fixed>验收单号<span class="danger">*</span></ion-label>
+        <ion-input type="text" readonly formControlName="acceptanceCode" placeholder="选择" (focus)="choiceAccept()"></ion-input>
+      </ion-item>
+      <span *ngIf="!paymentForm.controls.acceptanceCode.valid && paymentForm.controls.acceptanceCode.touched"
+            class="validation-failed">
+          请选择验收单号
+      </span>
+      <ion-item text-wrap>
         <ion-label fixed>付款原因<span class="danger">*</span></ion-label>
         <ion-input type="text" formControlName="payDigest" placeholder="手工输入" ></ion-input>
       </ion-item>

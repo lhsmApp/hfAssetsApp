@@ -53,7 +53,7 @@ export class BillGclSelectPage {
   getList() {
     console.log(this.gclList);
     //getGclMainList(contractCode:string,type:string,payCode:string,sequence :string)
-    this.paymentService.getGclMainList(this.contractCode,'fk','','0')
+    this.paymentService.getGclMainList(this.contractCode,'fk','','0','')
       .subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
