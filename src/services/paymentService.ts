@@ -163,7 +163,7 @@ export class PaymentService {
   }
 
   //工作量清单列表----basic_contract_work_list工作量清单表
-  getGclMainList(contractCode:string,type:string,payCode:string,sequence :string): Observable<(Object)> {
+  getGclMainList(contractCode:string,type:string,payCode:string,sequence :string,billNumber:string): Observable<(Object)> {
     let param = {
      //必传
      'action': 'queryListPhoneContractWorkList',
@@ -172,7 +172,8 @@ export class PaymentService {
      'type': type,//ht，fk（ht合同，fk付款，合同时把工作量清单全部查出，付款的话查询付款单号及没有付款单号的清单）
      'nullItem1' :sequence,//工作量清单序号
      //可传
-     'payCode': payCode,//付款单号
+     'payCode': payCode,//付款单号,
+     'billNumber':billNumber//验收单号
      };
      return this.httpService.get('phonePaymentRequest.do', param).map((res: Response) => res.json());
   }

@@ -70,7 +70,7 @@ export class BillGclPage {
       nullItem1=this.sequence;
     else
       payCode=this.paymentMain.payCode;
-    this.paymentService.getGclMainList(this.contractCode,this.type,payCode,nullItem1)
+    this.paymentService.getGclMainList(this.contractCode,this.type,payCode,nullItem1,'')
       .subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
