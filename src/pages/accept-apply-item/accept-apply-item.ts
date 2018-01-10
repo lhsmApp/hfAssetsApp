@@ -4,10 +4,12 @@ import {Storage} from '@ionic/storage';
 import {DictUtil} from '../../providers/dict-util';
 import {IonicPage, NavController, NavParams, ViewController,ModalController,AlertController,ToastController,Navbar} from 'ionic-angular';
 import {AcceptApplyDetail} from '../../model/accept-apply-detail';
+import {BillOfWorkMain} from '../../model/billof-work-main';
 import {Depart} from '../../model/depart';
 import {GlobalData} from "../../providers/GlobalData";
 import {Utils} from "../../providers/Utils";
 import {AcceptService} from '../../services/acceptService';
+import {PaymentService} from '../../services/paymentService';
 import {ResultBase} from "../../model/result-base";
 import {ReviewType} from '../../enums/review-type';
 import {ContractCostProperty} from '../../enums/enums';
@@ -55,6 +57,7 @@ export class AcceptApplyItemPage {
   applyFrom:any;
   list: AcceptApplyDetail[];
   itemShow:AcceptApplyDetail;
+  gclListInfo:BillOfWorkMain[]=[];
   listDept: DicInDepart[];
   callback :any;
   sendSuccess=false;
@@ -72,6 +75,7 @@ export class AcceptApplyItemPage {
               private modalCtrl: ModalController,
               private viewCtrl: ViewController,
               public acceptService:AcceptService, 
+              private paymentService:PaymentService,
               private globalData: GlobalData) {
     this.itemShow = new AcceptApplyDetail();
   	this.oper = this.params.get(Oper);
@@ -162,13 +166,25 @@ export class AcceptApplyItemPage {
               buttons: ['确定']
             });
             alert.present();
-        }
+            }
           }
         }, () => {
         
         });
       //this.itemShow = item;
       //this.FromPatchValue();
+
+      //获取工程量信息
+      //contractCode:string,type:string,payCode:string,sequence :string,billNumber:string
+      this.paymentService.getGclMainList(this.itemShow.contractCode,'ht','','',this.itemShow.billNumber)
+            .subscribe(object => {
+          let resultBase:ResultBase=object[0] as ResultBase;
+          if(resultBase.result=='true'){
+              this.gclListInfo = object[1] as BillOfWorkMain[];
+          }
+      }, () => {
+              
+      });
     } else if(this.oper === Oper_Add){
       console.log(this.oper);
       this.itemShow.billNumber = "";
