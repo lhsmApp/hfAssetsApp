@@ -91,9 +91,15 @@ export class BillGclPage {
             }else{
               this.workList = object[1] as BillOfWorkMain[];
               for(let item of this.workList){
-                if(item.payCode==null||item.payCode.trim()==""){
+                let checkItemFeild = item.payCode;
+                let checkTransferFeild = payCode;
+                if(this.type=='ys'){
+                  checkItemFeild = item.acceptanceCode;
+                  checkTransferFeild = acceptCode;
+                }
+                if(checkItemFeild==null||checkItemFeild.trim()==""){
                   item.gclType='3';
-                }else if(item.payCode==payCode){
+                }else if(checkItemFeild==checkTransferFeild){
                   item.gclType="1";
                 }else{
                   item.gclType='2';
