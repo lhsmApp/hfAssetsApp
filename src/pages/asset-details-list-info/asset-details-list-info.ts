@@ -197,7 +197,6 @@ export class AssetDetailsListInfoPage {
 
   //已选工程量
   gcl(assetsCode:string){
-    console.log(assetsCode);
-    this.navCtrl.push("BillGclPage",{'type':'htAssets','assetsCode':assetsCode});
+    this.navCtrl.push("BillGclPage",{'contractCode':this.contractCode,'type':'htAssets','assetsCode':assetsCode});
   }
 }

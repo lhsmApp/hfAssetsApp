@@ -73,6 +73,7 @@ export class AcceptSelectPage {
 
   //选择验收单
   selectAccept(selectItem){
+      console.log('ccccccccccccccccc');
       this.callback(selectItem).then(()=>{ this.navCtrl.pop() });
   }
 }

@@ -242,40 +242,62 @@ export class AdvancePaymentApplyPage {
 
   //选择验收单号
   choiceAccept(){
+    if(this.paymentForm.get('contractCode').value==null||this.paymentForm.get('contractCode').value==""){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: '请先选择合同流水号，再选择验收单号！',
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
+    if(this.paymentForm.get('clauseType').value==null||this.paymentForm.get('clauseType').value==""){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: '请先选择款项类别，再选择验收单号！',
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
     this.navCtrl.push('AcceptSelectPage',  {callback: this.choiceAcceptOk});
   }
 
-  choiceAcceptOk = (acceptCode) =>
+  choiceAcceptOk = (acceptInfo) =>
   {
     return new Promise((resolve, reject) => {
-      if(acceptCode){
+      if(acceptInfo&&acceptInfo.billNumber){
           this.paymentForm.patchValue({
-            acceptanceCode:acceptCode
+            acceptanceCode:acceptInfo.billNumber
         });
 
-        //获取工程量信息,当付款类型为进度款或者竣工款时付款金额需要根据验收单号下的工程量进行计算
-        this.paymentService.getGclMainList(this.paymentDetail.contractCode,'fk',this.paymentDetail.payCode,'0','')
-        .subscribe(object => {
-          let resultBase:ResultBase=object[0] as ResultBase;
-          if(resultBase.result=='true'){
-            this.gclListInfo = object[1] as BillOfWorkMain[];
-            if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='4'){
-            let sumHj=0;
-            if(this.gclListInfo){
-              for(let gclItem of this.gclListInfo){
-                if(gclItem.checked){
-                  sumHj+=gclItem.moneyTotal;
+        if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='4'){  
+
+          //获取工程量信息,当付款类型为进度款或者竣工款时付款金额需要根据验收单号下的工程量进行计算
+          this.paymentService.getGclMainList(this.paymentForm.get('contractCode').value,'ys','','0',this.paymentForm.get('acceptanceCode').value)
+          .subscribe(object => {
+            let resultBase:ResultBase=object[0] as ResultBase;
+            if(resultBase.result=='true'){
+              this.gclListInfo = object[1] as BillOfWorkMain[];
+              if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='4'){
+              let sumHj=0;
+              if(this.gclListInfo){
+                for(let gclItem of this.gclListInfo){
+                  if(gclItem.checked){
+                    sumHj+=gclItem.moneyTotal;
+                  }
                 }
               }
+              this.paymentForm.patchValue({
+                  payMoney:sumHj,
+                });
+              }
             }
-            this.paymentForm.patchValue({
-                payMoney:sumHj,
-              });
-            }
-          }
-        }, () => {
-          
-        });
+          }, () => {
+            
+          });
+        }
+
       }
       resolve();
     });
@@ -465,7 +487,7 @@ export class AdvancePaymentApplyPage {
     }
     this.paymentMain.payCode=this.paymentForm.get('payCode').value;
     //this.navCtrl.push("BillGclSelectPage",{'paymentItem':this.paymentMain,callback:this.getData,'contractCode':this.paymentForm.get('contractCode').value,'gclList':this.gclListInfo});
-    this.navCtrl.push("BillGclPage",{'paymentItem':this.paymentMain,'contractCode':this.paymentDetail.contractCode,'type':'fk'});
+    this.navCtrl.push("BillGclPage",{'paymentItem':this.paymentMain,'contractCode':this.paymentForm.get('contractCode').value,'type':'fk'});
   }
 
   //送审
