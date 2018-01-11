@@ -9,6 +9,8 @@ import {IN_DEPART} from "../../enums/storage-type";
 import {DicInDepart} from '../../model/dic-in-depart';
 import {DictUtil} from '../../providers/dict-util';
 import {ReviewType} from '../../enums/review-type';
+import {ContractCostProperty} from '../../enums/enums';
+import {AcceptType} from '../../enums/enums';
 
 import {Oper,Oper_Look,Oper_Edit,Oper_Add,Oper_Approval} from '../../providers/TransferFeildName';
 import {Title} from '../../providers/TransferFeildName';
@@ -119,6 +121,10 @@ export class AcceptApplyInfoPage {
               this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
                 this.listDept=inDepart;
                 this.itemShow.departName = this.dictUtil.getInDepartName(this.listDept,this.itemShow.departCode);
+                //”成本属性”（1.直接成本2.间接费用）
+                this.itemShow.costPropertyName = this.dictUtil.getNumEnumsName(ContractCostProperty,this.itemShow.costProperty);
+                //”验收类型（2.进度验收，4，竣工验收）”
+                this.itemShow.clauseTypeName = this.dictUtil.getEnumsName(AcceptType,this.itemShow.clauseType);
               });
           }
         } else {
@@ -133,6 +139,11 @@ export class AcceptApplyInfoPage {
     
       });
     //this.itemShow = item;
+  }
+
+  //工程量清单
+  billOfGcl(){
+    this.navCtrl.push("BillGclPage",{BillNumberCode: this.billNumber,'contractCode':this.itemShow.contractCode,'type':'ys'});
   }
   
   //资产明细

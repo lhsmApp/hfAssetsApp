@@ -26,7 +26,7 @@ export class BillGclDetailPage {
 
   billOfWorkMain:BillOfWorkMain;
   billOfWorkDetail:BillOfWorkDetail;
-  paymentMain:AdvancePaymentMain;
+  //paymentMain:AdvancePaymentMain;
   contractCode:string;
 
   dicUnit: DicComplex[];
@@ -38,7 +38,7 @@ export class BillGclDetailPage {
     private dictUtil:DictUtil,
     private paymentService:PaymentService) {
   	this.billOfWorkMain=this.navParams.get("gclItem");
-    this.paymentMain=this.navParams.get("paymentItem");
+    //this.paymentMain=this.navParams.get("paymentItem");
     this.contractCode=this.navParams.get('contractCode');
   }
 

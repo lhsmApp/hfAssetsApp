@@ -3,8 +3,9 @@ import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angul
 import { BillOfWorkMain} from '../../model/billof-work-main';
 import { PaymentService} from '../../services/paymentService';
 import {ResultBase} from "../../model/result-base";
-import { AdvancePaymentMain} from '../../model/advance-payment-main';
 import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
+
+import {BillNumberCode} from '../../providers/TransferFeildName';
 /**
  * Generated class for the BillGclSelectPage page.
  *
@@ -33,16 +34,14 @@ export class BillGclSelectPage {
   isEmpty:boolean=false;
   workList:BillOfWorkMain[];
   callback :any;
-  paymentMain:AdvancePaymentMain;
-  contractCode:string;
-  gclList:BillOfWorkMain[];
+  billNumber:string;//单号
+  contractCode:string;//合同流水号
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl:AlertController,private paymentService:PaymentService) {
 	  //this.workList=WORK_LIST;
-    this.paymentMain= this.navParams.get('paymentItem');
+    this.billNumber = this.navParams.get(BillNumberCode);
     this.contractCode=this.navParams.get('contractCode');
-    this.callback    = this.navParams.get('callback');
-    this.gclList=this.navParams.get('gclList');
+    this.callback = this.navParams.get('callback');
   }
 
   ionViewDidLoad() {
@@ -51,9 +50,8 @@ export class BillGclSelectPage {
 
   //获取工程量列表信息
   getList() {
-    console.log(this.gclList);
     //getGclMainList(contractCode:string,type:string,payCode:string,sequence :string)
-    this.paymentService.getGclMainList(this.contractCode,'fk','','0','')
+    this.paymentService.getGclMainList(this.contractCode,'ys','','0',this.billNumber)
       .subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
@@ -61,18 +59,11 @@ export class BillGclSelectPage {
             this.isEmpty=false;
             this.workList = object[1] as BillOfWorkMain[];
             for(let workItem of this.workList){
-              /*for(let gclItem of this.gclList){
-                if(workItem.payCode==gclItem.payCode){
-                  workItem.checked=true;
-                }else{
-                  workItem.checked=false;
-                }
-              }*/
-              if(workItem.payCode==null||workItem.payCode.trim()==""){
+              if(workItem.acceptanceCode==null||workItem.acceptanceCode.trim()==""){
                 workItem.checked=false;
                 workItem.gclType='3';
                 workItem.disabled=false;
-              }else if(workItem.payCode==this.paymentMain.payCode){
+              }else if(workItem.acceptanceCode==this.billNumber){
                 workItem.checked=true;
                 workItem.gclType="1";
                 workItem.disabled=false;
@@ -113,7 +104,7 @@ export class BillGclSelectPage {
 
   //查看明细
   viewDetail(item: BillOfWorkMain){
-  	this.navCtrl.push("BillGclDetailPage",{"gclItem":item,'paymentItem':this.paymentMain,'contractCode':this.contractCode});
+  	this.navCtrl.push("BillGclDetailPage",{"gclItem":item,'contractCode':this.contractCode});
   }
 
 }
