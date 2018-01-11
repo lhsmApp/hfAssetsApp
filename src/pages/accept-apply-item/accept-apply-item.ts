@@ -306,7 +306,7 @@ export class AcceptApplyItemPage {
         return;
       }
       console.log("ReviewType：" + ReviewType[ReviewType.BASICACCEPTANCE_APPLY]);
-      this.navCtrl.push(Page_ChoiceApproversPage, {callback:this.checkRefresh,BillNumberCode: this.billNumber,'reviewType':ReviewType[ReviewType.BASICACCEPTANCE_APPLY]});
+      this.navCtrl.push(Page_ChoiceApproversPage, {callback:this.checkRefresh,BillNumberCode: this.billNumber, BillContractCode:this.itemShow.contractCode,'reviewType':ReviewType[ReviewType.BASICACCEPTANCE_APPLY]});
   }
 
   //回调

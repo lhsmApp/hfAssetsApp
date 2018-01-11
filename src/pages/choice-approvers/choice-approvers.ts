@@ -6,6 +6,7 @@ import {ApprovalService} from '../../services/approvalService';
 import {BillNumberCode} from '../../providers/TransferFeildName';
 import {ResultBase} from "../../model/result-base";
 import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
+import {BillContractCode} from '../../providers/TransferFeildName';
 
 
 /**
@@ -33,6 +34,7 @@ import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
 })
 export class ChoiceApproversPage {
   billNumber:string;
+  contractCode:string = '';
   list: ReviewProcessMain[];
   reviewType:string;
   callback :any;
@@ -45,6 +47,7 @@ export class ChoiceApproversPage {
               private viewCtrl: ViewController,
               private approvalService:ApprovalService) {
     this.billNumber = this.navParams.get(BillNumberCode);
+    this.contractCode = this.navParams.get(BillContractCode);
     this.reviewType=this.navParams.get('reviewType');
     this.callback    = this.navParams.get('callback');
       console.log('reviewType：' + this.reviewType);
@@ -61,7 +64,7 @@ export class ChoiceApproversPage {
     this.isEmpty=false;
       //console.log(ReviewType.REVIEW_TYPE_BASIC_PAYMENT);
       console.log('reviewType：' + this.reviewType);
-      this.approvalService.queryUserReviewPay(this.billNumber,this.reviewType)
+      this.approvalService.queryUserReviewPay(this.billNumber,this.reviewType,this.contractCode)
       .subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){

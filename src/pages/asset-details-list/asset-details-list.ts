@@ -99,34 +99,67 @@ export class AssetDetailsListPage {
       acceptanceFlag = "1";
       translateCode = this.billNumber;
     }
-    this.contractService.getAssetDetailList(acceptanceCode, contractCode, translateCode, acceptanceFlag, checkResult).subscribe(
-      object => {
-        let resultBase:ResultBase=object[0] as ResultBase;
-        if(resultBase.result=='true'){
-          this.listAll = object[1] as AcceptAssetMain[];
-          if(this.listAll){
-            this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
-              this.listDept=inDepart;
-              for(let item of this.listAll){
-                item.departName  = this.dictUtil.getInDepartName(this.listDept,item.departCode);
-              }
-            });
-          }
-          this.list = this.listAll;
-          if(!(this.listAll!=null&&this.listAll.length>0)){
-            this.isEmpty=true;
-          }
-        } else {
+    if(this.TypeView === TypeView_AcceptApply){
+      this.contractService.getAssetDetailListBySelectedWorkList(acceptanceCode).subscribe(
+        object => {
+          let resultBase:ResultBase=object[0] as ResultBase;
+          if(resultBase.result=='true'){
+            this.listAll = object[1] as AcceptAssetMain[];
+            if(this.listAll){
+              this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
+                this.listDept=inDepart;
+                for(let item of this.listAll){
+                  item.departName  = this.dictUtil.getInDepartName(this.listDept,item.departCode);
+                }
+              });
+            }
+            this.list = this.listAll;
+            console.log("this.listAll");
+            console.log(this.listAll);
+            if(!(this.listAll!=null&&this.listAll.length>0)){
+              this.isEmpty=true;
+            }
+          } else {
             let alert = this.alertCtrl.create({
               title: '提示',
               subTitle: resultBase.message,
               buttons: ['确定']
             });
             alert.present();
-        }
-      }, () => {
+          }
+        }, () => {
     
-      });/**/
+        });/**/
+    } else {
+      this.contractService.getAssetDetailList(acceptanceCode, contractCode, translateCode, acceptanceFlag, checkResult).subscribe(
+        object => {
+          let resultBase:ResultBase=object[0] as ResultBase;
+          if(resultBase.result=='true'){
+            this.listAll = object[1] as AcceptAssetMain[];
+            if(this.listAll){
+              this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
+                this.listDept=inDepart;
+                for(let item of this.listAll){
+                  item.departName  = this.dictUtil.getInDepartName(this.listDept,item.departCode);
+                }
+              });
+            }
+            this.list = this.listAll;
+            if(!(this.listAll!=null&&this.listAll.length>0)){
+              this.isEmpty=true;
+            }
+          } else {
+            let alert = this.alertCtrl.create({
+              title: '提示',
+              subTitle: resultBase.message,
+              buttons: ['确定']
+            });
+            alert.present();
+          }
+        }, () => {
+    
+        });/**/
+    }
     /*this.listAll = listGet;
     this.list = listGet;*/
   }
