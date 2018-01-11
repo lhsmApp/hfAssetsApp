@@ -31,7 +31,7 @@
           </ion-label>
             <!--<p color="green">键码：{{item.keyCode}}</p>资产-->
             <ion-icon *ngIf="TypeView!='ht'" ios="ios-arrow-forward" md="ios-arrow-forward" color="grayslate" item-end></ion-icon>
-            <button *ngIf="TypeView=='ht'"  ion-button color="secondary" clear item-end (click)='gcl(item.assetsCode)'>已选工程量</button>
+            <button *ngIf="TypeView=='ht'"  ion-button color="secondary" clear item-end (click)='gcl(item.keyCode)'>已选工程量</button>
 		    </ion-item>
 	 </ion-list>
   </div>
