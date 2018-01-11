@@ -26,10 +26,10 @@ export const Tzlx= [{code: '0', name: '调增'}, {code: '1', name: '调减'}]
 export const TransferFundsType= [{code: '1', name: '固定资产'}, {code: '2', name: '无形资产'}, {code: '3', name: '长期待摊费用'}, {code: '4', name: '长期股权投资'}]
 
 //合同成本属性 直接成本/间接费用
-export const ContractCostProperty= [{code:'1',name:'直接成本'}, {code:'2',name:'间接费用'}];
+export const ContractCostProperty= [{code:1,name:'直接成本'}, {code:2,name:'间接费用'}];
 
 //验收类型（3.质保验收，4，竣工验收）
-export const AcceptType= [{code:'3',name:'质保验收'}, {code:'4',name:'竣工验收'}];
+export const AcceptType= [{code:'2',name:'进度验收'}, {code:'4',name:'竣工验收'}];
 
 //资产类型：1、实物资产 2、无形资产3、长期待摊费用4、长期股权投资5、固定资产
 export const ASSETS_TYPE= [{code: '1', name: '实物资产'}, {code: '2', name: '无形资产'}, {code: '3', name: '长期待摊费用'}, {code: '4', name: '长期股权投资'},{code: '5', name: '固定资产'}]

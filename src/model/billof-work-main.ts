@@ -5,6 +5,7 @@
 export class BillOfWorkMain{
 
 	payCode :string;//付款单号
+	acceptanceCode :string;//验收单号
 	
 	sequence:string;//序号
 	

@@ -122,8 +122,8 @@ export class AcceptApplyInfoPage {
                 this.listDept=inDepart;
                 this.itemShow.departName = this.dictUtil.getInDepartName(this.listDept,this.itemShow.departCode);
                 //”成本属性”（1.直接成本2.间接费用）
-                this.itemShow.costPropertyName = this.dictUtil.getEnumsName(ContractCostProperty,this.itemShow.costProperty);
-                //”验收类型（3.质保验收，4，竣工验收）”
+                this.itemShow.costPropertyName = this.dictUtil.getNumEnumsName(ContractCostProperty,this.itemShow.costProperty);
+                //”验收类型（2.进度验收，4，竣工验收）”
                 this.itemShow.clauseTypeName = this.dictUtil.getEnumsName(AcceptType,this.itemShow.clauseType);
               });
           }
@@ -143,7 +143,7 @@ export class AcceptApplyInfoPage {
 
   //工程量清单
   billOfGcl(){
-    //this.navCtrl.push("BillGclPage",{'paymentItem':this.paymentMain,'contractCode':this.paymentDetail.contractCode,'type':'fk'});
+    this.navCtrl.push("BillGclPage",{BillNumberCode: this.billNumber,'contractCode':this.itemShow.contractCode,'type':'ys'});
   }
   
   //资产明细

@@ -7,6 +7,8 @@ import { AdvancePaymentMain} from '../../model/advance-payment-main';
 import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
 import {ContractService} from '../../services/contractService';
 
+import {BillNumberCode} from '../../providers/TransferFeildName';
+
 /**
  * Generated class for the BillGclPage page.
  *
@@ -40,6 +42,8 @@ export class BillGclPage {
   sequence:string;//合同序号sequence
   assetsCode:string;//合同下的资产明细编码
 
+  billNumber:string;
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public alertCtrl:AlertController,
@@ -51,6 +55,8 @@ export class BillGclPage {
     this.type=this.navParams.get('type');
     this.sequence=this.navParams.get('sequence');
     this.assetsCode=this.navParams.get('assetsCode');
+
+    this.billNumber = this.navParams.get(BillNumberCode);
   }
 
   ionViewDidLoad() {
@@ -66,11 +72,15 @@ export class BillGclPage {
   getList() {
     let nullItem1='0';
     let payCode='';
-    if(this.type=='ht')
+    let acceptCode = '';
+    if(this.type=='ht'){
       nullItem1=this.sequence;
-    else
+    } else if(this.type=='ys'){
+      acceptCode = this.billNumber
+    } else {
       payCode=this.paymentMain.payCode;
-    this.paymentService.getGclMainList(this.contractCode,this.type,payCode,nullItem1,'')
+    }
+    this.paymentService.getGclMainList(this.contractCode,this.type,payCode,nullItem1,acceptCode)
       .subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
@@ -145,8 +155,8 @@ export class BillGclPage {
 
   //查看明细
   openPage(item: BillOfWorkMain){
-    //this.navCtrl.push("BillGclDetailPage",{id:id});
-    this.navCtrl.push("BillGclDetailPage",{"gclItem":item,'paymentItem':this.paymentMain,'contractCode':this.contractCode});
+    //this.navCtrl.push("BillGclDetailPage",{id:id}); 
+    this.navCtrl.push("BillGclDetailPage",{"gclItem":item,'contractCode':this.contractCode});//'paymentItem':this.paymentMain,
   }
 
 }

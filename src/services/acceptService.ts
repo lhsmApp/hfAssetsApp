@@ -40,7 +40,7 @@ export class AcceptService {
   }
 
   //验收申请主页面保存---basic_assets_accept_apply  验收单据表
-  saveAcceptApplyMain(data: string):Observable<(object)>{
+  saveAcceptApplyMain(data: string, datalist: string):Observable<(object)>{
     console.log('验收申请主页面保存'+this.globalData.sessionId);
     /*let param = {
         'action': "saveAssetsAcceptanceApply",
@@ -61,7 +61,9 @@ export class AcceptService {
     formData.append('action', 'saveAssetsAcceptanceApply');
     formData.append('sessionid', this.globalData.sessionId);
     formData.append('data', data);
+    formData.append('datalist', datalist);
     console.log('data:' + data);
+    console.log('datalist:' + datalist);
     return this.httpService.postMultiFormData('phoneAcceptanceApply.do', formData).map((res:Response) => res.json());
   }
 

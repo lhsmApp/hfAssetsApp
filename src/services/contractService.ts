@@ -50,14 +50,15 @@ export class ContractService {
   }
 
   //资产明细列表-----basic_contract_detail 合同明细表
-  getAssetDetailList(contractCode:string, translateCode:string, acceptanceFlag:string, checkResult:string):Observable<(object)>{
+  getAssetDetailList(acceptanceCode:string, contractCode:string, translateCode:string, acceptanceFlag:string, checkResult:string):Observable<(object)>{
     console.log('资产明细列表'+this.globalData.sessionId);
     let param = {
         'action': "queryListPhoneContractDetail",
         'sessionid': this.globalData.sessionId,
+        'checkResult': checkResult,
         'contractCode': contractCode,//合同流水号
         'translateCode': translateCode,//”转资单号”
-        'checkResult': checkResult,
+        'acceptanceCode': acceptanceCode,//”验收单据号”
         'acceptanceFlag': acceptanceFlag,
         //1.合同调用,acceptanceFlag="",contractCode必传，checkResult必传
         //2.验收调用 acceptanceFlag=1，contractCode必传，translateCode传""或者不传都行

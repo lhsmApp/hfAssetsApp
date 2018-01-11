@@ -84,6 +84,8 @@ export class AssetDetailsListPage {
         //2.验收调用 acceptanceFlag=1，contractCode必传，translateCode传""或者不传都行
         //3.转资单调用acceptanceFlag=1，translateCode必传
     //contractCode:string, translateCode:string, acceptanceFlag:string checkResult
+    //4.20180102 验收调用时不但要传acceptanceFlag=1，并且要传acceptanceCode=”验收单据号”（其他调用不需要传）
+    let acceptanceCode = "";
     let translateCode = "";
     let acceptanceFlag = "";
     let checkResult = "";
@@ -91,12 +93,13 @@ export class AssetDetailsListPage {
     if(this.TypeView === TypeView_AcceptApply){
       acceptanceFlag = "1";
       contractCode = this.contractCode;
+      acceptanceCode = this.billNumber;
     }
     if(this.TypeView === TypeView_TransferFunds){
       acceptanceFlag = "1";
       translateCode = this.billNumber;
     }
-    this.contractService.getAssetDetailList(contractCode, translateCode, acceptanceFlag, checkResult).subscribe(
+    this.contractService.getAssetDetailList(acceptanceCode, contractCode, translateCode, acceptanceFlag, checkResult).subscribe(
       object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){

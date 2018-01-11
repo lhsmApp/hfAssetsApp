@@ -175,6 +175,11 @@ export class PaymentService {
      'payCode': payCode,//付款单号,
      'billNumber':billNumber//验收单号
      };
+     console.log('contractCode:' + contractCode);
+     console.log('type:' + type);
+     console.log('nullItem1:' + sequence);
+     console.log('payCode:' + payCode);
+     console.log('billNumber:' + billNumber);
      return this.httpService.get('phonePaymentRequest.do', param).map((res: Response) => res.json());
   }
 

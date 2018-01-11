@@ -87,7 +87,7 @@ export class ContractChoiceConfirmPage {
           if(this.list && this.list.length > 0){
               this.itemShow = this.list[0];
               //成本属性
-              this.itemShow.costPropertyName = this.dictUtil.getEnumsName(ContractCostProperty,this.itemShow.costProperty);
+              this.itemShow.costPropertyName = this.dictUtil.getNumEnumsName(ContractCostProperty,this.itemShow.costProperty);
               this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
                 this.dicInDept=inDepart;
                 //甲方签约单位

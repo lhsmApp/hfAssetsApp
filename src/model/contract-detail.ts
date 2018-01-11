@@ -13,7 +13,7 @@ export class ContractDetail{
 	additionalPerson:string;//附加相对人
 	ownDepart :string;//甲方签约单位
 	contractMoney:number;//合同标的额,传double型
-	costProperty :string;//成本属性
+	costProperty :number;//成本属性
 	contractDate:string;//签约日期
 	uploadFlag:boolean;//是否上传附件
 	requireUser:string;//申请人
