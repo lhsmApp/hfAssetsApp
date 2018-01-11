@@ -57,12 +57,13 @@ export class AcceptApplyItemPage {
   applyFrom:any;
   list: AcceptApplyDetail[];
   itemShow:AcceptApplyDetail;
-  gclListInfo:BillOfWorkMain[]=[];
   listDept: DicInDepart[];
   callback :any;
   sendSuccess=false;
+  isBackRefresh = false;
 
-  billOfGclIsSaved:boolean = true;
+  gclListInfo:BillOfWorkMain[]=[];
+  //billOfGclIsSaved:boolean = true;
 
   dicCostProperty: Array<{code: number, name: string}>;//”成本属性”（1.直接成本2.间接费用）
   dicClauseType: Array<{code: string, name: string}>;//”验收类型（2.进度验收，4，竣工验收）”
@@ -80,11 +81,12 @@ export class AcceptApplyItemPage {
               private paymentService:PaymentService,
               private globalData: GlobalData) {
     this.itemShow = new AcceptApplyDetail();
-    this.billOfGclIsSaved = true;
+    //this.billOfGclIsSaved = true;
   	this.oper = this.params.get(Oper);
   	this.billNumber = this.params.get(BillNumberCode);
     this.callback    = this.params.get('callback');
     this.sendSuccess=false;
+    this.isBackRefresh = false;
     //this.listDept = listDeptGet;
 
     this.applyFrom = this.formBuilder.group({
@@ -135,22 +137,24 @@ export class AcceptApplyItemPage {
     this.dicClauseType = AcceptType;//”验收类型（2.进度验收，4，竣工验收）”
 
     this.navBar.backButtonClick=()=>{
-      if(this.sendSuccess){
+      if(this.sendSuccess || this.isBackRefresh){
         this.callback(true).then(()=>{ this.navCtrl.pop() });
       }else{
         this.navCtrl.pop();
       }
     }
     this.sendSuccess=false;
+    this.isBackRefresh = false;
     this.itemShow = new AcceptApplyDetail();
-    this.billOfGclIsSaved = true;
+    //this.billOfGclIsSaved = true;
     this.getShowItem();
   }
 
   getShowItem(){
     this.itemShow = new AcceptApplyDetail();
+    this.gclListInfo = [];
     if(this.oper === Oper_Edit){
-      this.billOfGclIsSaved = true;
+      //this.billOfGclIsSaved = true;
       console.log(this.oper);
       this.acceptService.getAcceptDetailItem(this.billNumber).subscribe(
         object => {
@@ -190,7 +194,7 @@ export class AcceptApplyItemPage {
       //this.itemShow = item;
       //this.FromPatchValue();
     } else if(this.oper === Oper_Add){
-      this.billOfGclIsSaved = false;
+      //this.billOfGclIsSaved = false;
       console.log(this.oper);
       this.itemShow.billNumber = "";
       this.itemShow.contractCode = "";
@@ -204,7 +208,7 @@ export class AcceptApplyItemPage {
       this.itemShow.reviewStatus = "0";
       this.itemShow.costProperty = 1;
       this.itemShow.clauseType = "";
-      this.itemShow.costPropertyName = "直接成本";
+      this.itemShow.costPropertyName = this.dictUtil.getNumEnumsName(ContractCostProperty,this.itemShow.costProperty);
       this.itemShow.clauseTypeName = "";
       this.FromPatchValue();
     } else {
@@ -220,67 +224,21 @@ export class AcceptApplyItemPage {
     detail.requireDate =  Utils.dateFormat(new Date(), 'yyyy-MM-dd HH:mm');
     transferInfo.push(detail);
 
-    console.log(this.gclListInfo);
-    let datalist=new Array();
-    let seqceList =[];
-    let xzList =[];
-    let seqceStr='';
-    let xzStr='';
-    if(this.gclListInfo){
-      for(let seq of this.gclListInfo){
-        seqceList.push(seq.sequence);
-        if(seq.checked==true){
-          xzList.push(1);
-        }else{
-          xzList.push(0);
-        }
-      }
-      seqceStr=seqceList.join(',');
-      xzStr=xzList.join(',');
-      console.log(seqceStr);
-      console.log(xzStr);
-      let gclInfo={cCode:detail.contractCode,billNumber:detail.billNumber,seqceList:seqceStr,xzList:xzStr};
-      datalist.push(gclInfo);
-    }else{
-      let gclInfo={cCode:detail.contractCode,billNumber:detail.billNumber,seqceList:'',xzList:''};
-      datalist.push(gclInfo);
-    }
-    //验收类型（2.进度验收，4，竣工验收）
-    //验收单据加验收类型：（进度验收，竣工验收）进度验收正常勾选工程量清单，竣工验收需要判断工程量清单是否全部勾选，不全部勾选不让点确定。
-    if(detail.clauseType=="4"){
-      /*if(xzStr
-      let alert = this.alertCtrl.create({
-        title: '提示',
-        subTitle: "工程量清单要全部勾选！",
-        buttons: ['确定']
-      });
-      alert.present();
-      return;*/
-    }
-    //成本属性”（1.直接成本2.间接费用）
-    //间接费用 不可以打开验收明细和勾选工程量清单
-    if(detail.costProperty==2){
-      /*let alert = this.alertCtrl.create({
-        title: '提示',
-        subTitle: "",
-        buttons: ['确定']
-      });
-      alert.present();
-      return;*/
-    }
-    this.acceptService.saveAcceptApplyMain(JSON.stringify(transferInfo),JSON.stringify(datalist))
+    this.acceptService.saveAcceptApplyMain(JSON.stringify(transferInfo),"[]")
       .subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
-          this.sendSuccess=true;
+          this.isBackRefresh = true;
           console.log(object[1][0]);
           if(this.oper == Oper_Add){
             this.itemShow = object[1][0] as AcceptApplyDetail;
             this.billNumber = this.itemShow.billNumber;
-            this.FromPatchValue();
+          } else {
+            this.itemShow = detail;
           }
+          this.FromPatchValue();
           this.oper = Oper_Edit;
-          this.billOfGclIsSaved = true;
+          //this.billOfGclIsSaved = true;
           let toast = this.toastCtrl.create({
               message: '保存成功',
               duration: 3000
@@ -328,32 +286,56 @@ export class AcceptApplyItemPage {
 
   //工程量清单
   billOfGcl(){
-    if(this.applyFrom.get('contractCode').value==null||this.applyFrom.get('contractCode').value==""){
+    if(!(this.billNumber!=null&&this.billNumber.trim()!="")){// || this.billOfGclIsSaved == false
+        let alert = this.alertCtrl.create({
+          title: '提示',
+          subTitle: '请先保存验收信息，再选择工程量信息！',
+          buttons: ['确定']
+        });
+        alert.present();
+        return;
+    }
+    //成本属性”（1.直接成本2.间接费用）
+    //间接费用 不可以打开验收明细和勾选工程量清单
+    if(this.itemShow.costProperty==2){
       let alert = this.alertCtrl.create({
         title: '提示',
-        subTitle: '请先选择合同流水号，再选择工程量信息！',
+        subTitle: "成本属性：间接费用，不可以勾选工程量清单！",
         buttons: ['确定']
       });
       alert.present();
       return;
     }
-    this.navCtrl.push("BillGclSelectPage",{BillNumberCode:this.itemShow.billNumber,callback:this.choiceGclOk,'contractCode':this.applyFrom.get('contractCode').value});
+    //if(this.applyFrom.get('contractCode').value==null||this.applyFrom.get('contractCode').value==""){
+    //  let alert = this.alertCtrl.create({
+    //    title: '提示',
+    //    subTitle: '请先选择合同流水号，再选择工程量信息！',
+    //    buttons: ['确定']
+    //  });
+    //  alert.present();
+    //  return;
+    //}
+    this.navCtrl.push("BillGclSelectPage",{ItemTranfer:this.itemShow,'type':'ys',callback:this.choiceGclOk});
   }
 
   //回调获取选择的工程量清单
   choiceGclOk = (data) =>
   {
     return new Promise((resolve, reject) => {
-      console.log(data);
-      this.gclListInfo=data;
-      this.billOfGclIsSaved = false;
+      console.log("choiceGclOk");
+      //this.gclListInfo=data;
+      //this.billOfGclIsSaved = false;
+      if(data){
+        this.isBackRefresh = true;
+        this.getShowItem();
+      }
       resolve();
     });
   };
   
   //资产明细
   toAssetDetail(){
-      if(!(this.billNumber!=null&&this.billNumber.trim()!="") || this.billOfGclIsSaved == false){
+      if(!(this.billNumber!=null&&this.billNumber.trim()!="")){// || this.billOfGclIsSaved == false
         let alert = this.alertCtrl.create({
           title: '提示',
           subTitle: '请先保存验收信息，再进行维护资产明细信息！',
@@ -362,8 +344,36 @@ export class AcceptApplyItemPage {
         alert.present();
         return;
       }
+      //成本属性”（1.直接成本2.间接费用）
+      //间接费用 不可以打开验收明细和勾选工程量清单
+      if(this.itemShow.costProperty==2){
+        let alert = this.alertCtrl.create({
+          title: '提示',
+          subTitle: "成本属性：间接费用，不可以打开验收明细！",
+          buttons: ['确定']
+        });
+        alert.present();
+        return;
+      }
+      let haveGcl: boolean = false;
+      if(this.gclListInfo){
+        for(let seq of this.gclListInfo){
+          if(seq.acceptanceCode==this.billNumber){
+            haveGcl = true;
+          }
+        }
+      }
+      if(haveGcl == false){
+        let alert = this.alertCtrl.create({
+          title: '提示',
+          subTitle: '请先选择工程量信息，再进行维护资产明细信息！',
+          buttons: ['确定']
+        });
+        alert.present();
+        return;
+      }
       console.log(this.itemShow.requireDate);
-      this.navCtrl.push(Page_AssetDetailsListPage,  {BillNumberCode: this.billNumber, BillContractCode:this.itemShow.contractCode, 'BillAddTime':this.itemShow.requireDate, TypeView:TypeView_AcceptApply});
+      this.navCtrl.push(Page_AssetDetailsListPage, {BillNumberCode: this.billNumber, BillContractCode:this.itemShow.contractCode, 'BillAddTime':this.itemShow.requireDate, TypeView:TypeView_AcceptApply});
   }
 
   //选择合同

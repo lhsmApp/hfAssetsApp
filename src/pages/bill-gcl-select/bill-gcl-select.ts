@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController,ToastController } from 'ionic-angular';
 import { BillOfWorkMain} from '../../model/billof-work-main';
 import { PaymentService} from '../../services/paymentService';
+import {AcceptService} from '../../services/acceptService';
 import {ResultBase} from "../../model/result-base";
 import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
+import {AcceptApplyDetail} from '../../model/accept-apply-detail';
 
-import {BillNumberCode} from '../../providers/TransferFeildName';
+import {ItemTranfer} from '../../providers/TransferFeildName';
 /**
  * Generated class for the BillGclSelectPage page.
  *
@@ -34,24 +36,42 @@ export class BillGclSelectPage {
   isEmpty:boolean=false;
   workList:BillOfWorkMain[];
   callback :any;
-  billNumber:string;//单号
-  contractCode:string;//合同流水号
+  //billNumber:string;//单号
+  //contractCode:string;//合同流水号
+  itemTranfer:AcceptApplyDetail;
+  type:string;//ht，fk,htAssets
+  
+  isBackRefresh = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl:AlertController,private paymentService:PaymentService) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public alertCtrl:AlertController,
+              public acceptService:AcceptService, 
+              public toastCtrl:ToastController,
+              private paymentService:PaymentService) {
 	  //this.workList=WORK_LIST;
-    this.billNumber = this.navParams.get(BillNumberCode);
-    this.contractCode=this.navParams.get('contractCode');
+    //this.billNumber = this.navParams.get(BillNumberCode);
+    //this.contractCode=this.navParams.get('contractCode');
+    this.itemTranfer=this.navParams.get(ItemTranfer);
+    this.type=this.navParams.get('type');
     this.callback = this.navParams.get('callback');
+    this.isBackRefresh = false;
   }
 
   ionViewDidLoad() {
+    this.isBackRefresh = false;
     this.getList();
   }
 
   //获取工程量列表信息
   getList() {
-    //getGclMainList(contractCode:string,type:string,payCode:string,sequence :string)
-    this.paymentService.getGclMainList(this.contractCode,'ys','','0',this.billNumber)
+    let payCode:string = '';
+    let sequence:string = '';
+    if(this.type=='ys'){
+      sequence = '0';
+    }
+    //getGclMainList(contractCode:string,type:string,payCode:string,sequence :string,billNumber:string)
+    this.paymentService.getGclMainList(this.itemTranfer.contractCode,this.type,payCode,sequence,this.itemTranfer.billNumber)
       .subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
@@ -63,7 +83,7 @@ export class BillGclSelectPage {
                 workItem.checked=false;
                 workItem.gclType='3';
                 workItem.disabled=false;
-              }else if(workItem.acceptanceCode==this.billNumber){
+              }else if(workItem.acceptanceCode==this.itemTranfer.billNumber){
                 workItem.checked=true;
                 workItem.gclType="1";
                 workItem.disabled=false;
@@ -95,16 +115,94 @@ export class BillGclSelectPage {
   	refresher.complete();
   }
 
+  //查看明细
+  viewDetail(item: BillOfWorkMain){
+  	this.navCtrl.push("BillGclDetailPage",{"gclItem":item,'contractCode':this.itemTranfer.contractCode});
+  }
+
 
   //确定选择
   confirm(){
-    this.callback(this.workList).then(()=>{ this.navCtrl.pop() });
-  	//this.navCtrl.pop();
-  }
+    let transferInfo=new Array<AcceptApplyDetail>();
+    transferInfo.push(this.itemTranfer);
 
-  //查看明细
-  viewDetail(item: BillOfWorkMain){
-  	this.navCtrl.push("BillGclDetailPage",{"gclItem":item,'contractCode':this.contractCode});
+    //console.log(this.gclListInfo);
+    let isHave:boolean = false;
+    let isAll:boolean = true;
+    let datalist=new Array();
+    let seqceList =[];
+    let xzList =[];
+    let seqceStr='';
+    let xzStr='';
+    if(this.workList){
+      for(let seq of this.workList){
+        //seqceList.push(seq.sequence);
+        if(seq.checked==true){
+          seqceList.push(seq.sequence);
+          xzList.push(1);
+          isHave = true;
+        }else{
+          //xzList.push(0);
+          if(seq.acceptanceCode==this.itemTranfer.billNumber){
+            isAll = false;
+          }
+        }
+      }
+      seqceStr=seqceList.join(',');
+      xzStr=xzList.join(',');
+      console.log(seqceStr);
+      console.log(xzStr);
+      let gclInfo={cCode:this.itemTranfer.contractCode,billNumber:this.itemTranfer.billNumber,seqceList:seqceStr,xzList:xzStr};
+      datalist.push(gclInfo);
+    }else{
+      let gclInfo={cCode:this.itemTranfer.contractCode,billNumber:this.itemTranfer.billNumber,seqceList:'',xzList:''};
+      datalist.push(gclInfo);
+    }
+    //验收类型（2.进度验收，4，竣工验收）
+    //验收单据加验收类型：（进度验收，竣工验收）进度验收正常勾选工程量清单，竣工验收需要判断工程量清单是否全部勾选，不全部勾选不让点确定。
+    if(this.itemTranfer.clauseType=="4" && isAll == false){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: "工程量清单要全部勾选！",
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
+    //成本属性”（1.直接成本2.间接费用）
+    //间接费用 不可以打开验收明细和勾选工程量清单
+    if(this.itemTranfer.costProperty==2 && isHave == true){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: "成本属性：间接费用，不可以勾选工程量清单！",
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
+    this.acceptService.saveAcceptApplyMain(JSON.stringify(transferInfo),JSON.stringify(datalist))
+      .subscribe(object => {
+        let resultBase:ResultBase=object[0] as ResultBase;
+        if(resultBase.result=='true'){
+          this.isBackRefresh = true;
+          this.callback(this.isBackRefresh).then(()=>{ this.navCtrl.pop()});
+          //this.navCtrl.pop();
+          let toast = this.toastCtrl.create({
+              message: '保存成功',
+              duration: 3000
+          });
+          toast.present();
+        } else {
+            let alert = this.alertCtrl.create({
+              title: '提示',
+              subTitle: resultBase.message,
+              buttons: ['确定']
+            });
+            alert.present();
+        }
+      }, () => {
+        
+      });
   }
 
 }
