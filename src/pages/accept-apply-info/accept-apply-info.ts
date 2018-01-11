@@ -11,6 +11,8 @@ import {DictUtil} from '../../providers/dict-util';
 import {ReviewType} from '../../enums/review-type';
 import {ContractCostProperty} from '../../enums/enums';
 import {AcceptType} from '../../enums/enums';
+import {BillOfWorkMain} from '../../model/billof-work-main';
+import {PaymentService} from '../../services/paymentService';
 
 import {Oper,Oper_Look,Oper_Edit,Oper_Add,Oper_Approval} from '../../providers/TransferFeildName';
 import {Title} from '../../providers/TransferFeildName';
@@ -60,12 +62,15 @@ export class AcceptApplyInfoPage {
   hasApprovalProgress=false;
   approvalState:string;
 
+  gclListInfo:BillOfWorkMain[]=[];
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController,
               private storage: Storage,
               public toastCtrl:ToastController,
               private dictUtil:DictUtil,
               public acceptService:AcceptService,
+              private paymentService:PaymentService,
               public approvalService:ApprovalService) {
     this.itemShow = new AcceptApplyDetail();
     this.isShowCheck = false;
@@ -111,6 +116,7 @@ export class AcceptApplyInfoPage {
 
   getShowItem(){
     this.itemShow = new AcceptApplyDetail();
+    this.gclListInfo = [];
     this.acceptService.getAcceptDetailItem(this.billNumber).subscribe(
       object => {
         let resultBase:ResultBase=object[0] as ResultBase;
@@ -125,6 +131,17 @@ export class AcceptApplyInfoPage {
                 this.itemShow.costPropertyName = this.dictUtil.getNumEnumsName(ContractCostProperty,this.itemShow.costProperty);
                 //”验收类型（2.进度验收，4，竣工验收）”
                 this.itemShow.clauseTypeName = this.dictUtil.getEnumsName(AcceptType,this.itemShow.clauseType);
+              });
+              //获取工程量信息
+              //contractCode:string,type:string,payCode:string,sequence :string,billNumber:string
+              this.paymentService.getGclMainList(this.itemShow.contractCode,'ys','','0',this.itemShow.billNumber)
+                    .subscribe(object => {
+                  let resultBase:ResultBase=object[0] as ResultBase;
+                  if(resultBase.result=='true'){
+                      this.gclListInfo = object[1] as BillOfWorkMain[];
+                  }
+              }, () => {
+                      
               });
           }
         } else {
@@ -247,6 +264,41 @@ export class AcceptApplyInfoPage {
   }
 
   send(){
+    let isHave:boolean = false;
+    let isAll:boolean = true;
+    if(this.gclListInfo){
+      for(let seq of this.gclListInfo){
+        if(seq.checked==true){
+          isHave = true;
+        }else{
+          if(!(seq.acceptanceCode!=null && seq.acceptanceCode.trim()!="") || seq.acceptanceCode==this.itemShow.billNumber){
+            isAll = false;
+          }
+        }
+      }
+    }
+    //验收类型（2.进度验收，4，竣工验收）
+    //验收单据加验收类型：（进度验收，竣工验收）进度验收正常勾选工程量清单，竣工验收需要判断工程量清单是否全部勾选，不全部勾选不让点确定。
+    if(this.itemShow.clauseType=="4" && isAll == false){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: "验收类型：竣工验收，工程量清单要全部勾选！",
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
+    //成本属性”（1.直接成本2.间接费用）
+    //间接费用 不可以打开验收明细和勾选工程量清单
+    if(this.itemShow.costProperty==2 && isHave == true){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: "成本属性：间接费用，不可以勾选工程量清单！",
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
     console.log("ReviewType：" + ReviewType[ReviewType.BASICACCEPTANCE_APPLY]);
       this.navCtrl.push(Page_ChoiceApproversPage, {callback:this.checkRefresh,BillNumberCode: this.billNumber, BillContractCode:this.itemShow.contractCode,'reviewType':ReviewType[ReviewType.BASICACCEPTANCE_APPLY]});
   }

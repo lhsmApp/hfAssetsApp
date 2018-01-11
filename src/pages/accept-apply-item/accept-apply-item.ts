@@ -218,6 +218,15 @@ export class AcceptApplyItemPage {
 
   //保存
   save(){
+    if(this.sendSuccess!=false){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: "单据已送审！",
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
     let transferInfo=new Array<AcceptApplyDetail>();
     let detail=this.applyFrom.value as AcceptApplyDetail;
     detail.costProperty = Number(detail.costProperty);
@@ -296,6 +305,15 @@ export class AcceptApplyItemPage {
 
   //送审
   send(){
+    if(this.sendSuccess!=false){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: "单据已送审！",
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
       if(!(this.billNumber!=null&&this.billNumber.trim()!="")){
         let alert = this.alertCtrl.create({
           title: '提示',
@@ -305,6 +323,41 @@ export class AcceptApplyItemPage {
         alert.present();
         return;
       }
+    let isHave:boolean = false;
+    let isAll:boolean = true;
+    if(this.gclListInfo){
+      for(let seq of this.gclListInfo){
+        if(seq.checked==true){
+          isHave = true;
+        }else{
+          if(!(seq.acceptanceCode!=null && seq.acceptanceCode.trim()!="") || seq.acceptanceCode==this.itemShow.billNumber){
+            isAll = false;
+          }
+        }
+      }
+    }
+    //验收类型（2.进度验收，4，竣工验收）
+    //验收单据加验收类型：（进度验收，竣工验收）进度验收正常勾选工程量清单，竣工验收需要判断工程量清单是否全部勾选，不全部勾选不让点确定。
+    if(this.itemShow.clauseType=="4" && isAll == false){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: "验收类型：竣工验收，工程量清单要全部勾选！",
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
+    //成本属性”（1.直接成本2.间接费用）
+    //间接费用 不可以打开验收明细和勾选工程量清单
+    if(this.itemShow.costProperty==2 && isHave == true){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: "成本属性：间接费用，不可以勾选工程量清单！",
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
       console.log("ReviewType：" + ReviewType[ReviewType.BASICACCEPTANCE_APPLY]);
       this.navCtrl.push(Page_ChoiceApproversPage, {callback:this.checkRefresh,BillNumberCode: this.billNumber, BillContractCode:this.itemShow.contractCode,'reviewType':ReviewType[ReviewType.BASICACCEPTANCE_APPLY]});
   }
@@ -323,6 +376,15 @@ export class AcceptApplyItemPage {
 
   //工程量清单
   billOfGcl(){
+    if(this.sendSuccess!=false){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: "单据已送审！",
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
     if(!(this.billNumber!=null&&this.billNumber.trim()!="")){// || this.billOfGclIsSaved == false
         let alert = this.alertCtrl.create({
           title: '提示',
@@ -372,6 +434,15 @@ export class AcceptApplyItemPage {
   
   //资产明细
   toAssetDetail(){
+    if(this.sendSuccess!=false){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: "单据已送审！",
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
       if(!(this.billNumber!=null&&this.billNumber.trim()!="")){// || this.billOfGclIsSaved == false
         let alert = this.alertCtrl.create({
           title: '提示',
@@ -415,6 +486,15 @@ export class AcceptApplyItemPage {
 
   //选择合同
   choiceContract(){
+    if(this.sendSuccess!=false){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: "单据已送审！",
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
       this.navCtrl.push(Page_ContractChoiceListPage,  {callback: this.choiceContractOk});
   }
 
@@ -435,6 +515,15 @@ export class AcceptApplyItemPage {
 
   //附件列表
   attachment(){
+    if(this.sendSuccess!=false){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: "单据已送审！",
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
     if(!(this.billNumber!=null&&this.billNumber.trim()!="")){
       let alert = this.alertCtrl.create({
         title: '提示',
