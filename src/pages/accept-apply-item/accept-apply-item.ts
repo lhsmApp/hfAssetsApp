@@ -224,11 +224,48 @@ export class AcceptApplyItemPage {
     detail.requireDate =  Utils.dateFormat(new Date(), 'yyyy-MM-dd HH:mm');
     transferInfo.push(detail);
 
-    this.acceptService.saveAcceptApplyMain(JSON.stringify(transferInfo),"[]")
+    let datalistTransfer = "";
+    //成本属性”（1.直接成本2.间接费用）
+    //间接费用 不可以打开验收明细和勾选工程量清单
+    if(detail.billNumber!=null&&detail.billNumber.trim()!="" && detail.costProperty==2){
+        let datalist=new Array();
+        let seqceList =[];
+        let xzList =[];
+        let seqceStr='';
+        let xzStr='';
+        if(this.gclListInfo){
+          for(let seq of this.gclListInfo){
+            if(seq.acceptanceCode==detail.billNumber || seq.checked==true){
+              seqceList.push(seq.sequence);
+              xzList.push(0);
+            }
+          }
+          seqceStr=seqceList.join(',');
+          if(seqceStr!=null && seqceStr.trim()!=""){
+            if(!seqceStr.trim().endsWith(',')){
+              seqceStr += ',';
+            }
+          }
+          xzStr=xzList.join(',');
+          if(xzStr!=null && xzStr.trim()!=""){
+            if(!xzStr.trim().endsWith(',')){
+              xzStr += ',';
+            }
+          }
+          console.log(seqceStr);
+          console.log(xzStr);
+          let gclInfo={cCode:detail.contractCode,billNumber:detail.billNumber,seqceList:seqceStr,xzList:xzStr};
+          datalist.push(gclInfo);
+          datalistTransfer = JSON.stringify(datalist);
+        }
+    }
+
+    this.acceptService.saveAcceptApplyMain(JSON.stringify(transferInfo),datalistTransfer)
       .subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
           this.isBackRefresh = true;
+          this.oper = Oper_Edit;
           console.log(object[1][0]);
           if(this.oper == Oper_Add){
             this.itemShow = object[1][0] as AcceptApplyDetail;
@@ -237,7 +274,7 @@ export class AcceptApplyItemPage {
             this.itemShow = detail;
           }
           this.FromPatchValue();
-          this.oper = Oper_Edit;
+          this.getShowItem();
           //this.billOfGclIsSaved = true;
           let toast = this.toastCtrl.create({
               message: '保存成功',
@@ -297,7 +334,7 @@ export class AcceptApplyItemPage {
     }
     //成本属性”（1.直接成本2.间接费用）
     //间接费用 不可以打开验收明细和勾选工程量清单
-    if(this.itemShow.costProperty==2){
+    /*if(this.itemShow.costProperty==2){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: "成本属性：间接费用，不可以勾选工程量清单！",
@@ -305,7 +342,7 @@ export class AcceptApplyItemPage {
       });
       alert.present();
       return;
-    }
+    }*/
     //if(this.applyFrom.get('contractCode').value==null||this.applyFrom.get('contractCode').value==""){
     //  let alert = this.alertCtrl.create({
     //    title: '提示',
@@ -346,7 +383,7 @@ export class AcceptApplyItemPage {
       }
       //成本属性”（1.直接成本2.间接费用）
       //间接费用 不可以打开验收明细和勾选工程量清单
-      if(this.itemShow.costProperty==2){
+      /*if(this.itemShow.costProperty==2){
         let alert = this.alertCtrl.create({
           title: '提示',
           subTitle: "成本属性：间接费用，不可以打开验收明细！",
@@ -371,7 +408,7 @@ export class AcceptApplyItemPage {
         });
         alert.present();
         return;
-      }
+      }*/
       console.log(this.itemShow.requireDate);
       this.navCtrl.push(Page_AssetDetailsListPage, {BillNumberCode: this.billNumber, BillContractCode:this.itemShow.contractCode, 'BillAddTime':this.itemShow.requireDate, TypeView:TypeView_AcceptApply});
   }

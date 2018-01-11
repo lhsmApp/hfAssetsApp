@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController,ToastController } from 'ionic-angular';
+import { Component,ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams,AlertController,ToastController,Navbar } from 'ionic-angular';
 import { BillOfWorkMain} from '../../model/billof-work-main';
 import { PaymentService} from '../../services/paymentService';
 import {AcceptService} from '../../services/acceptService';
@@ -32,6 +32,8 @@ import {ItemTranfer} from '../../providers/TransferFeildName';
   templateUrl: 'bill-gcl-select.html',
 })
 export class BillGclSelectPage {
+  @ViewChild('myNavbar') navBar: Navbar;
+
   emptyPath=DEFAULT_INVOICE_EMPTY;
   isEmpty:boolean=false;
   workList:BillOfWorkMain[];
@@ -40,7 +42,7 @@ export class BillGclSelectPage {
   //contractCode:string;//合同流水号
   itemTranfer:AcceptApplyDetail;
   type:string;//ht，fk,htAssets
-  
+
   isBackRefresh = false;
 
   constructor(public navCtrl: NavController, 
@@ -60,6 +62,12 @@ export class BillGclSelectPage {
 
   ionViewDidLoad() {
     this.isBackRefresh = false;
+
+    this.navBar.backButtonClick=()=>{
+      this.callback(this.isBackRefresh).then(()=>{ this.navCtrl.pop()});
+      //this.navCtrl.pop();
+    }
+
     this.getList();
   }
 
@@ -136,20 +144,34 @@ export class BillGclSelectPage {
     let xzStr='';
     if(this.workList){
       for(let seq of this.workList){
-        //seqceList.push(seq.sequence);
-        if(seq.checked==true){
+        if(seq.acceptanceCode==this.itemTranfer.billNumber || seq.checked==true){
           seqceList.push(seq.sequence);
-          xzList.push(1);
+          if(seq.checked==true){
+            xzList.push(1);
+          }else{
+            xzList.push(0);
+          }
+        }
+        if(seq.checked==true){
           isHave = true;
         }else{
-          //xzList.push(0);
-          if(seq.acceptanceCode==this.itemTranfer.billNumber){
+          if(!(seq.acceptanceCode!=null && seq.acceptanceCode.trim()!="") || seq.acceptanceCode==this.itemTranfer.billNumber){
             isAll = false;
           }
         }
       }
       seqceStr=seqceList.join(',');
+      if(seqceStr!=null && seqceStr.trim()!=""){
+        if(!seqceStr.trim().endsWith(',')){
+          seqceStr += ',';
+        }
+      }
       xzStr=xzList.join(',');
+      if(xzStr!=null && xzStr.trim()!=""){
+        if(!xzStr.trim().endsWith(',')){
+          xzStr += ',';
+        }
+      }
       console.log(seqceStr);
       console.log(xzStr);
       let gclInfo={cCode:this.itemTranfer.contractCode,billNumber:this.itemTranfer.billNumber,seqceList:seqceStr,xzList:xzStr};
@@ -163,7 +185,7 @@ export class BillGclSelectPage {
     if(this.itemTranfer.clauseType=="4" && isAll == false){
       let alert = this.alertCtrl.create({
         title: '提示',
-        subTitle: "工程量清单要全部勾选！",
+        subTitle: "验收类型：竣工验收，工程量清单要全部勾选！",
         buttons: ['确定']
       });
       alert.present();
@@ -185,8 +207,7 @@ export class BillGclSelectPage {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
           this.isBackRefresh = true;
-          this.callback(this.isBackRefresh).then(()=>{ this.navCtrl.pop()});
-          //this.navCtrl.pop();
+          this.getList();
           let toast = this.toastCtrl.create({
               message: '保存成功',
               duration: 3000
