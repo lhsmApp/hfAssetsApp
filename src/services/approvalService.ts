@@ -12,11 +12,12 @@ export class ApprovalService {
   }
 
   //付款单据送审-审列表接口review_process 审批流程表
-  queryUserReviewPay(billNumber:string, type:string): Observable<(Object)> {
+  queryUserReviewPay(billNumber:string, type:string,contractCode:string): Observable<(Object)> {
     console.log('type: ' + type);
     let action = "";
     let reviewType = "";
     let getDo = "";
+    let getContractCode = "";
     if(type == ReviewType[ReviewType.REVIEW_TYPE_BASIC_PAYMENT]){
         action = 'queryUserReviewPay';
         reviewType = "付款审批";
@@ -25,6 +26,7 @@ export class ApprovalService {
         action = 'queryUserReviewAcceptance';
         reviewType = "验收申请审批";
         getDo = "phoneAcceptanceApply.do";
+        getContractCode = contractCode;
     }
     console.log('action: ' + action);
     console.log('reviewType: ' + reviewType);
@@ -34,6 +36,7 @@ export class ApprovalService {
      'action': action,
      'sessionid':this.globalData.sessionId,
      'billNumber': billNumber,
+     'contractCode': getContractCode,
      'reviewType':reviewType//审批使用常量名
      };
      return this.httpService.get(getDo, param).map((res: Response) => res.json());
