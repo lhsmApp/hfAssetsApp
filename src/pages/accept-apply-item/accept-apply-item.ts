@@ -276,12 +276,8 @@ export class AcceptApplyItemPage {
           this.isBackRefresh = true;
           this.oper = Oper_Edit;
           console.log(object[1][0]);
-          if(this.oper == Oper_Add){
-            this.itemShow = object[1][0] as AcceptApplyDetail;
-            this.billNumber = this.itemShow.billNumber;
-          } else {
-            this.itemShow = detail;
-          }
+          this.itemShow = object[1][0] as AcceptApplyDetail;
+          this.billNumber = this.itemShow.billNumber;
           this.FromPatchValue();
           this.getShowItem();
           //this.billOfGclIsSaved = true;
