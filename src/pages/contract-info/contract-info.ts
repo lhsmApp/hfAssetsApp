@@ -124,7 +124,7 @@ export class ContractInfoPage {
           });
           
           //成本属性
-          this.contractDetailInfo.costPropertyName = this.dictUtil.getEnumsName(ContractCostProperty,this.contractDetailInfo.costProperty);
+          this.contractDetailInfo.costPropertyName = this.dictUtil.getNumEnumsName(ContractCostProperty,this.contractDetailInfo.costProperty);
         }else{
           let alert = this.alertCtrl.create({
             title: '提示',
