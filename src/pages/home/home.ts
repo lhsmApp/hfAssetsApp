@@ -168,14 +168,94 @@ export class HomePage {
 
   openPage(cate: string) {
     if (cate === 'HTSP') {
+      let flag:boolean=false;
+      for(let item of this.globalData.permission){
+        if(item.funcCode=='39020203'){
+          flag=true;
+          break;
+        }
+      }
+      if(!flag){
+        let alert = this.alertCtrl.create({
+          title: '提示',
+          subTitle: '不能进行合同审批，您没有合同审批的权限！',
+          buttons: ['确定']
+        });
+        alert.present();
+        return;
+      }
       this.navCtrl.push("ContractApprovalPage",{callback:this.afterApproval});
     }else if (cate === 'FKSP') {
+      let flag:boolean=false;
+      for(let item of this.globalData.permission){
+        if(item.funcCode=='390303'){
+          flag=true;
+          break;
+        }
+      }
+      if(!flag){
+        let alert = this.alertCtrl.create({
+          title: '提示',
+          subTitle: '不能进行付款审批，您没有付款审批的权限！',
+          buttons: ['确定']
+        });
+        alert.present();
+        return;
+      }
       this.navCtrl.push("AdvancePaymentApprovalPage",{callback:this.afterApproval});
     }else if(cate === 'ZCYS'){
+      let flag:boolean=false;
+      for(let item of this.globalData.permission){
+        if(item.funcCode=='390502'){
+          flag=true;
+          break;
+        }
+      }
+      if(!flag){
+        let alert = this.alertCtrl.create({
+          title: '提示',
+          subTitle: '不能进行验收审批，您没有验收审批的权限！',
+          buttons: ['确定']
+        });
+        alert.present();
+        return;
+      }
       this.navCtrl.push("AcceptApprovalListPage",{callback:this.afterApproval});
     }else if(cate === 'ZZSP'){
+      let flag:boolean=false;
+      for(let item of this.globalData.permission){
+        if(item.funcCode=='390507'){
+          flag=true;
+          break;
+        }
+      }
+      if(!flag){
+        let alert = this.alertCtrl.create({
+          title: '提示',
+          subTitle: '不能进行转资审批，您没有转资审批的权限！',
+          buttons: ['确定']
+        });
+        alert.present();
+        return;
+      }
       this.navCtrl.push("TransferFundsApprovalListPage",{callback:this.afterApproval});
     }else if(cate === 'ZZTZSP'){
+      let flag:boolean=false;
+      for(let item of this.globalData.permission){
+        if(item.funcCode=='390509'){
+          flag=true;
+          break;
+        }
+      }
+      if(!flag){
+        let alert = this.alertCtrl.create({
+          title: '提示',
+          subTitle: '不能进行转资调整审批，您没有转资调整审批的权限！',
+          buttons: ['确定']
+        });
+        alert.present();
+        return;
+      }
       this.navCtrl.push("TransferAdjustApprovalListPage",{callback:this.afterApproval});
     }
   }

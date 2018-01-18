@@ -24,17 +24,18 @@
 	      进度管理
 	    <ion-icon name="arrow-dropright" item-end></ion-icon>
 	  </ion-item> -->
-	  <ion-item (click)="yukApply()" *ngIf="fkPermission">
+	  <!-- *ngIf="fkPermission" -->
+	  <ion-item (click)="yukApply()" >
 	    <ion-icon name="logo-foursquare" item-start color="primary"></ion-icon>
 	      付款申请
 	    <ion-icon name="arrow-dropright" item-end></ion-icon>
 	  </ion-item>
-	  <ion-item (click)="ysApply()" *ngIf="ysPermission">
+	  <ion-item (click)="ysApply()">
 	    <ion-icon name="logo-buffer" item-start color="primary"></ion-icon>
 	      验收申请
 	    <ion-icon name="arrow-dropright" item-end></ion-icon>
 	  </ion-item>
-	  <ion-item (click)="jdApply()" *ngIf="jdPermission">
+	  <ion-item (click)="jdApply()">
 	    <ion-icon name="pulse" item-start color="primary"></ion-icon>
 	      进度管理
 	    <ion-icon name="arrow-dropright" item-end></ion-icon>
