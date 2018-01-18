@@ -326,7 +326,7 @@ export class AcceptApplyItemPage {
         if(seq.checked==true){
           isHave = true;
         }else{
-          if(!(seq.acceptanceCode!=null && seq.acceptanceCode.trim()!="") || seq.acceptanceCode==this.itemShow.billNumber){
+          if(!(seq.acceptanceCode!=null && seq.acceptanceCode.trim()!="")){
             isAll = false;
           }
         }
