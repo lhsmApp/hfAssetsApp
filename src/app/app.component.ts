@@ -52,7 +52,6 @@ export class MyApp {
         });
       }
       else{
-        console.log('sdfsfsd');
         this.globalData.serverPort=APP_PORT_BROWER;
       }
 
@@ -91,8 +90,14 @@ export class MyApp {
       }*/
       //如果想点击返回按钮隐藏toast或loading或Overlay就把下面加上
       // this.ionicApp._toastPortal.getActive() ||this.ionicApp._loadingPortal.getActive()|| this.ionicApp._overlayPortal.getActive()
-      let activePortal = this.ionicApp._modalPortal.getActive();
       
+      let activeOverlayPortal = this.ionicApp._overlayPortal.getActive();
+      if (activeOverlayPortal) {
+        activeOverlayPortal.dismiss();
+        return;
+      }
+
+      let activePortal = this.ionicApp._modalPortal.getActive();
       if (activePortal) {
         activePortal.dismiss();
         return;
@@ -103,6 +108,7 @@ export class MyApp {
         let tabs=activeVC.instance.tabs;
         if(tabs){
           let activeNav = tabs.getSelected();
+
           //return activeNav.canGoBack() ? activeNav.pop() : this.nativeService.minimize();//this.showExit()
           if(activeNav.canGoBack()) {
             activeNav.pop();

@@ -16,9 +16,9 @@ export class QueryPage {
   constructor(public navCtrl: NavController,private globalData: GlobalData) {
     if(this.globalData.permission){
       for(let item of this.globalData.permission){
-        if(item.func_code=='391209'){
+        if(item.func_code=='3902010901'){
           this.projectQueryPermission=item.enabled==1?true:false;
-        }else if(item.func_code=='391306'){
+        }else if(item.func_code=='390511'){
           this.zzQueryPermission=item.enabled==1?true:false;
         }
       }

@@ -100,6 +100,9 @@ export class AssetDetailsListInfoPage {
       acceptanceFlag = "1";
       translateCode = this.billNumber;
     }
+    if(this.TypeView === TypeView_Contract){
+      contractCode = this.contractCode;
+    }
     if(this.TypeView === TypeView_AcceptApply){
       this.contractService.getAssetDetailListBySelectedWorkList(acceptanceCode).subscribe(
         object => {
