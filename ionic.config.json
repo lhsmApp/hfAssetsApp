@@ -6,6 +6,6 @@
     "cordova": {}
   },
   "proxies": [ 
-  	{ "path": "/assets", "proxyUrl": "http://192.168.1.105:9080/assets" }
+  	{ "path": "/assets", "proxyUrl": "http://10.201.2.93:9080/assets" }
   ]
 }
