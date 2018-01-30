@@ -97,7 +97,7 @@ export class AdvancePaymentApplyPage {
       planType: [,[Validators.required]],//项目核算类别，自动带出
       //planTypeName: [,[Validators.required]],//项目核算类别，自动带出
       payDigest: [,[Validators.required]],//付款原因，手工录入
-      acceptanceCode:[,[Validators.required]],//验收单号，选择
+      acceptanceCode:'',//验收单号，选择
       costMoney: [,[Validators.required]],//合同标的（审计）额，自动带出
       taxMoney: '',//已付款额度，自动带出
       payMoney: [,[Validators.required]],//本次申请金额，手工录入
@@ -318,6 +318,23 @@ export class AdvancePaymentApplyPage {
         return;
       }
     }*/
+
+    if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='4'){
+      if(this.paymentForm.get('acceptanceCode').value==null||this.paymentForm.get('acceptanceCode').value==""){
+        let alert = this.alertCtrl.create({
+          title: '提示',
+          subTitle: '请先选择验收单号，再进行保存！',
+          buttons: ['确定']
+        });
+        alert.present();
+        return;
+      }
+    }else{
+      this.paymentForm.patchValue({
+          acceptanceCode:''
+      });
+    }
+
 
     let paymentInfo=new Array<AdvancePaymentDetail>();
     let detail=this.paymentForm.value as AdvancePaymentDetail;
