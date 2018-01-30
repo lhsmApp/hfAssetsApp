@@ -54,7 +54,7 @@ export class QueryPage {
       let flag:boolean=false;
       console.log(this.globalData.permission);
       for(let item of this.globalData.permission){
-        if(item.funcCode=='3902010901'){
+        if(item.funcCode=='390107'){
           flag=true;
           break;
         }
@@ -74,16 +74,73 @@ export class QueryPage {
 
   //合同信息查询
   queryContract() {
+    if(this.globalData.permission){
+      let flag:boolean=false;
+      console.log(this.globalData.permission);
+      for(let item of this.globalData.permission){
+        if(item.funcCode=='390206'){
+          flag=true;
+          break;
+        }
+      }
+      if(!flag){
+        let alert = this.alertCtrl.create({
+          title: '提示',
+          subTitle: '不能进行合同信息查询，您没有合同信息查询的权限！',
+          buttons: ['确定']
+        });
+        alert.present();
+        return;
+      }
+    }
     this.navCtrl.push('QueryConditionPage', {'oper': 'ht'});
   }
 
   //付款信息查询
   queryPayment() {
+    if(this.globalData.permission){
+      let flag:boolean=false;
+      console.log(this.globalData.permission);
+      for(let item of this.globalData.permission){
+        if(item.funcCode=='390405'){
+          flag=true;
+          break;
+        }
+      }
+      if(!flag){
+        let alert = this.alertCtrl.create({
+          title: '提示',
+          subTitle: '不能进行付款信息查询，您没有付款信息查询的权限！',
+          buttons: ['确定']
+        });
+        alert.present();
+        return;
+      }
+    }
     this.navCtrl.push('QueryConditionPage', {'oper': 'yfk'});
   }
 
   //验收信息查询
   queryYs() {
+    if(this.globalData.permission){
+      let flag:boolean=false;
+      console.log(this.globalData.permission);
+      for(let item of this.globalData.permission){
+        if(item.funcCode=='390303'){
+          flag=true;
+          break;
+        }
+      }
+      if(!flag){
+        let alert = this.alertCtrl.create({
+          title: '提示',
+          subTitle: '不能进行验收信息查询，您没有验收信息查询的权限！',
+          buttons: ['确定']
+        });
+        alert.present();
+        return;
+      }
+    }
     this.navCtrl.push('QueryConditionPage', {'oper': 'topics1'});
   }
 
@@ -92,7 +149,7 @@ export class QueryPage {
     if(this.globalData.permission){
       let flagzz:boolean=false;
       for(let item of this.globalData.permission){
-        if(item.funcCode=='390511'){
+        if(item.funcCode=='390605'){
           flagzz=true;
           break;
         }

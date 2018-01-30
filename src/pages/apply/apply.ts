@@ -66,7 +66,7 @@ export class ApplyPage {
     if(this.globalData.permission){
       let flag:boolean=false;
       for(let item of this.globalData.permission){
-        if(item.funcCode=='390302'){
+        if(item.funcCode=='390401'){
           flag=true;
           break;
         }
@@ -89,7 +89,7 @@ export class ApplyPage {
     if(this.globalData.permission){
       let flagys:boolean=false;
       for(let item of this.globalData.permission){
-        if(item.funcCode=='390501'){
+        if(item.funcCode=='390301'){
           flagys=true;
           break;
         }
@@ -112,7 +112,7 @@ export class ApplyPage {
     if(this.globalData.permission){
       let flagjd:boolean=false;
       for(let item of this.globalData.permission){
-        if(item.funcCode=='39020108'){
+        if(item.funcCode=='390106'){
           flagjd=true;
           break;
         }

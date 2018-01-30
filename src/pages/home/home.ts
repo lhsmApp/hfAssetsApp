@@ -170,7 +170,7 @@ export class HomePage {
     if (cate === 'HTSP') {
       let flag:boolean=false;
       for(let item of this.globalData.permission){
-        if(item.funcCode=='39020203'){
+        if(item.funcCode=='390203'){
           flag=true;
           break;
         }
@@ -188,7 +188,7 @@ export class HomePage {
     }else if (cate === 'FKSP') {
       let flag:boolean=false;
       for(let item of this.globalData.permission){
-        if(item.funcCode=='390303'){
+        if(item.funcCode=='390402'){
           flag=true;
           break;
         }
@@ -206,7 +206,7 @@ export class HomePage {
     }else if(cate === 'ZCYS'){
       let flag:boolean=false;
       for(let item of this.globalData.permission){
-        if(item.funcCode=='390502'){
+        if(item.funcCode=='390302'){
           flag=true;
           break;
         }
@@ -224,7 +224,7 @@ export class HomePage {
     }else if(cate === 'ZZSP'){
       let flag:boolean=false;
       for(let item of this.globalData.permission){
-        if(item.funcCode=='390507'){
+        if(item.funcCode=='390602'){
           flag=true;
           break;
         }
@@ -242,7 +242,7 @@ export class HomePage {
     }else if(cate === 'ZZTZSP'){
       let flag:boolean=false;
       for(let item of this.globalData.permission){
-        if(item.funcCode=='390509'){
+        if(item.funcCode=='390604'){
           flag=true;
           break;
         }

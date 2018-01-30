@@ -329,6 +329,10 @@ export class AdvancePaymentApplyPage {
         alert.present();
         return;
       }
+    }else{
+      this.paymentForm.patchValue({
+          acceptanceCode:''
+      });
     }
 
 
