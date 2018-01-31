@@ -38,7 +38,7 @@ export class AttachmentPage {
   attachmentList:Attachment[];
   billNumber:string;
   contractCode :string;
-  type:string;//1.合同 2.发票 
+  type:string;//1.合同/验收 2.发票 3.付款
   typeList:string;//1、合同 2、付款、发票、验收
   attachmentType:string;//1.合同 2.付款 3.发票 4.验收
 

@@ -13,14 +13,16 @@ export class AcceptService {
   }
 
   //验收申请单据列表---basic_assets_accept_apply  验收单据表
-  getAcceptMainList(type:string, billNumber:string, startDate:string, endDate:string, 
+  getAcceptMainList(type:string, billNumber:string, contractCode:string, clauseType:string, startDate:string, endDate:string, 
              reviewStatus:string): Observable<(Object)> {
   	console.log('验收申请单据列表'+this.globalData.sessionId);
     let param = {
      'action': 'queryListAssetsAcceptanceApply',
      'sessionid': this.globalData.sessionId,
-     'type': type,//1.申请 2.查询 3.审批
+     'type': type,//1.申请 2.查询 3.审批 4.付款单查验收单
      'reviewStatus': reviewStatus,//0新增（新增）、99待审批（待审批）、1 审批成功（已审批）、2审批失败 （退回）
+     'contractCode':contractCode,//type=4传合同流水号 type为1/2/3的时候合同流水号不传
+     'clauseType':clauseType,//type=4必传 type为1/2/3的时候合同流水号不传
      'billNumber': billNumber,//"验收编号"(模糊查询)
      'startDate': startDate,//"开始日期"(对应   requireDate:"申请时间")
      'endDate': endDate,//"结束日期"(对应   requireDate:"申请时间")

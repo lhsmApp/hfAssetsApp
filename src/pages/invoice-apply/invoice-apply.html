@@ -51,6 +51,7 @@
       <ion-item text-wrap>
         <ion-label fixed>发票单价</ion-label>
         <ion-input type="number" formControlName="price"></ion-input>
+        <!--  ng-change="myFunc()" -->
       </ion-item>
       <span *ngIf="!invoiceForm.controls.price.valid && invoiceForm.controls.price.touched"
             class="validation-failed">请输入发票单价
@@ -70,7 +71,7 @@
             class="validation-failed">请输入税率
       </span>
       <ion-item text-wrap>
-        <ion-label fixed>发票金额</ion-label>
+        <ion-label fixed>发票总金额</ion-label>
         <ion-input type="number" formControlName="chalanMoney"></ion-input>
       </ion-item>
       <span *ngIf="!invoiceForm.controls.chalanMoney.valid && invoiceForm.controls.chalanMoney.touched"

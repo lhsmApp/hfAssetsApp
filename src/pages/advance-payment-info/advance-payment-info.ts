@@ -264,9 +264,9 @@ export class AdvancePaymentInfoPage {
   attachment(){
     console.log(this.apply);
     if(this.apply){
-      this.navCtrl.push("AttachmentPage",{'billNumber':this.paymentDetail.payCode,'contractCode':'','type':'1','attachmentType':'2','typeList':'1'});
+      this.navCtrl.push("AttachmentPage",{'billNumber':this.paymentDetail.payCode,'contractCode':'','type':'3','attachmentType':'2','typeList':'1'});
     }else{
-      this.navCtrl.push("AttachmentInfoPage",{'billNumber':this.paymentDetail.payCode,'contractCode':'','type':'1','attachmentType':'2','typeList':'1'});
+      this.navCtrl.push("AttachmentInfoPage",{'billNumber':this.paymentDetail.payCode,'contractCode':'','type':'3','attachmentType':'2','typeList':'1'});
     }
   }
 }

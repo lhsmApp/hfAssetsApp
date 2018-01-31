@@ -63,7 +63,7 @@ export class AttachmentService {
   }
 
   //附件上传-----basic_up_file 附件表
-  uploadAttachment64(base64String:string,type:string,billNumber:string,contractCode:string):Observable<(Object)> {
+  uploadAttachment64(base64String:string,type:string,billNumber:string,contractCode:string, userCode:string, userName:string):Observable<(Object)> {
     /*let param = {
      //必传
      'action': 'deletePhoneBasicChalan',
@@ -73,11 +73,13 @@ export class AttachmentService {
      };*/
 
      let data={
-     	'type' :type,//（1,2） 1.合同 2.发票
+     	'type' :type,//（1,2,3） 1.合同/验收 2.发票 3.付款
      	'billNumber' :billNumber,//”单号”（如果是合同页contractCode，如果是发票页sequence）
 	    'fileFlag ' :1,//(模块标记1,基建 2，租赁 目前始终传1)
 	    'contractCode' :contractCode,//如果是发票页必须传，contractCode合同页传空
-	    'depiction':''//文件信息
+	    'depiction':'',//文件信息,//如果是发票页必须传，contractCode合同页传空
+        'userCode':userCode,
+        'userName':userName
      };
      let formData: FormData = new FormData(); 
      //必传
@@ -91,14 +93,16 @@ export class AttachmentService {
   }
 
   //附件上传-----basic_up_file 附件表
-  uploadAttachment(blob:Blob,fileName:string,type:string,billNumber:string,contractCode:string):Observable<(Object)> {
+  uploadAttachment(blob:Blob,fileName:string,type:string,billNumber:string,contractCode:string, userCode:string, userName:string):Observable<(Object)> {
      //let fileInfo=new Blob([arrayBuffer], { type: "image/jpeg" } );
      let data={
-         'type' :type,//（1,2） 1.合同 2.发票
+         'type' :type,//（1,2,3） 1.合同/验收 2.发票 3.付款
          'billNumber' :billNumber,//”单号”（如果是合同页contractCode，如果是发票页sequence）
         'fileFlag' :1,//(模块标记1,基建 2，租赁 目前始终传1)
         'contractCode' :contractCode,//如果是发票页必须传，contractCode合同页传空
-        'depiction':''//文件信息
+        'depiction':'',//文件信息
+        'userCode':userCode,
+        'userName':userName
      };
      let formData: FormData = new FormData(); 
      //必传

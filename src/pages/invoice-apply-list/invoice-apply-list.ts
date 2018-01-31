@@ -109,6 +109,7 @@ export class InvoiceApplyListPage {
   //删除
   delete(item: InvoiceMain, slidingItem: ItemSliding){
     slidingItem.close();
+    console.log(item);
     let confirm = this.alertCtrl.create({
       title: '删除提示?',
       message: '确认要删除当前发票吗?',
@@ -122,6 +123,7 @@ export class InvoiceApplyListPage {
         {
           text: '确认',
           handler: () => {
+            console.log(item.chalanNumber);
             this.paymentService.deleteInvoiceMain(this.paymentMain.payCode,item.chalanNumber)
             .subscribe(object => {
               let resultBase:ResultBase=object[0] as ResultBase;

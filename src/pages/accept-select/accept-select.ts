@@ -24,9 +24,13 @@ export class AcceptSelectPage {
   list:AcceptApplyMain[];
   emptyPath=DEFAULT_INVOICE_EMPTY;
   isEmpty:boolean=false;
+  contractCode: string;
+  clauseType:string;
   callback :any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController,public acceptService:AcceptService) {
   	this.callback    = this.navParams.get('callback');
+    this.contractCode = this.navParams.get('contractCode');
+    this.clauseType = this.navParams.get('clauseType');
   }
 
   ionViewDidLoad() {
@@ -40,7 +44,7 @@ export class AcceptSelectPage {
     //1.申请 2.查询 3.审批
     //0新增（新增）、99待审批（待审批）、1 审批成功（已审批）、2审批失败 （退回）
     //type:string, billNumber:string, startDate:string, endDate:string, reviewStatus:string
-    this.acceptService.getAcceptMainList('4', '' ,'', '', state).subscribe(
+    this.acceptService.getAcceptMainList('4', '' , this.contractCode, this.clauseType,'', '', state).subscribe(
       object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){

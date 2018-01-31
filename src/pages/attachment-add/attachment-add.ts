@@ -25,7 +25,7 @@ export class AttachmentAddPage {
   attachmentPath: string=DEFAULT_INVOICE_EMPTY;
   billNumber:string;//单号:如果是合同页contractCode，如果是发票页sequence
   contractCode:string;//如果是发票页必须传，contractCode合同页传空
-  type :string;//1.合同 2.发票 
+  type :string;//1.合同/验收 2.发票 3.付款
 
   constructor(private params: NavParams,
               private viewCtrl: ViewController,
@@ -72,7 +72,7 @@ export class AttachmentAddPage {
   //保存附件
   saveAttachment() {
     this.nativeService.convertImgToArrayBuffer(this.attachmentPath).subscribe(fileInfo => {
-      this.attachmentService.uploadAttachment(fileInfo.blob,fileInfo.fileName,this.type,this.billNumber,this.contractCode).subscribe(object => {
+      this.attachmentService.uploadAttachment(fileInfo.blob,fileInfo.fileName,this.type,this.billNumber,this.contractCode,this.globalData.userId,this.globalData.userName).subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
           this.viewCtrl.dismiss({'reflesh': true});

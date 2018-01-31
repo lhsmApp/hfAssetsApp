@@ -89,7 +89,7 @@ export class AdvancePaymentApplyPage {
     this.oper=this.navParams.get('oper');
     this.paymentForm = this.formBuilder.group({
       payCode: '',//付款单号，保存后自动生成
-      clauseType: [,[Validators.required]],//款项类别，选择
+      clauseType: [,[Validators.required]],//款项类别，选择 必须在acceptanceCode之前
       contractCode: [,[Validators.required]],//合同流水号，选择
       contractName: [,[Validators.required]],//合同名称，自动带出
       //elementType: [, [Validators.required]],//项目性质，自动带出
@@ -242,7 +242,9 @@ export class AdvancePaymentApplyPage {
 
   //选择验收单号
   choiceAccept(){
-    if(this.paymentForm.get('contractCode').value==null||this.paymentForm.get('contractCode').value==""){
+    let contractCode:string = this.paymentForm.get('contractCode').value;
+    let clauseType:string = this.paymentForm.get('clauseType').value;
+    if(!(contractCode!=null&&contractCode.trim()!="")){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: '请先选择合同流水号，再选择验收单号！',
@@ -251,7 +253,7 @@ export class AdvancePaymentApplyPage {
       alert.present();
       return;
     }
-    if(this.paymentForm.get('clauseType').value==null||this.paymentForm.get('clauseType').value==""){
+    if(!(clauseType!=null&&clauseType.trim()!="")){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: '请先选择款项类别，再选择验收单号！',
@@ -260,7 +262,18 @@ export class AdvancePaymentApplyPage {
       alert.present();
       return;
     }
-    this.navCtrl.push('AcceptSelectPage',  {callback: this.choiceAcceptOk});
+    //款项为“预付款”时，无需选择“验收单号”，建议将字段隐藏或改为提示“当前款项为预付款，禁止选择验收单号”
+    if(clauseType=='1' || clauseType=='3'){
+        let alert = this.alertCtrl.create({
+          title: '提示',
+          subTitle: '当前款项为预付款或质保金，禁止选择验收单号！',
+          buttons: ['确定']
+        });
+        alert.present();
+        return;
+    }
+    console.log(contractCode);
+    this.navCtrl.push('AcceptSelectPage',  {'contractCode':contractCode,'clauseType':clauseType,callback: this.choiceAcceptOk});
   }
 
   choiceAcceptOk = (acceptInfo) =>
@@ -319,8 +332,19 @@ export class AdvancePaymentApplyPage {
       }
     }*/
 
+    if(this.paymentForm.get('clauseType').value=='1'||this.paymentForm.get('clauseType').value=='3'){
+      if(this.paymentForm.get('acceptanceCode').value!=null && this.paymentForm.get('acceptanceCode').value.trim()!=""){
+        let alert = this.alertCtrl.create({
+          title: '提示',
+          subTitle: '当前款项为预付款或质保金，禁止选择验收单号！',
+          buttons: ['确定']
+        });
+        alert.present();
+        return;
+      }
+    }
     if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='4'){
-      if(this.paymentForm.get('acceptanceCode').value==null||this.paymentForm.get('acceptanceCode').value==""){
+      if(!(this.paymentForm.get('acceptanceCode').value!=null&&this.paymentForm.get('acceptanceCode').value.trim()!="")){
         let alert = this.alertCtrl.create({
           title: '提示',
           subTitle: '请先选择验收单号，再进行保存！',
@@ -338,7 +362,7 @@ export class AdvancePaymentApplyPage {
 
     let paymentInfo=new Array<AdvancePaymentDetail>();
     let detail=this.paymentForm.value as AdvancePaymentDetail;
-    if(detail.taxMoney==null||detail.taxMoney.toString()==""){
+    if(!(detail.taxMoney!=null&&detail.taxMoney.toString().trim()!="")){
       detail.taxMoney=0;
     }
     detail.payMoney=parseFloat(detail.payMoney.toString());
@@ -466,7 +490,7 @@ export class AdvancePaymentApplyPage {
 
   //工程量清单
   billOfGcl(paymentDetail:AdvancePaymentDetail){
-    if(this.paymentForm.get('contractCode').value==null||this.paymentForm.get('contractCode').value==""){
+    if(!(this.paymentForm.get('contractCode').value!=null&&this.paymentForm.get('contractCode').value.trim()!="")){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: '请先选择合同流水号，再选择工程量信息！',
@@ -475,7 +499,7 @@ export class AdvancePaymentApplyPage {
       alert.present();
       return;
     }
-    if(this.paymentForm.get('acceptanceCode').value==null||this.paymentForm.get('acceptanceCode').value==""){
+    if(!(this.paymentForm.get('acceptanceCode').value!=null&&this.paymentForm.get('acceptanceCode').value.trim()!="")){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: '请先选择验收单号，再查看工程量信息！',
@@ -536,11 +560,27 @@ export class AdvancePaymentApplyPage {
     });
   };
 
+  clearAcceptanceCode(){
+    console.log('clearAcceptanceCode');
+    if(this.paymentForm.get('acceptanceCode').value!=null && this.paymentForm.get('acceptanceCode').value.trim()!=""){
+      this.paymentForm.patchValue({
+        acceptanceCode:''
+      });
+    }
+  }
 
   //款项类别变化
-  clauseChange(){
+  clauseChange(clauseType:string){
     console.log('change');
-    if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='4'){
+    //款项为“预付款”时，无需选择“验收单号”，建议将字段隐藏或改为提示“当前款项为预付款，禁止选择验收单号”
+    console.log(clauseType);
+    console.log(this.paymentForm.get('clauseType').value);
+    if(clauseType=='1'||clauseType=='3'){
+      this.paymentForm.patchValue({
+        acceptanceCode:''
+      });
+    }
+    if(clauseType=='2'||clauseType=='4'){
         let sumHj=0;
         if(this.gclListInfo){
           for(let gclItem of this.gclListInfo){
@@ -567,6 +607,6 @@ export class AdvancePaymentApplyPage {
       alert.present();
       return;
     }
-    this.navCtrl.push("AttachmentPage",{'billNumber':this.paymentDetail.payCode,'contractCode':'','type':'1','attachmentType':'2','typeList':'1'});
+    this.navCtrl.push("AttachmentPage",{'billNumber':this.paymentDetail.payCode,'contractCode':'','type':'2','attachmentType':'2','typeList':'1'});
   }
 }

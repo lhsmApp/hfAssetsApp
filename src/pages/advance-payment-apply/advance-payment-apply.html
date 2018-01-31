@@ -33,7 +33,9 @@
       </ion-item>
       <ion-item text-wrap>
         <ion-label fixed>款项类别<span class="danger">*</span></ion-label>
-        <ion-select [ngModel]="clauseType" formControlName="clauseType" style="left:0;" placeholder="选择" cancelText="取消" okText="确定" (ngModelChange)="clauseType=$event;clauseChange()">
+        <ion-select [(ngModel)]="clauseType" formControlName="clauseType" style="left:0;" placeholder="选择" 
+            cancelText="取消" okText="确定" 
+            (ngModelChange)="clauseType=$event;clauseChange(clauseType)">
           <!-- <ion-option value="1">进度款</ion-option>
           <ion-option value="2">预付款</ion-option>
           <ion-option value="3">质保金</ion-option>
