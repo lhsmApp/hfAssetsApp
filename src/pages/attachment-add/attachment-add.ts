@@ -7,6 +7,8 @@ import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
 import {AttachmentService} from '../../services/attachmentService';
 import {ResultBase} from "../../model/result-base";
 import {GlobalData} from "../../providers/GlobalData";
+import { normalizeURL } from 'ionic-angular';
+
 
 /**
  * Generated class for the AttachmentAddPage page.
@@ -23,6 +25,7 @@ import {GlobalData} from "../../providers/GlobalData";
 export class AttachmentAddPage {
   title:string;
   attachmentPath: string=DEFAULT_INVOICE_EMPTY;
+  attachmentPathUpload: string;
   billNumber:string;//单号:如果是合同页contractCode，如果是发票页sequence
   contractCode:string;//如果是发票页必须传，contractCode合同页传空
   type :string;//1.合同/验收 2.发票 3.付款
@@ -56,14 +59,17 @@ export class AttachmentAddPage {
     };
     if (type == 1) {
       this.nativeService.getPictureByCameraOfPath(options).subscribe(imageBase64 => {
+
         //this.attachmentPath=imageBase64.substring(0,imageBase64.lastIndexOf('?'));
-        this.attachmentPath=imageBase64;
+        this.attachmentPath=normalizeURL(imageBase64);
+        attachmentPathUpload=imageBase64;
         //this.getPictureSuccess(imageBase64);
       });
     } else {
       this.nativeService.getPictureByPhotoLibraryOfPath(options).subscribe(imageBase64 => {
         //this.attachmentPath=imageBase64.substring(0,imageBase64.lastIndexOf('?'));
-        this.attachmentPath=imageBase64;
+        this.attachmentPath=normalizeURL(imageBase64);
+        this.attachmentPathUpload=imageBase64;
         //this.getPictureSuccess(imageBase64);
       });
     }
@@ -71,7 +77,7 @@ export class AttachmentAddPage {
 
   //保存附件
   saveAttachment() {
-    this.nativeService.convertImgToArrayBuffer(this.attachmentPath).subscribe(fileInfo => {
+    this.nativeService.convertImgToArrayBuffer(this.attachmentPathUpload).subscribe(fileInfo => {
       this.attachmentService.uploadAttachment(fileInfo.blob,fileInfo.fileName,this.type,this.billNumber,this.contractCode,this.globalData.userId,this.globalData.userName).subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
