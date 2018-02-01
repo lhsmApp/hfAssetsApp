@@ -18,10 +18,10 @@ import {GlobalData} from "../../providers/GlobalData";
  * Ionic pages and navigation.
  */
 
- const  ATTACHMENT_LIST: Attachment []= [  
+ /*const  ATTACHMENT_LIST: Attachment []= [  
  { fileName: '办公发票', fileInfo: '办公发票描述', filePath: DEFAULT_INVOICE,sequence:1},
  { fileName: '旅游发票', fileInfo: '旅游发票描述',filePath: DEFAULT_INVOICE,sequence:2}
- ];
+ ];*/
 
 @IonicPage()
 @Component({
@@ -71,7 +71,7 @@ export class AttachmentInfoPage {
 
   //获取附件列表信息
   getList(){
-    this.attachmentService.getAttachmentList(this.billNumber,this.contractCode,this.typeList)
+    this.attachmentService.getAttachmentList(this.billNumber,this.contractCode,this.type)
     .subscribe(object => {
       let resultBase:ResultBase=object[0] as ResultBase;
       if(resultBase.result=='true'){

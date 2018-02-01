@@ -29,7 +29,8 @@
   	      <img src="{{thumbPath}}">
   	    </ion-thumbnail>
   	    <p>{{item.fileName}}</p>
-  	    <ion-note>{{item.fileInfo}}</ion-note>
+  	    <p><ion-note>{{item.fileInfo}}</ion-note></p>
+        <p><ion-note>{{item.uploader}}</ion-note></p>
        </ion-item>
        <ion-item-options side="right">
           <button ion-button color="danger" (click)="delete(item);">

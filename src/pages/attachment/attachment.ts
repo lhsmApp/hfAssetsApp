@@ -19,10 +19,10 @@ import {GlobalData} from "../../providers/GlobalData";
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
- const  ATTACHMENT_LIST: Attachment []= [  
+ /*const  ATTACHMENT_LIST: Attachment []= [  
  { fileName: '办公发票', fileInfo: '办公发票描述', filePath: DEFAULT_INVOICE,sequence:1},
  { fileName: '旅游发票', fileInfo: '旅游发票描述',filePath: DEFAULT_INVOICE,sequence:2}
- ];
+ ];*/
 
 
 @IonicPage()
@@ -77,7 +77,7 @@ export class AttachmentPage {
   //获取附件列表信息
   getList(){
     //this.nativeService.alert(this.billNumber+'|'+this.contractCode+'|'+this.type);
-    this.attachmentService.getAttachmentList(this.billNumber,this.contractCode,this.typeList)
+    this.attachmentService.getAttachmentList(this.billNumber,this.contractCode,this.type)
     .subscribe(object => {
       let resultBase:ResultBase=object[0] as ResultBase;
       if(resultBase.result=='true'){
@@ -224,7 +224,7 @@ export class AttachmentPage {
         {
           text: '确认',
           handler: () => {
-            this.attachmentService.deleteAttachment(this.billNumber,this.contractCode,this.type,item.sequence)
+            this.attachmentService.deleteAttachment(this.billNumber,this.contractCode,this.type,item.sequence,'0')
             .subscribe(object => {
               let resultBase:ResultBase=object[0] as ResultBase;
               if(resultBase.result=='true'){

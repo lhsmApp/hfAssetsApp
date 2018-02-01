@@ -10,4 +10,6 @@ export class Attachment{
 	fileInfo:string;//附件信息
 	
 	filePath:string;//附件路径
+
+	uploader:string;//上传人
 }
