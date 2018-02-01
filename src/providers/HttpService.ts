@@ -55,6 +55,7 @@ export class HttpService {
   public post(url: string, body: any = {}): Observable<Response> {
     return this.request(url, new RequestOptions({
       method: RequestMethod.Post,
+      withCredentials:true,
       body: body,
       headers: new Headers({
         'Content-Type': 'application/json; charset=UTF-8'
@@ -65,6 +66,7 @@ export class HttpService {
   public postMultiFormData(url: string, body: any = {}): Observable<Response> {
     return this.request(url, new RequestOptions({
       method: RequestMethod.Post,
+      withCredentials:true,
       body: body,
       headers: new Headers({
         //'Content-Type': 'application/json; charset=UTF-8'
@@ -76,6 +78,7 @@ export class HttpService {
   public postFormData(url: string, paramMap: any = null): Observable<Response> {
     return this.request(url, new RequestOptions({
       method: RequestMethod.Post,
+      withCredentials:true,
       search: HttpService.buildURLSearchParams(paramMap).toString(),
       headers: new Headers({
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -86,6 +89,7 @@ export class HttpService {
   public put(url: string, body: any = {}): Observable<Response> {
     return this.request(url, new RequestOptions({
       method: RequestMethod.Put,
+      withCredentials:true,
       body: body
     }));
   }
@@ -100,6 +104,7 @@ export class HttpService {
   public patch(url: string, body: any = {}): Observable<Response> {
     return this.request(url, new RequestOptions({
       method: RequestMethod.Patch,
+      withCredentials:true,
       body: body
     }));
   }
@@ -107,6 +112,7 @@ export class HttpService {
   public head(url: string, paramMap: any = null): Observable<Response> {
     return this.request(url, new RequestOptions({
       method: RequestMethod.Head,
+      withCredentials:true,
       search: HttpService.buildURLSearchParams(paramMap).toString()
     }));
   }
@@ -114,6 +120,7 @@ export class HttpService {
   public options(url: string, paramMap: any = null): Observable<Response> {
     return this.request(url, new RequestOptions({
       method: RequestMethod.Options,
+      withCredentials:true,
       search: HttpService.buildURLSearchParams(paramMap).toString()
     }));
   }
