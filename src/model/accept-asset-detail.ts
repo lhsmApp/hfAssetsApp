@@ -27,8 +27,7 @@ export class AcceptAssetDetail {
     addDepreciate: number;//累计折旧(double)
     devalueValue: number;//减值准备(double)
     keyCode: string;//资产键码
-
-
+    acceptanceCode: string;//
 
     assetsTypeName: string;//资产类型"
     //没字典
@@ -41,4 +40,5 @@ export class AcceptAssetDetail {
     usedStateName: string;//使用状况"
     storePlaceName: string;//存放地点""
     specialLineName: string;//技术鉴定部门"
+
 }

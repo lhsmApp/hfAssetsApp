@@ -48,6 +48,7 @@ export class AttachmentAddPage {
   }
 
   ionViewDidLoad() {
+    console.log(this.globalData.userCode);
     console.log('ionViewDidLoad AttachmentAddPage');
   }
 
@@ -62,7 +63,7 @@ export class AttachmentAddPage {
 
         //this.attachmentPath=imageBase64.substring(0,imageBase64.lastIndexOf('?'));
         this.attachmentPath=normalizeURL(imageBase64);
-        attachmentPathUpload=imageBase64;
+        this.attachmentPathUpload=imageBase64;
         //this.getPictureSuccess(imageBase64);
       });
     } else {
@@ -78,7 +79,7 @@ export class AttachmentAddPage {
   //保存附件
   saveAttachment() {
     this.nativeService.convertImgToArrayBuffer(this.attachmentPathUpload).subscribe(fileInfo => {
-      this.attachmentService.uploadAttachment(fileInfo.blob,fileInfo.fileName,this.type,this.billNumber,this.contractCode,this.globalData.userId,this.globalData.userName).subscribe(object => {
+      this.attachmentService.uploadAttachment(fileInfo.blob,fileInfo.fileName,this.type,this.billNumber,this.contractCode,this.globalData.userCode,this.globalData.userName).subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
           this.viewCtrl.dismiss({'reflesh': true});

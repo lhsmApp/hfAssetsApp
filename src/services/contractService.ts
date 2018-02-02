@@ -67,12 +67,13 @@ export class ContractService {
     return this.httpService.get('phoneContactMain.do', param).map((res:Response) => res.json());
   }
   //根据验收单号查到资产明细列表
-  getAssetDetailListBySelectedWorkList(billNumber:string):Observable<(object)>{
+  getAssetDetailListBySelectedWorkList(billNumber:string, contractCode:string):Observable<(object)>{
     console.log('资产明细列表'+this.globalData.sessionId);
     let param = {
         'action': "queryKeyCodeListBySelectedWorkList",
         'sessionid': this.globalData.sessionId,
         'billNumber': billNumber,//”验收单据号”
+        'contractCode': contractCode,
     };
     return this.httpService.get('phoneAcceptanceApply.do', param).map((res:Response) => res.json());
   }
