@@ -20,6 +20,7 @@ export class HttpService {
               private globalData: GlobalData,
               public logger: Logger,
               private nativeService: NativeService) {
+    
   }
 
   public request(url: string, options: RequestOptionsArgs): Observable<Response> {
