@@ -25,5 +25,5 @@ export class ProjectUnitDetail{
 
 
 				elementFlagName: string;//项目单元类别" 
- 				sgsxName: string;//施工属性""                      		  
+ 				sgsxName: string;//施工属性""   		  
 }

@@ -258,7 +258,7 @@ export class AcceptApplyItemPage {
           xzStr=xzList.join(',');
           if(xzStr!=null && xzStr.trim()!=""){
             if(!xzStr.trim().endsWith(',')){
-              xzStr += ',';
+              xzStr += ','; 
             }
           }
           console.log(seqceStr);

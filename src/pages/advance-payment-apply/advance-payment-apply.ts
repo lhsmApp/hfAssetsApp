@@ -263,10 +263,19 @@ export class AdvancePaymentApplyPage {
       return;
     }
     //款项为“预付款”时，无需选择“验收单号”，建议将字段隐藏或改为提示“当前款项为预付款，禁止选择验收单号”
-    if(clauseType=='1' || clauseType=='3'){
+    if(clauseType=='1'){
         let alert = this.alertCtrl.create({
           title: '提示',
-          subTitle: '当前款项为预付款或质保金，禁止选择验收单号！',
+          subTitle: '当前款项为预付款，禁止选择验收单号！',
+          buttons: ['确定']
+        });
+        alert.present();
+        return;
+    }
+    if(clauseType=='3'){
+        let alert = this.alertCtrl.create({
+          title: '提示',
+          subTitle: '当前款项为质保金，禁止选择验收单号！',
           buttons: ['确定']
         });
         alert.present();
@@ -332,11 +341,20 @@ export class AdvancePaymentApplyPage {
       }
     }*/
 
-    if(this.paymentForm.get('clauseType').value=='1'||this.paymentForm.get('clauseType').value=='3'){
-      if(this.paymentForm.get('acceptanceCode').value!=null && this.paymentForm.get('acceptanceCode').value.trim()!=""){
+    if(this.paymentForm.get('acceptanceCode').value!=null && this.paymentForm.get('acceptanceCode').value.trim()!=""){
+      if(this.paymentForm.get('clauseType').value=='1'){
         let alert = this.alertCtrl.create({
           title: '提示',
-          subTitle: '当前款项为预付款或质保金，禁止选择验收单号！',
+          subTitle: '当前款项为预付款，禁止选择验收单号！',
+          buttons: ['确定']
+        });
+        alert.present();
+        return;
+      }
+      if(this.paymentForm.get('clauseType').value=='3'){
+        let alert = this.alertCtrl.create({
+          title: '提示',
+          subTitle: '当前款项为质保金，禁止选择验收单号！',
           buttons: ['确定']
         });
         alert.present();

@@ -155,6 +155,7 @@ export class AssetDetailsItemPage {
       addDepreciate: [, []],
       devalueValue: [, []],
       keyCode: [, []],
+      acceptanceCode: [, []],
 
       assetsTypeName: [, []],
     });
@@ -190,6 +191,7 @@ export class AssetDetailsItemPage {
       addDepreciate: this.itemShow.addDepreciate,
       devalueValue: this.itemShow.devalueValue,
       keyCode: this.itemShow.keyCode,
+      acceptanceCode: this.itemShow.acceptanceCode,
 
       assetsTypeName: this.itemShow.assetsTypeName,
     });
