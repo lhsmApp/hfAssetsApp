@@ -7,10 +7,10 @@
         <ion-item class='list'>
           <ion-label><ion-icon name="person"></ion-icon></ion-label>
 
-          <ion-input type="text" formControlName="usercode" placeholder="用户名" clearInput></ion-input>
+          <ion-input type="text" formControlName="usercode" autofocus placeholder="用户名" clearInput></ion-input>
         </ion-item>
         <div *ngIf="!loginForm.controls.usercode.valid && loginForm.controls.usercode.touched" class="validation-failed"> 请输入正确用户名</div>
-
+        
         <ion-item class='list'>
           <ion-label><ion-icon name="key"></ion-icon></ion-label>
           <ion-input type="password" formControlName="password" placeholder="密码" clearInput></ion-input>
@@ -24,8 +24,9 @@
         <div *ngIf="!loginForm.controls.departCode.valid && loginForm.controls.departCode.touched" class="validation-failed"> 请选择单位</div>
 
         <ion-item class='list' no-lines>
+          <ion-label class="main_gray">记住信息</ion-label>
           <ion-checkbox formControlName="ischeck"></ion-checkbox>
-          <label item-left style="margin-left: -25px;" class="main_gray">记住信息</label>
+          <!-- <label item-left style="margin-left: -25px;" class="main_gray">记住信息</label> -->
           <button ion-button  type="button" small clear color="primary" item-right (click)="serverIP()">设置服务器</button>
         </ion-item>
        </ion-list>

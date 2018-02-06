@@ -62,7 +62,7 @@ export class AttachmentAddPage {
 
         //this.attachmentPath=imageBase64.substring(0,imageBase64.lastIndexOf('?'));
         this.attachmentPath=normalizeURL(imageBase64);
-        attachmentPathUpload=imageBase64;
+        this.attachmentPathUpload=imageBase64;
         //this.getPictureSuccess(imageBase64);
       });
     } else {
