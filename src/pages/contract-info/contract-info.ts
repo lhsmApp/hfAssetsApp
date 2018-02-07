@@ -93,6 +93,11 @@ export class ContractInfoPage {
     this.initData();
   }
 
+  //当点击手机物理后退键时促发审批或者送审刷新动作
+  refBack(){
+    this.callback(true).then(()=>{ this.navCtrl.pop() });
+  }
+
   //初始化数据
   initData(){
     this.contractService.getContractDetailItem(this.contractMain.contractCode,this.contractMain.sequence)

@@ -1,5 +1,5 @@
 import { Component ,ViewChild} from '@angular/core';
-import { Platform,Keyboard,IonicApp,Nav,ToastController,Tabs  } from 'ionic-angular';
+import { Platform,Keyboard,IonicApp,Nav,ToastController,Tabs ,Tab,ViewController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeService} from "../providers/NativeService";
@@ -108,10 +108,18 @@ export class MyApp {
         let tabs=activeVC.instance.tabs;
         if(tabs){
           let activeNav = tabs.getSelected();
-
+          let tb=activeNav as Tab;
+          
           //return activeNav.canGoBack() ? activeNav.pop() : this.nativeService.minimize();//this.showExit()
           if(activeNav.canGoBack()) {
-            activeNav.pop();
+            let vc=tb.getActive() as ViewController;
+            if(vc.instance.sendSuccess){
+              /*if(vc.instance.refBack instanceof  function){*/
+                vc.instance.refBack();
+              /*}*/
+            }else{
+              activeNav.pop();
+            }
             return;
           }
         }
