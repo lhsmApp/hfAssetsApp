@@ -16,7 +16,8 @@ import {Oper,Oper_Look,Oper_Approval} from '../../providers/TransferFeildName';
 import {Title} from '../../providers/TransferFeildName';
 import {ItemTranfer} from '../../providers/TransferFeildName';
 
-import {Page_TransferAdjustAssetListPage} from '../../providers/TransferFeildName';
+import {Page_TransferAdjustAssetListPage,Page_ApprovalPage} from '../../providers/TransferFeildName';
+import {BillNumberCode} from '../../providers/TransferFeildName';
 //import {Oper,Oper_Approval} from '../../providers/TransferFeildName';
 //import {Title} from '../../providers/TransferFeildName';
 //import {ItemTranfer} from '../../providers/TransferFeildName';
@@ -138,7 +139,22 @@ export class TransferAdjustApprovalInfoPage {
   }
 
   check(){
-    let prompt = this.alertCtrl.create({
+    let reviewType = ReviewType[ReviewType.REVIEW_TYPE_BASIC_TRANSLATE_ADJUST];
+      this.navCtrl.push(Page_ApprovalPage, {callback:this.checkCallback,BillNumberCode: this.itemShow.translateCode, "BillReviewType":reviewType});
+  }
+
+  //回调
+  checkCallback = (data) =>
+  {
+    return new Promise((resolve, reject) => {
+      console.log(data);
+      if(data){
+        this.sendSuccess=true;
+      }
+      resolve();
+    });
+  };
+    /*let prompt = this.alertCtrl.create({
       title: '审批',
       message: "请输入审批意见",
       inputs: [
@@ -215,7 +231,7 @@ export class TransferAdjustApprovalInfoPage {
       }
     });
     prompt.present();
-  }
+  }*/
 
   //审批进度
   approvalProgress(){

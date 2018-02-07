@@ -35,8 +35,9 @@ export class ApprovalPage {
     this.message = "";
     this.isCheck = false;
     this.billNumber = this.navParams.get(BillNumberCode);
-    this.ReviewType = this.navParams.get(BillReviewType);
+    this.ReviewType = this.navParams.get("BillReviewType");
     this.callback = this.navParams.get('callback');
+        console.log(this.ReviewType);
   }
 
   ionViewDidLoad() {
@@ -68,6 +69,32 @@ export class ApprovalPage {
       alert.present();
       return;
   	}
+        //billNumber:string,reviewType:string,vetoReason:string
+        console.log(this.billNumber);
+        console.log(this.ReviewType);
+        console.log(this.message);
+        this.approvalService.auditReview(this.billNumber, this.ReviewType, this.message)
+          .subscribe(object => {
+            let resultBase:ResultBase=object[0] as ResultBase;
+            if(resultBase.result=='true'){
+              this.isCheck=true;
+              console.log('通过');
+              let toast = this.toastCtrl.create({
+                message: resultBase.message,
+                duration: 3000
+              });
+              toast.present();
+            } else {
+              let alert = this.alertCtrl.create({
+                title: '提示',
+                subTitle: resultBase.message,
+                buttons: ['确定']
+              });
+              alert.present();
+            }
+          }, () => {
+        
+          });
   }
 
   checkFalse(){
@@ -81,6 +108,9 @@ export class ApprovalPage {
       return;
   	}
         //billNumber:string,reviewType:string,vetoReason:string
+        console.log(this.billNumber);
+        console.log(this.ReviewType);
+        console.log(this.message);
         this.approvalService.vetoReview(this.billNumber, this.ReviewType, this.message)
           .subscribe(object => {
             let resultBase:ResultBase=object[0] as ResultBase;

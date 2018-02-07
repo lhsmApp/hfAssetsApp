@@ -22,6 +22,9 @@ import {BillCheckResult} from '../../providers/TransferFeildName';
 
 import {TypeView,TypeView_Contract} from '../../providers/TransferFeildName';
 
+import {Page_ApprovalPage } from '../../providers/TransferFeildName';
+import {BillNumberCode} from '../../providers/TransferFeildName';
+
 /**
  * Generated class for the ContractInfoPage page.
  *
@@ -140,6 +143,22 @@ export class ContractInfoPage {
 
   //审批
   approval(){
+    let reviewType = ReviewType[ReviewType.REVIEW_TYPE_CONTRACT_MAIN];
+      this.navCtrl.push(Page_ApprovalPage, {callback:this.checkCallback,BillNumberCode: this.contractDetailInfo.contractCode, "BillReviewType":reviewType});
+  }
+
+  //回调
+  checkCallback = (data) =>
+  {
+    return new Promise((resolve, reject) => {
+      console.log(data);
+      if(data){
+        this.sendSuccess=true;
+      }
+      resolve();
+    });
+  };
+  /* 
     let prompt = this.alertCtrl.create({
       title: '审批',
       message: "请输入审批意见",
@@ -216,7 +235,7 @@ export class ContractInfoPage {
       }
     });
     prompt.present();
-  }
+  }*/
 
   //合同明细
   contractDetail(){

@@ -179,7 +179,8 @@ export class AcceptApplyInfoPage {
   }
 
   check(){
-      this.navCtrl.push(Page_ApprovalPage, {callback:this.checkCallback,BillNumberCode: this.billNumber, BillReviewType:ReviewType[ReviewType.BASICACCEPTANCE_APPLY]});
+    let reviewType = ReviewType[ReviewType.BASICACCEPTANCE_APPLY];
+      this.navCtrl.push(Page_ApprovalPage, {callback:this.checkCallback,BillNumberCode: this.billNumber, "BillReviewType":reviewType});
   }
 
   //回调

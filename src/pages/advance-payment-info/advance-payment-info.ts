@@ -13,10 +13,11 @@ import {DicInDepart} from '../../model/dic-in-depart';
 import {DicOutDepart} from '../../model/dic-out-depart';
 import { PAYMENT_CATEGORY} from '../../enums/enums';
 import { DictUtil} from '../../providers/dict-util';
-import {BillNumberCode} from '../../providers/TransferFeildName';
 import { ReviewType} from '../../enums/review-type';
 import {ApprovalService} from '../../services/approvalService';
 
+import {Page_ApprovalPage } from '../../providers/TransferFeildName';
+import {BillNumberCode} from '../../providers/TransferFeildName';
 /**
  * Generated class for the AdvancePaymentInfoPage page.
  *
@@ -145,6 +146,22 @@ export class AdvancePaymentInfoPage {
 
   //审批
   approval(){
+    let reviewType = ReviewType[ReviewType.REVIEW_TYPE_BASIC_PAYMENT];
+      this.navCtrl.push(Page_ApprovalPage, {callback:this.checkCallback,BillNumberCode: this.paymentDetail.payCode, "BillReviewType":reviewType});
+  }
+
+  //回调
+  checkCallback = (data) =>
+  {
+    return new Promise((resolve, reject) => {
+      console.log(data);
+      if(data){
+        this.sendSuccess=true;
+      }
+      resolve();
+    });
+  };
+  /* 
     let prompt = this.alertCtrl.create({
       title: '审批',
       message: "请输入审批意见",
@@ -221,7 +238,7 @@ export class AdvancePaymentInfoPage {
       }
     });
     prompt.present();
-  }
+  }*/
 
   //发票
   invoice(){

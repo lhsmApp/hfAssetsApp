@@ -18,12 +18,12 @@
                 <ion-label fixed>请输入审批意见</ion-label>
         </ion-item>
         <ion-item text-wrap>
-                <ion-input type="text">{{message}}</ion-input>
+                <ion-input type="text" placeholder="请输入审批意见" [(ngModel)]="message"></ion-input>
         </ion-item>
 
-        <div padding-horizontal>
-            <button ion-button color="danger" (click)="cancel()">返回</button>
-            <button ion-button color="danger" (click)="checkFalse()">不通过</button>
-            <button ion-button color="danger" (click)="checkTrue()">通过</button>
-        </div>
+        <ion-item padding-horizontal>
+            <button ion-button item-end color="blue" (click)="cancel()">返回</button>
+            <button ion-button item-end color="danger" (click)="checkFalse()">不通过</button>
+            <button ion-button item-end color="green" (click)="checkTrue()">通过</button>
+        </ion-item>
 </ion-content>
