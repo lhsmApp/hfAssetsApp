@@ -108,6 +108,11 @@ export class AdvancePaymentInfoPage {
     this.initData();
   }
 
+  //当点击手机物理后退键时促发审批或者送审刷新动作
+  refBack(){
+    this.callback(true).then(()=>{ this.navCtrl.pop() });
+  }
+
   //初始化数据
   initData(){
     this.paymentService.getPaymentDetail(this.paymentMain.payCode)
