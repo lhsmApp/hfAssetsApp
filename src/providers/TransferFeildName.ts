@@ -90,3 +90,6 @@ export const Page_TransferAdjustAssetInfoPage = 'TransferAdjustAssetInfoPage';
 
 //选择审批人 BillNumberCode BillReviewType
 export const Page_ChoiceApproversPage = 'ChoiceApproversPage';
+
+//审批 BillNumberCode BillReviewType
+export const Page_ApprovalPage = 'ApprovalPage';

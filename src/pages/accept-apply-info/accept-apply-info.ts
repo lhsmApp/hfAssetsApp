@@ -18,7 +18,7 @@ import {Oper,Oper_Look,Oper_Edit,Oper_Add,Oper_Approval} from '../../providers/T
 import {Title} from '../../providers/TransferFeildName';
 import {BillNumberCode} from '../../providers/TransferFeildName';
 
-import {Page_AssetDetailsListInfoPage,Page_AssetDetailsListPage,Page_ChoiceApproversPage } from '../../providers/TransferFeildName';
+import {Page_AssetDetailsListInfoPage,Page_AssetDetailsListPage,Page_ChoiceApproversPage,Page_ApprovalPage } from '../../providers/TransferFeildName';
 import {TypeView,TypeView_AcceptApply} from '../../providers/TransferFeildName';
 import {BillReviewType} from '../../providers/TransferFeildName';
 import {BillApprovalState} from '../../providers/TransferFeildName';
@@ -179,7 +179,21 @@ export class AcceptApplyInfoPage {
   }
 
   check(){
-        console.log('check');
+      this.navCtrl.push(Page_ApprovalPage, {callback:this.checkCallback,BillNumberCode: this.billNumber, BillReviewType:ReviewType[ReviewType.BASICACCEPTANCE_APPLY]});
+  }
+
+  //回调
+  checkCallback = (data) =>
+  {
+    return new Promise((resolve, reject) => {
+      console.log(data);
+      if(data){
+        this.sendSuccess=true;
+      }
+      resolve();
+    });
+  };
+  /*      console.log('check');
         console.log(this.sendSuccess);
     let prompt = this.alertCtrl.create({
       title: '审批',
@@ -261,7 +275,7 @@ export class AcceptApplyInfoPage {
       }
     });
     prompt.present();
-  }
+  }*/
 
   send(){
     let isHave:boolean = false;
