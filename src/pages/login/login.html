@@ -19,7 +19,7 @@
 
         <ion-item class='list'>
           <ion-label><ion-icon name="people"></ion-icon></ion-label>
-          <ion-input type="text" formControlName="departCode" readonly  placeholder="单位" (focus)="selectDepart()" ></ion-input>
+          <ion-input type="text" formControlName="departCode" readonly  placeholder="单位" (tap)="selectDepart()" ></ion-input>
         </ion-item>
         <div *ngIf="!loginForm.controls.departCode.valid && loginForm.controls.departCode.touched" class="validation-failed"> 请选择单位</div>
 
