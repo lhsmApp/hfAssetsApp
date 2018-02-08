@@ -30,7 +30,7 @@ export class InvoiceApplyPage {
   paymentMain:AdvancePaymentMain;
   contractCode:string;
   callback :any;
-  saveSuccess=false;
+  isBackRefrash=false;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -60,14 +60,19 @@ export class InvoiceApplyPage {
   ionViewDidLoad() {
     this.navBar.backButtonClick=()=>{
       console.log('back');
-      if(this.saveSuccess){
+      if(this.isBackRefrash){
         this.callback(true).then(()=>{ this.navCtrl.pop() });
       }else{
         this.navCtrl.pop();
       }
     }
-    this.saveSuccess=false;
+    this.isBackRefrash=false;
     this.initData();
+  }
+
+  //当点击手机物理后退键时促发审批或者送审刷新动作
+  refBack(){
+    this.callback(true).then(()=>{ this.navCtrl.pop() });
   }
 
   //初始化数据
@@ -142,7 +147,7 @@ export class InvoiceApplyPage {
             duration: 3000
           });
           toast.present();
-          this.saveSuccess=true;
+          this.isBackRefrash=true;
           this.invoiceDetail = object[1][0] as InvoiceDetail;
           this.invoiceForm.patchValue({
             chalanNumber:this.invoiceDetail.chalanNumber,

@@ -22,7 +22,7 @@ export class ApprovalPage {
   @ViewChild('myNavbar') navBar: Navbar;
 
   message:string;
-  isCheck:boolean;
+  isBackRefrash:boolean;
 
   billNumber:string;
   ReviewType:string;
@@ -33,7 +33,7 @@ export class ApprovalPage {
               public toastCtrl:ToastController,
               public approvalService:ApprovalService) {
     this.message = "";
-    this.isCheck = false;
+    this.isBackRefrash = false;
     this.billNumber = this.navParams.get(BillNumberCode);
     this.ReviewType = this.navParams.get("BillReviewType");
     this.callback = this.navParams.get('callback');
@@ -43,7 +43,7 @@ export class ApprovalPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ApprovalPage');
     this.navBar.backButtonClick=()=>{
-      if(this.isCheck){
+      if(this.isBackRefrash){
         this.callback(true).then(()=>{ this.navCtrl.pop() });
       }else{
         this.navCtrl.pop();
@@ -51,8 +51,13 @@ export class ApprovalPage {
     }
   }
 
+  //当点击手机物理后退键时促发审批或者送审刷新动作
+  refBack(){
+    this.callback(true).then(()=>{ this.navCtrl.pop() });
+  }
+
   cancel(){
-      if(this.isCheck){
+      if(this.isBackRefrash){
         this.callback(true).then(()=>{ this.navCtrl.pop() });
       }else{
         this.navCtrl.pop();
@@ -60,7 +65,7 @@ export class ApprovalPage {
   }
 
   checkTrue(){
-  	if(this.isCheck){
+  	if(this.isBackRefrash){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: "已审批！",
@@ -77,7 +82,7 @@ export class ApprovalPage {
           .subscribe(object => {
             let resultBase:ResultBase=object[0] as ResultBase;
             if(resultBase.result=='true'){
-              this.isCheck=true;
+              this.isBackRefrash=true;
               console.log('通过');
               let toast = this.toastCtrl.create({
                 message: resultBase.message,
@@ -98,7 +103,7 @@ export class ApprovalPage {
   }
 
   checkFalse(){
-  	if(this.isCheck){
+  	if(this.isBackRefrash){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: "已审批！",
@@ -115,9 +120,9 @@ export class ApprovalPage {
           .subscribe(object => {
             let resultBase:ResultBase=object[0] as ResultBase;
             if(resultBase.result=='true'){
-              this.isCheck=true;
+              this.isBackRefrash=true;
               console.log('不通过');
-              console.log(this.isCheck);
+              console.log(this.isBackRefrash);
               let toast = this.toastCtrl.create({
                 message: resultBase.message,
                 duration: 3000

@@ -113,7 +113,7 @@ export class MyApp {
           //return activeNav.canGoBack() ? activeNav.pop() : this.nativeService.minimize();//this.showExit()
           if(activeNav.canGoBack()) {
             let vc=tb.getActive() as ViewController;
-            if(vc.instance.sendSuccess){
+            if(vc.instance.sendSuccess || vc.instance.isBackRefresh){
               /*if(vc.instance.refBack instanceof  function){*/
                 vc.instance.refBack();
               /*}*/

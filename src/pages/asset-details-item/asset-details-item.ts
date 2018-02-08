@@ -236,6 +236,11 @@ export class AssetDetailsItemPage {
     this.getShowItem();
   }
 
+  //当点击手机物理后退键时促发审批或者送审刷新动作
+  refBack(){
+    this.callback(true).then(()=>{ this.navCtrl.pop() });
+  }
+
   getShowItem(){
     this.itemShow = new AcceptAssetDetail();
 
