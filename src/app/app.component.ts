@@ -114,9 +114,11 @@ export class MyApp {
           if(activeNav.canGoBack()) {
             let vc=tb.getActive() as ViewController;
             if(vc.instance.sendSuccess){
-              /*if(vc.instance.refBack instanceof  function){*/  
+              if(vc.instance.refBack instanceof Function){
                 vc.instance.refBack();
-              /*}*/
+              }else{
+                activeNav.pop();
+              }
             }else{
               activeNav.pop();
             }
