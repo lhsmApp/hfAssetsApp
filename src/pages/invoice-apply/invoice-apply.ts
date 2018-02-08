@@ -30,7 +30,7 @@ export class InvoiceApplyPage {
   paymentMain:AdvancePaymentMain;
   contractCode:string;
   callback :any;
-  isBackRefrash=false;
+  sendSuccess=false;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -60,13 +60,13 @@ export class InvoiceApplyPage {
   ionViewDidLoad() {
     this.navBar.backButtonClick=()=>{
       console.log('back');
-      if(this.isBackRefrash){
+      if(this.sendSuccess){
         this.callback(true).then(()=>{ this.navCtrl.pop() });
       }else{
         this.navCtrl.pop();
       }
     }
-    this.isBackRefrash=false;
+    this.sendSuccess=false;
     this.initData();
   }
 
@@ -147,7 +147,7 @@ export class InvoiceApplyPage {
             duration: 3000
           });
           toast.present();
-          this.isBackRefrash=true;
+          this.sendSuccess=true;
           this.invoiceDetail = object[1][0] as InvoiceDetail;
           this.invoiceForm.patchValue({
             chalanNumber:this.invoiceDetail.chalanNumber,

@@ -38,7 +38,7 @@ export class TransferAdjustApprovalListPage {
     list:TransferFundsMain[];
   emptyPath=DEFAULT_INVOICE_EMPTY;
   isEmpty:boolean=false;
-  isBackRefrash=false;
+  sendSuccess=false;
   
   callback :any;
 
@@ -48,16 +48,16 @@ export class TransferAdjustApprovalListPage {
               private dictUtil:DictUtil,
               public tzCostService:AcceptService) {
     this.callback = this.navParams.get('callback');
-    this.isBackRefrash=false;
+    this.sendSuccess=false;
     //this.listAll = [];
     //this.list = [];
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TransferAdjustApprovalListPage');
-    this.isBackRefrash=false;
+    this.sendSuccess=false;
     this.navBar.backButtonClick=()=>{
-      if(this.isBackRefrash){
+      if(this.sendSuccess){
         this.callback(true).then(()=>{ this.navCtrl.pop() });
       }else{
         this.navCtrl.pop();
@@ -162,8 +162,8 @@ export class TransferAdjustApprovalListPage {
   checkRefresh = (data) =>
   {
     return new Promise((resolve, reject) => {
-      this.isBackRefrash=data;
       if(data){
+        this.sendSuccess=data;
         this.getList();
       }
       resolve();

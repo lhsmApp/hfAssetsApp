@@ -49,7 +49,7 @@
       </span>
       <ion-item text-wrap>
         <ion-label fixed>合同流水号<span class="danger">*</span></ion-label>
-        <ion-input type="text" readonly formControlName="contractCode" placeholder="选择" (focus)="choiceContract()"></ion-input>
+        <ion-input type="text" readonly formControlName="contractCode" placeholder="选择" (click)="choiceContract()"></ion-input>
       </ion-item>
       <span *ngIf="!paymentForm.controls.contractCode.valid && paymentForm.controls.contractCode.touched"
             class="validation-failed">
@@ -90,7 +90,7 @@
       </ion-item>
       <ion-item text-wrap>
         <ion-label fixed>验收单号<span class="danger"></span></ion-label>
-        <ion-input type="text" readonly formControlName="acceptanceCode" placeholder="选择" (focus)="choiceAccept()"></ion-input>
+        <ion-input type="text" readonly formControlName="acceptanceCode" placeholder="选择" (click)="choiceAccept()"></ion-input>
       </ion-item>
       <span *ngIf="!paymentForm.controls.acceptanceCode.valid && paymentForm.controls.acceptanceCode.touched"
             class="validation-failed">

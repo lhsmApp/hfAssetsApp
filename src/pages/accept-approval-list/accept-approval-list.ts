@@ -36,7 +36,7 @@ export class AcceptApprovalListPage {
     list:AcceptApplyMain[];
   emptyPath=DEFAULT_INVOICE_EMPTY;
   isEmpty:boolean=false;
-  isBackRefrash=false;
+  sendSuccess=false;
   
   callback :any;
 
@@ -45,15 +45,15 @@ export class AcceptApprovalListPage {
               public navParams: NavParams,
               public acceptService:AcceptService) {
     this.callback = this.navParams.get('callback');
-    this.isBackRefrash=false;
+    this.sendSuccess=false;
     //this.listAll = [];
     //this.list = [];
   }
 
   ionViewDidLoad() {
-    this.isBackRefrash=false;
+    this.sendSuccess=false;
     this.navBar.backButtonClick=()=>{
-      if(this.isBackRefrash){
+      if(this.sendSuccess){
         this.callback(true).then(()=>{ this.navCtrl.pop() });
       }else{
         this.navCtrl.pop();
@@ -152,8 +152,8 @@ export class AcceptApprovalListPage {
   checkRefresh = (data) =>
   {
     return new Promise((resolve, reject) => {
-      this.isBackRefrash=data;
       if(data){
+        this.sendSuccess=data;
         this.getList();
       }
       resolve();

@@ -43,7 +43,7 @@ export class BillGclSelectPage {
   itemTranfer:AcceptApplyDetail;
   type:string;//ht，fk,htAssets
 
-  isBackRefresh = false;
+  sendSuccess = false;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -57,15 +57,18 @@ export class BillGclSelectPage {
     this.itemTranfer=this.navParams.get(ItemTranfer);
     this.type=this.navParams.get('type');
     this.callback = this.navParams.get('callback');
-    this.isBackRefresh = false;
+    this.sendSuccess = false;
   }
 
   ionViewDidLoad() {
-    this.isBackRefresh = false;
+    this.sendSuccess = false;
 
     this.navBar.backButtonClick=()=>{
-      this.callback(this.isBackRefresh).then(()=>{ this.navCtrl.pop()});
-      //this.navCtrl.pop();
+      if(this.sendSuccess){
+        this.callback(true).then(()=>{ this.navCtrl.pop() });
+      }else{
+        this.navCtrl.pop();
+      }
     }
 
     this.getList();
@@ -211,7 +214,7 @@ export class BillGclSelectPage {
       .subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
-          this.isBackRefresh = true;
+          this.sendSuccess = true;
           this.getList();
           let toast = this.toastCtrl.create({
               message: '保存成功',

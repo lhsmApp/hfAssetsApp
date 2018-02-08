@@ -65,7 +65,7 @@ export class ScheduleApplyItemPage {
     maxYear:string;
   YearValues:string;
   callback :any;
-  isBackRefrash=false;
+  sendSuccess=false;
   dicelementFlag: DicBase[];//项目单元类别"      
   dicSgsx: Array<{code: string, name: string}>;//施工属性"" 
  
@@ -83,7 +83,7 @@ export class ScheduleApplyItemPage {
   	this.oper = this.navParams.get(Oper);
   	this.billElementCode = this.navParams.get(BillElementCode);
     this.callback    = this.navParams.get('callback');
-    this.isBackRefrash=false;
+    this.sendSuccess=false;
 
     let minyear = (new Date()).getFullYear() - 100;
     let maxyear = (new Date()).getFullYear() + 100;
@@ -157,13 +157,13 @@ export class ScheduleApplyItemPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ScheduleApplyItemPage');
     this.navBar.backButtonClick=()=>{
-      if(this.isBackRefrash){
+      if(this.sendSuccess){
         this.callback(true).then(()=>{ this.navCtrl.pop() });
       }else{
         this.navCtrl.pop();
       }
     }
-    this.isBackRefrash=false;
+    this.sendSuccess=false;
     this.itemShow = new ProjectUnitDetail();
     this.dicSgsx = Sgsx;
     this.getShowItem();
@@ -224,7 +224,7 @@ export class ScheduleApplyItemPage {
       .subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
-              this.isBackRefrash=true;
+              this.sendSuccess=true;
           this.oper = Oper_Edit;
           console.log(object[1][0]);
           this.itemShow = object[1][0] as ProjectUnitDetail;

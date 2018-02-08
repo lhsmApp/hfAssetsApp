@@ -91,7 +91,7 @@ export class AssetDetailsItemPage {
   itemShow:AcceptAssetDetail;
   assetFrom:any;
   callback :any;
-  isBackRefrash=false;
+  sendSuccess=false;
     maxYear:string;
 
   //assetsType: string;//资产类型"
@@ -123,7 +123,7 @@ export class AssetDetailsItemPage {
     this.itemTranfer = this.navParams.get(ItemTranfer);//从添加界面传回
     this.TypeView = this.navParams.get(TypeView);
     this.callback    = this.navParams.get('callback');
-    this.isBackRefrash=false;
+    this.sendSuccess=false;
     this.maxYear = ((new Date()).getFullYear() + 100).toString();
     
     this.assetFrom = this.formBuilder.group({
@@ -200,13 +200,13 @@ export class AssetDetailsItemPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AssetDetailsItemPage');
     this.navBar.backButtonClick=()=>{
-      if(this.isBackRefrash){
+      if(this.sendSuccess){
         this.callback(true).then(()=>{ this.navCtrl.pop() });
       }else{
         this.navCtrl.pop();
       }
     }
-    this.isBackRefrash=false;
+    this.sendSuccess=false;
     this.itemShow = new AcceptAssetDetail();
     this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
       this.DicDepartCode=inDepart;
@@ -309,7 +309,7 @@ export class AssetDetailsItemPage {
       .subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
-              this.isBackRefrash=true;
+              this.sendSuccess=true;
           this.oper = Oper_Edit;
           console.log(object[1][0]);
           this.itemShow = object[1][0] as AcceptAssetDetail;

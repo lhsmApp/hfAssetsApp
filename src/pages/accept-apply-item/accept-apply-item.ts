@@ -59,8 +59,9 @@ export class AcceptApplyItemPage {
   itemShow:AcceptApplyDetail;
   listDept: DicInDepart[];
   callback :any;
-  sendSuccess=false;
+  sendOrCheckSuccess=false;
   isBackRefresh = false;
+  sendSuccess=false;
 
   gclListInfo:BillOfWorkMain[]=[];
   //billOfGclIsSaved:boolean = true;
@@ -85,8 +86,9 @@ export class AcceptApplyItemPage {
   	this.oper = this.params.get(Oper);
   	this.billNumber = this.params.get(BillNumberCode);
     this.callback    = this.params.get('callback');
-    this.sendSuccess=false;
+    this.sendOrCheckSuccess=false;
     this.isBackRefresh = false;
+    this.sendSuccess=false;
     //this.listDept = listDeptGet;
 
     this.applyFrom = this.formBuilder.group({
@@ -137,14 +139,15 @@ export class AcceptApplyItemPage {
     this.dicClauseType = AcceptType;//”验收类型（2.进度验收，4，竣工验收）”
 
     this.navBar.backButtonClick=()=>{
-      if(this.sendSuccess || this.isBackRefresh){
+      if(this.sendOrCheckSuccess || this.isBackRefresh){
         this.callback(true).then(()=>{ this.navCtrl.pop() });
       }else{
         this.navCtrl.pop();
       }
     }
-    this.sendSuccess=false;
+    this.sendOrCheckSuccess=false;
     this.isBackRefresh = false;
+    this.sendSuccess=false;
     this.itemShow = new AcceptApplyDetail();
     //this.billOfGclIsSaved = true;
     this.getShowItem();
@@ -223,7 +226,7 @@ export class AcceptApplyItemPage {
 
   //保存
   save(){
-    if(this.sendSuccess!=false){
+    if(this.sendOrCheckSuccess!=false){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: "单据已送审！",
@@ -279,6 +282,7 @@ export class AcceptApplyItemPage {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
           this.isBackRefresh = true;
+          this.sendSuccess=true;
           this.oper = Oper_Edit;
           console.log(object[1][0]);
           this.itemShow = object[1][0] as AcceptApplyDetail;
@@ -306,7 +310,7 @@ export class AcceptApplyItemPage {
 
   //送审
   send(){
-    if(this.sendSuccess!=false){
+    if(this.sendOrCheckSuccess!=false){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: "单据已送审！",
@@ -369,6 +373,7 @@ export class AcceptApplyItemPage {
     return new Promise((resolve, reject) => {
       console.log(data);
       if(data){
+         this.sendOrCheckSuccess=true;
          this.sendSuccess=true;
       }
       resolve();
@@ -377,7 +382,7 @@ export class AcceptApplyItemPage {
 
   //工程量清单
   billOfGcl(){
-    if(this.sendSuccess!=false){
+    if(this.sendOrCheckSuccess!=false){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: "单据已送审！",
@@ -427,6 +432,7 @@ export class AcceptApplyItemPage {
       //this.billOfGclIsSaved = false;
       if(data){
         this.isBackRefresh = true;
+        this.sendSuccess=true;
         this.getShowItem();
       }
       resolve();
@@ -435,7 +441,7 @@ export class AcceptApplyItemPage {
   
   //资产明细
   toAssetDetail(){
-    if(this.sendSuccess!=false){
+    if(this.sendOrCheckSuccess!=false){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: "单据已送审！",
@@ -487,7 +493,7 @@ export class AcceptApplyItemPage {
 
   //选择合同
   choiceContract(){
-    if(this.sendSuccess!=false){
+    if(this.sendOrCheckSuccess!=false){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: "单据已送审！",
@@ -516,7 +522,7 @@ export class AcceptApplyItemPage {
 
   //附件列表
   attachment(){
-    if(this.sendSuccess!=false){
+    if(this.sendOrCheckSuccess!=false){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: "单据已送审！",

@@ -22,7 +22,7 @@ export class ApprovalPage {
   @ViewChild('myNavbar') navBar: Navbar;
 
   message:string;
-  isBackRefrash:boolean;
+  sendSuccess:boolean;
 
   billNumber:string;
   ReviewType:string;
@@ -33,7 +33,7 @@ export class ApprovalPage {
               public toastCtrl:ToastController,
               public approvalService:ApprovalService) {
     this.message = "";
-    this.isBackRefrash = false;
+    this.sendSuccess = false;
     this.billNumber = this.navParams.get(BillNumberCode);
     this.ReviewType = this.navParams.get("BillReviewType");
     this.callback = this.navParams.get('callback');
@@ -43,7 +43,7 @@ export class ApprovalPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ApprovalPage');
     this.navBar.backButtonClick=()=>{
-      if(this.isBackRefrash){
+      if(this.sendSuccess){
         this.callback(true).then(()=>{ this.navCtrl.pop() });
       }else{
         this.navCtrl.pop();
@@ -57,7 +57,7 @@ export class ApprovalPage {
   }
 
   cancel(){
-      if(this.isBackRefrash){
+      if(this.sendSuccess){
         this.callback(true).then(()=>{ this.navCtrl.pop() });
       }else{
         this.navCtrl.pop();
@@ -65,7 +65,7 @@ export class ApprovalPage {
   }
 
   checkTrue(){
-  	if(this.isBackRefrash){
+  	if(this.sendSuccess){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: "已审批！",
@@ -82,7 +82,7 @@ export class ApprovalPage {
           .subscribe(object => {
             let resultBase:ResultBase=object[0] as ResultBase;
             if(resultBase.result=='true'){
-              this.isBackRefrash=true;
+              this.sendSuccess=true;
               console.log('通过');
               let toast = this.toastCtrl.create({
                 message: resultBase.message,
@@ -103,7 +103,7 @@ export class ApprovalPage {
   }
 
   checkFalse(){
-  	if(this.isBackRefrash){
+  	if(this.sendSuccess){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: "已审批！",
@@ -120,9 +120,9 @@ export class ApprovalPage {
           .subscribe(object => {
             let resultBase:ResultBase=object[0] as ResultBase;
             if(resultBase.result=='true'){
-              this.isBackRefrash=true;
+              this.sendSuccess=true;
               console.log('不通过');
-              console.log(this.isBackRefrash);
+              console.log(this.sendSuccess);
               let toast = this.toastCtrl.create({
                 message: resultBase.message,
                 duration: 3000

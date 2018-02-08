@@ -200,7 +200,7 @@ export class AcceptApplyInfoPage {
     });
   };
   /*      console.log('check');
-        console.log(this.sendSuccess);
+        console.log(this.sendOrCheckSuccess);
     let prompt = this.alertCtrl.create({
       title: '审批',
       message: "请输入审批意见",
@@ -229,9 +229,9 @@ export class AcceptApplyInfoPage {
           .subscribe(object => {
             let resultBase:ResultBase=object[0] as ResultBase;
             if(resultBase.result=='true'){
-              this.sendSuccess=true;
+              this.sendOrCheckSuccess=true;
               console.log('不通过');
-              console.log(this.sendSuccess);
+              console.log(this.sendOrCheckSuccess);
               let toast = this.toastCtrl.create({
                 message: resultBase.message,
                 duration: 3000
@@ -259,9 +259,9 @@ export class AcceptApplyInfoPage {
           .subscribe(object => {
             let resultBase:ResultBase=object[0] as ResultBase;
             if(resultBase.result=='true'){
-              this.sendSuccess=true;
+              this.sendOrCheckSuccess=true;
               console.log('通过');
-              console.log(this.sendSuccess);
+              console.log(this.sendOrCheckSuccess);
               let toast = this.toastCtrl.create({
                 message: resultBase.message,
                 duration: 3000
