@@ -31,7 +31,7 @@
             <ion-item text-wrap>
                 <ion-label fixed>合同流水号</ion-label>
                 <ion-input type="text" readonly formControlName="contractCode" 
-                           placeholder="选择" (tap)="choiceContract()"></ion-input>
+                           placeholder="选择" disabled="disabled" (tap)="choiceContract()"></ion-input>
             </ion-item>
             <span *ngIf="!applyFrom.controls.contractCode.valid && applyFrom.controls.contractCode.touched"
                   class="validation-failed">
