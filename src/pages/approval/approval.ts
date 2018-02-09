@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController,ToastController,Navbar } from 'ionic-angular';
+import { IonicPage, NavController,ViewController, NavParams,AlertController,ToastController,Navbar } from 'ionic-angular';
 import {ApprovalService} from '../../services/approvalService';
 import {ResultBase} from "../../model/result-base";
 
@@ -30,6 +30,7 @@ export class ApprovalPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController,
+              private viewCtrl: ViewController,
               public toastCtrl:ToastController,
               public approvalService:ApprovalService) {
     this.message = "";
@@ -44,23 +45,28 @@ export class ApprovalPage {
     console.log('ionViewDidLoad ApprovalPage');
     this.navBar.backButtonClick=()=>{
       if(this.sendSuccess){
-        this.callback(true).then(()=>{ this.navCtrl.pop() });
+        //this.callback(true).then(()=>{ this.navCtrl.pop() });
+        this.viewCtrl.dismiss(true);
       }else{
-        this.navCtrl.pop();
+        //this.navCtrl.pop();
+        this.viewCtrl.dismiss(false);
       }
     }
   }
 
   //当点击手机物理后退键时促发审批或者送审刷新动作
   refBack(){
-    this.callback(true).then(()=>{ this.navCtrl.pop() });
+    //this.callback(true).then(()=>{ this.navCtrl.pop() });
+        this.viewCtrl.dismiss(true);
   }
 
   cancel(){
       if(this.sendSuccess){
-        this.callback(true).then(()=>{ this.navCtrl.pop() });
+        //this.callback(true).then(()=>{ this.navCtrl.pop() });
+        this.viewCtrl.dismiss(true);
       }else{
-        this.navCtrl.pop();
+        //this.navCtrl.pop();
+        this.viewCtrl.dismiss(false);
       }
   }
 

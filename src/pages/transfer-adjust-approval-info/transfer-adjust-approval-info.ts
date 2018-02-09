@@ -1,6 +1,6 @@
 import { Component,ViewChild } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
-import { IonicPage, NavController, NavParams,AlertController,ToastController,Navbar } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, NavParams,AlertController,ToastController,Navbar } from 'ionic-angular';
 import {TransferFundsMain} from '../../model/transfer-funds-main';
 import {TransferFundsDetail} from '../../model/transfer-funds-detail';
 import {AcceptService} from '../../services/acceptService';
@@ -69,6 +69,7 @@ export class TransferAdjustApprovalInfoPage {
               private dictUtil:DictUtil,
               public alertCtrl: AlertController,
               public toastCtrl:ToastController,
+              private modalCtrl: ModalController,
               public acceptService:AcceptService,
               public approvalService:ApprovalService) {
     this.itemShow = new TransferFundsDetail();
@@ -145,7 +146,15 @@ export class TransferAdjustApprovalInfoPage {
 
   check(){
     let reviewType = ReviewType[ReviewType.REVIEW_TYPE_BASIC_TRANSLATE_ADJUST];
-      this.navCtrl.push(Page_ApprovalPage, {callback:this.checkCallback,BillNumberCode: this.itemShow.translateCode, "BillReviewType":reviewType});
+    //this.navCtrl.push(Page_ApprovalPage, {callback:this.checkCallback,BillNumberCode: this.itemShow.translateCode, "BillReviewType":reviewType});
+  
+    let modal = this.modalCtrl.create(Page_ApprovalPage,{BillNumberCode: this.itemShow.translateCode, "BillReviewType":reviewType});
+    modal.present();
+    modal.onDidDismiss(data => {
+      if(data){
+        this.sendSuccess=true;
+      }
+    });
   }
 
   //回调

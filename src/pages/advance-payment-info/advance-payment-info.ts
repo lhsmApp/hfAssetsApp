@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController,ToastController ,Navbar } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, NavParams,AlertController,ToastController ,Navbar } from 'ionic-angular';
 import {Storage} from "@ionic/storage";
 import { AdvancePaymentDetail} from '../../model/advance-payment-detail';
 import { AdvancePaymentMain} from '../../model/advance-payment-main';
@@ -66,6 +66,7 @@ export class AdvancePaymentInfoPage {
     public navParams: NavParams,
     public alertCtrl: AlertController,
     public toastCtrl:ToastController,
+    private modalCtrl: ModalController,
     private storage: Storage,
     private paymentService:PaymentService,
     private approvalService:ApprovalService,
@@ -152,7 +153,15 @@ export class AdvancePaymentInfoPage {
   //审批
   approval(){
     let reviewType = ReviewType[ReviewType.REVIEW_TYPE_BASIC_PAYMENT];
-      this.navCtrl.push(Page_ApprovalPage, {callback:this.checkCallback,BillNumberCode: this.paymentDetail.payCode, "BillReviewType":reviewType});
+    //this.navCtrl.push(Page_ApprovalPage, {callback:this.checkCallback,BillNumberCode: this.paymentDetail.payCode, "BillReviewType":reviewType});
+  
+    let modal = this.modalCtrl.create(Page_ApprovalPage,{BillNumberCode: this.paymentDetail.payCode, "BillReviewType":reviewType});
+    modal.present();
+    modal.onDidDismiss(data => {
+      if(data){
+        this.sendSuccess=true;
+      }
+    });
   }
 
   //回调

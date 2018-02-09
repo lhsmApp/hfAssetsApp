@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController,ToastController,Navbar } from 'ionic-angular';
+import { IonicPage, ModalController,NavController, NavParams,AlertController,ToastController,Navbar } from 'ionic-angular';
 import {Storage} from "@ionic/storage";
 import {AcceptApplyDetail} from '../../model/accept-apply-detail';
 import {AcceptService} from '../../services/acceptService';
@@ -69,6 +69,7 @@ export class AcceptApplyInfoPage {
               private storage: Storage,
               public toastCtrl:ToastController,
               private dictUtil:DictUtil,
+              private modalCtrl: ModalController,
               public acceptService:AcceptService,
               private paymentService:PaymentService,
               public approvalService:ApprovalService) {
@@ -185,7 +186,15 @@ export class AcceptApplyInfoPage {
 
   check(){
     let reviewType = ReviewType[ReviewType.BASICACCEPTANCE_APPLY];
-      this.navCtrl.push(Page_ApprovalPage, {callback:this.checkCallback,BillNumberCode: this.billNumber, "BillReviewType":reviewType});
+    //  this.navCtrl.push(Page_ApprovalPage, {callback:this.checkCallback,BillNumberCode: this.billNumber, "BillReviewType":reviewType});
+
+    let modal = this.modalCtrl.create(Page_ApprovalPage,{BillNumberCode: this.billNumber, "BillReviewType":reviewType});
+    modal.present();
+    modal.onDidDismiss(data => {
+      if(data){
+        this.sendSuccess=true;
+      }
+    });
   }
 
   //回调

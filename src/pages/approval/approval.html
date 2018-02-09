@@ -8,22 +8,26 @@
 
   <ion-navbar color="dark" #myNavbar>
     <ion-title>审批</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="cancel()">
+        返回
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
-
-<ion-content padding>
-        <ion-item text-wrap>
-                <ion-label fixed>请输入审批意见</ion-label>
-        </ion-item>
-        <ion-item text-wrap>
-                <ion-input type="text" placeholder="请输入审批意见" [(ngModel)]="message"></ion-input>
-        </ion-item>
-
-        <ion-item padding-horizontal>
-            <button ion-button item-end color="blue" (click)="cancel()">返回</button>
-            <button ion-button item-end color="danger" (click)="checkFalse()">不通过</button>
-            <button ion-button item-end color="green" (click)="checkTrue()">通过</button>
+<ion-content padding> 
+        <div padding-horizontal margin-top>
+          <h2>请输入审批意见</h2> 
+        </div>
+        <ion-item>
+          <ion-textarea placeholder="请输入审批意见" rows=10 [(ngModel)]="message"></ion-textarea>
         </ion-item>
 </ion-content>
+<ion-footer padding>
+        <div padding-horizontal text-center>
+            <button ion-button block color="danger" (click)="checkFalse()">不 通 过</button>
+            <button ion-button block color="green" (click)="checkTrue()">通 过</button>
+        </div>
+</ion-footer>

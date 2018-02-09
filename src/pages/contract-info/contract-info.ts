@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams ,AlertController,ToastController,Navbar} from 'ionic-angular';
+import { IonicPage, NavController, ModalController, NavParams ,AlertController,ToastController,Navbar} from 'ionic-angular';
 import {Storage} from "@ionic/storage";
 import {ContractDetail} from '../../model/contract-detail';
 import {ContractMain} from '../../model/contract-main';
@@ -57,6 +57,7 @@ export class ContractInfoPage {
     public navParams: NavParams,
     public alertCtrl: AlertController,
     public toastCtrl:ToastController,
+    private modalCtrl: ModalController,
     private contractService:ContractService,
     private approvalService:ApprovalService,
     private dictUtil:DictUtil,
@@ -149,7 +150,15 @@ export class ContractInfoPage {
   //审批
   approval(){
     let reviewType = ReviewType[ReviewType.REVIEW_TYPE_CONTRACT_MAIN];
-      this.navCtrl.push(Page_ApprovalPage, {callback:this.checkCallback,BillNumberCode: this.contractDetailInfo.contractCode, "BillReviewType":reviewType});
+    //this.navCtrl.push(Page_ApprovalPage, {callback:this.checkCallback,BillNumberCode: this.contractDetailInfo.contractCode, "BillReviewType":reviewType});
+  
+    let modal = this.modalCtrl.create(Page_ApprovalPage,{BillNumberCode: this.contractDetailInfo.contractCode, "BillReviewType":reviewType});
+    modal.present();
+    modal.onDidDismiss(data => {
+      if(data){
+        this.sendSuccess=true;
+      }
+    });
   }
 
   //回调
