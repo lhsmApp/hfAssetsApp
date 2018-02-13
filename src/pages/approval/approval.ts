@@ -95,6 +95,7 @@ export class ApprovalPage {
                 duration: 3000
               });
               toast.present();
+              this.viewCtrl.dismiss(true);
             } else {
               let alert = this.alertCtrl.create({
                 title: '提示',
@@ -134,6 +135,7 @@ export class ApprovalPage {
                 duration: 3000
               });
               toast.present();
+              this.viewCtrl.dismiss(true);
             } else {
               let alert = this.alertCtrl.create({
                 title: '提示',

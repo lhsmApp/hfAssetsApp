@@ -10,33 +10,35 @@
     <ion-title>审批</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="cancel()">
-        返回
+        取消
       </button>
     </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
-<ion-content padding> 
+<ion-content padding>   
   <div padding-horizontal margin-top>
-      <h2>请输入审批意见</h2> 
+    <h5>请输入审批意见</h5>
   </div>
   <ion-item no-lines>
-    <ion-textarea rows=25 placeholder="请输入审批意见" [(ngModel)]="message"></ion-textarea>
+    <ion-textarea rows=30 placeholder="请输入审批意见" [(ngModel)]="message"></ion-textarea>
   </ion-item>
 </ion-content>
 <ion-footer>
-  <div padding-horizontal style="border: 1px solid #DEDEDE;">
+  <div padding-horizontal><!-- style="border: 1px solid #DEDEDE;"-->
       <ion-row>
-        <ion-col col-6 (click)="checkFalse()" style="border-right: 1px solid #DEDEDE;">
-          <div text-center>
+        <ion-col col-6><!-- style="border-right: 1px solid #DEDEDE;"-->
+          <!--<div text-center>
             <p>不通过</p>
-          </div>
+          </div>-->
+            <button ion-button color="red" block (click)="checkFalse()">不通过</button>
         </ion-col>
-        <ion-col col-6 (click)="checkTrue()">
-          <div text-center>
+        <ion-col col-6>
+          <!--<div text-center>
             <p>通过</p>
-          </div>
+          </div>-->
+            <button ion-button color="green" block (click)="checkTrue()">通过</button>
         </ion-col>
       </ion-row>
   </div>
