@@ -4,6 +4,9 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import {GlobalData} from "../../providers/GlobalData";
 import { Permission} from '../../model/permission';
 
+import {Oper_Edit} from '../../providers/TransferFeildName';
+import {Title} from '../../providers/TransferFeildName';
+
 @Component({
   selector: 'page-apply',
   templateUrl: 'apply.html'
@@ -128,6 +131,29 @@ export class ApplyPage {
       }
     }
     this.navCtrl.push('ScheduleApplyListPage');
+  }
+
+  //付款发票录入
+  fpApply(){
+    if(this.globalData.permission){
+      let flagjd:boolean=false;
+      for(let item of this.globalData.permission){
+        if(item.funcCode=='390401'){
+          flagjd=true;
+          break;
+        }
+      }
+      if(!flagjd){
+        let alert = this.alertCtrl.create({
+          title: '提示',
+          subTitle: '不能进行付款发票录入，您没有付款发票录入的权限！',
+          buttons: ['确定']
+        });
+        alert.present();
+        return;
+      }
+    }
+    this.navCtrl.push("InvoicePaymentListPage",{Oper:Oper_Edit,Title:'付款发票录入'});
   }
 
 }

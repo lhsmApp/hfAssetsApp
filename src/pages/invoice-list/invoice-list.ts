@@ -12,12 +12,12 @@ import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
  * Ionic pages and navigation.
  */
 
-  const  INVOICE_LIST: InvoiceMain []= [  
+  /*const  INVOICE_LIST: InvoiceMain []= [  
  { chalanNumber: 'FP2017080001', chalanContent: '付款缺失合同明细', chalanMoney: 2000,chalanDate: '2017-09-30'},
  { chalanNumber: 'FPD2017080002', chalanContent: '进度款需要申请' ,chalanMoney: 3000,chalanDate: '2017-09-30'},
  { chalanNumber: 'FPD2017080003', chalanContent: '进度款需要申请' ,chalanMoney: 40000,chalanDate: '2017-09-30'},
  { chalanNumber: 'FPD2017080004', chalanContent: '进度款需要申请' ,chalanMoney: 50000,chalanDate: '2017-09-30'}
- ];
+ ];*/
 
 @IonicPage()
 @Component({

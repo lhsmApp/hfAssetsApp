@@ -3,7 +3,7 @@
 
 export const APP_PORT_NATIVE = '9080';
 export const APP_PORT_BROWER = '8100';
-export const APP_SERVE_IP = '10.201.2.93';
+export const APP_SERVE_IP = 'weiapp.pw';
 export const APP_SERVE_FILE_URL = '/assets/';
 export const APP_SERVE_URL = '/assets/cellphone/';
 export const APP_SERVE_URL_CHART = '/assets/analyze/';
@@ -49,6 +49,7 @@ export const DEFAULT_HT = './assets/img/hetongshenpi@2x.png';//合同
 export const DEFAULT_ZZ = './assets/img/zhuanzi@2x.png';//转资
 export const DEFAULT_ZZTZ = './assets/img/zhuanzitiaozhengshenpi@2x.png';//转资调整
 export const DEFAULT_LOGIN_BG = './assets/img/LoginBg.png';//登录背景
+export const DEFAULT_FP = './assets/img/yanshoushenpi@2x.png';//发票
 
 export const CHART1 = './assets/img/chart1.jpg';//图表1
 export const CHART2 = './assets/img/chart2.jpg';//图表2

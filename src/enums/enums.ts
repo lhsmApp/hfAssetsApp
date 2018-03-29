@@ -13,6 +13,9 @@ export const AcceptReviewStatus= [{code: '0', name: '新增'}, {code: '99', name
 //转资单据状态
 export const TransferFundsReviewStatus= [{code: '0', name: '新增'}, {code: '1', name: '未审批'}, {code: '2', name: '退回'}, {code: '3', name: '审批中'}, {code: '4', name: '已审批'}]
 
+//发票单据状态 0默认，1送审，2，退回，3审批完成
+export const InvoiceSendStatus= [{code: 0, name: '新增'}, {code: 1, name: '未审批'}, {code: 2, name: '退回'}, {code: 3, name: '已审批'}]
+
 //是否已分摊费用 0否 1是
 export const FeeFlag= [{code: '0', name: '否'}, {code: '1', name: '是'}]
 

@@ -11,23 +11,39 @@ export class ApprovalService {
   constructor(public httpService: HttpService, private globalData: GlobalData) {
   }
 
+  getreviewType(type:string){
+    let reviewType = "";
+    if(type == ReviewType[ReviewType.REVIEW_TYPE_BASIC_PAYMENT]){
+        reviewType = "付款审批";
+    } else if(type == ReviewType[ReviewType.BASICACCEPTANCE_APPLY]){
+        reviewType = "验收申请审批";
+    } else if(type == ReviewType[ReviewType.REVIEW_TYPE_CONTRACT_MAIN]){
+        reviewType = "合同单据审批";
+    } else if(type == ReviewType[ReviewType.REVIEW_TYPE_BASIC_TRANSLATE_VOUCHER]){
+        reviewType = "转资单审批";
+    } else if(type == ReviewType[ReviewType.REVIEW_TYPE_BASIC_TRANSLATE_ADJUST]){
+        reviewType = "转资单调整审批";
+    } else if(type == ReviewType[ReviewType.REVIEW_TYPE_INVOICE]){
+        reviewType = "付款发票审批";
+    }
+    return reviewType;
+  }
+
   //付款单据送审-审列表接口review_process 审批流程表
   queryUserReviewPay(billNumber:string, type:string,contractCode:string): Observable<(Object)> {
     console.log('type: ' + type);
     let action = "";
-    let reviewType = "";
+    let reviewType = this.getreviewType(type);
     let getDo = "";
     let getContractCode = "";
     if(type == ReviewType[ReviewType.REVIEW_TYPE_BASIC_PAYMENT]){
         action = 'queryUserReviewPay';
-        reviewType = "付款审批";
         getDo = "phonePaymentRequest.do";
     } else if(type == ReviewType[ReviewType.BASICACCEPTANCE_APPLY]){
         action = 'queryUserReviewAcceptance';
-        reviewType = "验收申请审批";
         getDo = "phoneAcceptanceApply.do";
         getContractCode = contractCode;
-    }
+    } 
     console.log('action: ' + action);
     console.log('reviewType: ' + reviewType);
     console.log('getDo: ' + getDo);
@@ -44,18 +60,7 @@ export class ApprovalService {
 
   //审批进度获取 review_process 审批流程表
   queryApprovalProgress(billNumber:string, type:string,isHistory:string): Observable<(Object)> {
-    let reviewType = "";
-    if(type == ReviewType[ReviewType.REVIEW_TYPE_BASIC_PAYMENT]){
-        reviewType = "付款审批";
-    } else if(type == ReviewType[ReviewType.BASICACCEPTANCE_APPLY]){
-        reviewType = "验收申请审批";
-    }else if(type == ReviewType[ReviewType.REVIEW_TYPE_CONTRACT_MAIN]){
-        reviewType = "合同单据审批";
-    } else if(type == ReviewType[ReviewType.REVIEW_TYPE_BASIC_TRANSLATE_VOUCHER]){
-        reviewType = "转资单审批";
-    } else if(type == ReviewType[ReviewType.REVIEW_TYPE_BASIC_TRANSLATE_ADJUST]){
-        reviewType = "转资单调整审批";
-    }
+    let reviewType = this.getreviewType(type);
     let param = {
      //必传
      'action': 'getAuditList',
@@ -69,14 +74,7 @@ export class ApprovalService {
 
   //单据送审确认接口- review_process 审批流程表
   sendReviewPay(billNumber:string,type:string,data:string): Observable<(Object)> {
-    let reviewType = "";
-    if(type == ReviewType[ReviewType.REVIEW_TYPE_BASIC_PAYMENT]){
-        reviewType = "付款审批";
-    } else if(type == ReviewType[ReviewType.BASICACCEPTANCE_APPLY]){
-        reviewType = "验收申请审批";
-    } else if(type == ReviewType[ReviewType.REVIEW_TYPE_CONTRACT_MAIN]){
-        reviewType = "合同单据审批";
-    }
+    let reviewType = this.getreviewType(type);
     let action = "sendReview";
     let formData: FormData = new FormData(); 
     formData.append('action', action);
@@ -94,18 +92,7 @@ export class ApprovalService {
 
   //审批接口review_process 审批流程表
   auditReview(billNumber:string,type:string,vetoReason:string): Observable<(Object)> {
-    let reviewType = "";
-    if(type == ReviewType[ReviewType.REVIEW_TYPE_BASIC_PAYMENT]){
-        reviewType = "付款审批";
-    } else if(type == ReviewType[ReviewType.BASICACCEPTANCE_APPLY]){
-        reviewType = "验收申请审批";
-    } else if(type == ReviewType[ReviewType.REVIEW_TYPE_BASIC_TRANSLATE_VOUCHER]){
-        reviewType = "转资单审批";
-    } else if(type == ReviewType[ReviewType.REVIEW_TYPE_BASIC_TRANSLATE_ADJUST]){
-        reviewType = "转资单调整审批";
-    }else if(type == ReviewType[ReviewType.REVIEW_TYPE_CONTRACT_MAIN]){
-        reviewType = "合同单据审批";
-    }
+    let reviewType = this.getreviewType(type);
     let action = "auditReview";
     let formData: FormData = new FormData(); 
     formData.append('action', action);
@@ -123,18 +110,7 @@ export class ApprovalService {
 
   //否决接口review_process 审批流程表
   vetoReview(billNumber:string,type:string,vetoReason:string): Observable<(Object)> {
-    let reviewType = "";
-    if(type == ReviewType[ReviewType.REVIEW_TYPE_BASIC_PAYMENT]){
-        reviewType = "付款审批";
-    } else if(type == ReviewType[ReviewType.BASICACCEPTANCE_APPLY]){
-        reviewType = "验收申请审批";
-    } else if(type == ReviewType[ReviewType.REVIEW_TYPE_BASIC_TRANSLATE_VOUCHER]){
-        reviewType = "转资单审批";
-    } else if(type == ReviewType[ReviewType.REVIEW_TYPE_BASIC_TRANSLATE_ADJUST]){
-        reviewType = "转资单调整审批";
-    }else if(type == ReviewType[ReviewType.REVIEW_TYPE_CONTRACT_MAIN]){
-        reviewType = "合同单据审批";
-    }
+    let reviewType = this.getreviewType(type);
     let action = "vetoReview";
     let formData: FormData = new FormData(); 
     formData.append('action', action);

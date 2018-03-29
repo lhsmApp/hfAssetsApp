@@ -1,23 +1,13 @@
 <!--
-  Generated template for the InvoiceApplyPage page.
+  Generated template for the InvoiceApplyItemPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
 
-  <ion-navbar #myNavbar color='dark'>
-    <!-- <ion-buttons left>
-      <button ion-button icon-only (click)="goBack()">
-          <ion-icon ios="ios-arrow-back" md="ios-arrow-back"></ion-icon>
-      </button>
-    </ion-buttons> -->
-    <ion-title>发票申请</ion-title>
-    <!-- <ion-buttons end>
-      <button ion-button icon-only (click)="add()">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-buttons> -->
+  <ion-navbar color='dark' #myNavbar>
+    <ion-title>{{title}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -26,10 +16,10 @@
 <ion-content>
 	<form [formGroup]="invoiceForm" (ngSubmit)="(save())">
     <ion-item-group inset>
-      <ion-item text-wrap>
+      <!--<ion-item text-wrap>
         <ion-label fixed>序号</ion-label>
         <ion-input type="text" readonly formControlName="sequence"></ion-input>
-      </ion-item>
+      </ion-item>-->
       <ion-item text-wrap>
         <ion-label fixed>发票类型</ion-label>
         <ion-select [(ngModel)]="chalanType" formControlName="chalanType" cancelText="取消" okText="确定">

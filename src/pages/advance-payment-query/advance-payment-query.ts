@@ -64,7 +64,7 @@ import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
       let startDate=this.queryCondition.startDate;
       let endDate=this.queryCondition.endDate;
       //getPaymentMainList(type:string,reviewStatus:string,payCode:string,startDate:string,endDate:string)
-      this.paymentService.getPaymentMainList('2',state,payCode,startDate,endDate)
+      this.paymentService.getPaymentMainList('2',state,payCode,startDate,endDate,'')
       .subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){

@@ -12,13 +12,14 @@ export class PaymentService {
 
 
   //付款单据申请列表---basic_pay_main       付款主表
-  getPaymentMainList(type:string,reviewStatus:string,payCode:string,startDate:string,endDate:string): Observable<(Object)> {
+  getPaymentMainList(type:string,reviewStatus:string,payCode:string,startDate:string,endDate:string,
+          sendStatus:string): Observable<(Object)> {
   	console.log('付款主表'+this.globalData.sessionId);
     let param = {
      //必传
      'action': 'queryListPhonePayMain',
      'sessionid':this.globalData.sessionId,
-     'type':type,//1.申请 2.查询 3.审批
+     'type':type,//1.申请 2.查询 3.审批 4.发票申请
      //可传
      /*付款后端字段解释(括号中代表客户端对应字段)
       0录入(新增)
@@ -32,7 +33,7 @@ export class PaymentService {
      'payCode': payCode,
      'startDate':startDate,
      'endDate':endDate,
-     
+     'sendStatus':sendStatus,
      };
      return this.httpService.get('phonePaymentRequest.do', param).map((res: Response) => res.json());
   }

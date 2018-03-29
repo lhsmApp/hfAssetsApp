@@ -3,5 +3,6 @@ export  enum ReviewType {
     REVIEW_TYPE_BASIC_TRANSLATE_ADJUST =2, //'转资单审批',
     REVIEW_TYPE_BASIC_TRANSLATE_VOUCHER=3,//'转资单审批',
     BASICACCEPTANCE_APPLY=4,//'验收申请审批',
-    REVIEW_TYPE_CONTRACT_MAIN=5//'合同单据审批'
+    REVIEW_TYPE_CONTRACT_MAIN=5,//'合同单据审批'
+    REVIEW_TYPE_INVOICE=6//'发票审批'
 }

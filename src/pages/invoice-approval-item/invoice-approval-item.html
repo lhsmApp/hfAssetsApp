@@ -1,0 +1,155 @@
+<!--
+  Generated template for the InvoiceApprovalItemPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+-->
+<ion-header>
+
+  <ion-navbar color='dark' #myNavbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+	<ion-item-group inset>
+		<ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>序号：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{itemShow?.sequence}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>发票类型：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{itemShow?.chalanTypeName}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>发票编号：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{itemShow?.chalanNumber}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>发票日期：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{itemShow?.chalanDate}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>发票内容：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{itemShow?.chalanContent}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>发票单价：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{itemShow?.price|number}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>发票数量：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{itemShow?.singleAmount}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>税率：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{itemShow?.sl}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>发票总金额：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{itemShow?.chalanMoney|number}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>不含税金额：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{itemShow?.noTaxMoney|number}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>可抵扣进项税：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{itemShow?.deductibleInputString}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>完税凭证号：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{itemShow?.taxNumber}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    
+	    <ion-item-divider color="light"></ion-item-divider>
+	    <ion-item (click)='attachment()'>附件 <ion-icon name="more" item-end></ion-icon></ion-item>
+    </ion-item-group>
+</ion-content>

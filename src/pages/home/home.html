@@ -75,6 +75,13 @@
             <ion-badge *ngIf="zztzBillCount>0" color="danger" class="brage">{{zztzBillCount}}</ion-badge>
           </div>
         </ion-col>
+        <ion-col col-4 (click)="openPage('FKFPSP')" >
+          <div text-center>
+            <img color="primary"  class='imgSize' src='{{fpPath}}'/>
+            <p>付款发票审批</p>
+            <ion-badge *ngIf="fpBillCount>0" color="danger" class="brage">{{fpBillCount}}</ion-badge>
+          </div>
+        </ion-col>
       </ion-row>
 
   </ion-list>

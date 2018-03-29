@@ -12,4 +12,6 @@ export class AdvancePaymentMain{
 	reviewStatus:string;//单据状态
 
 	clauseType:string;//付款类型
+
+	sendStatus:number;//发票单据状态
 }

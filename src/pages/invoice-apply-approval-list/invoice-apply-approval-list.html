@@ -1,14 +1,14 @@
 <!--
-  Generated template for the InvoiceApplyListPage page.
+  Generated template for the InvoiceApplyApprovalListPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
 
-  <ion-navbar color='dark'>
-    <ion-title>发票列表</ion-title>
-    <ion-buttons end>
+  <ion-navbar color='dark' #myNavbar>
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons end *ngIf="isEdit">
       <button ion-button icon-only (click)="add()">
         <ion-icon name="add"></ion-icon>
       </button>
@@ -23,16 +23,17 @@
     </ion-refresher-content>
   </ion-refresher>
   <div *ngIf="!isEmpty">
+    <ion-searchbar (ionInput)="getItems($event)" placeholder="输入编号模糊搜索"></ion-searchbar>
     <ion-list class="list-avatar-page">
-    	<ion-item-sliding *ngFor="let item of invoiceList" #slidingItem>
+    	<ion-item-sliding *ngFor="let item of list" #slidingItem>
   	    <ion-item (click)="openPage(item)">
   	      <h2>发票编号：{{item.chalanNumber}}</h2>
-          <button ion-button color="danger" outline item-end>发票金额：{{item.chalanMoney|number}}</button>
+          <button item-end ion-button color="danger" outline>发票金额：{{item.chalanMoney|number}}</button>
   	      <!-- <h3 item-end>{{item.chalanMoney}}</h3> -->
   	      <p>发票内容：{{item.chalanContent}} </p>
   	      <p >发票日期：{{item.chalanDate}}</p>
   	    </ion-item>
-  	    <ion-item-options side="right">
+  	    <ion-item-options side="right" *ngIf="isEdit">
   	      <button ion-button color="primary" (click)="edit(item,slidingItem);$event.stopPropagation()">
   	        <ion-icon name="create"></ion-icon>
   	        编辑

@@ -43,7 +43,7 @@ export class AdvancePaymentApplyListPage {
   getList(){
       let state="0,2";
       //getPaymentMainList(type:string,reviewStatus:string,payCode:string,startDate:string,endDate:string)
-      this.paymentService.getPaymentMainList('1',state,'','','')
+      this.paymentService.getPaymentMainList('1',state,'','','','')
       .subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){

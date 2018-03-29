@@ -496,7 +496,7 @@ export class AdvancePaymentApplyPage {
   };*/
 
   //发票
-  invoice(paymentDetail:AdvancePaymentDetail){
+  /*invoice(paymentDetail:AdvancePaymentDetail){
   	let payCode=this.paymentForm.get('payCode').value;
     console.log(this.paymentForm.get('payCode'));
     if(!(payCode!=null&&payCode.trim()!="")){
@@ -509,7 +509,7 @@ export class AdvancePaymentApplyPage {
       return;
     }
     this.navCtrl.push("InvoiceApplyListPage",{'paymentItem':this.paymentMain,'contractCode':this.paymentDetail.contractCode});
-  }
+  }*/
 
   //工程量清单
   billOfGcl(paymentDetail:AdvancePaymentDetail){
