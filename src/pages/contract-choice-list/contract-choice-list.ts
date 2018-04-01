@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ViewController,AlertController } from 'ionic-angular';
+import {Storage} from '@ionic/storage';
 import {ContractMain} from '../../model/contract-main';
 import {ContractService} from '../../services/contractService';
 import {ResultBase} from "../../model/result-base";
+import {DictUtil} from '../../providers/dict-util';
 import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
 
 import {Page_ContractChoiceConfirmPage} from '../../providers/TransferFeildName';
 import {BillContractCode} from '../../providers/TransferFeildName';
+import {IN_DEPART} from "../../enums/storage-type";
+import {DicInDepart} from '../../model/dic-in-depart';
 
 /**
  * Generated class for the ContractChoiceListPage page.
@@ -34,9 +38,13 @@ export class ContractChoiceListPage {
   emptyPath=DEFAULT_INVOICE_EMPTY;
   isEmpty:boolean=false;
 
+  listInDepart: DicInDepart[];
+
   constructor(public navCtrl: NavController, 
               public alertCtrl: AlertController,
               public navParams: NavParams,
+              private storage: Storage,
+              private dictUtil:DictUtil,
               private viewCtrl: ViewController,
               public contractService:ContractService) {
     this.callback    = this.navParams.get('callback');
@@ -72,6 +80,14 @@ export class ContractChoiceListPage {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
           this.listAll = object[1] as ContractMain[];
+            if(this.listAll){
+              this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
+                this.listInDepart=inDepart;
+                for(let item of this.listAll){
+                  item.departName  = this.dictUtil.getInDepartName(this.listInDepart,item.departCode);
+                }
+              });
+            }
           this.list = this.listAll;
           if(!(this.listAll!=null&&this.listAll.length>0)){
             this.isEmpty=true;

@@ -7,6 +7,8 @@ import {ApprovalService} from '../../services/approvalService';
 import {ResultBase} from "../../model/result-base";
 import {IN_DEPART} from "../../enums/storage-type";
 import {DicInDepart} from '../../model/dic-in-depart';
+import {OUT_DEPART} from "../../enums/storage-type";
+import {DicOutDepart} from '../../model/dic-out-depart';
 import {DictUtil} from '../../providers/dict-util';
 import {ReviewType} from '../../enums/review-type';
 import {ContractCostProperty} from '../../enums/enums';
@@ -56,7 +58,8 @@ export class AcceptApplyInfoPage {
 
   list: AcceptApplyDetail[];
   itemShow:AcceptApplyDetail;
-  listDept: DicInDepart[];
+  listInDepart: DicInDepart[];
+  listOutDept : DicOutDepart[];
   callback :any;
   sendSuccess=false;
   hasApprovalProgress=false;
@@ -130,13 +133,17 @@ export class AcceptApplyInfoPage {
           this.list = object[1] as AcceptApplyDetail[];
           if(this.list && this.list.length > 0){
               this.itemShow = this.list[0] as AcceptApplyDetail;
+              //”成本属性”（1.直接成本2.间接费用）
+              this.itemShow.costPropertyName = this.dictUtil.getNumEnumsName(ContractCostProperty,this.itemShow.costProperty);
+              //”验收类型（2.进度验收，4，竣工验收）”
+              this.itemShow.clauseTypeName = this.dictUtil.getEnumsName(AcceptType,this.itemShow.clauseType);
               this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
-                this.listDept=inDepart;
-                this.itemShow.departName = this.dictUtil.getInDepartName(this.listDept,this.itemShow.departCode);
-                //”成本属性”（1.直接成本2.间接费用）
-                this.itemShow.costPropertyName = this.dictUtil.getNumEnumsName(ContractCostProperty,this.itemShow.costProperty);
-                //”验收类型（2.进度验收，4，竣工验收）”
-                this.itemShow.clauseTypeName = this.dictUtil.getEnumsName(AcceptType,this.itemShow.clauseType);
+                this.listInDepart=inDepart;
+                this.itemShow.departName = this.dictUtil.getInDepartName(this.listInDepart,this.itemShow.departCode);
+              });
+              this.storage.get(OUT_DEPART).then((outDepart: DicOutDepart[]) => {
+                this.listOutDept=outDepart;
+                this.itemShow.departCodeWbName = this.dictUtil.getOutDepartName(this.listOutDept,this.itemShow.departCodeWb);
               });
               //获取工程量信息
               //contractCode:string,type:string,payCode:string,sequence :string,billNumber:string

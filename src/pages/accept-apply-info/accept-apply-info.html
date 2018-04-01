@@ -64,6 +64,13 @@
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
+                <ion-col col-4><span class='color-label'>所属单位：</span></ion-col>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.departName}}</span>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-row>
                 <ion-col col-4><span class='color-label'>成本属性：</span></ion-col>
                 <ion-col col-8><span text-left class="lable-info">{{itemShow.costPropertyName}}</span></ion-col>
             </ion-row>
@@ -77,7 +84,7 @@
         <ion-item text-wrap>
             <ion-row>
                 <ion-col col-4><span class='color-label'>申请单位：</span></ion-col>
-                <ion-col col-8><span text-left class="lable-info">{{itemShow.departName}}</span>
+                <ion-col col-8><span text-left class="lable-info">{{itemShow.departCodeWbName}}</span>
                 </ion-col>
             </ion-row>
         </ion-item>

@@ -17,6 +17,8 @@ import {AcceptType} from '../../enums/enums';
 
 import {IN_DEPART} from "../../enums/storage-type";
 import {DicInDepart} from '../../model/dic-in-depart';
+import {OUT_DEPART} from "../../enums/storage-type";
+import {DicOutDepart} from '../../model/dic-out-depart';
 
 import {Oper,Oper_Add,Oper_Edit} from '../../providers/TransferFeildName';
 import {BillNumberCode} from '../../providers/TransferFeildName';
@@ -34,7 +36,7 @@ import {BillAddTime} from '../../providers/TransferFeildName';
  * Ionic pages and navigation.
  */
 
-  /*const listDeptGet: Depart[]=[
+  /*const listInDepartGet: Depart[]=[
       {departCode:'1',departName:'单位1'},
       {departCode:'2',departName:'单位2'},
       {departCode:'133930001',departName:'单位3'},
@@ -57,7 +59,8 @@ export class AcceptApplyItemPage {
   applyFrom:any;
   list: AcceptApplyDetail[];
   itemShow:AcceptApplyDetail;
-  listDept: DicInDepart[];
+  listInDepart: DicInDepart[];
+  listOutDept : DicOutDepart[];
   callback :any;
   sendOrCheckSuccess=false;
   isBackRefresh = false;
@@ -89,14 +92,15 @@ export class AcceptApplyItemPage {
     this.sendOrCheckSuccess=false;
     this.isBackRefresh = false;
     this.sendSuccess=false;
-    //this.listDept = listDeptGet;
+    //this.listInDepart = listInDepartGet;
 
     this.applyFrom = this.formBuilder.group({
       contractCode: [, [Validators.required]],
       contractName: [, []],
       elementCode: [, []],
       elementName: [, []],
-      departCode: [, [Validators.required]],
+      departCode: [, []],
+      departCodeWb: [, [Validators.required]],
       requireDate: [, [Validators.required]],
       requireUser: [, [Validators.required]],
       costProperty: [, [Validators.required]],
@@ -106,6 +110,7 @@ export class AcceptApplyItemPage {
       reviewStatus: [, []],
       
       departName: [, []],
+      departCodeWbName: [, []],
       costPropertyName: [, []],
       clauseTypeName: [, []],
     });
@@ -118,6 +123,7 @@ export class AcceptApplyItemPage {
       elementCode: this.itemShow.elementCode,
       elementName: this.itemShow.elementName,
       departCode: this.itemShow.departCode,
+      departCodeWb: this.itemShow.departCodeWb,
       requireDate: this.itemShow.requireDate,
       requireUser: this.itemShow.requireUser,
       costProperty: this.itemShow.costProperty,
@@ -127,6 +133,7 @@ export class AcceptApplyItemPage {
       reviewStatus: this.itemShow.reviewStatus,
       
       departName: this.itemShow.departName,
+      departCodeWbName: this.itemShow.departCodeWbName,
       costPropertyName: this.itemShow.costPropertyName,
       clauseTypeName: this.itemShow.clauseTypeName,
     });
@@ -150,6 +157,9 @@ export class AcceptApplyItemPage {
     this.sendSuccess=false;
     this.itemShow = new AcceptApplyDetail();
     //this.billOfGclIsSaved = true;
+    this.storage.get(OUT_DEPART).then((outDepart: DicOutDepart[]) => {
+        this.listOutDept=outDepart;
+    });
     this.getShowItem();
   }
 
@@ -172,8 +182,9 @@ export class AcceptApplyItemPage {
             if(this.list && this.list.length > 0){
               this.itemShow = this.list[0] as AcceptApplyDetail;
               this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
-                this.listDept=inDepart;
-                this.itemShow.departName = this.dictUtil.getInDepartName(this.listDept,this.itemShow.departCode);
+                this.listInDepart=inDepart;
+                this.itemShow.departName = this.dictUtil.getInDepartName(this.listInDepart,this.itemShow.departCode);
+
                 this.FromPatchValue();
               });
               //获取工程量信息
@@ -209,8 +220,10 @@ export class AcceptApplyItemPage {
       this.itemShow.contractName = "";
       this.itemShow.elementCode = "";
       this.itemShow.elementName = "";
-      this.itemShow.departCode = this.globalData.departCode;
-      this.itemShow.departName = this.globalData.departName;
+      this.itemShow.departCode = "";
+      this.itemShow.departName = "";
+      this.itemShow.departCodeWb = "";
+      this.itemShow.departCodeWbName = "";
       this.itemShow.requireDate =  Utils.dateFormat(new Date());
       this.itemShow.requireUser = this.globalData.userName;
       this.itemShow.reviewStatus = "0";
@@ -514,6 +527,8 @@ export class AcceptApplyItemPage {
           this.itemShow.contractName = data.contractName;
           this.itemShow.elementCode = data.elementCode;
           this.itemShow.elementName = data.elementName;
+          this.itemShow.departCode = data.departCode;
+          this.itemShow.departName = data.departName;
           this.FromPatchValue();
       }
       resolve();

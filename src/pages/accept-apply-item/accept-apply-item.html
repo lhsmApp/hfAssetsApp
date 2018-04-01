@@ -51,6 +51,11 @@
                     placeholder="自动带出"></ion-input>
             </ion-item>
             <ion-item text-wrap>
+                <ion-label fixed>所属单位</ion-label>
+                <ion-input type="text" readonly readonly formControlName="departName"
+                    placeholder="自动带出"></ion-input>
+            </ion-item>
+            <ion-item text-wrap>
                 <ion-label fixed>成本属性</ion-label>
                 <ion-select type="text" [(ngModel)]="costProperty" formControlName="costProperty" placeholder="手工选择"
                             cancelText="取消" okText="确定" >
@@ -68,13 +73,12 @@
             </ion-item>
             <ion-item text-wrap>
                 <ion-label fixed>申请单位</ion-label>
-                <ion-input type="text" readonly formControlName="departName"></ion-input>
-                <!--<ion-select type="text" [(ngModel)]="departCode" formControlName="departCode" placeholder="选择">
-                    <ion-option *ngFor="let dept of listDept" value="{{dept.departCode}}">{{dept.departName}}</ion-option>
+                <ion-select type="text" [(ngModel)]="departCodeWb" formControlName="departCodeWb" placeholder="手工选择">
+                    <ion-option *ngFor="let dept of listOutDept" value="{{dept.departCode}}">{{dept.departName}}</ion-option>
                     <ion-option value=""></ion-option>
-                </ion-select>-->
+                </ion-select>
             </ion-item>
-            <span *ngIf="!applyFrom.controls.departCode.valid && applyFrom.controls.departCode.touched"
+            <span *ngIf="!applyFrom.controls.departCodeWb.valid && applyFrom.controls.departCodeWb.touched"
                   class="validation-failed">
                 请选择申请单位
             </span>

@@ -27,4 +27,7 @@ export class ContractMain{
     //3解约 
     //4审批中(待审批) 
     //10待审批(待审批)
+    
+	departCode:string;//所属单位
+	departName:string;//所属单位
 }
