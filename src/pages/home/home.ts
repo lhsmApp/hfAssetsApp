@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController,AlertController } from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {Notice} from '../../model/notice';
-import {DEFAULT_YS,DEFAULT_YFK,DEFAULT_HT,DEFAULT_ZZ,DEFAULT_ZZTZ,IS_DEPT_CHANGE} from "../../providers/Constants";
+import {DEFAULT_YS,DEFAULT_YFK,DEFAULT_HT,DEFAULT_ZZ,DEFAULT_ZZTZ,IS_DEPT_CHANGE,DEFAULT_FKFP} from "../../providers/Constants";
 import {NoticeService} from '../../services/noticeService';
 
 import {Page_NoticeInfoPage} from '../../providers/TransferFeildName';
@@ -35,7 +35,7 @@ export class HomePage {
   yfkPath: String = DEFAULT_YFK;
   zzPath: String = DEFAULT_ZZ;
   zztzPath: String = DEFAULT_ZZTZ;
-  //fpPath: String = DEFAULT_FP;
+  fkfpPath: String = DEFAULT_FKFP;
 
   /*htSchedule:Schedule;
   ysSchedule:Schedule;
@@ -48,7 +48,7 @@ export class HomePage {
   yfkBillCount:number=0;
   zzBillCount:number=0;
   zztzBillCount:number=0;
-  fpBillCount:number=0;
+  fkfpBillCount:number=0;
 
   scheduleList:Schedule[];
 
@@ -119,7 +119,7 @@ export class HomePage {
             }else if(item.businessType=='ZZTZSP'){
               this.zztzBillCount=item.billCount;
             }else if(item.businessType=='FKFPSP'){
-              this.fpBillCount=item.billCount;
+              this.fkfpBillCount=item.billCount;
             }
           }
         }else{

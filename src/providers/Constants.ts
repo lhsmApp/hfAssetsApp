@@ -49,7 +49,7 @@ export const DEFAULT_HT = './assets/img/hetongshenpi@2x.png';//合同
 export const DEFAULT_ZZ = './assets/img/zhuanzi@2x.png';//转资
 export const DEFAULT_ZZTZ = './assets/img/zhuanzitiaozhengshenpi@2x.png';//转资调整
 export const DEFAULT_LOGIN_BG = './assets/img/LoginBg.png';//登录背景
-export const DEFAULT_FP = './assets/img/yanshoushenpi@2x.png';//发票
+export const DEFAULT_FKFP = './assets/img/fukuanfapiaoshenpi@2x.png';//付款发票审批
 
 export const CHART1 = './assets/img/chart1.jpg';//图表1
 export const CHART2 = './assets/img/chart2.jpg';//图表2
