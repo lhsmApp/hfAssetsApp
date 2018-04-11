@@ -22,7 +22,15 @@ export class AdvancePaymentDetail{
 	intercourseCode:string;//往来单位名称(收款单位)
 	requireDate:string;//申请时间
 	requireUser:string;//申请人
+	
+	bl:number;//付款比例 double型
+	fpDate:string;//日期-发票审核
+	fpUser:string;//人-发票审核
 
 	reviewStatus:string;//单据状态
 	acceptanceCode:string;//验收单号
+
+	company:string;//企业名称 
+	openBank:string;//开户行  
+	bankNum:string;//银行账号
 }

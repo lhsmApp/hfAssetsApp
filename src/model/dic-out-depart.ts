@@ -13,4 +13,8 @@ export class DicOutDepart{
 	stationProperties:string;//单位性质（全资/租赁/控股）
 
 	departUse :string;//是否停用该单位(0:否,1:是)
+
+	company:string;//企业名称 
+	openBank:string;//开户行  
+	bankNum:string;//银行账号
 }

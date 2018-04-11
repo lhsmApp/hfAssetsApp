@@ -10,4 +10,8 @@ export class InvoiceMain{
 	chalanMoney:number;//发票金额,传double型
 
 	chalanDate:string;//发票日期
+
+
+
+	chalanContentName:string;//发票内容
 }

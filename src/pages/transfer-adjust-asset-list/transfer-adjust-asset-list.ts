@@ -129,7 +129,7 @@ export class TransferAdjustAssetListPage {
   }
 
     toDetail(item: TransferAdjustMain) {
-        this.navCtrl.push(Page_TransferAdjustAssetInfoPage, {BillNumberCode: item.translateCode, BillKeyCode: item.keyCode, Oper:Oper_Approval,Title:'转资调整审批'});
+        this.navCtrl.push(Page_TransferAdjustAssetInfoPage, {BillNumberCode: item.translateCode, BillKeyCode: item.keyCode, Oper:Oper_Approval,Title:this.title});
     }
 
 }

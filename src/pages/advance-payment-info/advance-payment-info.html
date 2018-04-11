@@ -163,6 +163,17 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
+	    <ion-item text-wrap *ngIf="isYFK">
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>付款比例：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{paymentDetail?.bl}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
 	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
@@ -196,6 +207,39 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
+	    <ion-item text-wrap *ngIf="isapproval">
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>企业名称：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{paymentDetail?.company}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap *ngIf="isapproval">
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>开户行：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{paymentDetail?.openBank}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap *ngIf="isapproval">
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>银行账号：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{paymentDetail?.bankNum}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
 	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
@@ -215,6 +259,28 @@
 	       		</ion-col>
 	       		<ion-col col-8>
 	       			<span text-left class="lable-info">{{paymentDetail?.requireDate}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap><!--*ngIf="isquery"-->
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>发票审核人：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{paymentDetail?.fpUser}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap><!--*ngIf="isquery"-->
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>发票审核日期：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{paymentDetail?.fpDate}}</span>
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>

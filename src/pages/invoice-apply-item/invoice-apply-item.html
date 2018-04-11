@@ -84,17 +84,19 @@
       <ion-item text-wrap>
         <ion-label fixed>发票日期</ion-label>
         <!-- <ion-input type="text" formControlName="chalanDate"></ion-input> -->
-        <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY MM DD" formControlName="chalanDate" cancelText="取消" doneText="确定"></ion-datetime>
+        <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD" formControlName="chalanDate" cancelText="取消" doneText="确定"></ion-datetime>
       </ion-item>
       <span *ngIf="!invoiceForm.controls.chalanDate.valid && invoiceForm.controls.chalanDate.touched"
             class="validation-failed">请输入发票日期
       </span>
       <ion-item text-wrap>
         <ion-label fixed>发票内容</ion-label>
-        <ion-input type="text" formControlName="chalanContent"></ion-input>
+        <ion-select [(ngModel)]="chalanContent" formControlName="chalanContent" cancelText="取消" okText="确定">
+          <ion-option *ngFor="let content of invoiceContent" [value]="content.code">{{content.name}}</ion-option>
+       </ion-select>
       </ion-item>
       <span *ngIf="!invoiceForm.controls.chalanContent.valid && invoiceForm.controls.chalanContent.touched"
-            class="validation-failed">请输入发票内容
+            class="validation-failed">请选择发票内容
       </span>
 	  <ion-item text-wrap>
         <ion-label fixed>完税凭证号</ion-label>

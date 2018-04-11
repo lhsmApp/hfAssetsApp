@@ -9,6 +9,7 @@ import { AdvancePaymentMain} from '../../model/advance-payment-main';
 import { INVOICE_TYPE} from '../../enums/enums';
 import {ReviewType} from '../../enums/review-type';
 import {Utils} from "../../providers/Utils";
+import { InvoiceContent} from '../../enums/enums';
 
 import {Oper,Oper_Add,Oper_Edit} from '../../providers/TransferFeildName';
 import {Title} from '../../providers/TransferFeildName';
@@ -39,6 +40,7 @@ export class InvoiceApplyItemPage {
 
   invoiceForm: any;
   invoiceType=INVOICE_TYPE;
+  invoiceContent=InvoiceContent;
   callback :any;
   isBackRefresh = false;
 
@@ -69,7 +71,7 @@ export class InvoiceApplyItemPage {
       noTaxMoney: [,[Validators.required]],//不含税金额，手工录入
       deductibleInputString : [,[Validators.required]],//可抵扣进项税，手工录入
       chalanDate : [,[Validators.required]],//发票日期，手工录入
-      chalanContent: [,[Validators.required]],//发票内容，手工录入
+      chalanContent: [,[Validators.required]],//发票内容，选择
       taxNumber: '',//完税凭证号，手工录入
     })
   }
@@ -122,7 +124,7 @@ export class InvoiceApplyItemPage {
             this.list = object[1] as InvoiceDetail[];
             if(this.list && this.list.length > 0){
               this.itemShow = this.list[0] as InvoiceDetail;
-                this.FromPatchValue();
+              this.FromPatchValue();
             }
           } else {
               let alert = this.alertCtrl.create({
@@ -142,6 +144,7 @@ export class InvoiceApplyItemPage {
       this.itemShow.chalanTypeName = "";
       this.itemShow.chalanNumber = "";
       this.itemShow.chalanContent = "";
+      this.itemShow.chalanContentName = "";
       this.itemShow.price = 0;
       this.itemShow.singleAmount =  0;
       this.itemShow.sl = "";
@@ -162,7 +165,7 @@ export class InvoiceApplyItemPage {
     if(!(sequence!=null&&sequence.trim()!="")){
       let alert = this.alertCtrl.create({
         title: '提示',
-        subTitle: '请先保存发票信息，再进行维护附件信息！',
+        subTitle: '请先保存，再进行维护附件信息！',
         buttons: ['确定']
       });
       alert.present();

@@ -69,7 +69,7 @@ export class QueryPage {
         return;
       }
     }
-    this.navCtrl.push("ProjQueryListPage");
+    this.navCtrl.push("ProjQueryListPage", {Title:'项目信息查询'});
   }
 
   //合同信息查询
@@ -93,7 +93,7 @@ export class QueryPage {
         return;
       }
     }
-    this.navCtrl.push('QueryConditionPage', {'oper': 'ht'});
+    this.navCtrl.push('QueryConditionPage', {'oper': 'ht',Title:'合同信息查询'});
   }
 
   //付款信息查询
@@ -117,10 +117,10 @@ export class QueryPage {
         return;
       }
     }
-    this.navCtrl.push('QueryConditionPage', {'oper': 'yfk'});
+    this.navCtrl.push('QueryConditionPage', {'oper': 'yfk',Title:'付款信息查询'});
   }
 
-  //验收信息查询
+  //实物确认查询  Title:'实物确认查询'后续已做完
   queryYs() {
     if(this.globalData.permission){
       let flag:boolean=false;
@@ -134,17 +134,17 @@ export class QueryPage {
       if(!flag){
         let alert = this.alertCtrl.create({
           title: '提示',
-          subTitle: '不能进行验收信息查询，您没有验收信息查询的权限！',
+          subTitle: '不能进行实物确认查询，您没有实物确认查询的权限！',
           buttons: ['确定']
         });
         alert.present();
         return;
       }
     }
-    this.navCtrl.push('QueryConditionPage', {'oper': 'topics1'});
+    this.navCtrl.push('QueryConditionPage', {'oper': 'topics1',Title:'实物确认查询'});
   }
 
-  //转资信息查询
+  //转资信息查询  Title:'转资信息查询'后续已做完
   queryZz() {
     if(this.globalData.permission){
       let flagzz:boolean=false;
@@ -164,6 +164,6 @@ export class QueryPage {
         return;
       }
     }
-    this.navCtrl.push('QueryConditionPage', {'oper': 'topics2'});
+    this.navCtrl.push('QueryConditionPage', {'oper': 'topics2',Title:'转资信息查询'});
   }
 }

@@ -87,7 +87,7 @@ export class ApplyPage {
     this.navCtrl.push("AdvancePaymentApplyListPage");
   }
 
-  //验收申请
+  //实物确认申请
   ysApply() {
     if(this.globalData.permission){
       let flagys:boolean=false;
@@ -100,17 +100,17 @@ export class ApplyPage {
       if(!flagys){
         let alert = this.alertCtrl.create({
           title: '提示',
-          subTitle: '不能进行验收申请，您没有验收申请的权限！',
+          subTitle: '不能进行实物确认申请，您没有实物确认申请的权限！',
           buttons: ['确定']
         });
         alert.present();
         return;
       }
     }
-    this.navCtrl.push('AcceptApplyListPage');
+    this.navCtrl.push('AcceptApplyListPage',{Oper:Oper_Edit,Title:'实物确认申请'});
   }
 
-  //进度管理
+  //项目进度维护
   jdApply() {
     if(this.globalData.permission){
       let flagjd:boolean=false;
@@ -123,17 +123,17 @@ export class ApplyPage {
       if(!flagjd){
         let alert = this.alertCtrl.create({
           title: '提示',
-          subTitle: '不能进行进度管理，您没有进度管理的权限！',
+          subTitle: '不能进行项目进度维护，您没有项目进度维护的权限！',
           buttons: ['确定']
         });
         alert.present();
         return;
       }
     }
-    this.navCtrl.push('ScheduleApplyListPage');
+    this.navCtrl.push('ScheduleApplyListPage',{Oper:Oper_Edit,Title:'项目进度维护'});
   }
 
-  //付款发票录入
+  //发票录入
   fpApply(){
     if(this.globalData.permission){
       let flagjd:boolean=false;
@@ -146,14 +146,14 @@ export class ApplyPage {
       if(!flagjd){
         let alert = this.alertCtrl.create({
           title: '提示',
-          subTitle: '不能进行付款发票录入，您没有付款发票录入的权限！',
+          subTitle: '不能进行发票录入，您没有发票录入的权限！',
           buttons: ['确定']
         });
         alert.present();
         return;
       }
     }
-    this.navCtrl.push("InvoicePaymentListPage",{Oper:Oper_Edit,Title:'付款发票录入'});
+    this.navCtrl.push("InvoicePaymentListPage",{Oper:Oper_Edit,Title:'发票录入'});
   }
 
 }

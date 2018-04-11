@@ -141,7 +141,7 @@ export class TransferAdjustApprovalInfoPage {
   
   //资产明细
   toAssetDetail(){
-        this.navCtrl.push(Page_TransferAdjustAssetListPage, {ItemTranfer: this.itemTranfer, Oper:Oper_Approval,Title:'转资调整审批'});
+        this.navCtrl.push(Page_TransferAdjustAssetListPage, {ItemTranfer: this.itemTranfer, Oper:Oper_Approval,Title:this.title});
   }
 
   check(){

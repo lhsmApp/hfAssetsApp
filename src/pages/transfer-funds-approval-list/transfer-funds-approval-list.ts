@@ -39,12 +39,14 @@ export class TransferFundsApprovalListPage {
   isEmpty:boolean=false;
   sendSuccess=false;
   
+  title:string;
   callback :any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController,
               private dictUtil:DictUtil,
               public translateVoucherService:AcceptService) {
+    this.title = this.navParams.get(Title);
     this.callback = this.navParams.get('callback');
     this.sendSuccess=false;
     //this.listAll = [];
@@ -150,7 +152,7 @@ export class TransferFundsApprovalListPage {
   }
 
     toDetail(translateCode: string) {
-        this.navCtrl.push(Page_TransferFundsInfoPage, {callback:this.checkRefresh,Oper:Oper_Approval,Title:'转资审批',BillNumberCode: translateCode,'approvalState':'2'});
+        this.navCtrl.push(Page_TransferFundsInfoPage, {callback:this.checkRefresh,Oper:Oper_Approval,Title:this.title,BillNumberCode: translateCode,'approvalState':'2'});
     }
 
   //回调

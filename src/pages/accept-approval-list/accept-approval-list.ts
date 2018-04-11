@@ -38,12 +38,14 @@ export class AcceptApprovalListPage {
   isEmpty:boolean=false;
   sendSuccess=false;
   
+  title:string;
   callback :any;
 
   constructor(public navCtrl: NavController,
               public alertCtrl: AlertController,
               public navParams: NavParams,
               public acceptService:AcceptService) {
+    this.title = this.navParams.get(Title);
     this.callback = this.navParams.get('callback');
     this.sendSuccess=false;
     //this.listAll = [];
@@ -145,7 +147,7 @@ export class AcceptApprovalListPage {
   }
 
     toDetail(billNumber: string) {
-        this.navCtrl.push(Page_AcceptApplyInfoPage, {callback:this.checkRefresh,BillNumberCode: billNumber,Oper:Oper_Approval,Title:'验收审批','approvalState':'2'});
+        this.navCtrl.push(Page_AcceptApplyInfoPage, {callback:this.checkRefresh,BillNumberCode: billNumber,Oper:Oper_Approval,Title:this.title,'approvalState':'2'});
     }
 
   //回调

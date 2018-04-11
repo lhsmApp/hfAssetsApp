@@ -61,7 +61,7 @@ export class AttachmentInfoPage {
     }else if(this.attachmentType=='3'){
       this.title='发票附件';
     }else if(this.attachmentType=='4'){
-      this.title='验收附件';
+      this.title='实物确认附件';
     }
   }
 

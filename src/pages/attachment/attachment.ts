@@ -66,7 +66,7 @@ export class AttachmentPage {
     }else if(this.attachmentType=='3'){
       this.title='发票附件';
     }else if(this.attachmentType=='4'){
-      this.title='验收附件';
+      this.title='实物确认附件';
     }
   }
 
@@ -213,7 +213,7 @@ export class AttachmentPage {
   delete(item:Attachment){
     let confirm = this.alertCtrl.create({
       title: '删除提示?',
-      message: '确认要删除当前付款单吗?',
+      message: '确认要删除吗?',
       buttons: [
         {
           text: '取消',

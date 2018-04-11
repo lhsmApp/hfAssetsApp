@@ -103,6 +103,13 @@
       <span *ngIf="!paymentForm.controls.payDigest.valid && paymentForm.controls.payDigest.touched"
             class="validation-failed">请输入付款原因
       </span>
+      <ion-item text-wrap *ngIf="isYFK">
+        <ion-label fixed>付款比例<span class="danger">*</span></ion-label>
+        <ion-input type="number" formControlName="bl" placeholder="手工输入"></ion-input>
+      </ion-item>
+      <span *ngIf="isYFK && !paymentForm.controls.bl.valid && paymentForm.controls.bl.touched"
+            class="validation-failed">请输入付款比例
+      </span>
       <ion-item text-wrap>
         <ion-label fixed>本次申请金额<span class="danger">*</span></ion-label>
         <ion-input type="number" formControlName="payMoney" placeholder="手工输入"></ion-input>

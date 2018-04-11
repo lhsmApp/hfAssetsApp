@@ -13,6 +13,7 @@ import {PROJECT_ELEMENT} from "../../enums/storage-type";
 import {DicBase} from '../../model/dic-base';
 
 import {Oper,Oper_Edit,Oper_Add} from '../../providers/TransferFeildName';
+import {Title} from '../../providers/TransferFeildName';
 import {BillElementCode} from '../../providers/TransferFeildName';
 
 import {Page_ChoiceApproversPage} from '../../providers/TransferFeildName';
@@ -57,6 +58,7 @@ export class ScheduleApplyItemPage {
   @ViewChild('myNavbar') navBar: Navbar;
   
     oper:string;
+    title:string;
 	  billElementCode:string;
 
     applyFrom:any;
@@ -81,6 +83,7 @@ export class ScheduleApplyItemPage {
     this.itemShow = new ProjectUnitDetail();
     this.maxYear = ((new Date()).getFullYear() + 100).toString();
   	this.oper = this.navParams.get(Oper);
+    this.title = this.navParams.get(Title);
   	this.billElementCode = this.navParams.get(BillElementCode);
     this.callback    = this.navParams.get('callback');
     this.sendSuccess=false;

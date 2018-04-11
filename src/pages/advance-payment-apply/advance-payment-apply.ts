@@ -67,6 +67,8 @@ export class AdvancePaymentApplyPage {
   sendSuccess=false;
   sendSuccess1=false;//用于校验送审成功后，按钮变成灰色
 
+  isYFK:boolean=false;//是预付款显示付款比例
+
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public toastCtrl:ToastController,
@@ -106,23 +108,17 @@ export class AdvancePaymentApplyPage {
       intercourseCode: [,[Validators.required]],//往来单位编号(收款单位)，选择
       //intercourseName: [, [Validators.required]],//往来单位名称(收款单位)，选择
       requireDate: [,[Validators.required]],//申请时间，自动填写当前时间
-      requireUser: [,[Validators.required]]//申请人，自动填写当前用户
+      requireUser: [,[Validators.required]],//申请人，自动填写当前用户
+      bl: [,[Validators.required]]//付款比例
     });
-
-
   }
 
-  //初始化数据
-  initData(){
-    if(this.paymentMain){
-      this.paymentService.getPaymentDetail(this.paymentMain.payCode)
-        .subscribe(object => {
-          let resultBase:ResultBase=object[0] as ResultBase;
-          if(resultBase.result=='true'){
-            console.log(object[1][0]);
-            this.paymentDetail = object[1][0] as AdvancePaymentDetail;
-            this.storage.get(AJUST_TYPE).then((ajustType: DicComplex[]) => {
-              this.listAjustType=ajustType;
+  FromPatchValue(){
+            if(this.paymentDetail.clauseType=='1'){
+              this.isYFK=true;//是预付款显示付款比例
+            } else {
+              this.isYFK=false;//是预付款显示付款比例
+            }
               this.paymentForm.patchValue({
                 payCode:this.paymentDetail.payCode,
                 clauseType:this.paymentDetail.clauseType,
@@ -140,8 +136,24 @@ export class AdvancePaymentApplyPage {
                 paymentCode:this.paymentDetail.paymentCode,
                 intercourseCode:this.paymentDetail.intercourseCode,
                 requireDate:this.paymentDetail.requireDate,
-                requireUser:this.paymentDetail.requireUser
+                requireUser:this.paymentDetail.requireUser,
+                bl:this.paymentDetail.bl
               });
+  }
+
+  //初始化数据
+  initData(){
+    this.isYFK=false;//是预付款显示付款比例
+    if(this.paymentMain){
+      this.paymentService.getPaymentDetail(this.paymentMain.payCode)
+        .subscribe(object => {
+          let resultBase:ResultBase=object[0] as ResultBase;
+          if(resultBase.result=='true'){
+            console.log(object[1][0]);
+            this.paymentDetail = object[1][0] as AdvancePaymentDetail;
+            this.storage.get(AJUST_TYPE).then((ajustType: DicComplex[]) => {
+              this.listAjustType=ajustType;
+              this.FromPatchValue();
             });
 
             //获取工程量信息
@@ -169,7 +181,8 @@ export class AdvancePaymentApplyPage {
         this.paymentMain=new AdvancePaymentMain();
         this.paymentForm.patchValue({
           requireDate:Utils.dateFormat(new Date()),
-          requireUser:this.globalData.userName
+          requireUser:this.globalData.userName,
+          bl:0
         });
       }
   }
@@ -182,6 +195,7 @@ export class AdvancePaymentApplyPage {
       }else{
         this.navCtrl.pop();
       }
+      this.isYFK=false;//是预付款显示付款比例
     }
     
     this.sendSuccess=false;
@@ -298,7 +312,7 @@ export class AdvancePaymentApplyPage {
             acceptanceCode:acceptInfo.billNumber
         });
 
-        if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='4'){  
+        if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='5'||this.paymentForm.get('clauseType').value=='4'){  
 
           //获取工程量信息,当付款类型为进度款或者竣工款时付款金额需要根据验收单号下的工程量进行计算
           this.paymentService.getGclMainList(this.paymentForm.get('contractCode').value,'ys','','0',this.paymentForm.get('acceptanceCode').value)
@@ -306,7 +320,7 @@ export class AdvancePaymentApplyPage {
             let resultBase:ResultBase=object[0] as ResultBase;
             if(resultBase.result=='true'){
               this.gclListInfo = object[1] as BillOfWorkMain[];
-              if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='4'){
+              if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='5'||this.paymentForm.get('clauseType').value=='4'){
               let sumHj=0;
               if(this.gclListInfo){
                 for(let gclItem of this.gclListInfo){
@@ -334,7 +348,7 @@ export class AdvancePaymentApplyPage {
   save(){
     //if(!this.paymentForm.valid) return;
 
-    /*if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='4'){
+    /*if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='5'||this.paymentForm.get('clauseType').value=='4'){
       if(this.gclListInfo==null||this.gclListInfo.length==0){
         let alert = this.alertCtrl.create({
           title: '提示',
@@ -366,7 +380,7 @@ export class AdvancePaymentApplyPage {
         return;
       }
     }
-    if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='4'){
+    if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='5'||this.paymentForm.get('clauseType').value=='4'){
       if(!(this.paymentForm.get('acceptanceCode').value!=null&&this.paymentForm.get('acceptanceCode').value.trim()!="")){
         let alert = this.alertCtrl.create({
           title: '提示',
@@ -382,13 +396,21 @@ export class AdvancePaymentApplyPage {
       });
     }
 
-
     let paymentInfo=new Array<AdvancePaymentDetail>();
     let detail=this.paymentForm.value as AdvancePaymentDetail;
     if(!(detail.taxMoney!=null&&detail.taxMoney.toString().trim()!="")){
       detail.taxMoney=0;
     }
+    if(!(detail.bl!=null&&detail.bl.toString().trim()!="")){
+      detail.bl=0;
+    }
     detail.payMoney=parseFloat(detail.payMoney.toString());
+    detail.bl=parseFloat(detail.bl.toString());
+    if(this.paymentForm.get('clauseType').value=='1'){
+      detail.payMoney = parseFloat(detail.costMoney.toString()) * detail.bl * 0.01;
+    } else {
+      detail.bl=0;
+    }
     //detail.requireUser='';
     paymentInfo.push(detail);
     /*console.log(this.gclListInfo);
@@ -430,25 +452,7 @@ export class AdvancePaymentApplyPage {
           this.paymentDetail = object[1][0] as AdvancePaymentDetail;
           this.sendSuccess=true;
           this.paymentMain.payCode=this.paymentDetail.payCode;
-          this.paymentForm.patchValue({
-            payCode:this.paymentDetail.payCode,
-            clauseType:this.paymentDetail.clauseType,
-            contractCode:this.paymentDetail.contractCode,
-            contractName:this.paymentDetail.contractName,
-            //elementType:this.paymentDetail.elementType,
-            elementName:this.paymentDetail.elementName,
-            planType:this.paymentDetail.planType,
-            //planTypeName:this.dicUtil.getContractTypeName(this.listContractType,this.paymentDetail.planType),
-            payDigest:this.paymentDetail.payDigest,
-            acceptanceCode:this.paymentDetail.acceptanceCode,
-            costMoney:this.paymentDetail.costMoney,
-            taxMoney:this.paymentDetail.taxMoney,
-            payMoney:this.paymentDetail.payMoney,
-            paymentCode:this.paymentDetail.paymentCode,
-            intercourseCode:this.paymentDetail.intercourseCode,
-            requireDate:this.paymentDetail.requireDate,
-            requireUser:this.paymentDetail.requireUser
-          });
+          this.FromPatchValue();
         }else{
           let alert = this.alertCtrl.create({
             title: '提示',
@@ -478,7 +482,7 @@ export class AdvancePaymentApplyPage {
     return new Promise((resolve, reject) => {
       console.log(data);
       this.gclListInfo=data;
-      if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='4'){
+      if(this.paymentForm.get('clauseType').value=='2'||this.paymentForm.get('clauseType').value=='5'||this.paymentForm.get('clauseType').value=='4'){
         let sumHj=0;
         if(this.gclListInfo){
           for(let gclItem of this.gclListInfo){
@@ -560,7 +564,7 @@ export class AdvancePaymentApplyPage {
     if(!(payCode!=null&&payCode.trim()!="")){
         let alert = this.alertCtrl.create({
           title: '提示',
-          subTitle: '请先保存付款信息，再进行送审！',
+          subTitle: '请先保存，再进行送审！',
           buttons: ['确定']
         });
         alert.present();
@@ -603,7 +607,12 @@ export class AdvancePaymentApplyPage {
         acceptanceCode:''
       });
     }
-    if(clauseType=='2'||clauseType=='4'){
+    if(clauseType=='1'){
+      this.isYFK=true;//是预付款显示付款比例
+    } else {
+      this.isYFK=false;//是预付款显示付款比例
+    }
+    if(clauseType=='2'||clauseType=='5'||clauseType=='4'){
         let sumHj=0;
         if(this.gclListInfo){
           for(let gclItem of this.gclListInfo){
@@ -615,7 +624,7 @@ export class AdvancePaymentApplyPage {
         this.paymentForm.patchValue({
             payMoney:sumHj,
           });
-      }
+    }
   }
 
   //附件列表
@@ -624,7 +633,7 @@ export class AdvancePaymentApplyPage {
     if(!(payCode!=null&&payCode.trim()!="")){
       let alert = this.alertCtrl.create({
         title: '提示',
-        subTitle: '请先保存付款信息，再进行维护附件信息！',
+        subTitle: '请先保存，再进行维护附件信息！',
         buttons: ['确定']
       });
       alert.present();

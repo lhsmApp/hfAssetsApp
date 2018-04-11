@@ -36,6 +36,8 @@ import {BillElementCode} from '../../providers/TransferFeildName';
   templateUrl: 'schedule-apply-list.html',
 })
 export class ScheduleApplyListPage {
+  title:string;
+
   listAll:ProjectUnitMain[];
 	list:ProjectUnitMain[];
   emptyPath=DEFAULT_INVOICE_EMPTY;
@@ -50,6 +52,7 @@ export class ScheduleApplyListPage {
               public projectElementService: ProjectElementService) {
     //this.listAll = [];
     //this.list = [];
+    this.title = this.navParams.get(Title);
   }
 
   ionViewDidLoad() {
@@ -153,15 +156,15 @@ export class ScheduleApplyListPage {
   }
 
     toDetail(elementCode: string) {
-        this.navCtrl.push(Page_ScheduleApplyInfoPage, {BillElementCode: elementCode,Oper:Oper_Edit, Title: '进度管理'});
+        this.navCtrl.push(Page_ScheduleApplyInfoPage, {BillElementCode: elementCode,Oper:Oper_Edit, Title:this.title});
     }
 
     /*add(){
-        this.navCtrl.push(Page_ScheduleApplyItemPage, {BillElementCode: [],Oper:Oper_Add});
+        this.navCtrl.push(Page_ScheduleApplyItemPage, {BillElementCode: [],Oper:Oper_Add, Title:this.title});
     }*/
     edit(elementCode: string, slidingItem: ItemSliding){
         slidingItem.close();
-        this.navCtrl.push(Page_ScheduleApplyItemPage, {callback:this.checkRefresh,BillElementCode: elementCode,Oper:Oper_Edit});
+        this.navCtrl.push(Page_ScheduleApplyItemPage, {callback:this.checkRefresh,BillElementCode: elementCode,Oper:Oper_Edit, Title:this.title});
     }
 
   //回调

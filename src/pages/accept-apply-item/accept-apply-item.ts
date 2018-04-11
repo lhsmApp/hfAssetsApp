@@ -21,6 +21,7 @@ import {OUT_DEPART} from "../../enums/storage-type";
 import {DicOutDepart} from '../../model/dic-out-depart';
 
 import {Oper,Oper_Add,Oper_Edit} from '../../providers/TransferFeildName';
+import {Title} from '../../providers/TransferFeildName';
 import {BillNumberCode} from '../../providers/TransferFeildName';
 
 import {Page_ContractChoiceListPage,Page_AssetDetailsListPage} from '../../providers/TransferFeildName';
@@ -54,6 +55,7 @@ export class AcceptApplyItemPage {
   @ViewChild('myNavbar') navBar: Navbar;
   
   oper:string;
+  title:string;
   billNumber:string;
 
   applyFrom:any;
@@ -87,6 +89,7 @@ export class AcceptApplyItemPage {
     this.itemShow = new AcceptApplyDetail();
     //this.billOfGclIsSaved = true;
   	this.oper = this.params.get(Oper);
+    this.title = this.params.get(Title);
   	this.billNumber = this.params.get(BillNumberCode);
     this.callback    = this.params.get('callback');
     this.sendOrCheckSuccess=false;
@@ -335,7 +338,7 @@ export class AcceptApplyItemPage {
       if(!(this.billNumber!=null&&this.billNumber.trim()!="")){
         let alert = this.alertCtrl.create({
           title: '提示',
-          subTitle: '请保存后再进行送审！',
+          subTitle: '请先保存，再进行送审！',
           buttons: ['确定']
         });
         alert.present();
@@ -407,7 +410,7 @@ export class AcceptApplyItemPage {
     if(!(this.billNumber!=null&&this.billNumber.trim()!="")){// || this.billOfGclIsSaved == false
         let alert = this.alertCtrl.create({
           title: '提示',
-          subTitle: '请先保存验收信息，再选择工程量信息！',
+          subTitle: '请先保存，再选择工程量信息！',
           buttons: ['确定']
         });
         alert.present();
@@ -466,7 +469,7 @@ export class AcceptApplyItemPage {
       if(!(this.billNumber!=null&&this.billNumber.trim()!="")){// || this.billOfGclIsSaved == false
         let alert = this.alertCtrl.create({
           title: '提示',
-          subTitle: '请先保存验收信息，再进行维护资产明细信息！',
+          subTitle: '请先保存，再进行维护资产明细信息！',
           buttons: ['确定']
         });
         alert.present();
@@ -549,13 +552,13 @@ export class AcceptApplyItemPage {
     if(!(this.billNumber!=null&&this.billNumber.trim()!="")){
       let alert = this.alertCtrl.create({
         title: '提示',
-        subTitle: '请先保存验收信息，再进行维护附件信息！',
+        subTitle: '请先保存，再进行维护附件信息！',
         buttons: ['确定']
       });
       alert.present();
       return;
     }
-    this.navCtrl.push("AttachmentPage",{'billNumber':this.billNumber,'contractCode':'','type':'1','attachmentType':'2','typeList':'1'});
+    this.navCtrl.push("AttachmentPage",{'billNumber':this.billNumber,'contractCode':'','type':'1','attachmentType':'4','typeList':'1'});
   }
 
 }

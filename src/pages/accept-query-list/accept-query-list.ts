@@ -33,6 +33,7 @@ import {BillApprovalState} from '../../providers/TransferFeildName';
 })
 export class AcceptQueryListPage {
   queryCondition:QueryCondition;
+  title:string;
 
     listAll:AcceptApplyMain[];
     list:AcceptApplyMain[];
@@ -50,7 +51,8 @@ export class AcceptQueryListPage {
     console.log('ionViewDidLoad AcceptQueryListPage');
     //this.listAll = [];
     //this.list = [];
-     this.queryCondition=this.navParams.get("queryCondition");
+    this.queryCondition=this.navParams.get("queryCondition");
+    this.title = this.navParams.get(Title);
     this.getList();
   }
 
@@ -129,7 +131,7 @@ export class AcceptQueryListPage {
 
   toDetail(billNumber: string) {
     console.log(BillApprovalState + ':' + this.queryCondition.state);
-    this.navCtrl.push(Page_AcceptApplyInfoPage, {BillNumberCode: billNumber,Oper:Oper_Look,Title:'验收查询','approvalState':this.queryCondition.state});
+    this.navCtrl.push(Page_AcceptApplyInfoPage, {BillNumberCode: billNumber,Oper:Oper_Look,Title:this.title,'approvalState':this.queryCondition.state});
   }
 
 }

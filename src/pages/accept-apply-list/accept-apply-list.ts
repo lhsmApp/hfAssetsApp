@@ -33,6 +33,8 @@ import {BillNumberCode} from '../../providers/TransferFeildName';
   templateUrl: 'accept-apply-list.html',
 })
 export class AcceptApplyListPage {
+  title:string;
+  
     listAll:AcceptApplyMain[];
     list:AcceptApplyMain[];
   emptyPath=DEFAULT_INVOICE_EMPTY;
@@ -44,6 +46,7 @@ export class AcceptApplyListPage {
               public acceptService:AcceptService) {
     //this.listAll = [];
     //this.list = [];
+    this.title = this.navParams.get(Title);
   }
 
   ionViewDidLoad() {
@@ -128,18 +131,18 @@ export class AcceptApplyListPage {
   }
 
     toDetail(billNumber: string) {
-      this.navCtrl.push(Page_AcceptApplyInfoPage, {callback:this.checkRefresh,BillNumberCode: billNumber,Oper:Oper_Edit,Title:'验收申请'});
+      this.navCtrl.push(Page_AcceptApplyInfoPage, {callback:this.checkRefresh,BillNumberCode: billNumber,Oper:Oper_Edit,Title:this.title});
     }
 
   //增加
     add(){
-        this.navCtrl.push(Page_AcceptApplyItemPage, {callback:this.checkRefresh,BillNumberCode: '',Oper:Oper_Add});
+        this.navCtrl.push(Page_AcceptApplyItemPage, {callback:this.checkRefresh,BillNumberCode: '',Oper:Oper_Add,Title:this.title});
     }
 
   //编辑
   edit(billNumber: string, slidingItem: ItemSliding){
     slidingItem.close();
-    this.navCtrl.push(Page_AcceptApplyItemPage, {callback:this.checkRefresh,BillNumberCode: billNumber,Oper:Oper_Edit});
+    this.navCtrl.push(Page_AcceptApplyItemPage, {callback:this.checkRefresh,BillNumberCode: billNumber,Oper:Oper_Edit,Title:this.title});
   }
 
   //回调

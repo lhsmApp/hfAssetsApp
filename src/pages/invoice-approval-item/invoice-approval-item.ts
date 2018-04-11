@@ -8,6 +8,7 @@ import { AdvancePaymentMain} from '../../model/advance-payment-main';
 import { DictUtil} from '../../providers/dict-util';
 import {INVOICE_TYPE} from '../../enums/enums';
 import {ReviewType} from '../../enums/review-type';
+import { InvoiceContent} from '../../enums/enums';
 
 import {Oper,Oper_Look,Oper_Edit,Oper_Add,Oper_Approval} from '../../providers/TransferFeildName';
 import {Title} from '../../providers/TransferFeildName';
@@ -65,6 +66,7 @@ export class InvoiceApprovalItemPage {
           console.log(object[1][0]);
           this.itemShow = object[1][0] as InvoiceDetail;
           this.itemShow.chalanTypeName=this.dictUtil.getEnumsName(INVOICE_TYPE,this.itemShow.chalanType);
+          this.itemShow.chalanContentName = this.dictUtil.getEnumsName(InvoiceContent, this.itemShow.chalanContent);
         }else{
           let alert = this.alertCtrl.create({
             title: '提示!',

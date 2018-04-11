@@ -29,4 +29,8 @@ export class InvoiceDetail{
 	chalanDate:string;//发票日期
 
 	taxNumber:string;//完税凭证号
+
+
+
+	chalanContentName:string;//发票内容
 }

@@ -11,7 +11,6 @@ import {IN_DEPART} from "../../enums/storage-type";
 import {OUT_DEPART} from "../../enums/storage-type";
 import {DicInDepart} from '../../model/dic-in-depart';
 import {DicOutDepart} from '../../model/dic-out-depart';
-import { PAYMENT_CATEGORY} from '../../enums/enums';
 import { DictUtil} from '../../providers/dict-util';
 import { ReviewType} from '../../enums/review-type';
 import {ApprovalService} from '../../services/approvalService';
@@ -53,7 +52,6 @@ export class AdvancePaymentInfoPage {
   apply:boolean=false;
   paymentDetail:AdvancePaymentDetail;
   paymentMain:AdvancePaymentMain;
-  paymentCategory=PAYMENT_CATEGORY;
   listPayDept : DicInDepart[];
   listIntercourse : DicOutDepart[];
   listAjustType : DicComplex[];
@@ -61,6 +59,8 @@ export class AdvancePaymentInfoPage {
   sendSuccess=false;
   approvalState:string;
   hasApprovalProgress=false;
+
+  isYFK:boolean=false;//是预付款显示付款比例
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -92,6 +92,7 @@ export class AdvancePaymentInfoPage {
         this.navCtrl.pop();
       }
     }
+    this.isYFK=false;//是预付款显示付款比例
     this.sendSuccess=false;
     this.payCode=this.navParams.get('id');
     this.isapproval=this.navParams.get('approval');
@@ -116,13 +117,16 @@ export class AdvancePaymentInfoPage {
 
   //初始化数据
   initData(){
+    this.isYFK=false;//是预付款显示付款比例
     this.paymentService.getPaymentDetail(this.paymentMain.payCode)
       .subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
           console.log(object[1][0]);
           this.paymentDetail = object[1][0] as AdvancePaymentDetail;
-
+          if(this.paymentDetail.clauseType=='1'){
+            this.isYFK=true;//是预付款显示付款比例
+          }
           this.paymentDetail.clauseTypeName=this.dictUtil.getClauseTypeName(this.paymentDetail.clauseType);
           this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
             this.listPayDept=inDepart;
@@ -130,7 +134,15 @@ export class AdvancePaymentInfoPage {
           });
           this.storage.get(OUT_DEPART).then((outDepart: DicOutDepart[]) => {
             this.listIntercourse=outDepart;
-            this.paymentDetail.intercourseName=this.dictUtil.getOutDepartName(this.listIntercourse,this.paymentDetail.intercourseCode);
+            if(this.listIntercourse&&this.listIntercourse.length>0){
+              for(let outDepart of this.listIntercourse){
+                if(outDepart.departCode==this.paymentDetail.intercourseCode)
+                  this.paymentDetail.intercourseName = outDepart.departName;
+                  this.paymentDetail.company = outDepart.company;
+                  this.paymentDetail.openBank = outDepart.openBank;
+                  this.paymentDetail.bankNum = outDepart.bankNum;
+              }
+            }
           });
           this.storage.get(AJUST_TYPE).then((adjustType: DicComplex[]) => {
             this.listAjustType=adjustType;

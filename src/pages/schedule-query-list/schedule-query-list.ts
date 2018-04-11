@@ -36,6 +36,7 @@ import {BillElementCode} from '../../providers/TransferFeildName';
   templateUrl: 'schedule-query-list.html',
 })
 export class ScheduleQueryListPage {
+  title:string;
   queryCondition:QueryCondition;
   
   listAll:ProjectUnitMain[];
@@ -58,6 +59,7 @@ export class ScheduleQueryListPage {
     console.log('ionViewDidLoad ScheduleQueryListPage');
     //this.listAll = [];
     //this.list = [];
+    this.title = this.navParams.get(Title);
      this.queryCondition=this.navParams.get("queryCondition");
     this.getList();
   }
@@ -153,7 +155,7 @@ export class ScheduleQueryListPage {
   }
 
     toDetail(elementCode: string) {
-        this.navCtrl.push(Page_ScheduleApplyInfoPage, {BillElementCode: elementCode,Oper:Oper_Look, Title: '进度管理'});
+        this.navCtrl.push(Page_ScheduleApplyInfoPage, {BillElementCode: elementCode,Oper:Oper_Look, Title: this.title});
     }
 
 }

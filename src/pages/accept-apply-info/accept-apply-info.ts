@@ -361,9 +361,9 @@ export class AcceptApplyInfoPage {
   //附件
   attachment(){
     if(this.oper === Oper_Edit || this.oper === Oper_Add){
-      this.navCtrl.push("AttachmentPage",{'billNumber':this.billNumber,'contractCode':'','type':'1','attachmentType':'2','typeList':'1'});
+      this.navCtrl.push("AttachmentPage",{'billNumber':this.billNumber,'contractCode':'','type':'1','attachmentType':'4','typeList':'1'});
     } else {
-      this.navCtrl.push("AttachmentInfoPage",{'billNumber':this.billNumber,'contractCode':'','type':'1','attachmentType':'2','typeList':'1'});
+      this.navCtrl.push("AttachmentInfoPage",{'billNumber':this.billNumber,'contractCode':'','type':'1','attachmentType':'4','typeList':'1'});
     }
   }
 

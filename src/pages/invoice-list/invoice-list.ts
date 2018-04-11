@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angul
 import { InvoiceMain} from '../../model/invoice-main';
 import { PaymentService} from '../../services/paymentService';
 import {ResultBase} from "../../model/result-base";
+import { InvoiceContent} from '../../enums/enums';
+import {DictUtil} from "../../providers/dict-util";
 import { AdvancePaymentMain} from '../../model/advance-payment-main';
 import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
 /**
@@ -32,7 +34,8 @@ export class InvoiceListPage {
   paymentMain:AdvancePaymentMain;
   contractCode:string;
 
- 	constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl:AlertController,private paymentService:PaymentService) {
+ 	constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl:AlertController,private paymentService:PaymentService,
+              private dictUtil:DictUtil) {
  		//this.invoiceList=INVOICE_LIST;
      this.apply=this.navParams.get('apply');
      this.paymentMain=this.navParams.get("paymentItem");
@@ -52,6 +55,11 @@ export class InvoiceListPage {
           if(object[1]!=null&&object[1].length>0){
             this.isEmpty=false;
             this.invoiceList = object[1] as InvoiceMain[];
+            if(this.invoiceList){
+              for(let item of this.invoiceList){
+                item.chalanContentName = this.dictUtil.getEnumsName(InvoiceContent, item.chalanContent);
+              }
+            }
           }else{
             this.isEmpty=true;
           }

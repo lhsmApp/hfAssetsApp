@@ -34,6 +34,7 @@ import {BillApprovalState} from '../../providers/TransferFeildName';
   templateUrl: 'transfer-funds-query-list.html',
 })
 export class TransferFundsQueryListPage {
+  title:string;
   queryCondition:QueryCondition;
   
   listAll:TransferFundsMain[];
@@ -53,7 +54,8 @@ export class TransferFundsQueryListPage {
     console.log('ionViewDidLoad TransferFundsQueryListPage');
     //this.listAll = [];
     //this.list = [];
-     this.queryCondition=this.navParams.get("queryCondition");
+    this.title = this.navParams.get(Title);
+    this.queryCondition=this.navParams.get("queryCondition");
     this.getList();
   }
 
@@ -136,7 +138,7 @@ export class TransferFundsQueryListPage {
   }
 
     toDetail(translateCode: string) {
-        this.navCtrl.push(Page_TransferFundsInfoPage, {callback:this.checkRefresh,Oper:Oper_Look,Title:'转资查询',BillNumberCode: translateCode,'approvalState':this.queryCondition.state});
+        this.navCtrl.push(Page_TransferFundsInfoPage, {callback:this.checkRefresh,Oper:Oper_Look,Title:this.title,BillNumberCode: translateCode,'approvalState':this.queryCondition.state});
     }
 
   //回调

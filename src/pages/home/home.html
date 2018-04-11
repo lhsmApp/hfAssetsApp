@@ -55,7 +55,7 @@
         <ion-col col-4 (click)="openPage('ZCYS')" >
           <div text-center>
             <img color="primary"  class='imgSize' src='{{ysPath}}'/>
-            <p>验收审批</p>
+            <p>实物确认审批</p>
             <ion-badge *ngIf="ysBillCount>0" color="danger" class="brage">{{ysBillCount}}</ion-badge>
           </div>
         </ion-col>
@@ -78,7 +78,7 @@
         <ion-col col-4 (click)="openPage('FKFPSP')" >
           <div text-center>
             <img color="primary"  class='imgSize' src='{{fkfpPath}}'/>
-            <p>付款发票审批</p>
+            <p>发票审核</p>
             <ion-badge *ngIf="fkfpBillCount>0" color="danger" class="brage">{{fkfpBillCount}}</ion-badge>
           </div>
         </ion-col>

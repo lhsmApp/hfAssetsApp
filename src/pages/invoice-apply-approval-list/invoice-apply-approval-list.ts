@@ -5,6 +5,8 @@ import { PaymentService} from '../../services/paymentService';
 import {ResultBase} from "../../model/result-base";
 import { AdvancePaymentMain} from '../../model/advance-payment-main';
 import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
+import { InvoiceContent} from '../../enums/enums';
+import {DictUtil} from "../../providers/dict-util";
 
 import {Oper,Oper_Edit,Oper_Add,Oper_Approval,Oper_Look} from '../../providers/TransferFeildName';
 import {Title} from '../../providers/TransferFeildName';
@@ -39,7 +41,8 @@ export class InvoiceApplyApprovalListPage {
   callback :any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl:AlertController,
-              private paymentService:PaymentService) {
+              private paymentService:PaymentService,
+              private dictUtil:DictUtil) {
     this.isEdit = false;
     this.oper=this.navParams.get(Oper);
     this.title=this.navParams.get(Title);
@@ -81,6 +84,11 @@ export class InvoiceApplyApprovalListPage {
           let resultBase:ResultBase=object[0] as ResultBase;
           if(resultBase.result=='true'){
             this.listAll = object[1] as InvoiceMain[];
+            if(this.listAll){
+              for(let item of this.listAll){
+                item.chalanContentName = this.dictUtil.getEnumsName(InvoiceContent, item.chalanContent);
+              }
+            }
             this.list = this.listAll;
             if(!(this.listAll!=null&&this.listAll.length>0)){
               this.isEmpty=true;

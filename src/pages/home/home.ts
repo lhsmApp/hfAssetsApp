@@ -220,13 +220,13 @@ export class HomePage {
       if(!flag){
         let alert = this.alertCtrl.create({
           title: '提示',
-          subTitle: '不能进行验收审批，您没有验收审批的权限！',
+          subTitle: '不能进行实物确认审批，您没有实物确认审批的权限！',
           buttons: ['确定']
         });
         alert.present();
         return;
       }
-      this.navCtrl.push("AcceptApprovalListPage",{callback:this.afterApproval});
+      this.navCtrl.push("AcceptApprovalListPage",{callback:this.afterApproval,Oper:Oper_Approval,Title:'实物确认审批'});
     }else if(cate === 'ZZSP'){
       let flag:boolean=false;
       for(let item of this.globalData.permission){
@@ -244,7 +244,7 @@ export class HomePage {
         alert.present();
         return;
       }
-      this.navCtrl.push("TransferFundsApprovalListPage",{callback:this.afterApproval});
+      this.navCtrl.push("TransferFundsApprovalListPage",{callback:this.afterApproval,Oper:Oper_Approval,Title:'转资审批'});
     }else if(cate === 'ZZTZSP'){
       let flag:boolean=false;
       for(let item of this.globalData.permission){
@@ -262,7 +262,7 @@ export class HomePage {
         alert.present();
         return;
       }
-      this.navCtrl.push("TransferAdjustApprovalListPage",{callback:this.afterApproval});
+      this.navCtrl.push("TransferAdjustApprovalListPage",{callback:this.afterApproval,Oper:Oper_Approval,Title:'转资调整审批'});
     }else if(cate === 'FKFPSP'){
       let flag:boolean=false;
       for(let item of this.globalData.permission){
@@ -274,13 +274,13 @@ export class HomePage {
       if(!flag){
         let alert = this.alertCtrl.create({
           title: '提示',
-          subTitle: '不能进行付款发票审批，您没有付款发票审批的权限！',
+          subTitle: '不能进行发票审核，您没有发票审核的权限！',
           buttons: ['确定']
         });
         alert.present();
         return;
       }
-      this.navCtrl.push("InvoicePaymentListPage",{callback:this.afterApproval,Oper:Oper_Approval,Title:'付款发票审批'});
+      this.navCtrl.push("InvoicePaymentListPage",{callback:this.afterApproval,Oper:Oper_Approval,Title:'发票审核'});
     }
   }
 

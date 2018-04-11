@@ -40,6 +40,7 @@ export class TransferAdjustApprovalListPage {
   isEmpty:boolean=false;
   sendSuccess=false;
   
+  title:string;
   callback :any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -47,6 +48,7 @@ export class TransferAdjustApprovalListPage {
               private storage: Storage,
               private dictUtil:DictUtil,
               public tzCostService:AcceptService) {
+    this.title = this.navParams.get(Title);
     this.callback = this.navParams.get('callback');
     this.sendSuccess=false;
     //this.listAll = [];
@@ -155,7 +157,7 @@ export class TransferAdjustApprovalListPage {
   }
 
     toDetail(item: TransferFundsMain) {
-        this.navCtrl.push(Page_TransferAdjustApprovalInfoPage, {callback:this.checkRefresh,ItemTranfer: item, Oper:Oper_Approval,Title:'转资调整审批','approvalState':'2'});
+        this.navCtrl.push(Page_TransferAdjustApprovalInfoPage, {callback:this.checkRefresh,ItemTranfer: item, Oper:Oper_Approval,Title:this.title,'approvalState':'2'});
     }
 
   //回调
