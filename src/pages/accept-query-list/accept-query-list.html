@@ -19,6 +19,7 @@
     </ion-refresher-content>
   </ion-refresher>
 
+
   <div *ngIf="!isEmpty">
     <ion-list class="list-avatar-page">
       <ion-item *ngFor="let item of list;trackBy:item?.billNumber" (click)="toDetail(item.billNumber)">
