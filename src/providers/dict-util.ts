@@ -49,8 +49,10 @@ export class DictUtil {
           //specialLine:技术部门
           //depositary:存放地点
           //additionalPerson:合同附加人
-          //console.log(complexDict.CodeProperty);
-          //console.log(complexDict.codeDetail);
+          //xmdylb
+          //jldw
+          console.log(complexDict.CodeProperty);
+          console.log(complexDict.codeDetail);
           this.storage.set(complexDict.CodeProperty, complexDict.codeDetail);
           this.storage.set(IS_DIC_LOAD,true);
         }
@@ -91,6 +93,8 @@ export class DictUtil {
       if(resultBase.result=='true'){
         let basicEntity = object[1] as DicBasicEntity[];
         this.storage.set(BASIC_ENTITY, basicEntity);
+          console.log(BASIC_ENTITY);
+          console.log(basicEntity);
       }
     }, () => {
       
@@ -223,6 +227,17 @@ export class DictUtil {
     return code;
   }
 
+  //翻译综合编码
+  getDicComplexName(dictInfo:DicComplex[],code:string):string{
+    if(dictInfo&&dictInfo.length>0){
+      for(let each of dictInfo){
+        if(each.complexCode==code)
+          return each.complexName;
+      }
+    }
+    return code;
+  }
+
   //翻译内部单位
   getInDepartName(dictInfo:DicInDepart[],code:string):string{
     if(dictInfo&&dictInfo.length>0){
@@ -317,14 +332,14 @@ export class DictUtil {
   }
 
   //翻译项目单元字典
-  getProjectElementName(dictInfo:DicBase[],code:string):string{
+  getProjectElementName(dictInfo:DicBase[],code:number):string{
     if(dictInfo&&dictInfo.length>0){
       for(let projectElement of dictInfo){
-        if(projectElement.code==code)
+        if(projectElement.code==code.toString())
           return projectElement.name;
       }
     }
-    return code;
+    return code.toString();
   }
 
   //翻译核算类别

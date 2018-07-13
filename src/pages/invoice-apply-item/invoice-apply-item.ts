@@ -7,7 +7,9 @@ import {ResultBase} from "../../model/result-base";
 import { InvoiceMain} from '../../model/invoice-main';
 import { AdvancePaymentMain} from '../../model/advance-payment-main';
 import { INVOICE_TYPE} from '../../enums/enums';
+import {TrueOrFalse} from '../../enums/enums';
 import {ReviewType} from '../../enums/review-type';
+import { DictUtil} from '../../providers/dict-util';
 import {Utils} from "../../providers/Utils";
 import { InvoiceContent} from '../../enums/enums';
 
@@ -42,12 +44,13 @@ export class InvoiceApplyItemPage {
   invoiceType=INVOICE_TYPE;
   invoiceContent=InvoiceContent;
   callback :any;
-  isBackRefresh = false;
+  sendSuccess = false;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public alertCtrl:AlertController,
     public toastCtrl:ToastController,
+   private dictUtil:DictUtil,
     private formBuilder: FormBuilder,private paymentService:PaymentService) {
     this.itemShow = new InvoiceDetail();
 
@@ -58,37 +61,47 @@ export class InvoiceApplyItemPage {
     this.invoiceMain = this.navParams.get('invoiceItem');
 
     this.callback    = this.navParams.get('callback');
-    this.isBackRefresh = false;
+    this.sendSuccess = false;
 
     this.invoiceForm = this.formBuilder.group({
-      chalanNumber: [,[Validators.required]],//发票编号，手工录入
-      sequence: '',//序号，自动生成，判断是否为空，空为增加，有则修改
+      chalanNumber: [,[]],//发票编号，手工录入
       chalanType: [,[Validators.required]],//发票类型，选择
-      price: [,[Validators.required]],//发票单价，手工录入
-      singleAmount: [,[Validators.required]],//发票数量，手工录入
-      sl: [,[Validators.required]],//税率，手工录入
-      chalanMoney : [,[Validators.required]],//发票金额，手工录入
+      chalanDate : [,[Validators.required]],//开票日期，手工录入
+      chalanMoney : [,[Validators.required]],//发票金额，手工录入 含税金额
       noTaxMoney: [,[Validators.required]],//不含税金额，手工录入
+      sl: [,[Validators.required]],//税率，手工录入
       deductibleInputString : [,[Validators.required]],//可抵扣进项税，手工录入
-      chalanDate : [,[Validators.required]],//发票日期，手工录入
-      chalanContent: [,[Validators.required]],//发票内容，选择
-      taxNumber: '',//完税凭证号，手工录入
+    ldje : [,[Validators.required]],//留抵金额
+    uploadFlag : [,[Validators.required]],//是否已上传扫描件
+    uploadFlagName : [,[]],//是否已上传扫描件
+    remark : [,[]],//备注
+
+      sequence: [,[]],//序号，自动生成，判断是否为空，空为增加，有则修改
+      chalanContent: [,[]],//发票内容，选择
+      price: [,[]],//发票单价，手工录入
+      singleAmount: [,[]],//发票数量，手工录入
+      taxNumber: [,[]],//完税凭证号，手工录入
     })
   }
 
   FromPatchValue(){
             this.invoiceForm.patchValue({
             chalanNumber:this.itemShow.chalanNumber,
-            sequence:this.itemShow.sequence,
             chalanType:this.itemShow.chalanType,
-            price:this.itemShow.price,
-            singleAmount:this.itemShow.singleAmount,
-            sl:this.itemShow.sl,
+            chalanDate:this.itemShow.chalanDate,
             chalanMoney:this.itemShow.chalanMoney,
             noTaxMoney:this.itemShow.noTaxMoney,
+            sl:this.itemShow.sl,
             deductibleInputString:this.itemShow.deductibleInputString,
-            chalanDate:this.itemShow.chalanDate,
+    ldje:this.itemShow.ldje,
+    uploadFlag:this.itemShow.uploadFlag,
+    uploadFlagName:this.itemShow.uploadFlagName,
+    remark:this.itemShow.remark,
+
+            sequence:this.itemShow.sequence,
             chalanContent:this.itemShow.chalanContent,
+            price:this.itemShow.price,
+            singleAmount:this.itemShow.singleAmount,
             taxNumber:this.itemShow.taxNumber,
             });
   }
@@ -96,13 +109,13 @@ export class InvoiceApplyItemPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad InvoiceApplyItemPage');
     this.navBar.backButtonClick=()=>{
-      if(this.isBackRefresh){
+      if(this.sendSuccess){
         this.callback(true).then(()=>{ this.navCtrl.pop() });
       }else{
         this.navCtrl.pop();
       }
     }
-    this.isBackRefresh = false;
+    this.sendSuccess = false;
     this.itemShow = new InvoiceDetail();
     this.initData();
   }
@@ -124,6 +137,7 @@ export class InvoiceApplyItemPage {
             this.list = object[1] as InvoiceDetail[];
             if(this.list && this.list.length > 0){
               this.itemShow = this.list[0] as InvoiceDetail;
+              this.itemShow.uploadFlagName=this.dictUtil.getNumEnumsName(TrueOrFalse,this.itemShow.uploadFlag);
               this.FromPatchValue();
             }
           } else {
@@ -139,20 +153,8 @@ export class InvoiceApplyItemPage {
         });
     } else if(this.oper === Oper_Add){
       console.log(this.oper);
-      this.itemShow.sequence = "";
-      this.itemShow.chalanType = "";
-      this.itemShow.chalanTypeName = "";
-      this.itemShow.chalanNumber = "";
-      this.itemShow.chalanContent = "";
-      this.itemShow.chalanContentName = "";
-      this.itemShow.price = 0;
-      this.itemShow.singleAmount =  0;
-      this.itemShow.sl = "";
-      this.itemShow.chalanMoney = 0;
-      this.itemShow.noTaxMoney = 0;
-      this.itemShow.deductibleInputString = "";
       this.itemShow.chalanDate = Utils.dateFormat(new Date());
-      this.itemShow.taxNumber = "";
+      this.itemShow.uploadFlagName=this.dictUtil.getNumEnumsName(TrueOrFalse,this.itemShow.uploadFlag);
       this.FromPatchValue();
     } else {
       this.FromPatchValue();
@@ -171,17 +173,29 @@ export class InvoiceApplyItemPage {
       alert.present();
       return;
     }
-    this.navCtrl.push("AttachmentPage",{'billNumber':this.itemShow.sequence,'contractCode':this.contractCode,'type':'2','attachmentType':'3','typeList':'2'});
+    this.navCtrl.push("AttachmentPage",{callback:this.attachmentChanged,'billNumber':this.itemShow.sequence,'contractCode':this.contractCode,'type':'2','attachmentType':'3','typeList':'2'});
   }
+  //回调
+  attachmentChanged = (data) =>
+  {
+    return new Promise((resolve, reject) => {
+      console.log(data);
+      if(data){
+        this.initData();
+      }
+      resolve();
+    });
+  };
 
   //发票保存
   save(){
     let invoiceInfo=new Array<InvoiceDetail>();
     let detail=<InvoiceDetail>this.invoiceForm.value;
-    detail.chalanMoney = detail.price * detail.singleAmount;
-    detail.price=parseFloat(detail.price.toString());
-    detail.chalanMoney =parseFloat(detail.chalanMoney.toString());
-    detail.noTaxMoney =parseFloat(detail.noTaxMoney.toString());
+    detail.chalanMoney = parseFloat(detail.chalanMoney.toString());
+    detail.noTaxMoney=parseFloat(detail.noTaxMoney.toString());
+    //detail.sl =parseFloat(detail.sl.toString());
+    //detail.deductibleInputString =parseFloat(detail.deductibleInputString.toString());
+    detail.ldje =parseFloat(detail.ldje.toString());
     console.log(detail);
     invoiceInfo.push(detail);
 
@@ -189,7 +203,7 @@ export class InvoiceApplyItemPage {
       .subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
-          this.isBackRefresh = true;
+          this.sendSuccess = true;
           this.oper = Oper_Edit;
           this.invoiceMain = new InvoiceMain();
           console.log(object[1][0]);

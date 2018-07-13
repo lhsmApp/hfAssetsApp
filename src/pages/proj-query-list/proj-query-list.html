@@ -25,8 +25,8 @@
       <ion-item *ngFor="let item of list;trackBy:item?.projectCode" (click)="toDetail(item.projectCode)">
         <h2>项目编号：{{item.projectCode}}</h2><!---->
         <h3>项目名称：{{item.projectName}}</h3><!---->
-        <!--<p>总投资：{{item.totalInvest}}</p>-->
-        <!--<p>我方投资：{{item.selfInvest}}</p>-->
+        <!--<p>总投资：{{item.totalInvest|number}}</p>-->
+        <!--<p>我方投资：{{item.selfInvest|number}}</p>-->
         <p>录入日期：{{item.requireDate}}</p><!---->
         <p>录入人：{{item.requireUser}}</p><!---->
         <h3 item-end><span item-end [tab]="item"></span></h3><!--单据状态：reviewStatus-->

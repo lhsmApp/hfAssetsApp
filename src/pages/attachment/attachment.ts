@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ModalController,AlertController } from 'ionic-angular';
+import { Component,ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams,ModalController,AlertController,Navbar } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import {FileTransfer,FileTransferObject} from "@ionic-native/file-transfer";
 import {FileOpener } from "@ionic-native/file-opener";
@@ -31,6 +31,11 @@ import {GlobalData} from "../../providers/GlobalData";
   templateUrl: 'attachment.html',
 })
 export class AttachmentPage {
+  @ViewChild('myNavbar') navBar: Navbar;
+
+  sendSuccess:Boolean = false;
+  callback :any;
+
   emptyPath=DEFAULT_INVOICE_EMPTY;
   isEmpty:boolean=false;
   title:string;
@@ -57,6 +62,7 @@ export class AttachmentPage {
     this.billNumber=this.navParams.get('billNumber');
     this.contractCode=this.navParams.get('contractCode');
     this.type=this.navParams.get('type');
+    this.callback = this.navParams.get('callback');
     this.typeList=this.navParams.get('typeList');
     this.attachmentType=this.navParams.get('attachmentType');
     if(this.attachmentType=='1'){
@@ -71,7 +77,23 @@ export class AttachmentPage {
   }
 
   ionViewDidLoad() {
+    this.navBar.backButtonClick=()=>{
+      console.log('back');
+      if(this.sendSuccess){
+        this.callback(true).then(()=>{ this.navCtrl.pop() });
+      }else{
+        this.navCtrl.pop();
+      }
+      //this.isYFK=false;//是预付款显示付款比例
+    }
+    this.sendSuccess=false;
     this.getList();
+  }
+
+  //当点击手机物理后退键时促发审批或者送审刷新动作
+  refBack(){
+    console.log("refBack");
+    this.callback(true).then(()=>{ this.navCtrl.pop() });
   }
 
   //获取附件列表信息
@@ -158,6 +180,7 @@ export class AttachmentPage {
     modal.onDidDismiss(data => {
       console.log(data);
       if(data){
+        this.sendSuccess = true;
         data.reflesh && this.getList();
       }
     });
@@ -228,7 +251,8 @@ export class AttachmentPage {
             .subscribe(object => {
               let resultBase:ResultBase=object[0] as ResultBase;
               if(resultBase.result=='true'){
-                this.attachmentList = this.attachmentList.filter(h => h !== item);
+                this.sendSuccess = true;
+                this.getList();
               }else{
                 let alert = this.alertCtrl.create({
                 title: '提示!',

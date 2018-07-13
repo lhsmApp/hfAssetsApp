@@ -315,10 +315,20 @@ export class AcceptApplyInfoPage {
     }
     //验收类型（2.进度验收，4，竣工验收）
     //验收单据加验收类型：（进度验收，竣工验收）进度验收正常勾选工程量清单，竣工验收需要判断工程量清单是否全部勾选，不全部勾选不让点确定。
+    //如果竣工验收，没选也可以送审; 进度不可以不选
     if(this.itemShow.clauseType=="4" && isAll == false){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: "验收类型：竣工验收，工程量清单要全部勾选！",
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
+    if(this.itemShow.clauseType=="2" && isHave == false){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: "验收类型：进度验收，工程量清单要有勾选！",
         buttons: ['确定']
       });
       alert.present();
@@ -361,10 +371,21 @@ export class AcceptApplyInfoPage {
   //附件
   attachment(){
     if(this.oper === Oper_Edit || this.oper === Oper_Add){
-      this.navCtrl.push("AttachmentPage",{'billNumber':this.billNumber,'contractCode':'','type':'1','attachmentType':'4','typeList':'1'});
+      this.navCtrl.push("AttachmentPage",{callback:this.attachmentChanged,'billNumber':this.billNumber,'contractCode':'','type':'1','attachmentType':'4','typeList':'1'});
     } else {
       this.navCtrl.push("AttachmentInfoPage",{'billNumber':this.billNumber,'contractCode':'','type':'1','attachmentType':'4','typeList':'1'});
     }
   }
+  //回调
+  attachmentChanged = (data) =>
+  {
+    return new Promise((resolve, reject) => {
+      console.log(data);
+      if(data){
+          //this.getShowItem();
+      }
+      resolve();
+    });
+  };
 
 }

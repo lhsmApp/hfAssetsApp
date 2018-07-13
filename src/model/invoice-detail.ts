@@ -4,33 +4,31 @@
  */
 export class InvoiceDetail{
 
-    sequence:string;//序号
+	chalanNumber :string = "";//发票编号
 
-    chalanType:string//发票类型
+    chalanType:string = ""//发票类型
+    chalanTypeName:string = ""//发票类型
 
-    chalanTypeName:string//发票类型
+	chalanDate:string = "";//开票日期
 
-	chalanNumber :string;//发票编号
-	
-	chalanContent:string;//发票内容
+	chalanMoney:number = 0;//发票金额,传double型  含税金额
 
-	price:number;//发票单价,double
+	noTaxMoney:number = 0;//不含税金额,传double型
 
-	singleAmount:number;//发票数量
+	sl:string = "";//税率
 
-	sl:string;//税率
+	deductibleInputString:string = "";//可抵扣进项税  税额
 
-	chalanMoney:number;//发票金额,传double型
+    ldje:number = 0;//留抵金额
+    uploadFlag:number = 0;//是否已上传扫描件
+    uploadFlagName:string = "";//是否已上传扫描件
+    remark:string = "";//备注
 
-	noTaxMoney:number;//不含税金额,传double型
+    sequence:string = "";//序号
+	chalanContent:string = "";//发票内容
+	chalanContentName:string = "";//发票内容
+	price:number = 0;//发票单价,double
+	singleAmount:string = "";//发票数量
+	taxNumber:string = "";//完税凭证号
 
-	deductibleInputString:string;//可抵扣进项税
-
-	chalanDate:string;//发票日期
-
-	taxNumber:string;//完税凭证号
-
-
-
-	chalanContentName:string;//发票内容
 }

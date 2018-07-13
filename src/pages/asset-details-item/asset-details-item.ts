@@ -95,7 +95,6 @@ export class AssetDetailsItemPage {
     maxYear:string;
 
   //assetsType: string;//资产类型"
-    dicAssetsCodeType: string;//资产类别"
   DicDepartCode: DicInDepart[];//所属单位"
   dicEntityCode: DicBasicEntity[];//所属资产组"
   dicUnitCode: DicComplex[];//计量单位"

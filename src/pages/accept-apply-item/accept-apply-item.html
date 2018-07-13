@@ -15,7 +15,7 @@
     </ion-buttons>-->
     <ion-title>{{title}}</ion-title>
     <ion-buttons end>
-      <button ion-button icon-right (click)="send()" [disabled]="sendOrCheckSuccess">
+      <button ion-button icon-right (click)="send()" [disabled]="sendSuccess1">
         送审
         <ion-icon name="paper-plane"></ion-icon>
       </button>
@@ -73,7 +73,8 @@
             </ion-item>
             <ion-item text-wrap>
                 <ion-label fixed>申请单位</ion-label>
-                <ion-select type="text" [(ngModel)]="departCodeWb" formControlName="departCodeWb" placeholder="手工选择">
+                <ion-select type="text" [(ngModel)]="departCodeWb" formControlName="departCodeWb" placeholder="手工选择"
+                            cancelText="取消" okText="确定" >
                     <ion-option *ngFor="let dept of listOutDept" value="{{dept.departCode}}">{{dept.departName}}</ion-option>
                     <ion-option value=""></ion-option>
                 </ion-select>

@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="dark">
-    <ion-title>选择验收单</ion-title>
+    <ion-title>选择实物确认单</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -23,7 +23,7 @@
     <ion-list class="list-avatar-page">
       <ion-item *ngFor="let item of list;trackBy:item?.billNumber">
       	<ion-label (click)="selectAccept(item)">
-	        <h2>验收单号：{{item.billNumber}}</h2><!---->
+	        <h2>实物确认单号：{{item.billNumber}}</h2><!---->
 	        <p>申请日期：{{item.requireDate}}</p><!---->
 	        <p>申请人：{{item.requireUser}}</p><!---->
         </ion-label>

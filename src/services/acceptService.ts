@@ -118,15 +118,20 @@ export class AcceptService {
   }
 
   //（暂时不开发）验收单据删除---basic_assets_accept_apply  验收单据表
-  /*deleteAcceptApply(billNumber:string):Observable<(object)>{
+  //已开发
+  deleteAcceptApply(billNumber:string):Observable<(object)>{
     console.log('验收单据删除'+this.globalData.sessionId);
-    let param = {
+    /*let param = {
         'action': "deletePhoneAssetsAcceptanceApply",
         'sessionid': this.globalData.sessionId,
         'billNumber': billNumber,//”验收单号”，
-    };
-    return this.httpService.post('phoneAcceptanceApply.do', param).map((res:Response) => res.json());
-  }*/
+    };*/
+    let formData: FormData = new FormData(); 
+    formData.append('action', "deletePhoneAssetsAcceptanceApply");
+    formData.append('sessionid', this.globalData.sessionId);
+    formData.append('billNumber', billNumber);//”验收单号”，
+    return this.httpService.postMultiFormData('phoneAcceptanceApply.do', formData).map((res:Response) => res.json());
+  }
 
   //
 

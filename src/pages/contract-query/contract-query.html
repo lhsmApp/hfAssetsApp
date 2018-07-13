@@ -20,7 +20,8 @@
       <ion-item *ngFor="let item of contractList;trackBy:item?.contractCode" (click)="openPage(item)">
         <h2>合同名称： {{item.contractName}} </h2>
         <p>合同流水号：{{item.contractCode}}</p>
-        <!-- <h3 item-end>{{item.chalanMoney}}</h3> -->
+        <p>合同编号：{{item.contractCodeHf}}</p><!---->
+        <!-- <h3 item-end>{{item.chalanMoney|number}}</h3> -->
         
         <p>申请人： {{item.requireUser}}</p>
         <ion-icon ios="ios-arrow-forward" md="ios-arrow-forward" color="grayslate" item-end></ion-icon>

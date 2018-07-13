@@ -28,10 +28,10 @@
     	<ion-item-sliding *ngFor="let item of list" #slidingItem>
   	    <ion-item (click)="openPage(item)">
   	      <h2>发票编号：{{item.chalanNumber}}</h2>
-          <button item-end ion-button color="danger" outline>发票金额：{{item.chalanMoney|number}}</button>
+          <button item-end ion-button color="danger" outline>含税金额：{{item.chalanMoney|number}}</button>
   	      <!-- <h3 item-end>{{item.chalanMoney}}</h3> -->
-  	      <p>发票内容：{{item.chalanContentName}} </p>
-  	      <p >发票日期：{{item.chalanDate}}</p>
+  	      <p>发票类型：{{item.chalanTypeName}} </p>
+  	      <p >开票日期：{{item.chalanDate}}</p>
   	    </ion-item>
   	    <ion-item-options side="right" *ngIf="isEdit">
   	      <button ion-button color="primary" (click)="edit(item,slidingItem);$event.stopPropagation()">
@@ -48,6 +48,6 @@
   </div>
   <div *ngIf="isEmpty" text-center padding-top margin-top>
     <img [src]="emptyPath" width="50%" height="50%"  margin-top>
-    <h3>目前还没有申请记录哦~</h3>
+    <h3>目前还没有任何记录哦~</h3>
   </div>
 </ion-content>

@@ -174,13 +174,19 @@ export class AdvancePaymentApplyListPage {
                 //this.advancePaymentList.unshift(item);
                 this.listAll = this.listAll.filter(h => h !== item);
                 this.advancePaymentList = this.advancePaymentList.filter(h => h !== item);
+                let alert = this.alertCtrl.create({
+                  title: '提示!',
+                  subTitle: resultBase.message,
+                  buttons: ['确定']
+                });
+                alert.present();
               }else{
                 let alert = this.alertCtrl.create({
-                title: '提示!',
-                subTitle: resultBase.message,
-                buttons: ['确定']
-              });
-              alert.present();
+                  title: '提示!',
+                  subTitle: resultBase.message,
+                  buttons: ['确定']
+                });
+                alert.present();
               }
             }, () => {
               

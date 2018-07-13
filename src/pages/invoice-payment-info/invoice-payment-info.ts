@@ -9,15 +9,22 @@ import {ResultBase} from "../../model/result-base";
 import {DicComplex} from "../../model/dic-complex";
 import {AJUST_TYPE} from "../../enums/storage-type";
 import {IN_DEPART} from "../../enums/storage-type";
+import {JLDW} from "../../enums/storage-type";
 import {OUT_DEPART} from "../../enums/storage-type";
 import {DicInDepart} from '../../model/dic-in-depart';
 import {DicOutDepart} from '../../model/dic-out-depart';
 import { DictUtil} from '../../providers/dict-util';
 import { ReviewType} from '../../enums/review-type';
 import {ApprovalService} from '../../services/approvalService';
+import { PayType } from '../../enums/enums';
+import { InvoiceSendStatus } from '../../enums/enums';
+import { AdvancePaymentReviewStatus } from '../../enums/enums';
 
 import {Oper,Oper_Edit,Oper_Add,Oper_Approval,Oper_Look} from '../../providers/TransferFeildName';
 import {Title} from '../../providers/TransferFeildName';
+
+import {Page_ApprovalPage } from '../../providers/TransferFeildName';
+import {BillNumberCode} from '../../providers/TransferFeildName';
 
 /**
  * Generated class for the InvoicePaymentInfoPage page.
@@ -44,9 +51,6 @@ export class InvoicePaymentInfoPage {
   list: AdvancePaymentDetail[];
   itemShow:AdvancePaymentDetail;
 
-  listPayDept : DicInDepart[];
-  listIntercourse : DicOutDepart[];
-  listAjustType : DicComplex[];
   callback :any;
   sendSuccess=false;
 
@@ -107,17 +111,23 @@ export class InvoicePaymentInfoPage {
           if(this.list && this.list.length > 0){
               this.itemShow = this.list[0] as AdvancePaymentDetail;
               this.itemShow.clauseTypeName=this.dictUtil.getClauseTypeName(this.itemShow.clauseType);
-              this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
-                this.listPayDept=inDepart;
-                this.itemShow.payDepart=this.dictUtil.getInDepartName(this.listPayDept,this.itemShow.paymentCode);
+              this.itemShow.payTypeName=this.dictUtil.getEnumsName(PayType, this.itemShow.payType);
+              this.itemShow.sendStatusName=this.dictUtil.getNumEnumsName(InvoiceSendStatus, this.itemShow.sendStatus);
+              this.itemShow.reviewStatusName=this.dictUtil.getNumEnumsName(AdvancePaymentReviewStatus, this.itemShow.reviewStatus);
+              //this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
+              //    this.itemShow.fzDeptName=this.dictUtil.getInDepartName(inDepart,this.itemShow.fzDept);
+              //});
+              this.storage.get(JLDW).then((dicList: DicComplex[]) => {
+                  this.itemShow.jlDeptName=this.dictUtil.getDicComplexName(dicList,this.itemShow.jlDept);
               });
+              //this.storage.get(IN_DEPART).then((inDepart: DicInDepart[]) => {
+                  //this.itemShow.payDepart=this.dictUtil.getInDepartName(inDepart,this.itemShow.paymentCode);
+              //});
               this.storage.get(OUT_DEPART).then((outDepart: DicOutDepart[]) => {
-                this.listIntercourse=outDepart;
-                this.itemShow.intercourseName=this.dictUtil.getOutDepartName(this.listIntercourse,this.itemShow.intercourseCode);
+            this.itemShow.intercourseName=this.dictUtil.getOutDepartName(outDepart,this.itemShow.intercourseCode);
               });
               this.storage.get(AJUST_TYPE).then((adjustType: DicComplex[]) => {
-                this.listAjustType=adjustType;
-                this.itemShow.planTypeName=this.dictUtil.getAjustTypeName(this.listAjustType,this.itemShow.planType);
+                  this.itemShow.planTypeName=this.dictUtil.getAjustTypeName(adjustType,this.itemShow.planType);
               });
           }
         }else{
@@ -179,7 +189,24 @@ export class InvoicePaymentInfoPage {
   //审批
   check(){
     let reviewType = ReviewType[ReviewType.REVIEW_TYPE_INVOICE];
-    let prompt = this.alertCtrl.create({
+    let modal = this.modalCtrl.create(Page_ApprovalPage,{BillNumberCode: this.itemShow.payCode, "BillReviewType":reviewType});
+    modal.present();
+    modal.onDidDismiss(data => {
+      if(data){
+        this.sendSuccess=true;
+        this.isShowCheck = false;
+        this.isShowSend = false;
+        this.oper = Oper_Look
+        this.callback(true).then(()=>{ this.navCtrl.pop() });
+        //let toast = this.toastCtrl.create({
+        //  message: resultBase.message,
+        //  duration: 3000
+        //});
+        //toast.present();
+      }
+    });
+
+    /*let prompt = this.alertCtrl.create({
       title: '审批',
       message: "请输入审批意见",
       inputs: [
@@ -262,7 +289,7 @@ export class InvoicePaymentInfoPage {
         });
       }
     });
-    prompt.present();
+    prompt.present();*/
   }
 
   //发票

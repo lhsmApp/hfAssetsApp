@@ -64,9 +64,8 @@ export class AcceptApplyItemPage {
   listInDepart: DicInDepart[];
   listOutDept : DicOutDepart[];
   callback :any;
-  sendOrCheckSuccess=false;
-  isBackRefresh = false;
   sendSuccess=false;
+  sendSuccess1=false;//用于校验送审成功后，按钮变成灰色
 
   gclListInfo:BillOfWorkMain[]=[];
   //billOfGclIsSaved:boolean = true;
@@ -92,8 +91,7 @@ export class AcceptApplyItemPage {
     this.title = this.params.get(Title);
   	this.billNumber = this.params.get(BillNumberCode);
     this.callback    = this.params.get('callback');
-    this.sendOrCheckSuccess=false;
-    this.isBackRefresh = false;
+    this.sendSuccess1=false;
     this.sendSuccess=false;
     //this.listInDepart = listInDepartGet;
 
@@ -149,14 +147,13 @@ export class AcceptApplyItemPage {
     this.dicClauseType = AcceptType;//”验收类型（2.进度验收，4，竣工验收）”
 
     this.navBar.backButtonClick=()=>{
-      if(this.sendOrCheckSuccess || this.isBackRefresh){
+      if(this.sendSuccess){
         this.callback(true).then(()=>{ this.navCtrl.pop() });
       }else{
         this.navCtrl.pop();
       }
     }
-    this.sendOrCheckSuccess=false;
-    this.isBackRefresh = false;
+    this.sendSuccess1=false;
     this.sendSuccess=false;
     this.itemShow = new AcceptApplyDetail();
     //this.billOfGclIsSaved = true;
@@ -242,7 +239,7 @@ export class AcceptApplyItemPage {
 
   //保存
   save(){
-    if(this.sendOrCheckSuccess!=false){
+    if(this.sendSuccess1!=false){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: "单据已送审！",
@@ -297,7 +294,6 @@ export class AcceptApplyItemPage {
       .subscribe(object => {
         let resultBase:ResultBase=object[0] as ResultBase;
         if(resultBase.result=='true'){
-          this.isBackRefresh = true;
           this.sendSuccess=true;
           this.oper = Oper_Edit;
           console.log(object[1][0]);
@@ -326,7 +322,7 @@ export class AcceptApplyItemPage {
 
   //送审
   send(){
-    if(this.sendOrCheckSuccess!=false){
+    if(this.sendSuccess1!=false){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: "单据已送审！",
@@ -359,10 +355,20 @@ export class AcceptApplyItemPage {
     }
     //验收类型（2.进度验收，4，竣工验收）
     //验收单据加验收类型：（进度验收，竣工验收）进度验收正常勾选工程量清单，竣工验收需要判断工程量清单是否全部勾选，不全部勾选不让点确定。
+    //如果竣工验收，没选也可以送审; 进度不可以不选
     if(this.itemShow.clauseType=="4" && isAll == false){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: "验收类型：竣工验收，工程量清单要全部勾选！",
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
+    if(this.itemShow.clauseType=="2" && isHave == false){
+      let alert = this.alertCtrl.create({
+        title: '提示',
+        subTitle: "验收类型：进度验收，工程量清单要有勾选！",
         buttons: ['确定']
       });
       alert.present();
@@ -389,8 +395,9 @@ export class AcceptApplyItemPage {
     return new Promise((resolve, reject) => {
       console.log(data);
       if(data){
-         this.sendOrCheckSuccess=true;
+         this.sendSuccess1=true;
          this.sendSuccess=true;
+         this.refBack();
       }
       resolve();
     });
@@ -398,7 +405,7 @@ export class AcceptApplyItemPage {
 
   //工程量清单
   billOfGcl(){
-    if(this.sendOrCheckSuccess!=false){
+    if(this.sendSuccess1!=false){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: "单据已送审！",
@@ -447,7 +454,6 @@ export class AcceptApplyItemPage {
       //this.gclListInfo=data;
       //this.billOfGclIsSaved = false;
       if(data){
-        this.isBackRefresh = true;
         this.sendSuccess=true;
         this.getShowItem();
       }
@@ -457,7 +463,7 @@ export class AcceptApplyItemPage {
   
   //资产明细
   toAssetDetail(){
-    if(this.sendOrCheckSuccess!=false){
+    if(this.sendSuccess1!=false){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: "单据已送审！",
@@ -509,7 +515,7 @@ export class AcceptApplyItemPage {
 
   //选择合同
   choiceContract(){
-    if(this.sendOrCheckSuccess!=false){
+    if(this.sendSuccess1!=false){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: "单据已送审！",
@@ -540,7 +546,7 @@ export class AcceptApplyItemPage {
 
   //附件列表
   attachment(){
-    if(this.sendOrCheckSuccess!=false){
+    if(this.sendSuccess1!=false){
       let alert = this.alertCtrl.create({
         title: '提示',
         subTitle: "单据已送审！",
@@ -558,7 +564,18 @@ export class AcceptApplyItemPage {
       alert.present();
       return;
     }
-    this.navCtrl.push("AttachmentPage",{'billNumber':this.billNumber,'contractCode':'','type':'1','attachmentType':'4','typeList':'1'});
+    this.navCtrl.push("AttachmentPage",{callback:this.attachmentChanged,'billNumber':this.billNumber,'contractCode':'','type':'1','attachmentType':'4','typeList':'1'});
   }
+  //回调
+  attachmentChanged = (data) =>
+  {
+    return new Promise((resolve, reject) => {
+      console.log(data);
+      if(data){
+          //this.getShowItem();
+      }
+      resolve();
+    });
+  };
 
 }

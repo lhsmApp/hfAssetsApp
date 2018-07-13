@@ -11,6 +11,9 @@ export class InvoiceMain{
 
 	chalanDate:string;//发票日期
 
+    chalanType:string = ""//发票类型
+    chalanTypeName:string = ""//发票类型
+
 
 
 	chalanContentName:string;//发票内容

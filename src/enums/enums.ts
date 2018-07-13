@@ -7,6 +7,9 @@ export const PAYMENT_CATEGORY= [{code:'1',name:'预付款'}, {code:'2',name:'月
 //发票类型
 export const INVOICE_TYPE= [{code:'1',name:'普通发票'}, {code:'2',name:'增值税专用发票'}];
 
+//付款单据状态
+export const AdvancePaymentReviewStatus= [{code: 0, name: '新增'}, {code: 1, name: '待审批'}, {code: 2, name: '退回'}, {code: 3, name: '待审批'}, {code: 4, name: '已审批'}, {code: 6, name: '作废'}];
+
 //验收申请单据状态
 export const AcceptReviewStatus= [{code: '0', name: '新增'}, {code: '99', name: '待审批'}, {code: '1', name: '已审批'}, {code: '2', name: '退回'}];
 
@@ -16,8 +19,10 @@ export const TransferFundsReviewStatus= [{code: '0', name: '新增'}, {code: '1'
 //发票单据状态 0默认，1送审，2，退回，3审批完成
 export const InvoiceSendStatus= [{code: 0, name: '新增'}, {code: 1, name: '未审批'}, {code: 2, name: '退回'}, {code: 3, name: '已审批'}];
 
-//是否已分摊费用 0否 1是
+//是否已分摊费用 
 export const FeeFlag= [{code: '0', name: '否'}, {code: '1', name: '是'}];
+//是否已上传扫描件  0否 1是 
+export const TrueOrFalse= [{code: 0, name: '否'}, {code: 1, name: '是'}];
 
 //施工属性 施工类/非施工类
 export const Sgsx= [{code: '0', name: '施工类'}, {code: '1', name: '非施工类'}];
@@ -45,6 +50,9 @@ export const OperaType= [{code: 1, name: '新增'}, {code: 2, name: '打回至�
 
 //发票录入中，“发票内容”字段为综合编码形式：分为1，设备类   2，服务类
 export const InvoiceContent= [{code:'1',name:'设备类'}, {code:'2',name:'服务类'}];
+
+//payType:" 支付方式",(01,银付，02转账) 保存编码01,或02
+export const PayType= [{code:'01',name:'银付'}, {code:'02',name:'转账'}];
 
 
 
