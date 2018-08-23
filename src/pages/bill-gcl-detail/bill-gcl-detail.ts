@@ -57,11 +57,13 @@ export class BillGclDetailPage {
         if(resultBase.result=='true'){
           console.log(object[1][0]);
           this.billOfWorkDetail = object[1][0] as BillOfWorkDetail;
-          this.storage.get(UNIT).then((unit: DicComplex[]) => {
-            this.dicUnit=unit;
-            //计量单位
-            this.billOfWorkDetail.unitCodeName = this.dictUtil.getUnitName(this.dicUnit,this.billOfWorkDetail.unitCode);
-          });
+          if(this.billOfWorkDetail!=null && this.billOfWorkDetail.unitCode!=null){
+            this.storage.get(UNIT).then((unit: DicComplex[]) => {
+              this.dicUnit=unit;
+              //计量单位
+              this.billOfWorkDetail.unitCodeName = this.dictUtil.getUnitName(this.dicUnit,this.billOfWorkDetail.unitCode);
+            });
+          }
           
         }else{
           let alert = this.alertCtrl.create({

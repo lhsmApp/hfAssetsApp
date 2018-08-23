@@ -7,6 +7,7 @@ import { InvoiceContent} from '../../enums/enums';
 import {DictUtil} from "../../providers/dict-util";
 import { AdvancePaymentMain} from '../../model/advance-payment-main';
 import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
+import {INVOICE_TYPE} from '../../enums/enums';
 /**
  * Generated class for the InvoiceListPage page.
  *
@@ -57,7 +58,8 @@ export class InvoiceListPage {
             this.invoiceList = object[1] as InvoiceMain[];
             if(this.invoiceList){
               for(let item of this.invoiceList){
-                item.chalanContentName = this.dictUtil.getEnumsName(InvoiceContent, item.chalanContent);
+                //item.chalanContentName = this.dictUtil.getEnumsName(InvoiceContent, item.chalanContent);
+                item.chalanTypeName=this.dictUtil.getEnumsName(INVOICE_TYPE,item.chalanType);
               }
             }
           }else{

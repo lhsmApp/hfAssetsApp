@@ -58,8 +58,6 @@ export const Page_AssetDetailsListPage = 'AssetDetailsListPage';
 //              TypeView:TypeView_AcceptApply、TypeView_TransferFunds、TypeView_Contract
 //              BillCheckResult(合同调用必传) BillTranslateType转资类型
 export const Page_AssetDetailsInfoPage = 'AssetDetailsInfoPage';
-//资产详情添加： BillNumberCode BillContractCode TypeView
-//export const Page_AssetDetailsAddPage = 'AssetDetailsAddPage';
 //资产详情编辑： BillNumberCode BillContractCode BillKeyCode Oper:Oper_Add、Oper_Edit TypeView ItemTranfer//从添加界面传入
 export const Page_AssetDetailsItemPage = 'AssetDetailsItemPage';
 

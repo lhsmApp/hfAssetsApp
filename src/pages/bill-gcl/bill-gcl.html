@@ -24,7 +24,7 @@
           <p>清单项目编号：{{item.listNumber}}</p>
           <p>清单项目名称：{{item.listName}}</p>
           <p>工程量：{{item.projectLoad}}</p>
-          <p>合价：{{item.moneyTotal}}</p>
+          <p>合价：{{item.moneyTotal|number}}</p>
           <!-- <ion-icon name="arrow-dropright" item-end></ion-icon> -->
           <ion-icon *ngIf="type=='ht'||type=='htAssets'" ios="ios-arrow-forward" md="ios-arrow-forward" color="grayslate" item-end></ion-icon>
           <h3 *ngIf="type!='ht'" item-end><span item-end [gcltype]="item"></span></h3>

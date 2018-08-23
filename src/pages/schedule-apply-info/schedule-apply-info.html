@@ -71,58 +71,52 @@
         <ion-item text-wrap>
             <ion-row>
                 <ion-col col-4><span class='color-label'>初始计划金额：</span></ion-col>
-                <ion-col col-8><span text-right class="lable-info">{{itemShow.planMoney}}</span></ion-col>
+                <ion-col col-8><span text-right class="lable-info">{{itemShow.planMoney|number}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
                 <ion-col col-4><span class='color-label'>当前计划金额：</span></ion-col>
-                <ion-col col-8><span text-right class="lable-info">{{itemShow.planMoneyCurrent}}</span></ion-col>
+                <ion-col col-8><span text-right class="lable-info">{{itemShow.planMoneyCurrent|number}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
                 <ion-col col-4><span class='color-label'>已付款金额：</span></ion-col>
-                <ion-col col-8><span text-right class="lable-info">{{itemShow.payMoney}}</span></ion-col>
+                <ion-col col-8><span text-right class="lable-info">{{itemShow.payMoney|number}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>完工百分比：</span></ion-col>
-                <ion-col col-8><span text-left class="lable-info">{{itemShow.completionProgress}}</span></ion-col>
-            </ion-row>
-        </ion-item>
-        <ion-item text-wrap>
-            <ion-row>
-                <ion-col col-4><span class='color-label'>设计完成时间：</span></ion-col>
+                <ion-col col-4><span class='color-label'>工程开工时间：</span></ion-col>
                 <ion-col col-8><span text-left class="lable-info">{{itemShow.designFinishTime}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>施工图完成时间：</span></ion-col>
+                <ion-col col-4><span class='color-label'>桩基施工完毕时间：</span></ion-col>
                 <ion-col col-8><span text-left class="lable-info">{{itemShow.drawingFinishTime}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>计划开工时间：</span></ion-col>
+                <ion-col col-4><span class='color-label'>基础施工完毕时间：</span></ion-col>
                 <ion-col col-8><span text-left class="lable-info">{{itemShow.planBeginTime}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>计划完工时间：</span></ion-col>
+                <ion-col col-4><span class='color-label'>主体施工完毕时间：</span></ion-col>
                 <ion-col col-8><span text-left class="lable-info">{{itemShow.planEndTime}}</span></ion-col>
             </ion-row>
         </ion-item>
         <ion-item text-wrap>
             <ion-row>
-                <ion-col col-4><span class='color-label'>实际开工时间：</span></ion-col>
+                <ion-col col-4><span class='color-label'>工程竣工时间：</span></ion-col>
                 <ion-col col-8><span text-left class="lable-info">{{itemShow.realBeginTime}}</span></ion-col>
             </ion-row>
         </ion-item>
-        <ion-item text-wrap>
+        <!--<ion-item text-wrap>
             <ion-row>
                 <ion-col col-4><span class='color-label'>实际完工时间：</span></ion-col>
                 <ion-col col-8><span text-left class="lable-info">{{itemShow.realEndTime}}</span></ion-col>
@@ -133,19 +127,19 @@
                 <ion-col col-4><span class='color-label'>竣工验收时间：</span></ion-col>
                 <ion-col col-8><span text-left class="lable-info">{{itemShow.realFinishTime}}</span></ion-col>
             </ion-row>
-        </ion-item>
+        </ion-item>-->
         <ion-item text-wrap>
             <ion-row>
                 <ion-col col-4><span class='color-label'>预达转资时间：</span></ion-col>
                 <ion-col col-8><span text-left class="lable-info">{{itemShow.certainDate}}</span></ion-col>
             </ion-row>
         </ion-item>
-        <ion-item text-wrap>
+        <!--<ion-item text-wrap>
             <ion-row>
                 <ion-col col-4><span class='color-label'>审计报告日期：</span></ion-col>
                 <ion-col col-8><span text-left class="lable-info">{{itemShow.auditReportTime}}</span></ion-col>
             </ion-row>
-        </ion-item>
+        </ion-item>-->
         <ion-item text-wrap>
             <ion-row>
                 <ion-col col-4><span class='color-label'>复核意见：</span></ion-col>

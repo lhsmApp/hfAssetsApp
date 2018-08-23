@@ -16,7 +16,7 @@
 
 <ion-content>
 	<ion-item-group inset>
-		<ion-item text-wrap>
+		<!--<ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>序号：</span>
@@ -26,7 +26,18 @@
 	       			<span text-left class="lable-info">{{itemShow?.sequence}}</span>
 	       		</ion-col>
        		</ion-row>
-	    </ion-item>
+	    </ion-item>-->
+	    <!--<ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>发票编号：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{itemShow?.chalanNumber}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>-->
 	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
@@ -41,18 +52,7 @@
 	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
-		   			<span class='color-label'>发票编号：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{itemShow?.chalanNumber}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>发票日期：</span>
+		   			<span class='color-label'>开票日期：</span>
 	       		
 	       		</ion-col>
 	       		<ion-col col-8>
@@ -60,7 +60,7 @@
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
-	    <ion-item text-wrap>
+	    <!--<ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
 		   			<span class='color-label'>发票内容：</span>
@@ -89,25 +89,14 @@
 	       		
 	       		</ion-col>
 	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{itemShow?.singleAmount}}</span>
+	       			<span text-left class="lable-info">{{itemShow?.singleAmount|number}}</span>
 	       		</ion-col>
        		</ion-row>
-	    </ion-item>
+	    </ion-item>-->
 	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
-		   			<span class='color-label'>税率：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{itemShow?.sl}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>发票总金额：</span>
+		   			<span class='color-label'>含税金额：</span>
 	       		
 	       		</ion-col>
 	       		<ion-col col-8>
@@ -129,7 +118,18 @@
 	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
-		   			<span class='color-label'>可抵扣进项税：</span>
+		   			<span class='color-label'>税率：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{itemShow?.sl}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>税额：</span>
 	       		
 	       		</ion-col>
 	       		<ion-col col-8>
@@ -140,6 +140,39 @@
 	    <ion-item text-wrap>
 			<ion-row>
 				<ion-col col-4>
+		   			<span class='color-label'>留抵金额：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{itemShow?.ldje|number}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>是否已上传扫描件：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{itemShow?.uploadFlagName}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4>
+		   			<span class='color-label'>备注：</span>
+	       		
+	       		</ion-col>
+	       		<ion-col col-8>
+	       			<span text-left class="lable-info">{{itemShow?.remark}}</span>
+	       		</ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <!--<ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4>
 		   			<span class='color-label'>完税凭证号：</span>
 	       		
 	       		</ion-col>
@@ -147,7 +180,7 @@
 	       			<span text-left class="lable-info">{{itemShow?.taxNumber}}</span>
 	       		</ion-col>
        		</ion-row>
-	    </ion-item>
+	    </ion-item>-->
 	    
 	    <ion-item-divider color="light"></ion-item-divider>
 	    <ion-item (click)='attachment()'>附件 <ion-icon name="more" item-end></ion-icon></ion-item>

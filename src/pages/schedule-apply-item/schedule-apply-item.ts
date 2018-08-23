@@ -36,11 +36,11 @@ import {Page_ChoiceApproversPage} from '../../providers/TransferFeildName';
         planMoneyCurrent: 28.00,//当前计划金额",传double型    
         payMoney: 6.00,//已付款金额",传double型               
         completionProgress: '57',//完工百分比
-        designFinishTime: '2017-12-14 15:16',//设计完成时间"
-        drawingFinishTime: '2017-12-14 15:16',//施工图完成时间"
-        planBeginTime: '2017-12-14 15:16',//计划开工时间"
-         planEndTime: '2017-12-14 15:16',//计划完工时间"
-         realBeginTime: '2017-12-14 15:16',//实际开工时间"
+        designFinishTime: '2017-12-14 15:16',//工程开工时间"
+        drawingFinishTime: '2017-12-14 15:16',//桩基施工完毕时间"
+        planBeginTime: '2017-12-14 15:16',//基础施工完毕时间"
+         planEndTime: '2017-12-14 15:16',//主体施工完毕时间"
+         realBeginTime: '2017-12-14 15:16',//工程竣工时间"
          realEndTime: '2017-12-14 15:16',//实际完工时间"
          realFinishTime: '2017-12-14 15:16',//竣工验收时间"
          certainDate: '2017-12-14 15:16',//预达转资时间"
@@ -120,6 +120,10 @@ export class ScheduleApplyItemPage {
         requireDate: [,[]], 
         requireUser: [,[]], 
         checkOpinion: [,[]], 
+        
+                     sequence: [,[]], 
+                     translateFlag: [,[]], 
+                     checkResult: [,[]], 
 
         elementFlagName: [,[]], 
         sgsxName: [,[]], 
@@ -151,6 +155,10 @@ export class ScheduleApplyItemPage {
         requireDate: this.itemShow.requireDate, 
         requireUser: this.itemShow.requireUser, 
         checkOpinion: this.itemShow.checkOpinion,
+        
+                     sequence: this.itemShow.sequence,
+                     translateFlag: this.itemShow.translateFlag,
+                     checkResult: this.itemShow.checkResult,
         
         elementFlagName: this.itemShow.elementFlagName, 
         sgsxName:  this.itemShow.sgsxName, 

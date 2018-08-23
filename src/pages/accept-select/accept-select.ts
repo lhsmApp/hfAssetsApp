@@ -72,10 +72,10 @@ export class AcceptSelectPage {
   }
 
   toDetail(billNumber: string) {
-    this.navCtrl.push(Page_AcceptApplyInfoPage, {BillNumberCode: billNumber,Oper:Oper_Look,Title:'选择验收单','approvalState':'1'});
+    this.navCtrl.push(Page_AcceptApplyInfoPage, {BillNumberCode: billNumber,Oper:Oper_Look,Title:'选择实物确认单','approvalState':'1'});
   }
 
-  //选择验收单
+  //选择实物确认单
   selectAccept(selectItem){
       console.log('ccccccccccccccccc');
       this.callback(selectItem).then(()=>{ this.navCtrl.pop() });

@@ -7,6 +7,7 @@ import { AdvancePaymentMain} from '../../model/advance-payment-main';
 import {DEFAULT_INVOICE_EMPTY} from "../../providers/Constants";
 import { InvoiceContent} from '../../enums/enums';
 import {DictUtil} from "../../providers/dict-util";
+import {INVOICE_TYPE} from '../../enums/enums';
 
 import {Oper,Oper_Edit,Oper_Add,Oper_Approval,Oper_Look} from '../../providers/TransferFeildName';
 import {Title} from '../../providers/TransferFeildName';
@@ -86,7 +87,8 @@ export class InvoiceApplyApprovalListPage {
             this.listAll = object[1] as InvoiceMain[];
             if(this.listAll){
               for(let item of this.listAll){
-                item.chalanContentName = this.dictUtil.getEnumsName(InvoiceContent, item.chalanContent);
+            //    item.chalanContentName = this.dictUtil.getEnumsName(InvoiceContent, item.chalanContent);
+                item.chalanTypeName=this.dictUtil.getEnumsName(INVOICE_TYPE,item.chalanType);
               }
             }
             this.list = this.listAll;

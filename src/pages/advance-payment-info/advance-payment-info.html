@@ -30,268 +30,185 @@
 
 
 <ion-content>	
-	<ion-item-group inset>
-		<!-- <ion-item>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>单据状态：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left>已审批</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item> -->
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>付款单号：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.payCode}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>款项类别：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.clauseTypeName}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>合同流水号：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.contractCode}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>合同名称：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.contractName}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <!-- <ion-item>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>项目性质：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.elementType}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item> -->
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>项目单元名称：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.elementName}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>项目核算类别：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.planTypeName}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>验收单号：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.acceptanceCode}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>付款原因：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.payDigest}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>合同标的额：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.costMoney}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>已付款额度：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.taxMoney}}</span><!-- |number:'1.2-3'} -->
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap *ngIf="isYFK">
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>付款比例：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.bl}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>本次申请金额：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.payMoney}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>付款单位：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.payDepart}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>收款单位：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.intercourseName}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap *ngIf="isapproval">
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>企业名称：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.company}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap *ngIf="isapproval">
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>开户行：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.openBank}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap *ngIf="isapproval">
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>银行账号：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.bankNum}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>申请人：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.requireUser}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>申请时间：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.requireDate}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap><!--*ngIf="isquery"-->
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>发票审核人：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.fpUser}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap><!--*ngIf="isquery"-->
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>发票审核日期：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{paymentDetail?.fpDate}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item-divider color="light"></ion-item-divider>
-	    <ion-item (click)='invoice()'>发票 <ion-icon name="more" item-end></ion-icon></ion-item>
+	<form [formGroup]="paymentForm" (ngSubmit)="(save())">
+    <ion-item-group >
+      <ion-item text-wrap>
+        <ion-label fixed>付款单号</ion-label>
+        <ion-input type="text" readonly formControlName="payCode"></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>付款类型<span class="danger">*</span></ion-label>
+        <ion-input type="text" readonly formControlName="clauseTypeName"></ion-input>
+      </ion-item>
+      <!--<ion-item text-wrap>
+        <ion-label fixed>合同流水号<span class="danger">*</span></ion-label>
+        <ion-input type="text" readonly formControlName="contractCode"></ion-input>
+      </ion-item>-->
+      <ion-item text-wrap>
+        <ion-label fixed>合同编号<span class="danger">*</span></ion-label>
+        <ion-input type="text" readonly formControlName="contractCodeHf" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>合同名称</ion-label>
+        <ion-input type="text" readonly formControlName="contractName" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>合同金额</ion-label><!--合同标的额-->
+        <ion-input type="number" readonly formControlName="costMoney" ></ion-input>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-label fixed>概算项目</ion-label>
+        <ion-input type="text" readonly formControlName="elementType" ></ion-input>
+      </ion-item> -->
+      <ion-item text-wrap>
+        <ion-label fixed>概算项目名称</ion-label>
+        <ion-input type="text" readonly formControlName="elementName" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>负责部门</ion-label>
+        <ion-input type="text" readonly formControlName="fzDept" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>项目核算类别</ion-label>
+        <ion-input type="text" readonly formControlName="planTypeName" ></ion-input>
+      </ion-item>
+      <!--<ion-item text-wrap *ngIf="isYFK">
+        <ion-label fixed>合同税额<span class="danger">*</span></ion-label>
+        <ion-input type="number" readonly formControlName="bl" ></ion-input>
+      </ion-item> -->
+      <ion-item text-wrap>
+        <ion-label fixed>支付方式<span class="danger">*</span></ion-label>
+        <ion-input type="text" readonly formControlName="payTypeName" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>付款原因<span class="danger">*</span></ion-label>
+        <ion-input type="text" readonly formControlName="payDigest" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>累计已付款额度</ion-label>
+        <ion-input type="number" readonly formControlName="taxMoney" ></ion-input>
+      </ion-item>
+      <!--<ion-item text-wrap>
+        <ion-label fixed>付款单位<span class="danger">*</span></ion-label>
+        <ion-input type="text" readonly formControlName="paymentCode" ></ion-input>
+      </ion-item>-->
+      <!--<ion-item text-wrap>
+        <ion-label fixed>付款单位<span class="danger">*</span></ion-label>
+        <ion-input type="text" readonly formControlName="payDepart" ></ion-input>
+      </ion-item>-->
+      <ion-item text-wrap>
+        <ion-label fixed>往来单位(收款单位)<span class="danger">*</span></ion-label>
+        <ion-input type="text" readonly formControlName="intercourseName" ></ion-input>
+      </ion-item>
+      <!--<ion-item text-wrap *ngIf="isapproval">
+        <ion-label fixed>企业名称</ion-label>
+        <ion-input type="text" readonly formControlName="company" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap *ngIf="isapproval">
+        <ion-label fixed>开户行</ion-label>
+        <ion-input type="text" readonly formControlName="openBank" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap *ngIf="isapproval">
+        <ion-label fixed>银行账号</ion-label>
+        <ion-input type="text" readonly formControlName="bankNum" ></ion-input>
+      </ion-item>-->
+      <ion-item text-wrap>
+        <ion-label fixed>实物确认单号<span class="danger"></span></ion-label>
+        <ion-input type="text" readonly clearInput formControlName="acceptanceCode"></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>监理部门<span class="danger">*</span></ion-label>
+        <ion-input type="text" readonly formControlName="jlDeptName" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>概算金额（单元计划金额）</ion-label>
+        <ion-input type="number" readonly formControlName="elePlanMoney" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>累计完成投资额</ion-label>
+        <ion-input type="number" readonly formControlName="tzPlanMoney" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>附件张数</ion-label>
+        <ion-input type="number" readonly formControlName="zs" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>结算金额</ion-label>
+        <ion-input type="number" readonly formControlName="ctJsMoney" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>合同预付款</ion-label>
+        <ion-input type="number" readonly formControlName="ctYfMoney" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>合同预付款比例</ion-label>
+        <ion-input type="number" readonly formControlName="ctYfBl" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>已付款比例(%)</ion-label>
+        <ion-input type="number" readonly formControlName="fkYfMoney" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>此次付款后比例(%)</ion-label>
+        <ion-input type="number" readonly formControlName="fkCcBl"></ion-input>
+      </ion-item>
+      <!--<ion-item text-wrap>
+        <ion-label fixed>本次申请金额<span class="danger">*</span></ion-label>
+        <ion-input type="number" readonly formControlName="payMoney" ></ion-input>
+      </ion-item>-->
+      <ion-item text-wrap>
+        <ion-label fixed>申请付款金额<span class="danger">*</span></ion-label>
+        <ion-input type="number" readonly formControlName="paySpMoney"></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>审批付款金额<span class="danger">*</span></ion-label>
+        <ion-input type="number" formControlName="payUpdataMoney" *ngIf="isapproval&&!sendSuccess" placeholder="手工输入" ></ion-input>
+        <ion-input type="number" formControlName="payUpdataMoney"  *ngIf="!(isapproval&&!sendSuccess)" readonly ></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>审批状态</ion-label>
+        <ion-input type="text" readonly formControlName="reviewStatusName" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>申请时间<span class="danger">*</span></ion-label>
+        <ion-input type="text" readonly formControlName="requireDate" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>申请人<span class="danger">*</span></ion-label>
+        <ion-input type="text" readonly formControlName="requireUser" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap *ngIf="isquery">
+        <ion-label fixed>发票状态</ion-label>
+        <ion-input type="text" readonly formControlName="sendStatusName" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap *ngIf="isquery">
+        <ion-label fixed>发票审核人</ion-label>
+        <ion-input type="text" readonly formControlName="fpUser" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap *ngIf="isquery">
+        <ion-label fixed>发票审核日期</ion-label>
+        <ion-input type="text" readonly formControlName="fpDate" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap *ngIf="isquery">
+        <ion-label fixed>付款状态</ion-label>
+        <ion-input type="text" readonly formControlName="fkztName" ></ion-input>
+      </ion-item>
+      <ion-item text-wrap *ngIf="isquery">
+        <ion-label fixed>凭证状态</ion-label>
+        <ion-input type="text" readonly formControlName="pzztName" ></ion-input>
+      </ion-item>
+	    <ion-item-divider color="light" *ngIf="!isapproval"></ion-item-divider>
+	    <ion-item (click)='invoice()' *ngIf="!isapproval">发票 <ion-icon name="more" item-end></ion-icon></ion-item>
 	    <ion-item-divider color="light"></ion-item-divider>
 	    <ion-item (click)='billOfGcl()'>工程量清单 <ion-icon name="more" item-end></ion-icon></ion-item>
 	    <ion-item-divider color="light"></ion-item-divider>
 	    <ion-item (click)='attachment()'>附件 <ion-icon name="more" item-end></ion-icon></ion-item>
 	    <ion-item-divider *ngIf="hasApprovalProgress" color="light"></ion-item-divider>
 	    <ion-item *ngIf="hasApprovalProgress" (click)='approvalProgress()'>审批进度 <ion-icon name="more" item-end></ion-icon></ion-item>
+	    <ion-item-divider color="light"></ion-item-divider>
     </ion-item-group>
-
+    <div padding-horizontal *ngIf="isapproval&&!sendSuccess">
+      <button ion-button color="danger" full type="submit" [disabled]="!paymentForm.valid">保 存</button>
+    </div>
+  </form>
 </ion-content>

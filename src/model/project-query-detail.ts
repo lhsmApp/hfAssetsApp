@@ -40,6 +40,5 @@ export class ProjectQueryDetail {
 	reviewStatusName: string;//单据状态 0
 	sourceOfFundName: string;//资金来源 " "
 	assetsStandardName: string;//资金渠道 "01"
-
 }
 

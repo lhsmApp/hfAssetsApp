@@ -25,4 +25,5 @@ export class BillOfWorkDetail{
 	fees:number;//其中规费,传double型
 
 	contractCode:string;//合同流水号
+	contractCodeHf:string;//合同编号
 }

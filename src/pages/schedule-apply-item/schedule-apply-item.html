@@ -64,68 +64,43 @@
                     placeholder="手工输入">
                 </ion-input>
             </ion-item>
-
             <ion-item text-wrap>
-                <ion-label fixed>完工百分比</ion-label>
-                <ion-input type="number" formControlName="completionProgress" 
-                    placeholder="手工输入，只能输入数字">
-                </ion-input>
-            </ion-item>
-            <ion-item text-wrap>
-                <ion-label fixed>设计完成时间</ion-label>
-                <!--<ion-input type="text" formControlName="designFinishTime" 
-                    placeholder="选择日期">
-                </ion-input>-->
+                <ion-label fixed>工程开工时间</ion-label>
                 <ion-datetime displayFormat="YYYY-MM-DD" placeholder="选择日期" max="{{maxYear}}" 
                             cancelText="取消" doneText="确认"
                             formControlName="designFinishTime" [(ngModel)]="designFinishTime">
                 </ion-datetime>
             </ion-item>
             <ion-item text-wrap>
-                <ion-label fixed>施工图完成时间</ion-label>
-                <!--<ion-input type="text" formControlName="drawingFinishTime" 
-                    placeholder="选择日期">
-                </ion-input>-->
+                <ion-label fixed>桩基施工完毕时间</ion-label>
                 <ion-datetime displayFormat="YYYY-MM-DD" placeholder="选择日期" max="{{maxYear}}"
                             cancelText="取消" doneText="确认"
                             formControlName="drawingFinishTime" [(ngModel)]="drawingFinishTime">
                 </ion-datetime>
             </ion-item>
             <ion-item text-wrap>
-                <ion-label fixed>计划开工时间</ion-label>
-                <!--<ion-input type="text" formControlName="planBeginTime" 
-                    placeholder="选择日期">
-                </ion-input>-->
+                <ion-label fixed>基础施工完毕时间</ion-label>
                 <ion-datetime displayFormat="YYYY-MM-DD" placeholder="选择日期" max="{{maxYear}}"
                             cancelText="取消" doneText="确认"
                             formControlName="planBeginTime" [(ngModel)]="planBeginTime">
                 </ion-datetime>
             </ion-item>
             <ion-item text-wrap>
-                <ion-label fixed>计划完工时间</ion-label>
-                <!--<ion-input type="text" formControlName="planEndTime" 
-                    placeholder="选择日期">
-                </ion-input>-->
+                <ion-label fixed>主体施工完毕时间</ion-label>
                 <ion-datetime displayFormat="YYYY-MM-DD" placeholder="选择日期" max="{{maxYear}}"
                             cancelText="取消" doneText="确认"
                             formControlName="planEndTime" [(ngModel)]="planEndTime">
                 </ion-datetime>
             </ion-item>
             <ion-item text-wrap>
-                <ion-label fixed>实际开工时间</ion-label>
-                <!--<ion-input type="text" formControlName="realBeginTime" 
-                    placeholder="选择日期">
-                </ion-input>-->
+                <ion-label fixed>工程竣工时间</ion-label>
                 <ion-datetime displayFormat="YYYY-MM-DD" placeholder="选择日期" max="{{maxYear}}"
                             cancelText="取消" doneText="确认"
                             formControlName="realBeginTime" [(ngModel)]="realBeginTime">
                 </ion-datetime>
             </ion-item>
-            <ion-item text-wrap>
+            <!--<ion-item text-wrap>
                 <ion-label fixed>实际完工时间</ion-label>
-                <!--<ion-input type="text" formControlName="realEndTime"
-                    placeholder="选择日期">
-                </ion-input>-->
                 <ion-datetime displayFormat="YYYY-MM-DD" placeholder="选择日期" max="{{maxYear}}"
                             cancelText="取消" doneText="确认"
                             formControlName="realEndTime" [(ngModel)]="realEndTime">
@@ -133,34 +108,25 @@
             </ion-item>
             <ion-item text-wrap>
                 <ion-label fixed>竣工验收时间</ion-label>
-                <!--<ion-input type="text" formControlName="realFinishTime" 
-                    placeholder="选择日期">
-                </ion-input>-->
                 <ion-datetime displayFormat="YYYY-MM-DD" placeholder="选择日期" max="{{maxYear}}"
                             cancelText="取消" doneText="确认"
                             formControlName="realFinishTime" [(ngModel)]="realFinishTime">
                 </ion-datetime>
-            </ion-item>
+            </ion-item>-->
             <ion-item text-wrap>
                 <ion-label fixed>预达转资时间</ion-label>
-                <!--<ion-input type="text" formControlName="certainDate" 
-                    placeholder="选择日期">
-                </ion-input>-->
                 <ion-datetime displayFormat="YYYY-MM-DD" placeholder="选择日期" max="{{maxYear}}"
                             cancelText="取消" doneText="确认"
                             formControlName="certainDate" [(ngModel)]="certainDate">
                 </ion-datetime>
             </ion-item>
-            <ion-item text-wrap>
+            <!--<ion-item text-wrap>
                 <ion-label fixed>审计报告日期</ion-label>
-                <!--<ion-input type="text" formControlName="auditReportTime" 
-                    placeholder="选择日期">
-                </ion-input>-->
                 <ion-datetime displayFormat="YYYY-MM-DD" placeholder="选择日期" max="{{maxYear}}"
                             cancelText="取消" doneText="确认"
                             formControlName="auditReportTime" [(ngModel)]="auditReportTime">
                 </ion-datetime>
-            </ion-item>
+            </ion-item>-->
             <ion-item text-wrap>
                 <ion-label fixed>复核意见</ion-label>
                 <ion-input type="text" formControlName="checkOpinion" 

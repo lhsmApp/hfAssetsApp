@@ -27,7 +27,7 @@
   	      <p>清单项目编号：{{item.listNumber}}</p>
           <p>清单项目名称：{{item.listName}}</p>
           <p>工程量：{{item.projectLoad}}</p>
-          <p>合价：{{item.moneyTotal}}</p>
+          <p>合价：{{item.moneyTotal|number}}</p>
           <!-- <ion-icon item-end name="arrow-dropright"></ion-icon> -->
         </ion-label>
     	  <ion-checkbox color="dark" checked="{{item.checked}}" [(ngModel)]="item.checked" [disabled]="item.disabled"></ion-checkbox>

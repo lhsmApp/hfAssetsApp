@@ -26,191 +26,202 @@
 
 <ion-content>
 	<ion-item-group inset>
-		<!-- <ion-item>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>单据状态：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left>已审批</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item> -->
 	    <ion-item text-wrap>
 			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>付款单号：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{itemShow?.payCode}}</span>
-	       		</ion-col>
+				<ion-col col-4> <span class='color-label'>付款单号：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.payCode}}</span> </ion-col>
        		</ion-row>
 	    </ion-item>
 	    <ion-item text-wrap>
 			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>款项类别：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{itemShow?.clauseTypeName}}</span>
-	       		</ion-col>
+				<ion-col col-4> <span class='color-label'>付款类型：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.clauseTypeName}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <!--<ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>合同流水号：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.contractCode}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>-->
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>合同编号：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.contractCodeHf}}</span> </ion-col>
        		</ion-row>
 	    </ion-item>
 	    <ion-item text-wrap>
 			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>合同流水号：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{itemShow?.contractCode}}</span>
-	       		</ion-col>
+				<ion-col col-4> <span class='color-label'>合同名称：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.contractName}}</span> </ion-col>
        		</ion-row>
 	    </ion-item>
 	    <ion-item text-wrap>
 			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>合同名称：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{itemShow?.contractName}}</span>
-	       		</ion-col>
+				<ion-col col-4> <span class='color-label'>合同金额：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.costMoney|number}}</span> </ion-col>
        		</ion-row>
 	    </ion-item>
 	    <!-- <ion-item>
 			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>项目性质：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{itemShow?.elementType}}</span>
-	       		</ion-col>
+				<ion-col col-4> <span class='color-label'>概算项目：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.elementType}}</span> </ion-col>
        		</ion-row>
 	    </ion-item> -->
 	    <ion-item text-wrap>
 			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>项目单元名称：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{itemShow?.elementName}}</span>
+				<ion-col col-4> <span class='color-label'>概算项目名称：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.elementName}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>负责部门：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.fzDept}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>项目核算类别：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.planTypeName}}</span> </ion-col> </ion-row>
+	    </ion-item>
+      <!--<ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>合同税额：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.bl|number}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item> -->
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>支付方式：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.payTypeName}}</span> </ion-col> </ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>付款原因：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.payDigest}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>累计已付款额度：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.taxMoney|number}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <!--<ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>付款单位：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.paymentCode}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>-->
+	    <!--<ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>付款单位：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.payDepart}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>-->
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>往来单位(收款单位)：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.intercourseName}}</span>
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
 	    <ion-item text-wrap>
 			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>项目核算类别：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{itemShow?.planTypeName}}</span>
+				<ion-col col-4> <span class='color-label'>实物确认单号：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.acceptanceCode}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>监理部门：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.jlDeptName}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>概算金额（单元计划金额）：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.elePlanMoney|number}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>累计完成投资额：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.tzPlanMoney|number}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>附件张数：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.zs|number}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>结算金额：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.ctJsMoney|number}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>合同预付款：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.ctYfMoney|number}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>合同预付款比例：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.ctYfBl|number}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>已付款比例(%)：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.fkYfMoney|number}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>此次付款后比例(%)：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.fkCcBl|number}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>
+        <!--<ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>本次申请金额：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.payMoney|number}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>-->
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>申请付款金额：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.paySpMoney|number}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>审批付款金额：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.payUpdataMoney|number}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>审批状态：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.reviewStatusName}}</span> </ion-col>
+       		</ion-row>
+	    </ion-item>
+	    <ion-item text-wrap>
+			<ion-row>
+				<ion-col col-4> <span class='color-label'>申请人：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.requireUser}}</span>
 	       		</ion-col>
        		</ion-row>
 	    </ion-item>
 	    <ion-item text-wrap>
 			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>验收单号：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{itemShow?.acceptanceCode}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>付款原因：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{itemShow?.payDigest}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>合同标的额：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{itemShow?.costMoney}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>已付款额度：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{itemShow?.taxMoney}}</span><!-- |number:'1.2-3'} -->
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>本次申请金额：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{itemShow?.payMoney}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>付款单位：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{itemShow?.payDepart}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>收款单位：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{itemShow?.intercourseName}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>申请人：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{itemShow?.requireUser}}</span>
-	       		</ion-col>
-       		</ion-row>
-	    </ion-item>
-	    <ion-item text-wrap>
-			<ion-row>
-				<ion-col col-4>
-		   			<span class='color-label'>申请时间：</span>
-	       		
-	       		</ion-col>
-	       		<ion-col col-8>
-	       			<span text-left class="lable-info">{{itemShow?.requireDate}}</span>
-	       		</ion-col>
+				<ion-col col-4> <span class='color-label'>申请时间：</span> </ion-col>
+	       		<ion-col col-8> <span text-left class="lable-info">{{itemShow?.requireDate}}</span> </ion-col>
        		</ion-row>
 	    </ion-item>
 	    <ion-item-divider color="light"></ion-item-divider>

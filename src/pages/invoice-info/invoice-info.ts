@@ -7,6 +7,7 @@ import { InvoiceDetail} from '../../model/invoice-detail';
 import { AdvancePaymentMain} from '../../model/advance-payment-main';
 import { DictUtil} from '../../providers/dict-util';
 import {INVOICE_TYPE} from '../../enums/enums';
+import {TrueOrFalse} from '../../enums/enums';
 import { InvoiceContent} from '../../enums/enums';
 /**
  * Generated class for the InvoiceInfoPage page.
@@ -51,7 +52,8 @@ export class InvoiceInfoPage {
           console.log(object[1][0]);
           this.invoiceDetail = object[1][0] as InvoiceDetail;
           this.invoiceDetail.chalanTypeName=this.dictUtil.getEnumsName(INVOICE_TYPE,this.invoiceDetail.chalanType);
-          this.invoiceDetail.chalanContentName = this.dictUtil.getEnumsName(InvoiceContent, this.invoiceDetail.chalanContent);
+          //this.invoiceDetail.chalanContentName = this.dictUtil.getEnumsName(InvoiceContent, this.invoiceDetail.chalanContent);
+          this.invoiceDetail.uploadFlagName=this.dictUtil.getNumEnumsName(TrueOrFalse,this.invoiceDetail.uploadFlag);
         }else{
           let alert = this.alertCtrl.create({
             title: '提示!',
@@ -69,10 +71,21 @@ export class InvoiceInfoPage {
   attachment(){
     console.log(this.apply);
     if(this.apply){
-      this.navCtrl.push("AttachmentPage",{'billNumber':this.invoiceDetail.sequence,'contractCode':this.contractCode,'type':'2','attachmentType':'3','typeList':'2'});
+      this.navCtrl.push("AttachmentPage",{callback:this.attachmentChanged,'billNumber':this.invoiceDetail.sequence,'contractCode':this.contractCode,'type':'2','attachmentType':'3','typeList':'2'});
     }else{
     	this.navCtrl.push("AttachmentInfoPage",{'billNumber':this.invoiceDetail.sequence,'contractCode':this.contractCode,'type':'2','attachmentType':'3','typeList':'2'});
     }
   }
+  //回调
+  attachmentChanged = (data) =>
+  {
+    return new Promise((resolve, reject) => {
+      console.log(data);
+      if(data){
+          this.initData();
+      }
+      resolve();
+    });
+  };
 
 }

@@ -50,14 +50,14 @@
                 <ion-label fixed>资产类型</ion-label>
                 <ion-input readonly formControlName="assetsTypeName" placeholder="自动填写，禁止调整"></ion-input>
             </ion-item>
-            <ion-item text-wrap>
+            <!--<ion-item text-wrap>
                 <ion-label fixed>资产类别</ion-label>
-                <ion-input formControlName="assetsCodeType" placeholder="手工输入"></ion-input>
+                <ion-input formControlName="assetsCodeType" placeholder="手工输入"></ion-input>-->
                 <!--<ion-select type="text" [(ngModel)]="assetsCodeType" formControlName="assetsCodeType" placeholder="手工选择" cancelText="取消" okText="确定" >
                     <ion-option *ngFor="let item of dicAssetsCodeType" value="{{item.}}">{{item.}}</ion-option>
                     <ion-option value=""></ion-option>
                 </ion-select>-->
-            </ion-item>
+            <!--</ion-item>-->
             <ion-item text-wrap>
                 <ion-label fixed>所属单位</ion-label>
                 <ion-select type="text" [(ngModel)]="departCode" formControlName="departCode" placeholder="手工选择"
@@ -78,10 +78,10 @@
                 <ion-label fixed>规格型号</ion-label>
                 <ion-input formControlName="assetsStandard" placeholder="手工输入"></ion-input>
             </ion-item>
-            <ion-item text-wrap>
+            <!--<ion-item text-wrap>
                 <ion-label fixed>车牌井号</ion-label>
                 <ion-input formControlName="licenceNumber" placeholder="手工输入"></ion-input>
-            </ion-item>
+            </ion-item>-->
             <ion-item text-wrap>
                 <ion-label fixed>计量单位</ion-label>
                 <ion-select type="text" [(ngModel)]="unitCode" formControlName="unitCode" placeholder="手工选择"
@@ -160,26 +160,6 @@
                     <!--<ion-option value=""></ion-option>-->
                 </ion-select>
             </ion-item>
-            <!--<ion-item >
-                <ion-label fixed>预计使用年限</ion-label>
-                <ion-input readonly formControlName="depreciateYear" placeholder="自动填写"></ion-input>
-            </ion-item>
-            <ion-item >
-                <ion-label fixed>原值</ion-label>
-                <ion-input readonly formControlName="originalValue" placeholder="自动填写，禁止调整"></ion-input>
-            </ion-item>
-            <ion-item >
-                <ion-label fixed>净值</ion-label>
-                <ion-input readonly formControlName="nowValue" placeholder="自动填写，禁止调整"></ion-input>
-            </ion-item>
-            <ion-item >
-                <ion-label fixed>累计折旧</ion-label>
-                <ion-input readonly formControlName="addDepreciate" placeholder="自动填写，禁止调整"></ion-input>
-            </ion-item>
-            <ion-item >
-                <ion-label fixed>减值准备</ion-label>
-                <ion-input readonly formControlName="devalueValue" placeholder="自动填写，禁止调整"></ion-input>
-            </ion-item>-->
 		</ion-item-group>
         <div padding-horizontal>
             <button ion-button color="danger" block type="submit" [disabled]="!assetFrom.valid">保 存</button>

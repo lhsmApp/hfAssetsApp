@@ -158,22 +158,48 @@ export class AcceptApplyListPage {
   };
 
   //删除
-  /*delete(billNumber: string){
-    this.acceptService.saveAcceptApplyMain(billNumber)
-        .subscribe(object => {
-          let resultBase:ResultBase=object[0] as ResultBase;
-          if(resultBase.result=='true'){
-            this.getList();
-          } else {
-            let alert = this.alertCtrl.create({
-              title: '提示',
-              subTitle: resultBase.message,
-              buttons: ['确定']
+  delete(billNumber: string, slidingItem: ItemSliding){
+    slidingItem.close();
+    let confirm = this.alertCtrl.create({
+      title: '删除提示?',
+      message: '确认要删除当前单据吗?',
+      buttons: [
+        {
+          text: '取消',
+          handler: () => {
+            console.log('cancel');
+          }
+        },
+        {
+          text: '确认',
+          handler: () => {
+            this.acceptService.deleteAcceptApply(billNumber)
+              .subscribe(object => {
+                let resultBase:ResultBase=object[0] as ResultBase;
+                if(resultBase.result=='true'){
+                  this.getList();
+                  let alert = this.alertCtrl.create({
+                    title: '提示',
+                    subTitle: resultBase.message,
+                    buttons: ['确定']
+                  });
+                  alert.present();
+                } else {
+                  let alert = this.alertCtrl.create({
+                    title: '提示',
+                    subTitle: resultBase.message,
+                    buttons: ['确定']
+                  });
+                  alert.present();
+              }
+              }, () => {
+              
             });
-            alert.present();
+          }
         }
-        }, () => {
-        
-      });
-  }*/
+      ]
+    });
+    confirm.present();
+  }
+
 }

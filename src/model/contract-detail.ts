@@ -21,6 +21,8 @@ export class ContractDetail{
 	checkResult :string;//单据状态
 	checkOpinion:string;//审批意见
 
+	contractCodeHf:string;//合同编号
+
 
 	compactTypeName:string;//合同类别
 	relativePersonName:string;//合同相对人 外部单位字典

@@ -24,9 +24,10 @@
     <ion-list>
       <ion-item *ngFor="let item of list;trackBy:item?.contractCode">
         <ion-label (click)="selectContract(item)">
-          <h2>编号：{{item.contractCode}}</h2><!---->
-          <h3>所属单位：{{item.departName}}</h3><!---->
-          <h3>名称：{{item.contractName}}</h3><!---->
+          <h2>合同名称：{{item.contractName}}</h2><!---->
+          <p>合同流水号：{{item.contractCode}}</p>
+          <p>合同编号：{{item.contractCodeHf}}</p><!---->
+          <p>所属单位：{{item.departName}}</p><!---->
           <p>申请人：{{item.requireUser}}</p><!---->
         </ion-label>
         <button ion-button color="secondary" clear item-end (click)='toDetail(item.contractCode)'>明细</button>
