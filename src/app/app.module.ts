@@ -68,6 +68,8 @@ import {NoticeService} from '../services/noticeService';
 
 //指令
 import { TabDirective } from "../directive/";
+import { AppAvailability } from '@ionic-native/app-availability';
+import {Broadcaster} from "@ionic-native/broadcaster"
 
 /*import * as fundebug from "fundebug-javascript";
 fundebug.apikey = '23cca085684576f006bfec289b92bc0cb7830a4e44c052266a23b0fc154f7b13';
@@ -163,7 +165,9 @@ class FundebugErrorHandler implements ErrorHandler {
     SystemService,
     ApprovalService,
     AttachmentService,
-    NoticeService
+    NoticeService,
+    AppAvailability,
+    Broadcaster
   ]
 })
 export class AppModule {

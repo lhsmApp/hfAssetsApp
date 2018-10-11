@@ -4,6 +4,16 @@
     <img src="{{loginBg}}" style="position:absolute; height:100%; width:100%; top:0%; left:0%;"/>
     <form padding class="card-form" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
        <ion-list class='list'>
+        <!-- <ion-item class='list' no-lines>
+          <ion-segment formControlName="state" color="primary">
+            <ion-segment-button value="1">
+              资产登录
+            </ion-segment-button>
+            <ion-segment-button value="2">
+              天房登录
+            </ion-segment-button>
+          </ion-segment>
+        </ion-item> -->
         <ion-item class='list'>
           <ion-label><ion-icon name="person"></ion-icon></ion-label>
 
@@ -33,6 +43,9 @@
        <div padding>
          <button ion-button color="secondary" icon-left full type="submit" [disabled]="!loginForm.valid||submitted"><!-- <ion-icon name="category" color="purple"></ion-icon> -->登　录</button>
        </div>
+       <!-- <div>
+         <button ion-button color="primary" type="button" icon-left full (click)="tfLogin()">天房登录</button>
+       </div> -->
     </form>
   </div>
     

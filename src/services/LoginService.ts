@@ -38,7 +38,20 @@ export class LoginService {
 
   }
 
+  loginTf(token): Observable<(Object)> {
+    
+    let param = {
+     'action': 'userLoginDd',
+     'userCode': '',
+     'passWord': '',
+     //'departCode':'',
+     'ddToken':token
+     };
+     return this.httpService.get('phoneDDLogin/login.do', param).map((res: Response) => res.json());
+  }
+
   getDepart(user): Observable<(Object)> {
+    /*if(user.state=='1'){*/
     let param = {
      'action': 'userLogin',
      //'sessionid':'',
@@ -48,6 +61,18 @@ export class LoginService {
      };
 
      return this.httpService.get('phoneLogin/login.do', param).map((res: Response) => res.json());
+     
+/*     }else{
+       let param = {
+       'action': 'userLogin',
+       //'sessionid':'',
+       'userCode': user.usercode,
+       'passWord': user.password,
+       //'departCode':''
+       };
+
+       return this.httpService.get('phoneLogin/login.do', param).map((res: Response) => res.json());
+     }*/
   }
 
 }

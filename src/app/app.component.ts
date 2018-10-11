@@ -1,5 +1,5 @@
 import { Component ,ViewChild} from '@angular/core';
-import { Platform,Keyboard,IonicApp,Nav,ToastController,Tabs ,Tab,ViewController } from 'ionic-angular';
+import { Platform,NavController,Keyboard,IonicApp,Nav,ToastController,Tabs ,Tab,ViewController,AlertController,ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeService} from "../providers/NativeService";
@@ -9,6 +9,11 @@ import {Helper} from "../providers/Helper";
 import {GlobalData} from "../providers/GlobalData";
 import {Storage} from '@ionic/storage';
 import {APP_PORT_BROWER,APP_PORT_NATIVE} from "../providers/Constants";
+import {Broadcaster} from "@ionic-native/broadcaster"
+import {LoginService} from '../services/LoginService';
+import {ResultBase} from "../model/result-base";
+import {UserInfo, LoginInfo} from "../model/userinfo";
+import { Permission} from '../model/permission';
 
 @Component({
   templateUrl: 'app.html'
@@ -17,6 +22,8 @@ export class MyApp {
   @ViewChild('myNav') nav: Nav;
   rootPage:any = LoginPage;
   backButtonPressed: boolean = false;
+  userInfo: UserInfo;
+  hasTfLogin:boolean=false;
 
   constructor(private platform: Platform,
     private keyboard: Keyboard,
@@ -27,7 +34,13 @@ export class MyApp {
     private helper: Helper,
     private toastCtrl: ToastController,
     private storage: Storage,
-    private globalData: GlobalData) {
+    private globalData: GlobalData,
+    private broadcaster:Broadcaster,
+    private alertCtrl:AlertController,
+    //private navCtrl:NavController,
+    private modalCtrl: ModalController,
+    private loginService: LoginService) {
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -42,7 +55,7 @@ export class MyApp {
         this.globalData.appNo=currentNo;
       });
 
-      if(this.nativeService.isMobile()){
+      /*if(this.nativeService.isMobile()){
           this.storage.get('SERVERPORT').then((serverPort: string) => {
           if(serverPort){
             this.globalData.serverPort=serverPort;
@@ -50,6 +63,7 @@ export class MyApp {
             this.globalData.serverPort=APP_PORT_NATIVE;
           }
         });
+        this.globalData.serverPort=APP_PORT_NATIVE;
       }
       else{
         this.globalData.serverPort=APP_PORT_BROWER;
@@ -59,10 +73,63 @@ export class MyApp {
         if(serverIP){
           this.globalData.serverIP=serverIP;
         }
-      });
-      
+      });*/
+
+
+      /***************************************/
+      //唤醒
+      /***************************************/
     });
   }
+
+  /*//选择单位
+  selectDepart(loginInfo){
+    let modal = this.modalCtrl.create('DepartSelectTfPage',{'departments':loginInfo});
+    modal.present();
+    modal.onDidDismiss(departInfo => {
+      if(departInfo){
+
+        let departCodeAndName:string[]=departInfo.split('|');
+        this.globalData.departCode = departCodeAndName[0];
+        this.globalData.departName=departCodeAndName[1];
+        //this.navCtrl.push(TabsPage,{"userinfo":this.userInfo});
+        //this.rootPage=TabsPage;
+
+        this.userInfo = loginInfo[1] as UserInfo;
+        let user={'usercode':this.userInfo.userCode}
+        this.login(user)
+      }
+    });
+  }
+
+  login(user) {
+    this.loginService.login(user).subscribe(loginInfo => {
+        let resultBase:ResultBase=loginInfo[0] as ResultBase;
+        if(resultBase.result=='true'){
+          this.rootPage=TabsPage;
+          this.userInfo = loginInfo[1] as UserInfo;
+          this.userInfo.departCode=this.globalData.departCode;
+          this.userInfo.departName=this.globalData.departName;
+          this.globalData.userId=this.userInfo.userCode;
+          this.globalData.passWord=this.userInfo.passWord;
+          this.globalData.userType=this.userInfo.userType;
+
+          this.globalData.userCode = this.userInfo.userCode;
+          this.globalData.userName = this.userInfo.userName;
+          this.globalData.permission=loginInfo[1].userFuntionList as Permission[];
+          this.storage.set('userinfo', this.userInfo);
+        }else{
+            let alert = this.alertCtrl.create({
+            title: '提示信息',
+            subTitle: resultBase.message,
+            buttons: ['确定']
+          });
+          alert.present();
+        }
+        
+      }, () => {
+      });
+  }*/
 
   assertNetwork() {
     if (!this.nativeService.isConnecting()) {

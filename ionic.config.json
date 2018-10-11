@@ -1,11 +1,7 @@
 {
   "name": "testNow",
-  "app_id": "",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
   },
-  "proxies": [ 
-  	{ "path": "/assets", "proxyUrl": "http://weiapp.pw:9080/assets" }
-  ]
+  "type": "ionic-angular"
 }

@@ -50,6 +50,8 @@ export class ServerSetPage {
 
       this.storage.set("SERVERPORT",serverPort);
       this.globalData.serverPort=serverPort;
+
+      this.storage.set("SERVER",serverIP+","+serverPort);
     }
     this.dismiss();
   }

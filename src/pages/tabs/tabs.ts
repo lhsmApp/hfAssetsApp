@@ -42,11 +42,16 @@ export class TabsPage implements OnInit {
    ngOnInit(): void {
      //this.userInfo = this.params.get('userInfo');
     //this.avatarPath = this.params.get('avatarPath');
-    let userinfo=this.navParams.get('userinfo');
+
+    /*let userinfo=this.navParams.get('userinfo');
     console.log(userinfo);
     this.globalData.userCode = userinfo.userCode;
     this.globalData.userName = userinfo.userName;
     this.globalData.sessionId=userinfo.sessionId;
+    this.storage.set('userinfo', userinfo);
+    */
+
+
     /*if (!userinfo.avatarPath) {
       this.helper.loadAvatarPath(userinfo.avatarId).subscribe(avatarPath => {
         userinfo.avatarPath = avatarPath;
@@ -54,7 +59,8 @@ export class TabsPage implements OnInit {
         this.storage.set('userinfo', userinfo);
       });
     }*/
-    this.storage.set('userinfo', userinfo);
+
+    
     this.storage.get(IS_DIC_LOAD).then((dicLoad: boolean) => {
       if(!dicLoad){
         console.log('dicLoad');
