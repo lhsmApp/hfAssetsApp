@@ -19,7 +19,7 @@ import { Permission} from '../../model/permission';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Broadcaster } from "@ionic-native/broadcaster";
 import { NativeService} from "../../providers/NativeService";
-import { AppAvailability } from '@ionic-native/app-availability';
+//import { AppAvailability } from '@ionic-native/app-availability';
 import {APP_PORT_BROWER,APP_PORT_NATIVE} from "../../providers/Constants";
 
 @Component({
@@ -50,7 +50,7 @@ export class LoginPage {
               private loginService: LoginService,
               private iab: InAppBrowser,
               private nativeService: NativeService,
-              private appAvailability:AppAvailability,
+              //private appAvailability:AppAvailability,
               private broadcaster:Broadcaster) {
     this.loginForm = this.formBuilder.group({
       /*gdliyh 78005250*/
@@ -280,23 +280,23 @@ export class LoginPage {
     console.log("ok"+frames.document.cookie);*/
 
     
-    var app = '';
-    if (this.platform.is('ios')) {
-        app = 'weixin://';      /* 微信的Scheme URL */
-    } else if (this.platform.is('android')) {
-        app = 'com.tencent.mm';     /* 微信的安卓包名 */
-    }
+    // var app = '';
+    // if (this.platform.is('ios')) {
+    //     app = 'weixin://';      /* 微信的Scheme URL */
+    // } else if (this.platform.is('android')) {
+    //     app = 'com.tencent.mm';     /* 微信的安卓包名 */
+    // }
 
-    this.appAvailability.check(app)     /* 检测微信是否已安卓 */
-    .then(
-        (yes: boolean) => {
-            this.iab.create('weixin://', '_system');    /* 打开微信 */
-        },
-        (no: boolean) => {
-            /* 未安装，请编写提示代码或跳转下载 */
-            this.nativeService.showToast('您还未安装天房手机移动助手,请安装后再试一次.');
-        }
-    );
+    // this.appAvailability.check(app)     /* 检测微信是否已安卓 */
+    // .then(
+    //     (yes: boolean) => {
+    //         this.iab.create('weixin://', '_system');    /* 打开微信 */
+    //     },
+    //     (no: boolean) => {
+    //         /* 未安装，请编写提示代码或跳转下载 */
+    //         this.nativeService.showToast('您还未安装天房手机移动助手,请安装后再试一次.');
+    //     }
+    // );
   }
 
 

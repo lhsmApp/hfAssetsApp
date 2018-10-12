@@ -68,7 +68,7 @@ import {NoticeService} from '../services/noticeService';
 
 //指令
 import { TabDirective } from "../directive/";
-import { AppAvailability } from '@ionic-native/app-availability';
+//import { AppAvailability } from '@ionic-native/app-availability';
 import {Broadcaster} from "@ionic-native/broadcaster"
 
 /*import * as fundebug from "fundebug-javascript";
@@ -166,7 +166,7 @@ class FundebugErrorHandler implements ErrorHandler {
     ApprovalService,
     AttachmentService,
     NoticeService,
-    AppAvailability,
+    //AppAvailability,
     Broadcaster
   ]
 })
